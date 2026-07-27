@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SJ Luxury Travel Ltd | Premium Travel & Experiences</title>
+    <style>
+        /* Base Styling */
+        :root {
+            --primary-color: #0d1b2a;
+            --accent-color: #c5a059;
+            --text-light: #f8f9fa;
+            --text-dark: #212529;
+            --bg-light: #f4f6f8;
+            --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-family);
+            color: var(--text-dark);
+            background-color: #ffffff;
+            line-height: 1.6;
+        }
+
+        /* Header & Navigation */
+        header {
+            background-color: var(--primary-color);
+            color: var(--text-light);
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        header .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            letter-spacing: 1px;
+            color: var(--accent-color);
+        }
+
+        nav a {
+            color: var(--text-light);
+            text-decoration: none;
+            margin-left: 20px;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: var(--accent-color);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(13, 27, 42, 0.75), rgba(13, 27, 42, 0.75)), 
+                        url('https://images.unsplash.com/photo-1516426122078-c23e76319801?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
+            color: var(--text-light);
+            text-align: center;
+            padding: 120px 20px;
+        }
+
+        .hero h1 {
+            font-size: 2.8rem;
+            margin-bottom: 15px;
+            color: var(--accent-color);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto 30px auto;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: var(--primary-color);
+            padding: 12px 30px;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #e0b86c;
+        }
+
+        /* Notice Banner */
+        .status-banner {
+            background-color: var(--bg-light);
+            border-left: 4px solid var(--accent-color);
+            padding: 20px;
+            margin: 40px auto;
+            max-width: 1000px;
+            border-radius: 4px;
+        }
+
+        .status-banner h3 {
+            color: var(--primary-color);
+            margin-bottom: 5px;
+        }
+
+        /* Features / Expect Section */
+        .features {
+            max-width: 1200px;
+            margin: 60px auto;
+            padding: 0 20px;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 40px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+        }
+
+        .card {
+            background-color: #ffffff;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 25px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card h3 {
+            color: var(--primary-color);
+            margin-bottom: 12px;
+        }
+
+        /* Contact Section */
+        .contact {
+            background-color: var(--primary-color);
+            color: var(--text-light);
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        .contact h2 {
+            color: var(--accent-color);
+            margin-bottom: 20px;
+        }
+
+        .contact p {
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .contact a {
+            color: var(--accent-color);
+            text-decoration: none;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #081019;
+            color: #8d99ae;
+            text-align: center;
+            padding: 20px;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            nav a {
+                margin: 0 10px;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Section -->
+    <header>
+        <div class="logo">SJ LUXURY TRAVEL LTD</div>
+        <nav>
+            <a href="#about">About</a>
+            <a href="#services">Services</a>
+            <a href="#contact">Contact</a>
+        </nav>
+    </header>
+
+    <!-- Hero Banner -->
+    <section class="hero">
+        <h1>Guaranteed Holidays Beyond The Usual</h1>
+        <p>We are upgrading our travel portal to bring you an elevated booking experience for custom safari expeditions and coastal villa getaways.</p>
+        <a href="#contact" class="btn">Request Custom Quote</a>
+    </section>
+
+    <!-- System Status Notice -->
+    <div class="status-banner" id="about">
+        <h3>System Update in Progress</h3>
+        <p>Our online booking engine is currently being updated to serve you better. Direct inquiries and manual travel bookings remain open via our phone line and office desk.</p>
+    </div>
+
+    <!-- What to Expect / Services Section -->
+    <section class="features" id="services">
+        <h2 class="section-title">What To Expect Upon Relaunch</h2>
+        <div class="grid">
+            <div class="card">
+                <h3>Bespoke Logistics</h3>
+                <p>Seamless flight bookings, executive SGR train transfers, chauffeured ground travel, and custom 4x4 safari Jeep allocations.</p>
+            </div>
+            <div class="card">
+                <h3>Watamu Villa Getaways</h3>
+                <p>Curated private villas and luxury coastal rentals tailored for relaxation across Kenya's finest beach destinations.</p>
+            </div>
+            <div class="card">
+                <h3>Signature Destinations</h3>
+                <p>Direct access to exclusive packages in Diani Beach, the Masai Mara, Mombasa, and cross-border expeditions in Tanzania & Zanzibar.</p>
+            </div>
+            <div class="card">
+                <h3>Corporate & Global</h3>
+                <p>Enterprise travel management, business exchange itineraries, group expeditions, and dedicated VIP concierge assistance.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Direct Contact Section -->
+    <section class="contact" id="contact">
+        <h2>Direct Inquiries & Custom Quotes</h2>
+        <p>Headquarters: Nairobi, Kenya</p>
+        <p>Direct Phone Line: <a href="tel:+254794816245">+(254) 794816245</a></p>
+        <p>Available Services: Custom Safari Quotes, Villa Reservations, Group Expeditions & Airport Transfers</p>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 SJ Luxury Travel Ltd. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>
