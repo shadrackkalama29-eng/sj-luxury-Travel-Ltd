@@ -3,260 +3,315 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SJ Luxury Travel Ltd | Premium Travel & Experiences</title>
-    <style>
-        /* Base Styling */
-        :root {
-            --primary-color: #0d1b2a;
-            --accent-color: #c5a059;
-            --text-light: #f8f9fa;
-            --text-dark: #212529;
-            --bg-light: #f4f6f8;
-            --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: var(--font-family);
-            color: var(--text-dark);
-            background-color: #ffffff;
-            line-height: 1.6;
-        }
-
-        /* Header & Navigation */
-        header {
-            background-color: var(--primary-color);
-            color: var(--text-light);
-            padding: 1rem 5%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-
-        header .logo {
-            font-size: 1.5rem;
-            font-weight: bold;
-            letter-spacing: 1px;
-            color: var(--accent-color);
-        }
-
-        nav a {
-            color: var(--text-light);
-            text-decoration: none;
-            margin-left: 20px;
-            transition: color 0.3s ease;
-        }
-
-        nav a:hover {
-            color: var(--accent-color);
-        }
-
-        /* Hero Section */
-        .hero {
-            background: linear-gradient(rgba(13, 27, 42, 0.75), rgba(13, 27, 42, 0.75)), 
-                        url('https://images.unsplash.com/photo-1516426122078-c23e76319801?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
-            color: var(--text-light);
-            text-align: center;
-            padding: 120px 20px;
-        }
-
-        .hero h1 {
-            font-size: 2.8rem;
-            margin-bottom: 15px;
-            color: var(--accent-color);
-        }
-
-        .hero p {
-            font-size: 1.2rem;
-            max-width: 600px;
-            margin: 0 auto 30px auto;
-        }
-
-        .btn {
-            display: inline-block;
-            background-color: var(--accent-color);
-            color: var(--primary-color);
-            padding: 12px 30px;
-            text-decoration: none;
-            font-weight: bold;
-            border-radius: 4px;
-            transition: background-color 0.3s ease;
-        }
-
-        .btn:hover {
-            background-color: #e0b86c;
-        }
-
-        /* Notice Banner */
-        .status-banner {
-            background-color: var(--bg-light);
-            border-left: 4px solid var(--accent-color);
-            padding: 20px;
-            margin: 40px auto;
-            max-width: 1000px;
-            border-radius: 4px;
-        }
-
-        .status-banner h3 {
-            color: var(--primary-color);
-            margin-bottom: 5px;
-        }
-
-        /* Features / Expect Section */
-        .features {
-            max-width: 1200px;
-            margin: 60px auto;
-            padding: 0 20px;
-        }
-
-        .section-title {
-            text-align: center;
-            font-size: 2rem;
-            color: var(--primary-color);
-            margin-bottom: 40px;
-        }
-
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 25px;
-        }
-
-        .card {
-            background-color: #ffffff;
-            border: 1px solid #e0e0e0;
-            border-radius: 8px;
-            padding: 25px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-            transition: transform 0.3s ease;
-        }
-
-        .card:hover {
-            transform: translateY(-5px);
-        }
-
-        .card h3 {
-            color: var(--primary-color);
-            margin-bottom: 12px;
-        }
-
-        /* Contact Section */
-        .contact {
-            background-color: var(--primary-color);
-            color: var(--text-light);
-            padding: 60px 20px;
-            text-align: center;
-        }
-
-        .contact h2 {
-            color: var(--accent-color);
-            margin-bottom: 20px;
-        }
-
-        .contact p {
-            margin-bottom: 10px;
-            font-size: 1.1rem;
-        }
-
-        .contact a {
-            color: var(--accent-color);
-            text-decoration: none;
-        }
-
-        /* Footer */
-        footer {
-            background-color: #081019;
-            color: #8d99ae;
-            text-align: center;
-            padding: 20px;
-            font-size: 0.9rem;
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            header {
-                flex-direction: column;
-                gap: 10px;
-            }
-
-            nav a {
-                margin: 0 10px;
-            }
-
-            .hero h1 {
-                font-size: 2rem;
+    <title>SJ Luxury Travel Ltd | Launching August 1, 2026</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        navyBlue: {
+                            50: '#f4f6fa',
+                            100: '#e5ebf5',
+                            600: '#152A56', 
+                            700: '#0B1B3D',
+                            800: '#061026',
+                        },
+                        luxuryGold: {
+                            50: '#FDFBF4',
+                            500: '#D4AF37',
+                            600: '#AA841B',
+                        },
+                        flightBlue: {
+                            550: '#2A26D9',
+                            600: '#1D19C4'
+                        },
+                        neutralBg: '#F4F5F7',
+                        tourOrange: '#E66F33',
+                        tourGreen: '#7A9A01'
+                    },
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'Inter', 'sans-serif']
+                    }
+                }
             }
         }
-    </style>
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght=300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
 </head>
-<body>
+<body class="bg-navyBlue-800 text-gray-100 font-sans antialiased selection:bg-luxuryGold-500 selection:text-navyBlue-800 min-h-screen flex flex-col justify-between relative overflow-x-hidden"
+      x-data="{
+         emailInput: '',
+         vipModalOpen: false,
+         previewVillaModal: false,
+         selectedVilla: {},
+         
+         // VIP Form Inputs
+         vipName: '',
+         vipEmail: '',
+         vipPhone: '',
+         vipNotes: '',
 
-    <!-- Header Section -->
-    <header>
-        <div class="logo">SJ LUXURY TRAVEL LTD</div>
-        <nav>
-            <a href="#about">About</a>
-            <a href="#services">Services</a>
-            <a href="#contact">Contact</a>
-        </nav>
-    </header>
+         // Countdown Timer Logic targeting August 1, 2026
+         days: 0,
+         hours: 0,
+         minutes: 0,
+         seconds: 0,
 
-    <!-- Hero Banner -->
-    <section class="hero">
-        <h1>Guaranteed Holidays Beyond The Usual</h1>
-        <p>We are upgrading our travel portal to bring you an elevated booking experience for custom safari expeditions and coastal villa getaways.</p>
-        <a href="#contact" class="btn">Request Custom Quote</a>
-    </section>
+         targetDate: new Date('2026-08-01T00:00:00+03:00').getTime(),
 
-    <!-- System Status Notice -->
-    <div class="status-banner" id="about">
-        <h3>System Update in Progress</h3>
-        <p>Our online booking engine is currently being updated to serve you better. Direct inquiries and manual travel bookings remain open via our phone line and office desk.</p>
-    </div>
+         villas: [
+             {
+                 name: 'Watamu Family 1-Bed Rental',
+                 category: 'Kenya Residence',
+                 image: 'https://i.pinimg.com/736x/8e/ae/0d/8eae0d76fdb05bca8928bb0a3276a322.jpg',
+                 specs: '1 Bed + Bunks | Private Pool Access',
+                 desc: 'Exclusive private coastal sanctuary designed for relaxed family retreats.'
+             },
+             {
+                 name: 'Palm & Sea Ocean Suite',
+                 category: 'Claris African Experience',
+                 image: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80',
+                 specs: '2 Bedrooms | Ocean Corridor Access',
+                 desc: 'Boutique apartment overlooking pristine Watamu marine waterways.'
+             },
+             {
+                 name: 'Love Nest Private Cottage',
+                 category: 'Claris African Experience',
+                 image: 'https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=800&q=80',
+                 specs: 'Honeymoon Suite | Full Privacy',
+                 desc: 'An intimate escape offering custom Swahili chef services on request.'
+             }
+         ],
 
-    <!-- What to Expect / Services Section -->
-    <section class="features" id="services">
-        <h2 class="section-title">What To Expect Upon Relaunch</h2>
-        <div class="grid">
-            <div class="card">
-                <h3>Bespoke Logistics</h3>
-                <p>Seamless flight bookings, executive SGR train transfers, chauffeured ground travel, and custom 4x4 safari Jeep allocations.</p>
+         openVillaPreview(villa) {
+             this.selectedVilla = villa;
+             this.previewVillaModal = true;
+         },
+
+         // Redirect Email Notify to WhatsApp
+         submitEmailNotify() {
+             const message = `Hello SJ Luxury Travel,%0A%0AI would like to join the launch waitlist for August 1st!%0A%0A*Email Address:* ${encodeURIComponent(this.emailInput)}`;
+             window.open(`https://wa.me/254707813002?text=${message}`, '_blank');
+             this.emailInput = '';
+         },
+
+         // Redirect VIP Access Form to WhatsApp
+         submitVipForm() {
+             let message = `Hello SJ Luxury Travel,%0A%0AI am requesting *VIP Early Access* for the August 1st launch.%0A%0A*Name:* ${encodeURIComponent(this.vipName)}%0A*Email:* ${encodeURIComponent(this.vipEmail)}%0A*Phone:* ${encodeURIComponent(this.vipPhone)}`;
+             if (this.vipNotes.trim() !== '') {
+                 message += `%0A*Travel Interest:* ${encodeURIComponent(this.vipNotes)}`;
+             }
+             window.open(`https://wa.me/254707813002?text=${message}`, '_blank');
+             this.vipModalOpen = false;
+             this.vipName = '';
+             this.vipEmail = '';
+             this.vipPhone = '';
+             this.vipNotes = '';
+         },
+
+         updateCountdown() {
+             const now = new Date().getTime();
+             const distance = this.targetDate - now;
+
+             if (distance > 0) {
+                 this.days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                 this.hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                 this.minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                 this.seconds = Math.floor((distance % (1000 * 60)) / 1000);
+             } else {
+                 this.days = 0;
+                 this.hours = 0;
+                 this.minutes = 0;
+                 this.seconds = 0;
+             }
+         },
+
+         init() {
+             this.updateCountdown();
+             setInterval(() => {
+                 this.updateCountdown();
+             }, 1000);
+         }
+      }">
+
+    <!-- Background Artwork / Gradients -->
+    <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=1920&q=80')] bg-cover bg-center mix-blend-overlay opacity-20 pointer-events-none"></div>
+    <div class="absolute -top-40 -right-40 w-96 h-96 bg-luxuryGold-500/10 rounded-full blur-3xl pointer-events-none"></div>
+    <div class="absolute -bottom-40 -left-40 w-96 h-96 bg-flightBlue-550/20 rounded-full blur-3xl pointer-events-none"></div>
+
+    <!-- Header Navigation Bar -->
+    <header class="relative z-20 border-b border-white/10 backdrop-blur-md bg-navyBlue-800/60">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 h-20 flex items-center justify-between">
+            <div class="text-base sm:text-xl font-extrabold tracking-tight text-white flex items-center gap-2">
+                <span class="text-luxuryGold-500"><i data-lucide="globe" class="w-5 h-5 sm:w-6 h-6"></i></span>
+                SJ LUXURY <span class="text-luxuryGold-500">TRAVEL LTD</span>
             </div>
-            <div class="card">
-                <h3>Watamu Villa Getaways</h3>
-                <p>Curated private villas and luxury coastal rentals tailored for relaxation across Kenya's finest beach destinations.</p>
-            </div>
-            <div class="card">
-                <h3>Signature Destinations</h3>
-                <p>Direct access to exclusive packages in Diani Beach, the Masai Mara, Mombasa, and cross-border expeditions in Tanzania & Zanzibar.</p>
-            </div>
-            <div class="card">
-                <h3>Corporate & Global</h3>
-                <p>Enterprise travel management, business exchange itineraries, group expeditions, and dedicated VIP concierge assistance.</p>
+            
+            <div class="flex items-center gap-3 sm:gap-4">
+                <a href="https://wa.me/254707813002" target="_blank" class="hidden sm:flex items-center gap-1.5 text-xs font-semibold text-gray-300 hover:text-luxuryGold-500 transition mr-2">
+                    <i data-lucide="phone" class="w-3.5 h-3.5 text-luxuryGold-500"></i>
+                    <span>+(254) 707 813 002</span>
+                </a>
+                <button @click="vipModalOpen = true" class="bg-luxuryGold-500 hover:bg-luxuryGold-600 text-navyBlue-800 font-bold px-4 py-2 sm:px-5 sm:py-2.5 rounded-lg text-xs tracking-wider uppercase transition shadow-lg">
+                    VIP Early Access
+                </button>
             </div>
         </div>
-    </section>
+    </header>
 
-    <!-- Direct Contact Section -->
-    <section class="contact" id="contact">
-        <h2>Direct Inquiries & Custom Quotes</h2>
-        <p>Headquarters: Nairobi, Kenya</p>
-        <p>Direct Phone Line: <a href="tel:+254794816245">+(254) 794816245</a></p>
-        <p>Available Services: Custom Safari Quotes, Villa Reservations, Group Expeditions & Airport Transfers</p>
-    </section>
+    <!-- Main Content Body -->
+    <main class="relative z-10 my-auto py-12 px-4 sm:px-6 max-w-5xl mx-auto text-center space-y-12">
+        
+        <!-- Headline & Hook -->
+        <div class="space-y-4 max-w-3xl mx-auto">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-luxuryGold-500 text-xs font-semibold uppercase tracking-widest backdrop-blur-sm">
+                <i data-lucide="sparkles" class="w-3.5 h-3.5"></i> Launching 1st August 2026
+            </div>
+            <h1 class="text-3xl sm:text-5xl md:text-6xl font-black text-white tracking-tight leading-tight">
+                Redefining High-Tier <br />
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-luxuryGold-500 via-yellow-200 to-luxuryGold-600">Travel & Villa Living</span>
+            </h1>
+            <p class="text-gray-300 text-xs sm:text-sm md:text-base max-w-2xl mx-auto font-normal leading-relaxed">
+                We are crafting an extraordinary digital portal for bespoke East African safaris, high-touch corporate aviation, and exclusive Watamu private holiday rentals.
+            </p>
+        </div>
+
+        <!-- Launch Countdown Timer -->
+        <div class="grid grid-cols-4 gap-2 sm:gap-4 max-w-xl mx-auto">
+            <div class="bg-white/5 border border-white/10 rounded-xl p-3 sm:p-4 text-center backdrop-blur-sm">
+                <span class="block text-2xl sm:text-4xl font-extrabold text-white" x-text="days < 10 ? '0' + days : days">00</span>
+                <span class="text-[10px] sm:text-xs text-gray-400 uppercase tracking-wider font-semibold">Days</span>
+            </div>
+            <div class="bg-white/5 border border-white/10 rounded-xl p-3 sm:p-4 text-center backdrop-blur-sm">
+                <span class="block text-2xl sm:text-4xl font-extrabold text-white" x-text="hours < 10 ? '0' + hours : hours">00</span>
+                <span class="text-[10px] sm:text-xs text-gray-400 uppercase tracking-wider font-semibold">Hours</span>
+            </div>
+            <div class="bg-white/5 border border-white/10 rounded-xl p-3 sm:p-4 text-center backdrop-blur-sm">
+                <span class="block text-2xl sm:text-4xl font-extrabold text-white" x-text="minutes < 10 ? '0' + minutes : minutes">00</span>
+                <span class="text-[10px] sm:text-xs text-gray-400 uppercase tracking-wider font-semibold">Mins</span>
+            </div>
+            <div class="bg-white/5 border border-white/10 rounded-xl p-3 sm:p-4 text-center backdrop-blur-sm">
+                <span class="block text-2xl sm:text-4xl font-extrabold font-mono text-luxuryGold-500" x-text="seconds < 10 ? '0' + seconds : seconds">00</span>
+                <span class="text-[10px] sm:text-xs text-gray-400 uppercase tracking-wider font-semibold">Secs</span>
+            </div>
+        </div>
+
+        <!-- Subscription Form -->
+        <div class="max-w-md mx-auto space-y-3">
+            <form @submit.prevent="submitEmailNotify()" class="flex flex-col sm:flex-row gap-2">
+                <input type="email" required x-model="emailInput" placeholder="Enter your email to join waitlist..." 
+                       class="bg-navyBlue-700/80 border border-white/15 rounded-lg px-4 py-3 text-xs sm:text-sm text-white placeholder-gray-400 focus:outline-none focus:border-luxuryGold-500 flex-1">
+                <button type="submit" class="bg-luxuryGold-500 hover:bg-luxuryGold-600 text-navyBlue-800 font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-lg transition shadow-md whitespace-nowrap flex items-center justify-center gap-2">
+                    <i data-lucide="message-circle" class="w-4 h-4"></i>
+                    Notify Me
+                </button>
+            </form>
+            <p class="text-[11px] text-gray-400">Join our priority WhatsApp waitlist to receive exclusive opening rates before August 1st.</p>
+        </div>
+
+        <!-- Exclusive Sneak Peek Teaser -->
+        <div class="pt-8 space-y-6">
+            <div class="flex items-center justify-center gap-2 text-xs uppercase font-bold tracking-widest text-luxuryGold-500">
+                <span class="w-8 h-px bg-luxuryGold-500/30"></span>
+                Sneak Peek: Watamu Holiday Rentals
+                <span class="w-8 h-px bg-luxuryGold-500/30"></span>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-left">
+                <template x-for="villa in villas" :key="villa.name">
+                    <div @click="openVillaPreview(villa)" class="bg-white/5 border border-white/10 rounded-xl p-3 hover:border-luxuryGold-500/50 transition cursor-pointer group">
+                        <div class="h-40 rounded-lg overflow-hidden relative mb-3">
+                            <img :src="villa.image" :alt="villa.name" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                            <span class="absolute top-2 right-2 bg-navyBlue-800/80 backdrop-blur-md text-white text-[9px] uppercase font-bold px-2 py-0.5 rounded" x-text="villa.category"></span>
+                        </div>
+                        <h3 class="font-bold text-sm text-white group-hover:text-luxuryGold-500 transition" x-text="villa.name"></h3>
+                        <p class="text-[11px] text-gray-400 mt-1" x-text="villa.specs"></p>
+                    </div>
+                </template>
+            </div>
+        </div>
+
+    </main>
 
     <!-- Footer -->
-    <footer>
-        <p>&copy; 2026 SJ Luxury Travel Ltd. All rights reserved.</p>
+    <footer class="relative z-10 border-t border-white/10 py-6 px-4 sm:px-6 bg-navyBlue-800/80 backdrop-blur-md text-xs text-gray-400">
+        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+            <a href="https://wa.me/254707813002" target="_blank" class="flex items-center gap-2 hover:text-luxuryGold-500 transition">
+                <i data-lucide="phone" class="w-3.5 h-3.5 text-luxuryGold-500"></i>
+                <span class="text-gray-300">Direct Desk: +(254) 707 813 002</span>
+            </a>
+            <p>© 2026 SJ Luxury Travel Ltd. Launching August 1, 2026.</p>
+            <div class="flex items-center gap-4 text-gray-300">
+                <a href="https://wa.me/254707813002" target="_blank" title="WhatsApp Us" class="hover:text-luxuryGold-500 transition"><i data-lucide="message-circle" class="w-4 h-4"></i></a>
+                <a href="mailto:info@sjluxurytravel.com" class="hover:text-luxuryGold-500 transition"><i data-lucide="mail" class="w-4 h-4"></i></a>
+                <a href="#" class="hover:text-luxuryGold-500 transition"><i data-lucide="instagram" class="w-4 h-4"></i></a>
+                <a href="#" class="hover:text-luxuryGold-500 transition"><i data-lucide="facebook" class="w-4 h-4"></i></a>
+            </div>
+        </div>
     </footer>
 
+    <!-- Villa Preview Modal -->
+    <div x-show="previewVillaModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm" style="display: none;" x-transition>
+        <div @click.away="previewVillaModal = false" class="bg-navyBlue-700 border border-white/10 rounded-2xl max-w-lg w-full p-6 space-y-4 relative text-left">
+            <button @click="previewVillaModal = false" class="absolute top-4 right-4 text-gray-400 hover:text-white">
+                <i data-lucide="x" class="w-5 h-5"></i>
+            </button>
+
+            <img :src="selectedVilla.image" :alt="selectedVilla.name" class="w-full h-48 object-cover rounded-xl">
+            <div>
+                <span class="text-[10px] uppercase font-bold text-luxuryGold-500" x-text="selectedVilla.category"></span>
+                <h3 class="text-xl font-bold text-white" x-text="selectedVilla.name"></h3>
+                <p class="text-xs font-semibold text-gray-300 mt-0.5" x-text="selectedVilla.specs"></p>
+                <p class="text-xs text-gray-400 mt-2 leading-relaxed" x-text="selectedVilla.desc"></p>
+            </div>
+
+            <div class="pt-2 border-t border-white/10 flex justify-between items-center">
+                <span class="text-xs text-gray-400">Reservations unlock August 1st.</span>
+                <button @click="previewVillaModal = false; vipModalOpen = true" class="bg-luxuryGold-500 text-navyBlue-800 font-bold px-4 py-2 rounded-lg text-xs uppercase tracking-wider">
+                    Reserve Priority Spot
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- VIP Early Access Modal (Links to WhatsApp) -->
+    <div x-show="vipModalOpen" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm" style="display: none;" x-transition>
+        <div @click.away="vipModalOpen = false" class="bg-navyBlue-700 border border-white/10 rounded-2xl max-w-md w-full p-6 space-y-4 relative text-left">
+            <button @click="vipModalOpen = false" class="absolute top-4 right-4 text-gray-400 hover:text-white">
+                <i data-lucide="x" class="w-5 h-5"></i>
+            </button>
+
+            <div class="space-y-1">
+                <h3 class="text-xl font-bold text-white">VIP Access Registration</h3>
+                <p class="text-xs text-gray-300">Submit your details to start a direct inquiry on WhatsApp for August 1st priority bookings.</p>
+            </div>
+
+            <form @submit.prevent="submitVipForm()" class="space-y-3 pt-2">
+                <input type="text" required x-model="vipName" placeholder="Full Name" class="w-full bg-navyBlue-800 border border-white/10 rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-luxuryGold-500">
+                <input type="email" required x-model="vipEmail" placeholder="Email Address" class="w-full bg-navyBlue-800 border border-white/10 rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-luxuryGold-500">
+                <input type="tel" required x-model="vipPhone" placeholder="Phone / WhatsApp Number" class="w-full bg-navyBlue-800 border border-white/10 rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-luxuryGold-500">
+                <textarea x-model="vipNotes" placeholder="Describe your upcoming travel interest or preferred dates..." class="w-full bg-navyBlue-800 border border-white/10 rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-luxuryGold-500" rows="3"></textarea>
+                
+                <button type="submit" class="w-full bg-luxuryGold-500 hover:bg-luxuryGold-600 text-navyBlue-800 font-bold text-xs uppercase tracking-wider py-3 rounded-lg transition flex items-center justify-center gap-2">
+                    <i data-lucide="message-circle" class="w-4 h-4"></i>
+                    Send Request to WhatsApp
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            lucide.createIcons();
+        });
+    </script>
 </body>
 </html>
