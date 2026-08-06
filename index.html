@@ -77,11 +77,117 @@
     <header id="header-nav" class="bg-white border-b border-gray-100 sticky top-0 z-40 shadow-sm" x-data="{ exploreDropdownOpen: false }">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 h-20 flex items-center justify-between">
             
-            <!-- Logo Branding Block -->
-            <a href="#hero" class="text-lg sm:text-xl font-bold tracking-tight text-gray-900 flex items-center gap-2">
-                <span class="text-navyBlue-600"><i data-lucide="globe" class="w-5 h-5 sm:w-6 h-6"></i></span>
-                SJ LUXURY <span class="text-navyBlue-600">TRAVEL LTD</span>
-            </a>
+           <!-- ===========================
+     SJ Luxury Travels LTD Logo
+     Text Only Version
+=========================== -->
+
+<a href="#hero" class="sj-brand">
+
+    <div class="sj-text-container">
+        <div class="sj-main-row">
+            <span class="sj-title">SJ</span>
+            <span class="sj-divider"></span>
+            <span class="sj-luxury">luxury</span>
+        </div>
+        <div class="sj-subtitle-row">
+            <span class="line"></span>
+            <span class="sj-subtitle">TRAVELS LTD</span>
+            <span class="line"></span>
+        </div>
+    </div>
+
+</a>
+
+<style>
+.sj-brand {
+    display: inline-flex;
+    align-items: center;
+    text-decoration: none;
+    font-family: 'Times New Roman', Times, serif, Arial, sans-serif;
+}
+
+.sj-text-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.sj-main-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.sj-title {
+    font-size: 38px;
+    font-weight: 700;
+    font-family: 'Georgia', serif;
+    background: linear-gradient(135deg, #C5A059 0%, #D4AF37 50%, #AA7C11 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    line-height: 1;
+}
+
+.sj-divider {
+    width: 1px;
+    height: 32px;
+    background-color: #0A2540;
+    opacity: 0.8;
+}
+
+.sj-luxury {
+    font-size: 32px;
+    font-weight: 400;
+    font-family: 'Georgia', serif;
+    color: #0A2540;
+    text-transform: lowercase;
+    letter-spacing: -0.5px;
+    line-height: 1;
+}
+
+.sj-subtitle-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 6px;
+}
+
+.sj-subtitle-row .line {
+    flex-grow: 1;
+    height: 1px;
+    background-color: #D4AF37;
+    width: 25px;
+}
+
+.sj-subtitle {
+    font-size: 9.5px;
+    font-weight: 600;
+    font-family: 'Arial', sans-serif;
+    color: #0A2540;
+    letter-spacing: 4px;
+    white-space: nowrap;
+}
+
+@media (max-width: 768px) {
+    .sj-title {
+        font-size: 28px;
+    }
+
+    .sj-divider {
+        height: 24px;
+    }
+
+    .sj-luxury {
+        font-size: 24px;
+    }
+
+    .sj-subtitle {
+        font-size: 7px;
+        letter-spacing: 2.5px;
+    }
+}
+</style>
             
             <!-- Desktop Navigation Links -->
             <nav class="hidden lg:flex items-center space-x-8 text-sm font-medium text-gray-600">
@@ -2369,10 +2475,20 @@
             
             <!-- Brand Info Column -->
             <div class="col-span-2 space-y-4">
-                <div class="text-base font-extrabold text-gray-900 flex items-center gap-2">
-                    <i data-lucide="globe" class="w-5 h-5 text-[#0B132B]"></i>
-                    <span class="tracking-wider">SJ LUXURY TRAVEL LTD</span>
-                </div>
+                <a href="#hero" class="inline-flex items-center text-decoration-none group">
+    <div class="flex flex-col justify-center">
+        <div class="flex items-center gap-3">
+            <span class="text-2xl font-bold font-serif" style="background: linear-gradient(135deg, #C5A059 0%, #D4AF37 50%, #AA7C11 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; line-height: 1;">SJ</span>
+            <span class="w-[1px] h-6 bg-gray-900 opacity-80"></span>
+            <span class="text-xl font-normal font-serif text-gray-900 lowercase tracking-tight line-height-1">luxury</span>
+        </div>
+        <div class="flex items-center gap-2 mt-1.5">
+            <span class="flex-grow h-[1px] bg-[#D4AF37] w-4"></span>
+            <span class="text-[8px] font-semibold font-sans text-gray-900 tracking-[3px] whitespace-nowrap">TRAVELS LTD</span>
+            <span class="flex-grow h-[1px] bg-[#D4AF37] w-4"></span>
+        </div>
+    </div>
+</a>
                 <p class="text-xs text-gray-600 leading-relaxed font-normal max-w-sm">
                     Setting the luxury standard for global citizens seeking seamless air charters, elite wilderness safaris, and exclusive private villa bookings across East Africa.
                 </p>
