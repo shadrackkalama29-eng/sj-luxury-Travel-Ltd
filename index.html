@@ -132,7 +132,7 @@
     <!-- ========================================================================= -->
     <!-- 03. HERO SECTION                                                          -->
     <!-- ========================================================================= -->
-    <<section id="hero" class="relative min-h-[75vh] flex flex-col justify-between bg-[#0B132B] text-white overflow-hidden border-b border-gray-100"
+    <section id="hero" class="relative min-h-[75vh] flex flex-col justify-between bg-[#0B132B] text-white overflow-hidden border-b border-gray-100"
          x-data="{
              activeSlide: 0,
              init() {
@@ -233,8 +233,15 @@
         </template>
     </div>
 </section>
-<!-- Mobile Off-Canvas Drawer -->
+<!-- 
+  Mobile Off-Canvas Drawer - Redesigned
+  Maintains all original functionality, Alpine.js state, and link structure.
+  Updated with a modern, dark, high-contrast aesthetic.
+  Requires: Tailwind CSS, Alpine.js, Lucide Icons
+-->
 <div x-show="mobileMenuOpen" class="fixed inset-0 z-50 lg:hidden" style="display: none;" role="dialog" aria-modal="true">
+    
+    <!-- Backdrop (Darker with stronger blur) -->
     <div x-show="mobileMenuOpen" 
          x-transition:enter="transition-opacity ease-linear duration-300" 
          x-transition:enter-start="opacity-0" 
@@ -242,73 +249,98 @@
          x-transition:leave="transition-opacity ease-linear duration-300" 
          x-transition:leave-start="opacity-100" 
          x-transition:leave-end="opacity-0" 
-         class="fixed inset-0 bg-gray-900/80 backdrop-blur-md" 
-         @click="mobileMenuOpen = false"></div>
+         class="fixed inset-0 bg-black/70 backdrop-blur-lg" 
+         @click="mobileMenuOpen = false"
+         aria-hidden="true">
+    </div>
 
+    <!-- Drawer Panel (Dark Theme) -->
     <div x-show="mobileMenuOpen" 
-         x-transition:enter="transition ease-in-out duration-300 transform" 
+         x-transition:enter="transition ease-out duration-400 transform" 
          x-transition:enter-start="-translate-x-full" 
          x-transition:enter-end="translate-x-0" 
-         x-transition:leave="transition ease-in-out duration-300 transform" 
+         x-transition:leave="transition ease-in duration-300 transform" 
          x-transition:leave-start="translate-x-0" 
          x-transition:leave-end="-translate-x-full" 
-         class="fixed inset-y-0 left-0 w-full max-w-xs bg-white shadow-2xl flex flex-col justify-between p-6 overflow-y-auto border-r border-gray-100">
+         class="fixed inset-y-0 left-0 z-50 w-full max-w-xs bg-[#0B132B] shadow-2xl flex flex-col p-6 overflow-y-auto border-r border-[#1C2541]">
         
-        <div class="space-y-6">
-            <div class="flex items-center justify-between pb-4 border-b border-gray-100">
-                <div class="text-base font-black text-gray-900 tracking-tight flex items-center gap-2">
-                    <span class="w-8 h-8 rounded-xl bg-[#0B132B] text-[#D4AF37] flex items-center justify-center font-black text-xs shadow-sm">SJ</span>
-                    <span class="tracking-widest">SJ LUXURY</span>
-                </div>
-                <button @click="mobileMenuOpen = false" class="text-gray-400 hover:text-gray-900 bg-gray-100 hover:bg-gray-200 h-9 w-9 rounded-full flex items-center justify-center transition" aria-label="Close Navigation Drawer">
-                    <i data-lucide="x" class="w-5 h-5"></i>
-                </button>
+        <!-- Header (Logo + Close Button) -->
+        <div class="flex items-center justify-between pb-6 border-b border-[#1C2541] mb-6">
+            <div class="text-base font-black text-white tracking-tight flex items-center gap-3">
+                <div class="w-10 h-10 rounded-2xl bg-[#D4AF37] text-[#0B132B] flex items-center justify-center font-black text-lg shadow-lg">SJ</div>
+                <span class="tracking-widest text-lg">SJ LUXURY</span>
+            </div>
+            <button @click="mobileMenuOpen = false" class="text-gray-400 hover:text-white bg-[#1C2541] hover:bg-brand-gold/20 h-10 w-10 rounded-2xl flex items-center justify-center transition-all duration-300" aria-label="Close Navigation Drawer">
+                <i data-lucide="x" class="w-6 h-6"></i>
+            </button>
+        </div>
+
+        <!-- Scrollable Content -->
+        <div class="flex-grow space-y-8">
+            
+            <!-- Navigation Section 1 -->
+            <div class="space-y-2">
+                <p class="text-[11px] font-bold text-gray-500 uppercase tracking-wider pl-4 mb-3">Main Menu</p>
+                
+                <!-- Home Link -->
+                <a href="#hero" @click="mobileMenuOpen = false" class="group flex items-center gap-4 px-4 py-3.5 rounded-2xl text-sm font-medium text-gray-300 hover:bg-[#1C2541] hover:text-white transition-all duration-200">
+                    <i data-lucide="home" class="w-5 h-5 text-[#D4AF37] group-hover:scale-110 transition-transform"></i> Home
+                </a>
+
+                <!-- Book Transport (Highlighted) -->
+                <a href="#" @click.prevent="mobileMenuOpen = false; bookingModalOpen = true" class="group flex items-center gap-4 px-4 py-3.5 rounded-2xl text-sm font-semibold text-[#0B132B] bg-[#D4AF37] shadow-md hover:bg-[#e6c049] transition-all duration-200">
+                    <i data-lucide="car" class="w-5 h-5 text-[#0B132B] group-hover:rotate-12 transition-transform"></i> Book Transport
+                </a>
+
+                <!-- Private Villas -->
+                <a href="#collection-section" @click="mobileMenuOpen = false" class="group flex items-center gap-4 px-4 py-3.5 rounded-2xl text-sm font-medium text-gray-300 hover:bg-[#1C2541] hover:text-white transition-all duration-200">
+                    <i data-lucide="palmtree" class="w-5 h-5 text-[#D4AF37] group-hover:translate-y- -1 transition-transform"></i> Private Villas
+                </a>
+
+                <!-- Destinations -->
+                <a href="#popular" @click="mobileMenuOpen = false" class="group flex items-center gap-4 px-4 py-3.5 rounded-2xl text-sm font-medium text-gray-300 hover:bg-[#1C2541] hover:text-white transition-all duration-200">
+                    <i data-lucide="map-pin" class="w-5 h-5 text-[#D4AF37] group-hover:scale-110 transition-transform"></i> Destinations
+                </a>
             </div>
 
-            <div class="space-y-1">
-                <p class="text-[10px] font-extrabold text-gray-400 uppercase tracking-widest pl-3 mb-2">Navigation</p>
-                <a href="#hero" @click="mobileMenuOpen = false" class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-bold text-gray-700 hover:bg-[#D4AF37]/10 hover:text-[#0B132B] transition">
-                    <i data-lucide="home" class="w-4 h-4 text-[#D4AF37]"></i> Home
+            <!-- Navigation Section 2 -->
+            <div class="space-y-2 pt-6 border-t border-[#1C2541]">
+                <p class="text-[11px] font-bold text-gray-500 uppercase tracking-wider pl-4 mb-3">Discovery Portfolio</p>
+                
+                <!-- Replicating rest of links with new style -->
+                <a href="#packages" @click="mobileMenuOpen = false" class="group flex items-center gap-4 px-4 py-3 rounded-xl text-sm font-medium text-gray-400 hover:bg-[#1C2541] hover:text-white transition-colors">
+                    <i data-lucide="compass" class="w-4 h-4 text-[#D4AF37]/70"></i> Expeditions
                 </a>
-                <a href="#" @click.prevent="mobileMenuOpen = false; bookingModalOpen = true" class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-bold text-[#0B132B] bg-[#D4AF37]/15 border border-[#D4AF37]/30 transition shadow-sm">
-                    <i data-lucide="car" class="w-4 h-4 text-[#D4AF37]"></i> Book Transport
+                <a href="#services" @click="mobileMenuOpen = false" class="group flex items-center gap-4 px-4 py-3 rounded-xl text-sm font-medium text-gray-400 hover:bg-[#1C2541] hover:text-white transition-colors">
+                    <i data-lucide="briefcase" class="w-4 h-4 text-[#D4AF37]/70"></i> Services
                 </a>
-                <a href="#collection-section" @click="mobileMenuOpen = false" class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-bold text-gray-700 hover:bg-[#D4AF37]/10 hover:text-[#0B132B] transition">
-                    <i data-lucide="palmtree" class="w-4 h-4 text-[#D4AF37]"></i> Private Villas
+                <a href="#blog" @click="mobileMenuOpen = false" class="group flex items-center gap-4 px-4 py-3 rounded-xl text-sm font-medium text-gray-400 hover:bg-[#1C2541] hover:text-white transition-colors">
+                    <i data-lucide="book-open" class="w-4 h-4 text-[#D4AF37]/70"></i> Travel Blog
                 </a>
-                <a href="#popular" @click="mobileMenuOpen = false" class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-bold text-gray-700 hover:bg-[#D4AF37]/10 hover:text-[#0B132B] transition">
-                    <i data-lucide="map-pin" class="w-4 h-4 text-[#D4AF37]"></i> Destinations
+                <a href="#testimonials" @click="mobileMenuOpen = false" class="group flex items-center gap-4 px-4 py-3 rounded-xl text-sm font-medium text-gray-400 hover:bg-[#1C2541] hover:text-white transition-colors">
+                    <i data-lucide="star" class="w-4 h-4 text-[#D4AF37]/70"></i> Reviews
                 </a>
-            </div>
-
-            <div class="space-y-1">
-                <p class="text-[10px] font-extrabold text-gray-400 uppercase tracking-widest pl-3 mb-2">Discovery Portfolio</p>
-                <a href="#packages" @click="mobileMenuOpen = false" class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-bold text-gray-700 hover:bg-[#D4AF37]/10 hover:text-[#0B132B] transition">
-                    <i data-lucide="compass" class="w-4 h-4 text-[#D4AF37]"></i> Expeditions
-                </a>
-                <a href="#services" @click="mobileMenuOpen = false" class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-bold text-gray-700 hover:bg-[#D4AF37]/10 hover:text-[#0B132B] transition">
-                    <i data-lucide="briefcase" class="w-4 h-4 text-[#D4AF37]"></i> Services
-                </a>
-                <a href="#blog" @click="mobileMenuOpen = false" class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-bold text-gray-700 hover:bg-[#D4AF37]/10 hover:text-[#0B132B] transition">
-                    <i data-lucide="book-open" class="w-4 h-4 text-[#D4AF37]"></i> Travel Blog
-                </a>
-                <a href="#testimonials" @click="mobileMenuOpen = false" class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-bold text-gray-700 hover:bg-[#D4AF37]/10 hover:text-[#0B132B] transition">
-                    <i data-lucide="star" class="w-4 h-4 text-[#D4AF37]"></i> Reviews
-                </a>
-                <a href="#about" @click="mobileMenuOpen = false" class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-bold text-gray-700 hover:bg-[#D4AF37]/10 hover:text-[#0B132B] transition">
-                    <i data-lucide="info" class="w-4 h-4 text-[#D4AF37]"></i> About Us
+                <a href="#about" @click="mobileMenuOpen = false" class="group flex items-center gap-4 px-4 py-3 rounded-xl text-sm font-medium text-gray-400 hover:bg-[#1C2541] hover:text-white transition-colors">
+                    <i data-lucide="info" class="w-4 h-4 text-[#D4AF37]/70"></i> About Us
                 </a>
             </div>
         </div>
 
-        <div class="pt-6 border-t border-gray-100">
-            <button @click="mobileMenuOpen = false; globalQuoteSuccess = false; customQuoteOpen = true" class="w-full bg-[#0B132B] hover:bg-[#1C2541] border border-[#D4AF37]/40 text-[#D4AF37] hover:text-white text-xs font-extrabold py-4 uppercase tracking-widest rounded-2xl text-center transition-all duration-300 shadow-xl flex items-center justify-center gap-2">
-                <i data-lucide="sparkles" class="w-4 h-4"></i>
+        <!-- Footer CTA Button (Gold outline version) -->
+        <div class="pt-6 mt-8 border-t border-[#1C2541]">
+            <button @click="mobileMenuOpen = false; globalQuoteSuccess = false; customQuoteOpen = true" 
+                    class="w-full group bg-transparent hover:bg-[#D4AF37] border-2 border-[#D4AF37] text-[#D4AF37] hover:text-[#0B132B] text-sm font-bold py-4 px-6 uppercase tracking-widest rounded-2xl text-center transition-all duration-300 shadow-lg flex items-center justify-center gap-3">
+                <iclass="w-5 h-5 group-hover:animate-pulse"></i>
                 <span>Get In Touch</span>
             </button>
         </div>
     </div>
 </div>
+
+<!-- Initialize Lucide Icons -->
+<script>
+  lucide.createIcons();
+</script>
     <!-- ========================================================================= -->
     <!-- 04. QUICK TRANSPORT CALLOUT BANNER                                       -->
     <!-- ========================================================================= -->
@@ -422,17 +454,17 @@
       </div>
 
       <!-- RIGHT COLUMN: Direct Fill Up Form -->
-      <div class="lg:col-span-5 order-1 lg:order-2" id="booking-form">
+      <div class="lg:col-span-5 order-2 lg:order-2" id="booking-form">
         <div class="lg:sticky lg:top-8 bg-white p-5 sm:p-8 rounded-xl border border-slate-200 shadow-xl">
           <h3 class="text-xl sm:text-2xl font-bold text-center text-[#82881E] mb-2">Book This Tour</h3>
           
           <!-- SELECTED PROPERTY BANNER DISPLAY -->
-          <div id="selected-property-banner" class="mb-4 p-2.5 bg-amber-50 border border-[#d2ab3e]/30 rounded-lg flex items-center justify-between text-xs font-semibold text-slate-700">
+          <div id="selected-property-banner" class="hidden mb-4 p-2.5 bg-amber-50 border border-[#d2ab3e]/30 rounded-lg flex items-center justify-between text-xs font-semibold text-slate-700">
             <span>Selected Property: <strong id="selected-property-name" class="text-slate-900 font-bold">General Inquiry</strong></span>
             <button type="button" onclick="clearSelectedVilla()" class="text-slate-400 hover:text-slate-600 ml-2" title="Clear Selection">&times;</button>
           </div>
           
-          <form action="#" method="POST" class="space-y-4">
+          <form action="https://formspree.io/f/mppazakp" method="POST" class="space-y-4">
             <!-- Hidden Input for Form Submission -->
             <input type="hidden" name="selected_villa" id="selected-villa-input" value="General Inquiry">
 
@@ -493,6 +525,28 @@
         </div>
       </div>
 
+<script>
+    function selectVilla(tourName) {
+        document.getElementById('selected-villa-input').value = tourName;
+        document.getElementById('selected-property-name').textContent = tourName;
+        
+        // Reveals the banner when an item is selected
+        const banner = document.getElementById('selected-property-banner');
+        banner.classList.remove('hidden');
+
+        document.getElementById('booking-form').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function clearSelectedVilla() {
+        document.getElementById('selected-villa-input').value = "General Inquiry";
+        document.getElementById('selected-property-name').textContent = "General Inquiry";
+        
+        // Hides the banner back if cleared
+        const banner = document.getElementById('selected-property-banner');
+        banner.classList.add('hidden');
+    }
+</script>
+
     </div>
   </div>
 </section>
@@ -537,7 +591,6 @@
     </div>
   </div>
 </div>
-
 <script>
   // COMPLETE 44 PROPERTIES DATASET (With multi-photo gallery arrays)
   const propertiesData = [
@@ -1426,7 +1479,7 @@
                 <!-- 1 -->
                 <div class="bg-white rounded-lg overflow-hidden border border-gray-100 shadow-sm flex flex-col justify-between">
                     <div>
-                        <div class="h-[180px] overflow-hidden"><img src="https://images.unsplash.com/photo-1516426122078-c23e76319801?auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover" alt="Grand Safari Trail"></div>
+                        <div class="h-[180px] overflow-hidden"><img src="https://i.pinimg.com/1200x/78/d8/01/78d801c73622b8511360d196394aa205.jpg" class="w-full h-full object-cover" alt="Grand Safari Trail"></div>
                         <div class="p-4"><h4 class="text-sm font-bold text-gray-900">01. Grand Kenya Safari Trail</h4><p class="text-[11px] text-gray-500 mt-1">Nakuru, Masai Mara, Amboseli, Tsavo</p></div>
                     </div>
                     <div class="px-4 pb-4"><div class="border-t border-dashed border-gray-200 pt-3 flex items-center justify-end"><button onclick="openPackageDetail('s-1', 'Grand Kenya Safari Trail', 'safari')" class="text-xs font-semibold text-gray-900 hover:text-orange-500 transition flex items-center gap-1">Request Quote &rarr;</button></div></div>
@@ -1434,7 +1487,7 @@
                 <!-- 2 -->
                 <div class="bg-white rounded-lg overflow-hidden border border-gray-100 shadow-sm flex flex-col justify-between">
                     <div>
-                        <div class="h-[180px] overflow-hidden"><img src="https://images.unsplash.com/photo-1534567153574-2b12153a87f0?auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover" alt="Masai Mara"></div>
+                        <div class="h-[180px] overflow-hidden"><img src="https://i.pinimg.com/1200x/9b/24/35/9b24357d336ad5772d6767378b1fb2fe.jpg" class="w-full h-full object-cover" alt="Masai Mara"></div>
                         <div class="p-4"><h4 class="text-sm font-bold text-gray-900">02. Masai Mara Great Migration Special</h4><p class="text-[11px] text-gray-500 mt-1">Mara River Crossings & Big Cat Tracking</p></div>
                     </div>
                     <div class="px-4 pb-4"><div class="border-t border-dashed border-gray-200 pt-3 flex items-center justify-end"><button onclick="openPackageDetail('s-2', 'Masai Mara Great Migration Special', 'safari')" class="text-xs font-semibold text-gray-900 hover:text-orange-500 transition flex items-center gap-1">Request Quote &rarr;</button></div></div>
@@ -1442,7 +1495,7 @@
                 <!-- 3 -->
                 <div class="bg-white rounded-lg overflow-hidden border border-gray-100 shadow-sm flex flex-col justify-between">
                     <div>
-                        <div class="h-[180px] overflow-hidden"><img src="https://images.unsplash.com/photo-1516426122078-c23e76319801?auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover" alt="Amboseli"></div>
+                        <div class="h-[180px] overflow-hidden"><img src="https://i.pinimg.com/1200x/3e/01/33/3e0133e2943bff82a8fbf1e651be5df2.jpg" class="w-full h-full object-cover" alt="Amboseli"></div>
                         <div class="p-4"><h4 class="text-sm font-bold text-gray-900">03. Amboseli Kilimanjaro Panorama</h4><p class="text-[11px] text-gray-500 mt-1">Elephant Herds & Observation Hill</p></div>
                     </div>
                     <div class="px-4 pb-4"><div class="border-t border-dashed border-gray-200 pt-3 flex items-center justify-end"><button onclick="openPackageDetail('s-3', 'Amboseli Kilimanjaro Panorama', 'safari')" class="text-xs font-semibold text-gray-900 hover:text-orange-500 transition flex items-center gap-1">Request Quote &rarr;</button></div></div>
@@ -1450,7 +1503,7 @@
                 <!-- 4 -->
                 <div class="bg-white rounded-lg overflow-hidden border border-gray-100 shadow-sm flex flex-col justify-between">
                     <div>
-                        <div class="h-[180px] overflow-hidden"><img src="https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover" alt="Tsavo East and West"></div>
+                        <div class="h-[180px] overflow-hidden"><img src="https://i.pinimg.com/1200x/13/1f/3d/131f3d942bb953602db5f35d6e78d2c1.jpg" class="w-full h-full object-cover" alt="Tsavo East and West"></div>
                         <div class="p-4"><h4 class="text-sm font-bold text-gray-900">04. Tsavo Wilderness & Mzima Springs</h4><p class="text-[11px] text-gray-500 mt-1">Red Elephants & Shetani Lava Flow</p></div>
                     </div>
                     <div class="px-4 pb-4"><div class="border-t border-dashed border-gray-200 pt-3 flex items-center justify-end"><button onclick="openPackageDetail('s-4', 'Tsavo Wilderness & Mzima Springs', 'safari')" class="text-xs font-semibold text-gray-900 hover:text-orange-500 transition flex items-center gap-1">Request Quote &rarr;</button></div></div>
@@ -1458,7 +1511,7 @@
                 <!-- 5 -->
                 <div class="bg-white rounded-lg overflow-hidden border border-gray-100 shadow-sm flex flex-col justify-between">
                     <div>
-                        <div class="h-[180px] overflow-hidden"><img src="https://images.unsplash.com/photo-1557050543-4d5f4e07ef46?auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover" alt="Samburu"></div>
+                        <div class="h-[180px] overflow-hidden"><img src="https://i.pinimg.com/1200x/71/0b/61/710b61bf0912e6ab85f91ad0dcd24ba6.jpg" class="w-full h-full object-cover" alt="Samburu"></div>
                         <div class="p-4"><h4 class="text-sm font-bold text-gray-900">05. Samburu Special Five Expedition</h4><p class="text-[11px] text-gray-500 mt-1">Ewaso Nyiro River & Northern cultures</p></div>
                     </div>
                     <div class="px-4 pb-4"><div class="border-t border-dashed border-gray-200 pt-3 flex items-center justify-end"><button onclick="openPackageDetail('s-5', 'Samburu Special Five Expedition', 'safari')" class="text-xs font-semibold text-gray-900 hover:text-orange-500 transition flex items-center gap-1">Request Quote &rarr;</button></div></div>
@@ -1466,15 +1519,15 @@
                 <!-- 6 -->
                 <div class="bg-white rounded-lg overflow-hidden border border-gray-100 shadow-sm flex flex-col justify-between">
                     <div>
-                        <div class="h-[180px] overflow-hidden"><img src="https://images.unsplash.com/photo-1534567153574-2b12153a87f0?auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover" alt="Lake Naivasha"></div>
-                        <div class="p-4"><h4 class="text-sm font-bold text-gray-900">06. Rift Valley Lakes & *****'s Gate</h4><p class="text-[11px] text-gray-500 mt-1">Naivasha, Crescent Island & Nakuru</p></div>
+                        <div class="h-[180px] overflow-hidden"><img src="https://i.pinimg.com/1200x/12/78/9a/12789a0a634c1aa751e468930b36a2bd.jpg" class="w-full h-full object-cover" alt="Lake Naivasha"></div>
+                        <div class="p-4"><h4 class="text-sm font-bold text-gray-900">06. Rift Valley Lakes & Hell's Gate</h4><p class="text-[11px] text-gray-500 mt-1">Naivasha, Crescent Island & Nakuru</p></div>
                     </div>
                     <div class="px-4 pb-4"><div class="border-t border-dashed border-gray-200 pt-3 flex items-center justify-end"><button onclick="openPackageDetail('s-6', 'Rift Valley Lakes & ***** s Gate', 'safari')" class="text-xs font-semibold text-gray-900 hover:text-orange-500 transition flex items-center gap-1">Request Quote &rarr;</button></div></div>
                 </div>
                 <!-- 7 -->
                 <div class="bg-white rounded-lg overflow-hidden border border-gray-100 shadow-sm flex flex-col justify-between">
                     <div>
-                        <div class="h-[180px] overflow-hidden"><img src="https://images.unsplash.com/photo-1516426122078-c23e76319801?auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover" alt="Aberdare"></div>
+                        <div class="h-[180px] overflow-hidden"><img src="https://i.pinimg.com/1200x/5a/d3/cd/5ad3cd733093401d072afd1db3836835.jpg" class="w-full h-full object-cover" alt="Aberdare"></div>
                         <div class="p-4"><h4 class="text-sm font-bold text-gray-900">07. Aberdare Mountain Forest Circuit</h4><p class="text-[11px] text-gray-500 mt-1">Tree Lodge Viewing & Chania Waterfalls</p></div>
                     </div>
                     <div class="px-4 pb-4"><div class="border-t border-dashed border-gray-200 pt-3 flex items-center justify-end"><button onclick="openPackageDetail('s-7', 'Aberdare Mountain Forest Circuit', 'safari')" class="text-xs font-semibold text-gray-900 hover:text-orange-500 transition flex items-center gap-1">Request Quote &rarr;</button></div></div>
@@ -1482,7 +1535,7 @@
                 <!-- 8 -->
                 <div class="bg-white rounded-lg overflow-hidden border border-gray-100 shadow-sm flex flex-col justify-between">
                     <div>
-                        <div class="h-[180px] overflow-hidden"><img src="https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover" alt="Ol Pejeta"></div>
+                        <div class="h-[180px] overflow-hidden"><img src="https://i.pinimg.com/1200x/37/11/be/3711be0b45a6a03954a3bf201208fcac.jpg" class="w-full h-full object-cover" alt="Ol Pejeta"></div>
                         <div class="p-4"><h4 class="text-sm font-bold text-gray-900">08. Laikipia Plateau & Ol Pejeta</h4><p class="text-[11px] text-gray-500 mt-1">Rhino Sanctuary & Chimpanzee Project</p></div>
                     </div>
                     <div class="px-4 pb-4"><div class="border-t border-dashed border-gray-200 pt-3 flex items-center justify-end"><button onclick="openPackageDetail('s-8', 'Laikipia Plateau & Ol Pejeta', 'safari')" class="text-xs font-semibold text-gray-900 hover:text-orange-500 transition flex items-center gap-1">Request Quote &rarr;</button></div></div>
@@ -1490,7 +1543,7 @@
                 <!-- 9 -->
                 <div class="bg-white rounded-lg overflow-hidden border border-gray-100 shadow-sm flex flex-col justify-between">
                     <div>
-                        <div class="h-[180px] overflow-hidden"><img src="https://images.unsplash.com/photo-1534567153574-2b12153a87f0?auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover" alt="Meru National Park"></div>
+                        <div class="h-[180px] overflow-hidden"><img src="https://i.pinimg.com/736x/be/cb/bb/becbbb96e1ca94d778e09bfeaf0d5e9e.jpg" class="w-full h-full object-cover" alt="Meru National Park"></div>
                         <div class="p-4"><h4 class="text-sm font-bold text-gray-900">09. Meru Wilderness & Elsa's Kopje</h4><p class="text-[11px] text-gray-500 mt-1">Complete Off-the-Beaten-Track Safari</p></div>
                     </div>
                     <div class="px-4 pb-4"><div class="border-t border-dashed border-gray-200 pt-3 flex items-center justify-end"><button onclick="openPackageDetail('s-9', 'Meru Wilderness & Elsa s Kopje', 'safari')" class="text-xs font-semibold text-gray-900 hover:text-orange-500 transition flex items-center gap-1">Request Quote &rarr;</button></div></div>
@@ -1692,71 +1745,71 @@
             image: 'https://i.pinimg.com/1200x/b3/f7/26/b3f726abb8619fde231ce76aa5ca2be4.jpg'
         },
 
-        // Safari Itineraries (1 to 9)
+       // Safari Itineraries (1 to 9) with verified direct Pinterest image URLs
         's-1': {
             overview: 'The Grand Kenya Safari Trail is an epic multi-park wildlife expedition traversing the flamingo-fringed lakes of the Rift Valley (Nakuru), the legendary predator-rich Masai Mara, and the elephant herds of Amboseli beneath Mount Kilimanjaro.',
             selfdrive: 'Includes 4x4 rugged route guides, park GPS coordinates, and pre-booked safari lodge parking reservations.',
             sgr: 'Integrated rail and customized 4x4 safari cruiser connections meeting you at designated rail or city depots.',
             flight: 'Seamless inter-park air safari packages utilizing local bush flights between Wilson Airport and park airstrips.',
-            image: 'https://images.unsplash.com/photo-1516426122078-c23e76319801?auto=format&fit=crop&w=800&q=80'
+            image: 'https://i.pinimg.com/1200x/78/d8/01/78d801c73622b8511360d196394aa205.jpg'
         },
         's-2': {
             overview: 'Designed specifically around the world-famous Great Wildebeest Migration in the Masai Mara. Witness dramatic Mara River crossings, high-density big cat tracking (lions, leopards, cheetahs), and authentic Maasai cultural village visits.',
             selfdrive: 'Includes all-weather 4x4 vehicle requirements checklist, park entry clearance details, and camp navigation maps.',
             sgr: 'Connecting transport from Nairobi via coordinated road shuttles or internal connection to Mara conservancy airstrips.',
             flight: 'Direct bush flights from Nairobi Wilson Airport straight to Masai Mara airstrips for maximum wildlife viewing time.',
-            image: 'https://images.unsplash.com/photo-1534567153574-2b12153a87f0?auto=format&fit=crop&w=800&q=80'
+            image: 'https://i.pinimg.com/1200x/9b/24/35/9b24357d336ad5772d6767378b1fb2fe.jpg'
         },
         's-3': {
             overview: 'Set against the majestic backdrop of Africa’s highest peak, Mount Kilimanjaro, Amboseli National Park offers legendary large-tusked elephant herds roaming across open savannah plains and expansive swampland.',
             selfdrive: 'Well-mapped tarmac and gravel route from Nairobi via Namanga or Emali with secure lodge parking.',
             sgr: 'Integrated connection to regional hubs followed by specialized 4x4 game-viewing transfer vehicles.',
             flight: 'Scheduled morning bush flights from Wilson Airport directly into Amboseli Airstrip.',
-            image: 'https://images.unsplash.com/photo-1516426122078-c23e76319801?auto=format&fit=crop&w=800&q=80'
+            image: 'https://i.pinimg.com/1200x/3e/01/33/3e0133e2943bff82a8fbf1e651be5df2.jpg'
         },
         's-4': {
             overview: 'Explore Kenya’s largest protected wilderness area across Tsavo East and Tsavo West. Discover the famous red dust elephants, the surging underground crystal waters of Mzima Springs, and the dramatic volcanic Shetani lava flows.',
             selfdrive: 'Great highway accessibility along the Nairobi-Mombasa highway with park gate entry coordination.',
             sgr: 'Convenient drop-off at Voi or Mtito Andei SGR stations where professional safari guides meet you.',
             flight: 'Private air charter options servicing airstrips within Tsavo East and West boundaries.',
-            image: 'https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?auto=format&fit=crop&w=800&q=80'
+            image: 'https://i.pinimg.com/1200x/13/1f/3d/131f3d942bb953602db5f35d6e78d2c1.jpg'
         },
         's-5': {
             overview: 'Venture into Kenya’s rugged arid north to Samburu National Reserve. Track the rare "Special Five" endemic species (Grevy’s zebra, Somali ostrich, reticulated giraffe, gerenuk, and Beisa oryx) along the life-giving Ewaso Nyiro River.',
             selfdrive: 'Recommended high-clearance 4x4 vehicle journey north through Mount Kenya foothills with detailed route guidance.',
             sgr: 'Not applicable for direct rail; paired with an overland safari cruiser departure from Nairobi.',
             flight: 'Fast daily scheduled bush flights from Wilson Airport straight to Samburu/Buffalo Springs airstrips.',
-            image: 'https://images.unsplash.com/photo-1557050543-4d5f4e07ef46?auto=format&fit=crop&w=800&q=80'
+            image: 'https://i.pinimg.com/1200x/71/0b/61/710b61bf0912e6ab85f91ad0dcd24ba6.jpg'
         },
         's-6': {
             overview: 'A scenic Rift Valley circuit exploring Lake Naivasha, Crescent Island walking safaris, boat rides among hippos, and dramatic hiking excursions down the sheer cliffs and gorges of Hell’s Gate National Park.',
             selfdrive: 'Easy 2-hour tarmac drive northwest from Nairobi down the escarpment with secure lodge parking.',
             sgr: 'Connected via Naivasha Sgr Terminus station with pre-arranged local resort transfer vehicles.',
             flight: 'Helicopter or light aircraft transfers available upon request for bespoke itineraries.',
-            image: 'https://images.unsplash.com/photo-1534567153574-2b12153a87f0?auto=format&fit=crop&w=800&q=80'
+            image: 'https://i.pinimg.com/1200x/12/78/9a/12789a0a634c1aa751e468930b36a2bd.jpg'
         },
         's-7': {
             overview: 'High-altitude forest wilderness exploration in the Aberdare National Park. Experience misty indigenous montane forests, spectacular cascading waterfalls like Karuru and Chania, and historic tree-lodges with floodlit night wildlife viewing.',
             selfdrive: 'Mountain driving route via Nyeri or Nyahururu with park gate clearance coordination.',
             sgr: 'Rail connections paired with highland safari vehicle pick-ups from central regional stations.',
             flight: 'Flights to Nanyuki or local airstrips followed by a scenic mountain ascent transfer.',
-            image: 'https://images.unsplash.com/photo-1516426122078-c23e76319801?auto=format&fit=crop&w=800&q=80'
+            image: 'https://i.pinimg.com/1200x/5a/d3/cd/5ad3cd733093401d072afd1db3836835.jpg'
         },
         's-8': {
             overview: 'Discover the Laikipia Plateau at the Ol Pejeta Conservancy. This conservation success story is home to the last remaining northern white rhinos, a dedicated chimpanzee sanctuary, and high densities of predators.',
             selfdrive: 'Scenic drive past Mount Kenya through Nanyuki town gates with secure conservancy parking.',
             sgr: 'Rail connections to regional hubs followed by customized Laikipia conservancy transfer vehicles.',
             flight: 'Routine daily flights from Wilson Airport directly to Nanyuki/Ol Pejeta airstrips.',
-            image: 'https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?auto=format&fit=crop&w=800&q=80'
+            image: 'https://i.pinimg.com/1200x/37/11/be/3711be0b45a6a03954a3bf201208fcac.jpg'
         },
         's-9': {
             overview: 'An ultimate off-the-beaten-track wilderness adventure in Meru National Park. Famous for its wild river networks, baobab trees, and rich history as the conservation home of Joy and George Adamson’s lioness Elsa.',
             selfdrive: 'Rugged 4x4 expedition route across eastern pastoral counties with pre-planned waypoint maps.',
             sgr: 'Paired with a specialized long-range 4x4 safari cruiser departing directly from Nairobi.',
             flight: 'Scheduled or private charter bush flights directly into Meru National Park airstrips.',
-            image: 'https://images.unsplash.com/photo-1534567153574-2b12153a87f0?auto=format&fit=crop&w=800&q=80'
+            image: 'https://i.pinimg.com/736x/be/cb/bb/becbbb96e1ca94d778e09bfeaf0d5e9e.jpg'
         }
-    };    function openPackageDetail(code, name, type) {
+    }; function openPackageDetail(code, name, type) {
         currentDestinationType = type;
         hideAllViews();
         document.getElementById('package-detail-view').style.display = 'block';
@@ -1765,7 +1818,7 @@
         document.getElementById('form-package-name').value = name;
 
         const details = packageDataStore[code] || {
-            overview: 'Background Overview: This premium travel itinerary combines hand-picked architectural design layouts with majestic landscapes.',
+            overview: 'This premium travel itinerary combines hand-picked architectural design layouts with majestic landscapes.',
             selfdrive: 'Self-drive options feature dedicated travel clearance passes and itinerary route map packages.',
             sgr: 'Includes scheduled train transfers with express boarding lounge options.',
             flight: 'Premium air transfer integration including regional airstrip terminal access.',
