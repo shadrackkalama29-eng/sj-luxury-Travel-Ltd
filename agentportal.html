@@ -2354,7 +2354,7 @@
                 </div>
 
                 <div class="auth-note">
-                    Your request will be sent to SJ Luxury Travel for verification. Once your password is reset to <strong>0000</strong> in the agent sheet, sign in with 0000 and you will be asked to create a new password.
+                    Your request will be sent to SJ Luxury Travel for verification. Once SJ Luxury Travel resets <strong>Column C</strong> to <strong>0000</strong> in the agent sheet, sign in with 0000 and you will be asked to create a new password.
                 </div>
 
                 <button class="btn btn-primary full" onclick="sendResetRequest()">
@@ -4080,9 +4080,12 @@
                     throw new Error("The reset request could not be sent.");
                 }
 
+                // Keep the identifier ready for the next login.
+                document.getElementById("loginIdentifier").value = identifier;
+
                 message.style.color = "#16834d";
                 message.textContent =
-                    "Reset request sent successfully. SJ Luxury Travel will verify your request and reset your password to 0000. Once that is done, log in with 0000 to create your new password.";
+                    "Reset request sent successfully. SJ Luxury Travel will verify your request and reset Column C to 0000. Once that is done, return to Login and enter 0000 to create your new password.";
 
             } catch (error) {
 
