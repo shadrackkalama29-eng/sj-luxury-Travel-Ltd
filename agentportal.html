@@ -1,3511 +1,5932 @@
-/**
- * ============================================================
- * SJ LUXURY TRAVEL
- * AGENT & PARTNER PORTAL BACKEND
- * ============================================================
- *
- * Google Sheets + Google Apps Script backend
- *
- * FEATURES
- * ------------------------------------------------------------
- * - Agent registration
- * - Referral code generation
- * - Agent login
- * - Phone login
- * - Session tokens
- * - Customer registration
- * - Customer search
- * - Customer dashboard
- * - Customer statistics
- * - Funnel tracking
- * - Admin customer management
- * - Agent management
- * - Automatic spreadsheet setup
- * - Custom Google Sheets menu
- * - JSONP API for external frontend
- *
- * ============================================================
- */
-
-
-/* ============================================================
-   CONFIGURATION
-============================================================ */
-
-const CONFIG = {
-
-  /*
-   * ============================================================
-   * SJ LUXURY TRAVEL — AGENT PORTAL CONFIGURATION
-   * ============================================================
-   *
-   * FRONTEND:
-   * https://www.sjluxurytravels.com/agentportal.html
-   *
-   * BACKEND:
-   * Google Apps Script Web App
-   *
-   * This URL is used by the Agent Portal frontend
-   * to communicate with this Apps Script backend.
-   * ============================================================
-   */
-
-  WEB_APP_URL:
-    "https://script.google.com/a/macros/sjluxurytravels.com/s/AKfycbwF2BtLTV_1QFEGLxLmSFGKir-xOc9mnWTJMQ9_rZy78qxvsA9vRaBrKH99zZzlBUm2/exec",
-
-  /*
-   * ============================================================
-   * FRONTEND URL
-   * ============================================================
-   *
-   * This is the public Agent Portal page.
-   * Keep this here so the backend configuration clearly identifies
-   * which frontend is connected to the system.
-   */
-
-  FRONTEND_URL:
-    "https://www.sjluxurytravels.com/agentportal.html",
-
-  /*
-   * ============================================================
-   * COMPANY INFORMATION
-   * ============================================================
-   */
-
-  COMPANY_NAME:
-    "SJ LUXURY TRAVEL",
-
-  PORTAL_NAME:
-    "Agent & Partner Portal",
-
-  WEBSITE:
-    "https://www.sjluxurytravels.com/",
-
-  /*
-   * ============================================================
-   * DEFAULT SETTINGS
-   * ============================================================
-  /*
-   * SESSION LENGTH
-   *
-   * Apps Script CacheService is used for login sessions.
-   *
-   * Maximum cache duration is limited by Apps Script.
-   */
-
-  SESSION_SECONDS:
-    21600,
-
-
-  /*
-   * SHEET NAMES
-   */
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>SJ Luxury Travel | Agent Portal</title>
+
+    <style>
+
+        /* =========================================================
+           GLOBAL
+        ========================================================= */
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f4f5f7;
+            color: #172033;
+            overflow-x: hidden;
+        }
+
+        button,
+        input,
+        select,
+        textarea {
+            font-family: inherit;
+        }
+
+        button {
+            border: 0;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+
+        /* =========================================================
+           BRAND COLORS
+        ========================================================= */
+
+        :root {
+            --navy-50: #f4f6fa;
+            --navy-100: #e5ebf5;
+            --navy-600: #152A56;
+            --navy-700: #0B1B3D;
+            --navy-800: #061026;
+
+            --gold-50: #FDFBF4;
+            --gold-500: #D4AF37;
+            --gold-600: #AA841B;
+
+            --flight-blue: #2A26D9;
+
+            --neutral-bg: #F4F5F7;
+            --tour-orange: #E66F33;
+            --tour-green: #7A9A01;
+        }
+
+
+        /* =========================================================
+           SJ LUXURY TRAVELS LOGO
+        ========================================================= */
+
+        .sj-brand {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            color: var(--navy-700);
+            width: 100%;
+            transition: .2s ease;
+        }
+
+        .sj-brand:hover {
+            transform: translateY(-1px);
+        }
+
+        .sj-text-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .sj-main-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            line-height: 1;
+        }
+
+        .sj-title {
+            font-size: 38px;
+            font-weight: 900;
+            letter-spacing: -2px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #C5A059 0%,
+                    #D4AF37 50%,
+                    #AA7C11 100%
+                );
+
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .sj-divider {
+            width: 1px;
+            height: 31px;
+            background: var(--gold-500);
+            margin: 0 9px;
+        }
+
+        .sj-luxury {
+            font-size: 23px;
+            font-weight: 300;
+            font-style: italic;
+            letter-spacing: -.5px;
+            color: var(--navy-700);
+        }
+
+        .sj-subtitle-row {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 7px;
+        }
+
+        .sj-subtitle {
+            font-size: 8px;
+            font-weight: 800;
+            letter-spacing: 3px;
+            color: var(--navy-700);
+            white-space: nowrap;
+        }
+
+        .sj-subtitle-row .line {
+            height: 1px;
+            width: 28px;
+            background: var(--gold-500);
+        }
+
+
+        /* =========================================================
+           LOGIN
+        ========================================================= */
+
+        .login-page {
+            min-height: 100vh;
+            min-height: 100svh;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            padding: 25px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #061026 0%,
+                    #0B1B3D 50%,
+                    #152A56 100%
+                );
+        }
+
+        .login-card {
+            width: 100%;
+            max-width: 470px;
+
+            background: #ffffff;
+
+            border-radius: 24px;
+
+            padding: 42px;
+
+            box-shadow:
+                0 30px 80px rgba(0, 0, 0, .28);
+        }
+
+        .login-card .sj-brand {
+            margin-bottom: 20px;
+        }
+
+        .login-card .sj-title {
+            font-size: 42px;
+        }
+
+        .login-card .sj-luxury {
+            font-size: 25px;
+        }
+
+        .login-card .sj-divider {
+            height: 34px;
+        }
+
+        .login-description {
+            text-align: center;
+            color: #777;
+            font-size: 14px;
+            margin: 8px 0 28px;
+        }
+
+        .logo {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .logo-mark {
+            width: 65px;
+            height: 65px;
+            margin: 0 auto 15px;
+
+            border-radius: 50%;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    var(--navy-700),
+                    var(--gold-500)
+                );
+
+            color: white;
+            font-size: 28px;
+            font-weight: 900;
+
+            box-shadow:
+                0 10px 25px rgba(11, 27, 61, .25);
+        }
+
+        .logo h1 {
+            margin: 0;
+            font-size: 25px;
+            letter-spacing: .5px;
+            color: var(--navy-700);
+        }
+
+        .logo p {
+            margin: 7px 0 0;
+            color: #777;
+            font-size: 14px;
+        }
+
+
+        /* =========================================================
+           FORMS
+        ========================================================= */
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 7px;
+            font-weight: 700;
+            font-size: 13px;
+            color: #283548;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+
+            padding: 13px 14px;
+
+            border: 1px solid #d7dee8;
+
+            border-radius: 10px;
+
+            background: #fff;
+
+            color: #172033;
+
+            font-size: 14px;
+
+            outline: none;
+
+            transition: .2s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: var(--gold-600);
+
+            box-shadow:
+                0 0 0 3px rgba(212, 175, 55, .10);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+        }
+
+
+        /* =========================================================
+           BUTTONS
+        ========================================================= */
+
+        .btn {
+            border: none;
+
+            border-radius: 10px;
+
+            padding: 12px 18px;
+
+            font-weight: 700;
+
+            cursor: pointer;
+
+            transition: .2s;
+
+            font-size: 13px;
+        }
+
+        .btn:hover {
+            transform: translateY(-1px);
+        }
+
+        .btn-primary {
+            background: var(--navy-700);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--navy-600);
+        }
+
+        .btn-primary.full {
+            width: 100%;
+        }
+
+        .btn-secondary {
+            background: #edf2f7;
+            color: #172033;
+        }
+
+        .btn-secondary:hover {
+            background: #dfe7ef;
+        }
+
+        .btn-success {
+            background: #16834d;
+            color: white;
+        }
+
+        .btn-danger {
+            background: #c0392b;
+            color: white;
+        }
+
+        .btn-report {
+            background: var(--gold-500);
+            color: var(--navy-800);
+        }
+
+        .btn-report:hover {
+            background: var(--gold-600);
+            color: white;
+        }
+
+
+        /* =========================================================
+           SWITCH
+        ========================================================= */
+
+        .switch-link {
+            text-align: center;
+            margin-top: 20px;
+            color: #666;
+            font-size: 14px;
+        }
+
+        .switch-link a {
+            color: var(--navy-600);
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        /* =========================================================
+           PASSWORD / AUTHENTICATION
+        ========================================================= */
+
+        .password-wrap {
+            position: relative;
+        }
+
+        .password-wrap input {
+            padding-right: 48px;
+        }
+
+        .password-toggle {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: transparent;
+            color: #667085;
+            font-size: 11px;
+            font-weight: 800;
+            cursor: pointer;
+            padding: 6px;
+        }
+
+        .forgot-link {
+            display: block;
+            text-align: right;
+            margin-top: -8px;
+            margin-bottom: 18px;
+            color: var(--navy-600);
+            font-size: 12px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .auth-note {
+            background: #f8fafc;
+            border: 1px solid #e6eaf0;
+            border-radius: 10px;
+            padding: 10px 12px;
+            color: #667085;
+            font-size: 12px;
+            line-height: 1.5;
+            margin-bottom: 16px;
+        }
+
+        .password-strength {
+            height: 4px;
+            border-radius: 10px;
+            background: #e7ebf0;
+            margin-top: 7px;
+            overflow: hidden;
+        }
+
+        .password-strength span {
+            display: block;
+            height: 100%;
+            width: 0;
+            transition: .2s ease;
+            background: var(--gold-500);
+        }
+
+
+        /* =========================================================
+           DASHBOARD
+        ========================================================= */
+
+        .dashboard {
+            min-height: 100vh;
+            background: var(--neutral-bg);
+        }
+
+
+        /* =========================================================
+           TOP BAR
+        ========================================================= */
+
+        .topbar {
+            background: var(--navy-800);
+            color: white;
+
+            padding: 14px 25px;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            gap: 20px;
+
+            position: sticky;
+            top: 0;
+            z-index: 100;
+
+            border-bottom: 1px solid rgba(212, 175, 55, .25);
+        }
+
+        .topbar-brand-link {
+            display: flex;
+            align-items: center;
+
+            text-decoration: none;
+            color: white;
+
+            min-width: 0;
+        }
+
+        .topbar-logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .topbar-logo .sj-text-container {
+            align-items: flex-start;
+        }
+
+        .topbar-logo .sj-main-row {
+            justify-content: flex-start;
+        }
+
+        .topbar-logo .sj-title {
+            font-size: 25px;
+        }
+
+        .topbar-logo .sj-luxury {
+            color: #ffffff;
+            font-size: 17px;
+        }
 
-  SHEETS: {
+        .topbar-logo .sj-divider {
+            height: 21px;
+            background: var(--gold-500);
+            margin: 0 6px;
+        }
 
-    AGENTS:
-      "Agents",
+        .topbar-logo .sj-subtitle-row {
+            justify-content: flex-start;
+            margin-top: 3px;
+        }
 
-    CLIENTS:
-      "Clients",
+        .topbar-logo .sj-subtitle {
+            color: rgba(255,255,255,.85);
+            font-size: 6px;
+            letter-spacing: 2px;
+        }
 
-    LOGS:
-      "Activity Logs"
+        .topbar-logo .sj-subtitle-row .line {
+            background: var(--gold-500);
+            width: 18px;
+        }
 
-  },
+        .user-area {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
 
+        .user-badge {
+            background: rgba(255,255,255,.08);
 
-  /*
-   * DEFAULT ADMIN
-   *
-   * IMPORTANT:
-   *
-   * Change this after the first setup.
-   *
-   * The default login will be:
-   *
-   * Referral:
-   * SJ-ADMIN
-   *
-   * Phone:
-   * 0700000000
-   */
+            border: 1px solid rgba(212,175,55,.25);
 
-  DEFAULT_ADMIN: {
+            padding: 8px 12px;
 
-    name:
-      "SJ Luxury Travel Administrator",
+            border-radius: 8px;
 
-    code:
-      "SJ-ADMIN",
+            font-size: 13px;
 
-    phone:
-      "0700000000",
+            max-width: 250px;
 
-    email:
-      "admin@sjluxurytravels.com"
-,
+            overflow: hidden;
 
-    password:
-      "ChangeMe@2026"
-  },
+            text-overflow: ellipsis;
 
+            white-space: nowrap;
+        }
 
-  /*
-   * CUSTOMER FUNNEL
-   */
 
-  STAGES: [
+        /* =========================================================
+           BACK TO WEBSITE
+        ========================================================= */
 
-    "LEAD QUALIFICATION",
+        .back-website-btn {
+            display: inline-flex;
 
-    "CONSULTATION",
+            align-items: center;
+            justify-content: center;
 
-    "BESPOKE ITINERARY",
+            gap: 7px;
 
-    "QUOTATION",
+            padding: 9px 13px;
 
-    "CLIENT APPROVAL",
+            border-radius: 9px;
 
-    "DEPOSIT PAYMENT",
+            background: rgba(255,255,255,.08);
 
-    "BOOKING CONFIRMATION"
+            border: 1px solid rgba(212,175,55,.25);
 
-  ]
+            color: white;
 
-};
+            text-decoration: none;
 
+            font-size: 12px;
 
-/* ============================================================
-   CUSTOM GOOGLE SHEETS MENU
-============================================================ */
+            font-weight: 700;
 
-/**
- * Runs automatically whenever the spreadsheet is opened.
- *
- * Google Apps Script supports custom menus using onOpen()
- * and SpreadsheetApp.getUi().
- */
+            transition: .2s ease;
 
-function onOpen() {
+            white-space: nowrap;
+        }
 
-  const ui =
-    SpreadsheetApp.getUi();
+        .back-website-btn:hover {
+            background: rgba(212,175,55,.15);
+            transform: translateY(-1px);
+        }
 
 
-  ui.createMenu(
-    "SJ Luxury Travel"
-  )
+        /* =========================================================
+           DASHBOARD CONTAINER
+        ========================================================= */
 
-    .addItem(
-      "Open Agent Portal",
-      "openAgentPortal"
-    )
+        .dashboard-container {
+            width: 100%;
+            max-width: 1450px;
 
-    .addSeparator()
+            margin: auto;
 
-    .addItem(
-      "Setup / Repair Database",
-      "setupDatabase"
-    )
+            padding: 30px;
+        }
 
-    .addItem(
-      "Refresh Dashboard Data",
-      "refreshDatabase"
-    )
 
-    .addSeparator()
+        /* =========================================================
+           STATS
+        ========================================================= */
 
-    .addItem(
-      "View Agents",
-      "showAgents"
-    )
+        .stats {
+            display: grid;
 
-    .addItem(
-      "View Customers",
-      "showCustomers"
-    )
+            grid-template-columns:
+                repeat(auto-fit, minmax(170px, 1fr));
 
-    .addItem(
-      "View Activity Logs",
-      "showLogs"
-    )
+            gap: 18px;
 
-    .addSeparator()
+            margin-bottom: 25px;
+        }
 
-    .addItem(
-      "Create Admin Account",
-      "createDefaultAdmin"
-    )
+        .stat-card {
+            background: white;
 
-    .addItem(
-      "Test API",
-      "testAPI"
-    )
+            border-radius: 15px;
 
-    .addToUi();
+            padding: 22px;
 
-}
+            box-shadow:
+                0 5px 20px rgba(0,0,0,.06);
 
+            border: 1px solid #edf0f4;
 
-/* ============================================================
-   OPEN PORTAL
-============================================================ */
+            position: relative;
 
-function openAgentPortal() {
+            overflow: hidden;
+        }
 
-  const html = HtmlService
-    .createHtmlOutput(
-      `
-      <div style="
-        font-family:Arial;
-        padding:25px;
-        text-align:center;
-      ">
+        .stat-card::after {
+            content: "";
 
-        <h2>
-          SJ Luxury Travel
-        </h2>
+            position: absolute;
 
-        <p>
-          Agent & Partner Portal
-        </p>
+            right: -30px;
+            bottom: -30px;
 
-        <a
-          href="${CONFIG.WEB_APP_URL}"
-          target="_blank"
-          style="
-            display:inline-block;
-            padding:12px 20px;
-            background:#0b3156;
-            color:white;
-            text-decoration:none;
-            border-radius:8px;
-            font-weight:bold;
-          "
+            width: 90px;
+            height: 90px;
+
+            border-radius: 50%;
+
+            background: rgba(212,175,55,.08);
+        }
+
+        .stat-card h3 {
+            margin: 0;
+            font-size: 30px;
+            color: var(--navy-700);
+        }
+
+        .stat-card p {
+            margin: 7px 0 0;
+            color: #777;
+            font-size: 13px;
+        }
+
+
+        /* =========================================================
+           PANELS
+        ========================================================= */
+
+        .panel {
+            background: white;
+
+            border-radius: 16px;
+
+            padding: 25px;
+
+            margin-bottom: 25px;
+
+            box-shadow:
+                0 5px 20px rgba(0,0,0,.05);
+
+            border: 1px solid #edf0f4;
+        }
+
+        .panel-header {
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            gap: 15px;
+
+            margin-bottom: 20px;
+        }
+
+        .panel-header h2 {
+            margin: 0;
+            font-size: 20px;
+            color: #172033;
+        }
+
+        .panel-actions {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+
+        /* =========================================================
+           SEARCH
+        ========================================================= */
+
+        .search-box {
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .search-box input {
+            width: 100%;
+
+            padding: 14px 15px 14px 42px;
+
+            border: 1px solid #d8dee8;
+
+            border-radius: 10px;
+
+            outline: none;
+
+            font-size: 14px;
+        }
+
+        .search-box input:focus {
+            border-color: var(--gold-500);
+
+            box-shadow:
+                0 0 0 3px rgba(212,175,55,.08);
+        }
+
+        .search-icon {
+            position: absolute;
+
+            left: 15px;
+
+            top: 50%;
+
+            transform: translateY(-50%);
+
+            color: #777;
+        }
+
+
+        /* =========================================================
+           TABLE
+        ========================================================= */
+
+        .table-wrapper {
+            width: 100%;
+
+            overflow-x: auto;
+
+            border: 1px solid #edf0f4;
+
+            border-radius: 10px;
+
+            -webkit-overflow-scrolling: touch;
+
+            scrollbar-width: thin;
+        }
+
+        .table-wrapper::-webkit-scrollbar {
+            height: 7px;
+        }
+
+        .table-wrapper::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 20px;
+        }
+
+        table {
+            width: 100%;
+
+            border-collapse: collapse;
+
+            min-width: 1050px;
+        }
+
+        th {
+            background: #f1f5f9;
+
+            text-align: left;
+
+            padding: 13px;
+
+            font-size: 11px;
+
+            text-transform: uppercase;
+
+            letter-spacing: .4px;
+
+            color: #596579;
+
+            white-space: nowrap;
+        }
+
+        td {
+            padding: 13px;
+
+            border-bottom: 1px solid #edf0f4;
+
+            font-size: 13px;
+
+            vertical-align: middle;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        tr:hover td {
+            background: #fafbfd;
+        }
+
+
+        /* =========================================================
+           STAGE BADGES
+        ========================================================= */
+
+        .stage {
+            display: inline-block;
+
+            padding: 6px 9px;
+
+            border-radius: 20px;
+
+            font-size: 10px;
+
+            font-weight: 800;
+
+            background: #e8f0f8;
+
+            color: #174d75;
+
+            white-space: nowrap;
+        }
+
+
+        /* =========================================================
+           FUNNEL / CUSTOMER JOURNEY
+        ========================================================= */
+
+        .funnel {
+            display: grid;
+
+            grid-template-columns:
+                repeat(7, minmax(0, 1fr));
+
+            gap: 8px;
+
+            width: 100%;
+        }
+
+        .funnel-step {
+            min-width: 0;
+
+            padding: 16px 8px;
+
+            text-align: center;
+
+            background: #edf2f7;
+
+            border-radius: 10px;
+
+            color: #344054;
+
+            font-size: 11px;
+
+            font-weight: 700;
+
+            line-height: 1.35;
+
+            overflow-wrap: anywhere;
+
+            word-break: normal;
+
+            display: flex;
+
+            flex-direction: column;
+
+            align-items: center;
+
+            justify-content: center;
+        }
+
+        .funnel-step span {
+            display: block;
+
+            font-size: 27px;
+
+            line-height: 1;
+
+            font-weight: 900;
+
+            color: var(--navy-700);
+
+            margin-bottom: 7px;
+        }
+
+        .funnel-step.active {
+            background: var(--navy-700);
+            color: white;
+        }
+
+        .funnel-step.active span {
+            color: white;
+        }
+
+
+        /* =========================================================
+           MODAL
+        ========================================================= */
+
+        .modal {
+            position: fixed;
+
+            inset: 0;
+
+            background: rgba(0,0,0,.62);
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            padding: 20px;
+
+            z-index: 999;
+        }
+
+        .modal-content {
+            background: white;
+
+            width: 100%;
+
+            max-width: 680px;
+
+            max-height: 90vh;
+
+            overflow-y: auto;
+
+            border-radius: 18px;
+
+            padding: 30px;
+
+            box-shadow:
+                0 30px 80px rgba(0,0,0,.25);
+        }
+
+        .modal-header {
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            margin-bottom: 20px;
+        }
+
+        .modal-header h2 {
+            margin: 0;
+        }
+
+        .close {
+            border: none;
+
+            background: transparent;
+
+            font-size: 28px;
+
+            cursor: pointer;
+
+            color: #777;
+        }
+
+
+        /* =========================================================
+           MESSAGE
+        ========================================================= */
+
+        .message {
+            text-align: center;
+
+            margin-top: 15px;
+
+            font-size: 13px;
+
+            min-height: 20px;
+        }
+
+
+        /* =========================================================
+           LOADING
+        ========================================================= */
+
+        .loading {
+            position: fixed;
+
+            inset: 0;
+
+            background: rgba(255,255,255,.75);
+
+            z-index: 2000;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+        }
+
+        .loading-box {
+            background: white;
+
+            padding: 25px 35px;
+
+            border-radius: 14px;
+
+            box-shadow:
+                0 20px 50px rgba(0,0,0,.15);
+
+            text-align: center;
+        }
+
+        .spinner {
+            width: 35px;
+
+            height: 35px;
+
+            border: 4px solid #e5e7eb;
+
+            border-top-color: var(--gold-500);
+
+            border-radius: 50%;
+
+            animation: spin .8s linear infinite;
+
+            margin: 0 auto 12px;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+
+        /* =========================================================
+           EMPTY STATE
+        ========================================================= */
+
+        .empty-state {
+            text-align: center;
+
+            padding: 45px;
+
+            color: #777;
+        }
+
+
+        /* =========================================================
+           FOOTER
+        ========================================================= */
+
+        .portal-footer {
+            background: #ffffff;
+
+            border-top: 1px solid #e5e7eb;
+
+            color: #4b5563;
+
+            font-size: 12px;
+
+            padding: 64px 16px;
+
+            position: relative;
+
+            overflow: hidden;
+        }
+
+        .footer-glow {
+            position: absolute;
+
+            bottom: 0;
+            right: 0;
+
+            width: 380px;
+            height: 380px;
+
+            background: rgba(11,19,43,.04);
+
+            border-radius: 50%;
+
+            filter: blur(45px);
+
+            pointer-events: none;
+        }
+
+        .footer-container {
+            width: 100%;
+
+            max-width: 1280px;
+
+            margin: 0 auto;
+
+            position: relative;
+
+            z-index: 2;
+        }
+
+        .footer-newsletter {
+            background: #0B132B;
+
+            color: white;
+
+            border-radius: 24px;
+
+            padding: 36px;
+
+            box-shadow:
+                0 20px 45px rgba(0,0,0,.16);
+
+            border: 1px solid rgba(212,175,55,.40);
+
+            position: relative;
+
+            overflow: hidden;
+
+            display: grid;
+
+            grid-template-columns:
+                minmax(0, 7fr)
+                minmax(0, 5fr);
+
+            gap: 32px;
+
+            align-items: center;
+
+            margin-bottom: 48px;
+        }
+
+        .footer-newsletter::after {
+            content: "";
+
+            position: absolute;
+
+            right: -40px;
+            bottom: -40px;
+
+            width: 260px;
+            height: 260px;
+
+            background: rgba(212,175,55,.08);
+
+            border-radius: 50%;
+
+            filter: blur(30px);
+
+            pointer-events: none;
+        }
+
+        .vip-badge {
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 8px;
+
+            padding: 5px 12px;
+
+            border-radius: 999px;
+
+            background: #1C2541;
+
+            border: 1px solid rgba(212,175,55,.30);
+
+            margin-bottom: 12px;
+        }
+
+        .vip-dot {
+            width: 8px;
+            height: 8px;
+
+            border-radius: 50%;
+
+            background: var(--gold-500);
+
+            animation: pulseGold 1.8s infinite;
+        }
+
+        @keyframes pulseGold {
+            0%, 100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: .35;
+            }
+        }
+
+        .vip-text {
+            font-size: 10px;
+
+            text-transform: uppercase;
+
+            letter-spacing: 2px;
+
+            color: var(--gold-500);
+
+            font-weight: 900;
+        }
+
+        .footer-newsletter h3 {
+            margin: 0 0 10px;
+
+            font-size: 27px;
+
+            line-height: 1.25;
+
+            color: white;
+        }
+
+        .footer-newsletter p {
+            margin: 0;
+
+            color: #d1d5db;
+
+            line-height: 1.6;
+        }
+
+        .newsletter-form {
+            display: flex;
+
+            gap: 10px;
+
+            position: relative;
+
+            z-index: 3;
+        }
+
+        .newsletter-form input {
+            flex: 1;
+
+            min-width: 0;
+
+            background: #1C2541;
+
+            border: 1px solid rgba(212,175,55,.40);
+
+            color: white;
+
+            padding: 14px 16px;
+
+            border-radius: 12px;
+
+            outline: none;
+
+            font-size: 12px;
+        }
+
+        .newsletter-form input:focus {
+            border-color: var(--gold-500);
+        }
+
+        .newsletter-form button {
+            background: var(--gold-500);
+
+            color: #0B132B;
+
+            padding: 14px 22px;
+
+            border-radius: 12px;
+
+            font-size: 11px;
+
+            font-weight: 900;
+
+            text-transform: uppercase;
+
+            letter-spacing: 1.5px;
+
+            cursor: pointer;
+
+            white-space: nowrap;
+
+            transition: .2s;
+        }
+
+        .newsletter-form button:hover {
+            background: #c29f31;
+        }
+
+        .newsletter-note {
+            margin-top: 8px !important;
+
+            font-size: 10px;
+
+            color: #9ca3af !important;
+        }
+
+        .newsletter-note a {
+            color: var(--gold-500);
+
+            text-decoration: underline;
+        }
+
+        .footer-grid {
+            display: grid;
+
+            grid-template-columns:
+                2fr
+                1fr
+                1fr
+                1fr;
+
+            gap: 32px;
+
+            padding-top: 4px;
+        }
+
+        .footer-column {
+            min-width: 0;
+        }
+
+        .footer-brand-column {
+            max-width: 390px;
+        }
+
+        .footer-logo {
+            display: inline-flex;
+
+            align-items: center;
+
+            text-decoration: none;
+
+            margin-bottom: 15px;
+        }
+
+        .footer-logo .sj-title {
+            font-size: 28px;
+        }
+
+        .footer-logo .sj-luxury {
+            font-size: 20px;
+        }
+
+        .footer-logo .sj-divider {
+            height: 24px;
+
+            margin: 0 7px;
+        }
+
+        .footer-logo .sj-subtitle {
+            font-size: 7px;
+
+            letter-spacing: 2.5px;
+        }
+
+        .footer-logo .sj-subtitle-row {
+            gap: 6px;
+
+            margin-top: 5px;
+        }
+
+        .footer-logo .sj-subtitle-row .line {
+            width: 18px;
+        }
+
+        .footer-description {
+            color: #6b7280;
+
+            line-height: 1.7;
+
+            margin: 0 0 15px;
+        }
+
+        .social-icons {
+            display: flex;
+
+            gap: 10px;
+        }
+
+        .social-icon {
+            width: 34px;
+            height: 34px;
+
+            border-radius: 50%;
+
+            background: #f3f4f6;
+
+            border: 1px solid #e5e7eb;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            text-decoration: none;
+
+            color: #0B132B;
+
+            font-size: 12px;
+
+            font-weight: 900;
+
+            transition: .2s;
+        }
+
+        .social-icon:hover {
+            background: #0B132B;
+
+            color: var(--gold-500);
+        }
+
+        .footer-heading {
+            margin: 0 0 14px;
+
+            font-size: 12px;
+
+            font-weight: 800;
+
+            color: #111827;
+
+            text-transform: uppercase;
+
+            letter-spacing: 1px;
+        }
+
+        .footer-links {
+            list-style: none;
+
+            margin: 0;
+            padding: 0;
+        }
+
+        .footer-links li {
+            margin-bottom: 9px;
+        }
+
+        .footer-links a {
+            color: #6b7280;
+
+            text-decoration: none;
+
+            font-weight: 500;
+
+            transition: .2s;
+        }
+
+        .footer-links a:hover {
+            color: #0B132B;
+        }
+
+        .contact-line {
+            display: flex;
+
+            align-items: flex-start;
+
+            gap: 8px;
+
+            color: #6b7280;
+
+            margin-bottom: 10px;
+
+            line-height: 1.5;
+        }
+
+        .contact-line a {
+            color: #0B132B;
+
+            font-weight: 700;
+
+            text-decoration: none;
+        }
+
+        .contact-line a:hover {
+            text-decoration: underline;
+        }
+
+        .bottom-footer {
+            padding-top: 30px;
+
+            margin-top: 35px;
+
+            border-top: 1px solid #e5e7eb;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 20px;
+
+            flex-wrap: wrap;
+
+            color: #6b7280;
+        }
+
+        .bottom-footer p {
+            margin: 0;
+        }
+
+        .bottom-footer a {
+            color: #0B132B;
+
+            text-decoration: none;
+
+            font-weight: 700;
+        }
+
+        .bottom-footer a:hover {
+            text-decoration: underline;
+        }
+
+        .bottom-links {
+            display: flex;
+
+            gap: 20px;
+
+            flex-wrap: wrap;
+        }
+
+        .bottom-links a {
+            color: #6b7280;
+
+            font-weight: 500;
+        }
+
+
+        /* =========================================================
+           TABLET
+        ========================================================= */
+
+        @media (max-width: 1000px) {
+
+            .dashboard-container {
+                padding: 22px;
+            }
+
+            .stats {
+                grid-template-columns:
+                    repeat(3, minmax(150px, 1fr));
+            }
+
+            .topbar {
+                padding: 12px 18px;
+            }
+
+            .funnel {
+                grid-template-columns:
+                    repeat(4, minmax(150px, 1fr));
+            }
+
+            .footer-grid {
+                grid-template-columns:
+                    repeat(2, minmax(0, 1fr));
+            }
+
+            .footer-brand-column {
+                max-width: none;
+                grid-column: 1 / -1;
+            }
+        }
+
+
+        /* =========================================================
+           MOBILE
+        ========================================================= */
+
+        @media (max-width: 700px) {
+
+            body {
+                overflow-x: hidden;
+            }
+
+
+            /* LOGIN */
+
+            .login-page {
+                min-height: 100svh;
+
+                padding: 15px;
+
+                align-items: flex-start;
+
+                padding-top: 35px;
+
+                padding-bottom: 35px;
+            }
+
+            .login-card {
+                max-width: 100%;
+
+                padding: 25px 20px;
+
+                border-radius: 18px;
+            }
+
+            .login-card .sj-title {
+                font-size: 34px;
+            }
+
+            .login-card .sj-luxury {
+                font-size: 21px;
+            }
+
+            .login-card .sj-divider {
+                height: 28px;
+
+                margin: 0 7px;
+            }
+
+            .login-card .sj-subtitle {
+                font-size: 7px;
+
+                letter-spacing: 2px;
+            }
+
+            .login-card .sj-subtitle-row .line {
+                width: 20px;
+            }
+
+            .login-description {
+                font-size: 13px;
+
+                margin-bottom: 22px;
+            }
+
+
+            /* MOBILE FORM */
+
+            .form-group input,
+            .form-group select,
+            .form-group textarea {
+                font-size: 16px;
+
+                padding: 13px;
+            }
+
+            .btn {
+                min-height: 44px;
+            }
+
+
+            /* TOP BAR */
+
+            .topbar {
+                position: relative;
+
+                padding: 12px;
+
+                gap: 12px;
+
+                flex-direction: column;
+
+                align-items: stretch;
+            }
+
+            .topbar-brand-link {
+                justify-content: center;
+            }
+
+            .topbar-logo .sj-title {
+                font-size: 24px;
+            }
+
+            .topbar-logo .sj-luxury {
+                font-size: 16px;
+            }
+
+            .topbar-logo .sj-subtitle {
+                font-size: 6px;
+            }
+
+            .user-area {
+                width: 100%;
+
+                display: grid;
+
+                grid-template-columns:
+                    minmax(0, 1fr)
+                    auto
+                    auto;
+
+                gap: 8px;
+            }
+
+            .user-badge {
+                min-width: 0;
+
+                max-width: none;
+
+                overflow: hidden;
+
+                text-overflow: ellipsis;
+
+                white-space: nowrap;
+            }
+
+            .back-website-btn {
+                width: 100%;
+            }
+
+
+            /* DASHBOARD */
+
+            .dashboard-container {
+                padding: 12px;
+            }
+
+
+            /* STATS */
+
+            .stats {
+                grid-template-columns:
+                    repeat(2, minmax(0, 1fr));
+
+                gap: 10px;
+
+                margin-bottom: 15px;
+            }
+
+            .stat-card {
+                padding: 16px 13px;
+
+                border-radius: 12px;
+            }
+
+            .stat-card h3 {
+                font-size: 24px;
+            }
+
+            .stat-card p {
+                font-size: 11px;
+
+                line-height: 1.3;
+            }
+
+
+            /* PANELS */
+
+            .panel {
+                padding: 15px;
+
+                border-radius: 13px;
+
+                margin-bottom: 15px;
+            }
+
+            .panel-header {
+                align-items: flex-start;
+
+                flex-direction: column;
+            }
+
+            .panel-header h2 {
+                font-size: 17px;
+            }
+
+            .panel-actions {
+                width: 100%;
+
+                display: grid;
+
+                grid-template-columns:
+                    repeat(2, minmax(0, 1fr));
+            }
+
+            .panel-actions .btn {
+                width: 100%;
+            }
+
+
+            /* SEARCH */
+
+            .search-box input {
+                font-size: 16px;
+
+                padding:
+                    13px
+                    13px
+                    13px
+                    40px;
+            }
+
+
+            /* CUSTOMER JOURNEY */
+
+            .funnel {
+                display: grid;
+
+                grid-template-columns:
+                    repeat(2, minmax(0, 1fr));
+
+                gap: 8px;
+
+                width: 100%;
+
+                overflow: visible;
+            }
+
+            .funnel-step {
+                width: 100%;
+
+                min-width: 0;
+
+                min-height: 86px;
+
+                padding: 12px 7px;
+
+                font-size: 10px;
+
+                line-height: 1.3;
+
+                overflow-wrap: break-word;
+            }
+
+            .funnel-step span {
+                font-size: 24px;
+
+                margin-bottom: 6px;
+            }
+
+            .funnel-step:last-child {
+                grid-column: 1 / -1;
+            }
+
+
+            /* MODAL */
+
+            .modal {
+                padding: 10px;
+
+                align-items: flex-end;
+            }
+
+            .modal-content {
+                max-height: 94svh;
+
+                border-radius:
+                    18px
+                    18px
+                    0
+                    0;
+
+                padding:
+                    20px
+                    16px;
+            }
+
+            .modal-header h2 {
+                font-size: 19px;
+            }
+
+
+            /* TABLE */
+
+            .table-wrapper {
+                margin-left: -2px;
+
+                margin-right: -2px;
+
+                border-radius: 8px;
+            }
+
+            table {
+                min-width: 950px;
+            }
+
+            th {
+                padding: 11px;
+
+                font-size: 10px;
+            }
+
+            td {
+                padding: 11px;
+
+                font-size: 12px;
+            }
+
+
+            /* FOOTER */
+
+            .portal-footer {
+                padding: 40px 15px;
+            }
+
+            .footer-newsletter {
+                grid-template-columns: 1fr;
+
+                padding: 25px 20px;
+
+                border-radius: 18px;
+
+                gap: 22px;
+            }
+
+            .footer-newsletter h3 {
+                font-size: 22px;
+            }
+
+            .newsletter-form {
+                flex-direction: column;
+            }
+
+            .newsletter-form button {
+                width: 100%;
+            }
+
+            .footer-grid {
+                grid-template-columns:
+                    repeat(2, minmax(0, 1fr));
+
+                gap: 30px 20px;
+            }
+
+            .footer-brand-column {
+                grid-column: 1 / -1;
+            }
+
+            .bottom-footer {
+                flex-direction: column;
+
+                text-align: center;
+
+                justify-content: center;
+            }
+
+            .bottom-links {
+                justify-content: center;
+            }
+        }
+
+
+        /* =========================================================
+           SMALL PHONES
+        ========================================================= */
+
+        @media (max-width: 480px) {
+
+            .user-area {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .user-badge {
+                grid-column: 1 / -1;
+            }
+
+            .back-website-btn,
+            .user-area .btn {
+                width: 100%;
+            }
+
+            .panel-actions {
+                grid-template-columns:
+                    1fr 1fr;
+            }
+
+            .funnel {
+                grid-template-columns:
+                    1fr 1fr;
+            }
+
+            .funnel-step {
+                min-height: 82px;
+
+                font-size: 9px;
+            }
+
+            .funnel-step span {
+                font-size: 22px;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-brand-column {
+                grid-column: auto;
+            }
+
+            .bottom-links {
+                flex-direction: column;
+
+                gap: 8px;
+            }
+        }
+
+
+        /* =========================================================
+           VERY SMALL PHONES
+        ========================================================= */
+
+        @media (max-width: 400px) {
+
+            .login-card {
+                padding:
+                    22px
+                    16px;
+            }
+
+            .login-card .sj-title {
+                font-size: 29px;
+            }
+
+            .login-card .sj-luxury {
+                font-size: 18px;
+            }
+
+            .login-card .sj-divider {
+                height: 24px;
+
+                margin: 0 5px;
+            }
+
+            .stats {
+                grid-template-columns:
+                    1fr 1fr;
+            }
+
+            .stat-card h3 {
+                font-size: 21px;
+            }
+
+            .stat-card p {
+                font-size: 10px;
+            }
+
+            .panel-actions {
+                grid-template-columns:
+                    1fr;
+            }
+
+            .funnel {
+                grid-template-columns:
+                    1fr;
+            }
+
+            .funnel-step:last-child {
+                grid-column: auto;
+            }
+
+            .funnel-step {
+                min-height: 70px;
+
+                flex-direction: row;
+
+                gap: 8px;
+
+                justify-content: flex-start;
+
+                text-align: left;
+
+                padding: 12px;
+            }
+
+            .funnel-step span {
+                margin: 0;
+
+                min-width: 30px;
+
+                text-align: center;
+            }
+        }
+
+
+        /* =========================================================
+           TOUCH DEVICES
+        ========================================================= */
+
+        @media (hover: none) {
+
+            .btn:hover,
+            .sj-brand:hover,
+            .back-website-btn:hover {
+                transform: none;
+            }
+        }
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- =======================================================
+         LOADING
+    ======================================================== -->
+
+    <div
+        id="loading"
+        class="loading hidden"
+    >
+
+        <div class="loading-box">
+
+            <div class="spinner"></div>
+
+            <strong id="loadingText">
+                Loading...
+            </strong>
+
+        </div>
+
+    </div>
+
+
+    <!-- =======================================================
+         LOGIN PAGE
+    ======================================================== -->
+
+    <section
+        id="loginPage"
+        class="login-page"
+    >
+
+        <div class="login-card">
+
+
+            <!-- SJ LUXURY TRAVELS LOGO -->
+
+            <a
+                href="https://www.sjluxurytravels.com/"
+                class="sj-brand"
+                aria-label="SJ Luxury Travels"
+            >
+
+                <div class="sj-text-container">
+
+                    <div class="sj-main-row">
+
+                        <span class="sj-title">
+                            SJ
+                        </span>
+
+                        <span class="sj-divider">
+                        </span>
+
+                        <span class="sj-luxury">
+                            luxury
+                        </span>
+
+                    </div>
+
+
+                    <div class="sj-subtitle-row">
+
+                        <span class="line"></span>
+
+                        <span class="sj-subtitle">
+                            TRAVELS LTD
+                        </span>
+
+                        <span class="line"></span>
+
+                    </div>
+
+                </div>
+
+            </a>
+
+
+            <p class="login-description">
+                Agent & Partner Portal
+            </p>
+
+
+            <!-- LOGIN -->
+            <div id="loginForm">
+
+                <div class="form-group">
+                    <label>Referral Code or Phone Number</label>
+                    <input
+                        id="loginIdentifier"
+                        type="text"
+                        placeholder="SJ-AG-1234 or 0712345678"
+                        autocomplete="username"
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label>Password</label>
+                    <div class="password-wrap">
+                        <input
+                            id="loginPassword"
+                            type="password"
+                            placeholder="Enter your password"
+                            autocomplete="current-password"
+                            onkeydown="if(event.key === 'Enter') login()"
+                        >
+                        <button
+                            type="button"
+                            class="password-toggle"
+                            onclick="togglePassword('loginPassword', this)"
+                        >SHOW</button>
+                    </div>
+                </div>
+
+                <a class="forgot-link" onclick="showForgotPassword()">
+                    Forgot your password?
+                </a>
+
+                <button class="btn btn-primary full" onclick="login()">
+                    LOGIN
+                </button>
+
+                <div class="switch-link">
+                    Don't have an agent account?
+                    <br>
+                    <a onclick="showRegister()">
+                        Become an SJ Luxury Travel Agent
+                    </a>
+                </div>
+
+                <p id="loginMessage" class="message"></p>
+            </div>
+
+
+            <!-- REGISTER -->
+            <div id="registerForm" class="hidden">
+
+                <h2>Become an Agent</h2>
+                <p style="color:#777;">
+                    Join the SJ Luxury Travel agent network.
+                </p>
+
+                <div class="form-group">
+                    <label>Full Name *</label>
+                    <input id="registerName" type="text" placeholder="Full name" autocomplete="name">
+                </div>
+
+                <div class="form-group">
+                    <label>Phone Number *</label>
+                    <input id="registerPhone" type="text" placeholder="0712345678" autocomplete="tel">
+                </div>
+
+                <div class="form-group">
+                    <label>Email *</label>
+                    <input id="registerEmail" type="email" placeholder="email@example.com" autocomplete="email">
+                </div>
+
+                <div class="form-group">
+                    <label>Create Password *</label>
+                    <div class="password-wrap">
+                        <input
+                            id="registerPassword"
+                            type="password"
+                            placeholder="Create your password"
+                            autocomplete="new-password"
+                            oninput="updatePasswordStrength()"
+                        >
+                        <button type="button" class="password-toggle" onclick="togglePassword('registerPassword', this)">SHOW</button>
+                    </div>
+                    <div class="password-strength">
+                        <span id="passwordStrengthBar"></span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Confirm Password *</label>
+                    <div class="password-wrap">
+                        <input
+                            id="registerConfirmPassword"
+                            type="password"
+                            placeholder="Repeat your password"
+                            autocomplete="new-password"
+                        >
+                        <button type="button" class="password-toggle" onclick="togglePassword('registerConfirmPassword', this)">SHOW</button>
+                    </div>
+                </div>
+
+                <div class="auth-note">
+                    Your password is stored exactly as you create it. You must enter it exactly the same way when signing in.
+                </div>
+
+                <button class="btn btn-primary full" onclick="registerAgent()">
+                    CREATE AGENT ACCOUNT
+                </button>
+
+                <div class="switch-link">
+                    Already registered?
+                    <br>
+                    <a onclick="showLogin()">Return to Login</a>
+                </div>
+
+                <p id="registerMessage" class="message"></p>
+            </div>
+
+
+            <!-- FORGOT PASSWORD -->
+            <div id="forgotPasswordForm" class="hidden">
+
+                <h2>Forgot Your Password?</h2>
+
+                <p style="color:#777;">
+                    Enter your phone number or referral code below and send a password reset request.
+                </p>
+
+                <div class="form-group">
+                    <label>Phone Number or Referral Code</label>
+                    <input
+                        id="resetIdentifier"
+                        type="text"
+                        placeholder="0712345678 or SJ-AG-1234"
+                        autocomplete="username"
+                    >
+                </div>
+
+                <div class="auth-note">
+                    Your request will be sent to SJ Luxury Travel for verification. Once your password is reset to <strong>0000</strong> in the agent sheet, sign in with 0000 and you will be asked to create a new password.
+                </div>
+
+                <button class="btn btn-primary full" onclick="sendResetRequest()">
+                    SEND RESET REQUEST
+                </button>
+
+                <div class="switch-link">
+                    Remember your password?
+                    <br>
+                    <a onclick="showLogin()">Return to Login</a>
+                </div>
+
+                <p id="forgotMessage" class="message"></p>
+            </div>
+
+
+            <!-- NEW PASSWORD AFTER 0000 RESET -->
+            <div id="newPasswordForm" class="hidden">
+
+                <h2>Create New Password</h2>
+
+                <p style="color:#777;">
+                    Your account has been reset. Choose the password you want to use from now on.
+                </p>
+
+                <div class="form-group">
+                    <label>New Password</label>
+                    <div class="password-wrap">
+                        <input id="newPassword" type="password" placeholder="Enter your new password" autocomplete="new-password">
+                        <button type="button" class="password-toggle" onclick="togglePassword('newPassword', this)">SHOW</button>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Confirm New Password</label>
+                    <div class="password-wrap">
+                        <input id="newPasswordConfirm" type="password" placeholder="Repeat your new password" autocomplete="new-password">
+                        <button type="button" class="password-toggle" onclick="togglePassword('newPasswordConfirm', this)">SHOW</button>
+                    </div>
+                </div>
+
+                <div class="auth-note">
+                    Do not use <strong>0000</strong> as your new password. That number is reserved for password reset.
+                </div>
+
+                <button class="btn btn-primary full" onclick="resetPassword()">
+                    UPDATE PASSWORD & CONTINUE
+                </button>
+
+                <p id="newPasswordMessage" class="message"></p>
+            </div>
+
+    </section>
+
+
+    <!-- =======================================================
+         DASHBOARD
+    ======================================================== -->
+
+    <section
+        id="dashboardPage"
+        class="dashboard hidden"
+    >
+
+
+        <!-- TOP BAR -->
+
+        <header class="topbar">
+
+
+            <!-- SJ LOGO -->
+
+            <a
+                href="https://www.sjluxurytravels.com/"
+                class="topbar-brand-link"
+                aria-label="SJ Luxury Travels"
+            >
+
+                <div class="topbar-logo">
+
+                    <div class="sj-text-container">
+
+                        <div class="sj-main-row">
+
+                            <span class="sj-title">
+                                SJ
+                            </span>
+
+                            <span class="sj-divider"></span>
+
+                            <span class="sj-luxury">
+                                luxury
+                            </span>
+
+                        </div>
+
+
+                        <div class="sj-subtitle-row">
+
+                            <span class="line"></span>
+
+                            <span class="sj-subtitle">
+                                TRAVELS LTD
+                            </span>
+
+                            <span class="line"></span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </a>
+
+
+            <!-- USER AREA -->
+
+            <div class="user-area">
+
+                <div
+                    id="userBadge"
+                    class="user-badge"
+                ></div>
+
+
+                <!-- BACK TO MAIN WEBSITE -->
+
+                <a
+                    href="https://www.sjluxurytravels.com/"
+                    class="back-website-btn"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    ← Back to Website
+                </a>
+
+
+                <!-- LOGOUT -->
+
+                <button
+                    class="btn btn-secondary"
+                    onclick="logout()"
+                >
+                    Logout
+                </button>
+
+            </div>
+
+        </header>
+
+
+        <main class="dashboard-container">
+
+
+            <!-- =================================================
+                 STATISTICS
+            ================================================== -->
+
+            <div
+                class="stats"
+                id="statsContainer"
+            >
+
+                <div class="stat-card">
+
+                    <h3 id="totalClients">
+                        0
+                    </h3>
+
+                    <p>
+                        Total Customers
+                    </p>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <h3 id="leadCount">
+                        0
+                    </h3>
+
+                    <p>
+                        Lead Qualification
+                    </p>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <h3 id="consultationCount">
+                        0
+                    </h3>
+
+                    <p>
+                        Consultation
+                    </p>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <h3 id="quotationCount">
+                        0
+                    </h3>
+
+                    <p>
+                        Quotations
+                    </p>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <h3 id="bookingCount">
+                        0
+                    </h3>
+
+                    <p>
+                        Confirmed Bookings
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 CUSTOMER PANEL
+            ================================================== -->
+
+            <div class="panel">
+
+                <div class="panel-header">
+
+                    <h2 id="dashboardTitle">
+                        My Customers
+                    </h2>
+
+                    <div class="panel-actions">
+
+                        <button
+                            id="addClientButton"
+                            class="btn btn-primary"
+                            onclick="openClientModal()"
+                        >
+                            + Add Customer
+                        </button>
+
+
+                        <button
+                            class="btn btn-report"
+                            onclick="downloadReport()"
+                        >
+                            ↓ Download Report
+                        </button>
+
+
+                        <button
+                            class="btn btn-secondary"
+                            onclick="loadDashboard()"
+                        >
+                            Refresh
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <!-- SEARCH -->
+
+                <div class="search-box">
+
+                    <span class="search-icon">
+                        🔎
+                    </span>
+
+                    <input
+                        id="searchInput"
+                        type="text"
+                        placeholder="Search customers by name, phone, ID, destination or service..."
+                        onkeyup="searchCustomers()"
+                    >
+
+                </div>
+
+
+                <!-- CUSTOMER TABLE -->
+
+                <div class="table-wrapper">
+
+                    <table>
+
+                        <thead>
+
+                            <tr>
+
+                                <th>
+                                    Client ID
+                                </th>
+
+                                <th>
+                                    Customer
+                                </th>
+
+                                <th>
+                                    Phone
+                                </th>
+
+                                <th>
+                                    Service
+                                </th>
+
+                                <th>
+                                    Destination
+                                </th>
+
+                                <th>
+                                    Agent
+                                </th>
+
+                                <th>
+                                    Funnel Stage
+                                </th>
+
+                                <th>
+                                    Action
+                                </th>
+
+                            </tr>
+
+                        </thead>
+
+
+                        <tbody id="clientTable"></tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 CUSTOMER JOURNEY
+            ================================================== -->
+
+            <div class="panel">
+
+                <div class="panel-header">
+
+                    <h2>
+                        Customer Journey
+                    </h2>
+
+                </div>
+
+
+                <div
+                    class="funnel"
+                    id="funnelContainer"
+                ></div>
+
+            </div>
+
+
+            <!-- =================================================
+                 ADMIN
+            ================================================== -->
+
+            <div
+                id="adminPanel"
+                class="panel hidden"
+            >
+
+                <div class="panel-header">
+
+                    <h2>
+                        Administration
+                    </h2>
+
+                    <div class="panel-actions">
+
+                        <button
+                            class="btn btn-secondary"
+                            onclick="loadAgents()"
+                        >
+                            Manage Agents
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <p style="color:#777;">
+
+                    Administrator access allows you to
+                    manage all agents and customer journeys.
+
+                </p>
+
+
+                <div
+                    id="agentsContainer"
+                    class="hidden"
+                >
+
+                    <div class="table-wrapper">
+
+                        <table>
+
+                            <thead>
+
+                                <tr>
+
+                                    <th>
+                                        Name
+                                    </th>
+
+                                    <th>
+                                        Referral Code
+                                    </th>
+
+                                    <th>
+                                        Phone
+                                    </th>
+
+                                    <th>
+                                        Email
+                                    </th>
+
+                                    <th>
+                                        Status
+                                    </th>
+
+                                    <th>
+                                        Created
+                                    </th>
+
+                                </tr>
+
+                            </thead>
+
+
+                            <tbody id="agentsTable"></tbody>
+
+                        </table>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+        </main>
+
+
+        <!-- =================================================
+             FOOTER
+        ================================================== -->
+
+        <footer
+            id="footer"
+            class="portal-footer"
         >
-          Open Agent Portal
-        </a>
 
-      </div>
-      `
-    )
-    .setWidth(400)
-    .setHeight(250);
+            <div class="footer-glow"></div>
 
+            <div class="footer-container">
 
-  SpreadsheetApp
-    .getUi()
-    .showModalDialog(
-      html,
-      "SJ Luxury Travel Portal"
-    );
 
-}
+                <!-- NEWSLETTER -->
 
+                <div class="footer-newsletter">
 
-/* ============================================================
-   SETUP DATABASE
-============================================================ */
+                    <div>
 
-/**
- * Creates the required sheets and headers.
- *
- * Safe to run repeatedly.
- */
+                        <div class="vip-badge">
 
-function setupDatabase() {
+                            <span class="vip-dot"></span>
 
-  const ss =
-    SpreadsheetApp
-      .getActiveSpreadsheet();
+                            <span class="vip-text">
+                                VIP Dispatch
+                            </span>
 
+                        </div>
 
-  /*
-   * AGENTS SHEET
-   */
+                        <h3>
+                            Subscribe for private flight updates & exclusive Watamu retreats
+                        </h3>
 
-  let agents =
-    ss.getSheetByName(
-      CONFIG.SHEETS.AGENTS
-    );
+                        <p>
+                            Receive privileged access to our seasonal private aviation schedules and limited coastal estate releases.
+                        </p>
 
+                    </div>
 
-  if (!agents) {
 
-    agents =
-      ss.insertSheet(
-        CONFIG.SHEETS.AGENTS
-      );
+                    <div>
 
-  }
+                        <form
+                            action="https://formspree.io/f/mppazakp"
+                            method="POST"
+                            class="newsletter-form"
+                        >
 
+                            <input
+                                type="email"
+                                name="email"
+                                placeholder="Enter your email address"
+                                required
+                            >
 
-  const agentHeaders = [
+                            <button type="submit">
+                                Subscribe
+                            </button>
 
-    "Agent ID",
+                        </form>
 
-    "Referral Code",
+                        <p class="newsletter-note">
+                            Unsubscribe at any time.
+                            Read our
+                            <a href="#">
+                                privacy policy
+                            </a>.
+                        </p>
 
-    "Full Name",
+                    </div>
 
-    "Phone",
+                </div>
 
-    "Email",
 
-    "Role",
+                <!-- MAIN FOOTER LINKS -->
 
-    "Status",
+                <div class="footer-grid">
 
-    "Created At",
 
-    "Last Login",
+                    <!-- BRAND INFO -->
 
-    "Notes"
+                    <div class="footer-column footer-brand-column">
 
-  ];
+                        <a
+                            href="https://www.sjluxurytravels.com/"
+                            class="footer-logo"
+                        >
 
+                            <div class="sj-text-container">
 
-  ensureHeaders(
-    agents,
-    agentHeaders
-  );
+                                <div class="sj-main-row">
 
+                                    <span class="sj-title">
+                                        SJ
+                                    </span>
 
-  /*
-   * CLIENTS SHEET
-   */
+                                    <span class="sj-divider"></span>
 
-  let clients =
-    ss.getSheetByName(
-      CONFIG.SHEETS.CLIENTS
-    );
+                                    <span class="sj-luxury">
+                                        luxury
+                                    </span>
 
+                                </div>
 
-  if (!clients) {
+                                <div class="sj-subtitle-row">
 
-    clients =
-      ss.insertSheet(
-        CONFIG.SHEETS.CLIENTS
-      );
+                                    <span class="line"></span>
 
-  }
+                                    <span class="sj-subtitle">
+                                        TRAVELS LTD
+                                    </span>
 
+                                    <span class="line"></span>
 
-  const clientHeaders = [
+                                </div>
 
-    "Row ID",
+                            </div>
 
-    "Client ID",
+                        </a>
 
-    "Customer Name",
 
-    "Phone",
+                        <p class="footer-description">
 
-    "Email",
+                            Setting the luxury standard for global citizens seeking seamless air charters, elite wilderness safaris, and exclusive private villa bookings across East Africa.
 
-    "Service",
+                        </p>
 
-    "Destination",
 
-    "Travel Date",
+                        <div class="social-icons">
 
-    "Travellers",
+                            <a
+                                href="#"
+                                class="social-icon"
+                                aria-label="Facebook"
+                            >
+                                f
+                            </a>
 
-    "Budget",
+                            <a
+                                href="#"
+                                class="social-icon"
+                                aria-label="Instagram"
+                            >
+                                ◎
+                            </a>
 
-    "Special Requests",
+                            <a
+                                href="#"
+                                class="social-icon"
+                                aria-label="LinkedIn"
+                            >
+                                in
+                            </a>
 
-    "Notes",
+                        </div>
 
-    "Agent Code",
+                    </div>
 
-    "Funnel Stage",
 
-    "Created At",
+                    <!-- QUICK LINKS -->
 
-    "Updated At"
+                    <div class="footer-column">
 
-  ];
+                        <h4 class="footer-heading">
+                            Quick Links
+                        </h4>
 
+                        <ul class="footer-links">
 
-  ensureHeaders(
-    clients,
-    clientHeaders
-  );
+                            <li>
+                                <a href="https://www.sjluxurytravels.com/">
+                                    Home
+                                </a>
+                            </li>
 
+                            <li>
+                                <a href="https://www.sjluxurytravels.com/">
+                                    Book Transport
+                                </a>
+                            </li>
 
-  /*
-   * LOGS SHEET
-   */
+                            <li>
+                                <a href="https://www.sjluxurytravels.com/">
+                                    Watamu Private Villas
+                                </a>
+                            </li>
 
-  let logs =
-    ss.getSheetByName(
-      CONFIG.SHEETS.LOGS
-    );
+                            <li>
+                                <a href="https://www.sjluxurytravels.com/">
+                                    Popular Destinations
+                                </a>
+                            </li>
 
+                            <li>
+                                <a href="https://www.sjluxurytravels.com/">
+                                    Expeditions
+                                </a>
+                            </li>
 
-  if (!logs) {
+                        </ul>
 
-    logs =
-      ss.insertSheet(
-        CONFIG.SHEETS.LOGS
-      );
+                    </div>
 
-  }
 
+                    <!-- SERVICES -->
 
-  const logHeaders = [
+                    <div class="footer-column">
 
-    "Timestamp",
+                        <h4 class="footer-heading">
+                            Services
+                        </h4>
 
-    "Action",
+                        <ul class="footer-links">
 
-    "User",
+                            <li>
+                                <a href="https://www.sjluxurytravels.com/">
+                                    Flight Bookings
+                                </a>
+                            </li>
 
-    "Role",
+                            <li>
+                                <a href="https://www.sjluxurytravels.com/">
+                                    Corporate Logistics
+                                </a>
+                            </li>
 
-    "Reference",
+                            <li>
+                                <a href="https://www.sjluxurytravels.com/">
+                                    Hotel Reservations
+                                </a>
+                            </li>
 
-    "Details"
+                            <li>
+                                <a href="https://www.sjluxurytravels.com/">
+                                    Wilderness Safaris
+                                </a>
+                            </li>
 
-  ];
+                            <li>
+                                <a href="https://www.sjluxurytravels.com/">
+                                    Airport Transfers
+                                </a>
+                            </li>
 
+                        </ul>
 
-  ensureHeaders(
-    logs,
-    logHeaders
-  );
+                    </div>
 
 
-  /*
-   * FORMATTING
-   */
+                    <!-- CONTACT DESK -->
 
-  formatSheet(
-    agents
-  );
+                    <div class="footer-column">
 
-  formatSheet(
-    clients
-  );
+                        <h4 class="footer-heading">
+                            Contact Desk
+                        </h4>
 
-  formatSheet(
-    logs
-  );
+                        <div class="contact-line">
+                            Nairobi, Kenya
+                        </div>
 
+                        <div class="contact-line">
 
-  /*
-   * CREATE DEFAULT ADMIN
-   */
+                            <span>
+                                ☎
+                            </span>
 
-  createDefaultAdmin();
+                            <a
+                                href="https://wa.me/254143299781"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+                                +(254) 143 299 781
+                            </a>
 
+                        </div>
 
-  SpreadsheetApp
-    .getUi()
-    .alert(
-      "SJ Luxury Travel database setup completed successfully."
-    );
+                        <div class="contact-line">
 
-}
+                            <span>
+                                ✉
+                            </span>
 
+                            <a href="mailto:info@sjluxurytravels.com">
+                                info@sjluxurytravels.com
+                            </a>
 
-/* ============================================================
-   ENSURE HEADERS
-============================================================ */
+                        </div>
 
-function ensureHeaders(
-  sheet,
-  headers
-) {
+                    </div>
 
-  const lastColumn =
-    Math.max(
-      sheet.getLastColumn(),
-      headers.length
-    );
+                </div>
 
 
-  const existing =
-    sheet
-      .getRange(
-        1,
-        1,
-        1,
-        headers.length
-      )
-      .getValues()[0];
+                <!-- BOTTOM BAR -->
 
+                <div class="bottom-footer">
 
-  let needsUpdate =
-    false;
+                    <p>
+                        &copy; 2026 SJ Luxury Travel Ltd. All rights reserved.
+                    </p>
 
+                    <p>
+                        Designed & Powered by
+                        <a
+                            href="https://kenflixdesigns.co.ke"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            kenflixdesigns.co.ke
+                        </a>
+                    </p>
 
-  for (
-    let i = 0;
-    i < headers.length;
-    i++
-  ) {
+                    <div class="bottom-links">
 
-    if (
-      existing[i] !==
-      headers[i]
-    ) {
+                        <a href="#">
+                            Privacy Policy
+                        </a>
 
-      needsUpdate =
-        true;
+                        <a href="#">
+                            Terms of Service
+                        </a>
 
-      break;
+                        <a href="#">
+                            Site Map
+                        </a>
 
-    }
+                    </div>
 
-  }
+                </div>
 
+            </div>
 
-  if (
-    needsUpdate ||
-    sheet.getLastRow() === 0
-  ) {
+        </footer>
 
-    sheet
-      .getRange(
-        1,
-        1,
-        1,
-        headers.length
-      )
-      .setValues(
-        [headers]
-      );
+    </section>
 
-  }
 
+    <!-- =======================================================
+         ADD CUSTOMER MODAL
+    ======================================================== -->
 
-  sheet
-    .getRange(
-      1,
-      1,
-      1,
-      headers.length
-    )
-    .setFontWeight(
-      "bold"
-    );
+    <div
+        id="clientModal"
+        class="modal hidden"
+    >
 
-}
+        <div class="modal-content">
 
 
-/* ============================================================
-   FORMAT SHEET
-============================================================ */
+            <div class="modal-header">
 
-function formatSheet(
-  sheet
-) {
+                <h2>
+                    Add New Customer
+                </h2>
 
-  const lastColumn =
-    sheet.getLastColumn();
+                <button
+                    class="close"
+                    onclick="closeClientModal()"
+                >
+                    &times;
+                </button>
 
+            </div>
 
-  if (
-    lastColumn < 1
-  ) {
 
-    return;
+            <div class="form-group">
 
-  }
+                <label>
+                    Customer Name *
+                </label>
 
+                <input
+                    id="clientName"
+                    type="text"
+                    placeholder="Customer full name"
+                >
 
-  sheet
-    .setFrozenRows(
-      1
-    );
+            </div>
 
 
-  sheet
-    .getRange(
-      1,
-      1,
-      1,
-      lastColumn
-    )
-    .setFontWeight(
-      "bold"
-    );
+            <div class="form-group">
 
+                <label>
+                    Phone Number *
+                </label>
 
-  sheet
-    .autoResizeColumns(
-      1,
-      lastColumn
-    );
+                <input
+                    id="clientPhone"
+                    type="text"
+                    placeholder="0712345678"
+                >
 
-}
+            </div>
 
 
-/* ============================================================
-   CREATE DEFAULT ADMIN
-============================================================ */
+            <div class="form-group">
 
-function createDefaultAdmin() {
+                <label>
+                    Email
+                </label>
 
-  const ss =
-    SpreadsheetApp.getActiveSpreadsheet();
+                <input
+                    id="clientEmail"
+                    type="email"
+                    placeholder="customer@email.com"
+                >
 
-  let sheet =
-    ss.getSheetByName(
-      CONFIG.SHEETS.AGENTS
-    );
+            </div>
 
-  if (!sheet) {
-    setupDatabaseSilent();
-    sheet =
-      ss.getSheetByName(
-        CONFIG.SHEETS.AGENTS
-      );
-  }
 
-  const data =
-    getSheetObjects(sheet);
+            <div class="form-group">
 
-  const exists =
-    data.some(function(agent) {
-      return String(
-        agent["Referral Code"] || ""
-      ).trim().toUpperCase() ===
-        CONFIG.DEFAULT_ADMIN.code;
-    });
+                <label>
+                    Service *
+                </label>
 
-  if (exists) return;
+                <select id="clientService">
 
-  const now = new Date();
-  const headers = sheet
-    .getRange(1, 1, 1, sheet.getLastColumn())
-    .getValues()[0];
+                    <option value="">
+                        Select Service
+                    </option>
 
-  const record = {
-    "Agent ID":
-      "ADM-" +
-      Utilities.getUuid()
-        .substring(0, 8)
-        .toUpperCase(),
-    "Referral Code": CONFIG.DEFAULT_ADMIN.code,
-    "Full Name": CONFIG.DEFAULT_ADMIN.name,
-    "Phone": CONFIG.DEFAULT_ADMIN.phone,
-    "Email": CONFIG.DEFAULT_ADMIN.email,
-    "Password": CONFIG.DEFAULT_ADMIN.password,
-    "Role": "admin",
-    "Status": "ACTIVE",
-    "Created At": now,
-    "Last Login": "",
-    "Notes": "Default administrator account"
-  };
+                    <option value="Luxury Safari">
+                        Luxury Safari
+                    </option>
 
-  const row = headers.map(function(header) {
-    return Object.prototype.hasOwnProperty.call(record, header)
-      ? record[header]
-      : "";
-  });
+                    <option value="Beach Holiday">
+                        Beach Holiday
+                    </option>
 
-  sheet.appendRow(row);
+                    <option value="Private Villa">
+                        Private Villa
+                    </option>
 
-  logActivity(
-    "CREATE_ADMIN",
-    CONFIG.DEFAULT_ADMIN.name,
-    "admin",
-    CONFIG.DEFAULT_ADMIN.code,
-    "Default administrator account created"
-  );
+                    <option value="Honeymoon">
+                        Honeymoon
+                    </option>
 
-}
+                    <option value="Family Holiday">
+                        Family Holiday
+                    </option>
 
+                    <option value="Luxury Travel">
+                        Luxury Travel
+                    </option>
 
-/* ============================================================
-   SILENT DATABASE SETUP
-============================================================ */
+                    <option value="Corporate Travel">
+                        Corporate Travel
+                    </option>
 
-function setupDatabaseSilent() {
+                    <option value="Private Jet">
+                        Private Jet
+                    </option>
 
-  const ss =
-    SpreadsheetApp
-      .getActiveSpreadsheet();
+                    <option value="Luxury Yacht">
+                        Luxury Yacht
+                    </option>
 
+                    <option value="Airport Transfer">
+                        Airport Transfer
+                    </option>
 
-  let agents =
-    ss.getSheetByName(
-      CONFIG.SHEETS.AGENTS
-    );
+                    <option value="Custom Itinerary">
+                        Custom Itinerary
+                    </option>
 
+                    <option value="Other">
+                        Other
+                    </option>
 
-  if (!agents) {
+                </select>
 
-    agents =
-      ss.insertSheet(
-        CONFIG.SHEETS.AGENTS
-      );
+            </div>
 
-  }
 
+            <div class="form-group">
 
-  ensureHeaders(
-    agents,
-    [
+                <label>
+                    Destination
+                </label>
 
-      "Agent ID",
-      "Referral Code",
-      "Full Name",
-      "Phone",
-      "Email",
-      "Password",
-      "Password Hash",
-      "Password Salt",
-      "Role",
-      "Status",
-      "Created At",
-      "Last Login",
-      "Notes"
+                <input
+                    id="clientDestination"
+                    type="text"
+                    placeholder="e.g. Maasai Mara, Zanzibar, Dubai"
+                >
 
-    ]
-  );
+            </div>
 
 
-  let clients =
-    ss.getSheetByName(
-      CONFIG.SHEETS.CLIENTS
-    );
+            <div class="form-group">
 
+                <label>
+                    Travel Date
+                </label>
 
-  if (!clients) {
+                <input
+                    id="clientTravelDate"
+                    type="date"
+                >
 
-    clients =
-      ss.insertSheet(
-        CONFIG.SHEETS.CLIENTS
-      );
+            </div>
 
-  }
 
+            <div class="form-group">
 
-  ensureHeaders(
-    clients,
-    [
+                <label>
+                    Number of Travellers
+                </label>
 
-      "Row ID",
-      "Client ID",
-      "Customer Name",
-      "Phone",
-      "Email",
-      "Service",
-      "Destination",
-      "Travel Date",
-      "Travellers",
-      "Budget",
-      "Special Requests",
-      "Notes",
-      "Agent Code",
-      "Funnel Stage",
-      "Created At",
-      "Updated At"
+                <input
+                    id="clientTravellers"
+                    type="number"
+                    min="1"
+                    placeholder="e.g. 2"
+                >
 
-    ]
-  );
+            </div>
 
 
-  let logs =
-    ss.getSheetByName(
-      CONFIG.SHEETS.LOGS
-    );
+            <div class="form-group">
 
+                <label>
+                    Budget
+                </label>
 
-  if (!logs) {
+                <input
+                    id="clientBudget"
+                    type="text"
+                    placeholder="Approximate budget"
+                >
 
-    logs =
-      ss.insertSheet(
-        CONFIG.SHEETS.LOGS
-      );
+            </div>
 
-  }
 
+            <div class="form-group">
 
-  ensureHeaders(
-    logs,
-    [
+                <label>
+                    Special Requests
+                </label>
 
-      "Timestamp",
-      "Action",
-      "User",
-      "Role",
-      "Reference",
-      "Details"
+                <textarea
+                    id="clientSpecialRequests"
+                    rows="4"
+                    placeholder="Any special requirements..."
+                ></textarea>
 
-    ]
-  );
+            </div>
 
-}
 
+            <div class="form-group">
 
-/* ============================================================
-   WEB APP ENTRY POINT
-============================================================ */
+                <label>
+                    Notes
+                </label>
 
-function doGet(e) {
+                <textarea
+                    id="clientNotes"
+                    rows="3"
+                    placeholder="Additional notes..."
+                ></textarea>
 
-  try {
+            </div>
 
-    const params =
-      e &&
-      e.parameter
-        ? e.parameter
-        : {};
 
+            <button
+                class="btn btn-primary full"
+                onclick="saveClient()"
+            >
+                SAVE CUSTOMER
+            </button>
 
-    const action =
-      params.action ||
-      "status";
 
+            <p
+                id="clientMessage"
+                class="message"
+            ></p>
 
-    let result;
+        </div>
 
+    </div>
 
-    switch (
-      action
-    ) {
 
-      case "login":
+    <script>
 
-        result =
-          handleLogin(
-            params
-          );
 
-        break;
+        /* =========================================================
+           CONFIGURATION
+        ========================================================= */
 
+        const API_URL =
+            "https://script.google.com/macros/s/AKfycbyFmDVuaaRmAVKnieJPeUZy0Yo9uFnrjkr_8mY30rtOUH3qRv9T9mNhHWoUmMP43ZAi/exec";
 
-      case "register":
 
-        result =
-          handleRegister(
-            params
-          );
+        /* =========================================================
+           GLOBAL VARIABLES
+        ========================================================= */
 
-        break;
-
-      case "forgotPassword":
-
-        result =
-          handleForgotPassword(
-            params
-          );
-
-        break;
-
-
-      case "verifyResetCode":
-
-        result =
-          handleVerifyResetCode(
-            params
-          );
-
-        break;
-
-
-      case "resetPassword":
-
-        result =
-          handleResetPassword(
-            params
-          );
-
-        break;
-
-
-      case "clients":
-
-        result =
-          handleClients(
-            params
-          );
-
-        break;
-
-
-      case "addClient":
-
-        result =
-          handleAddClient(
-            params
-          );
-
-        break;
-
-
-      case "dashboard":
-
-        result =
-          handleDashboard(
-            params
-          );
-
-        break;
-
-
-      case "search":
-
-        result =
-          handleSearch(
-            params
-          );
-
-        break;
-
-
-      case "updateStage":
-
-        result =
-          handleUpdateStage(
-            params
-          );
-
-        break;
-
-
-      case "agents":
-
-        result =
-          handleAgents(
-            params
-          );
-
-        break;
-
-
-      case "status":
-
-        result = {
-
-          status:
-            "success",
-
-          message:
-            "SJ Luxury Travel backend is online.",
-
-          timestamp:
-            new Date().toISOString()
-
-        };
-
-        break;
-
-
-      default:
-
-        result = {
-
-          status:
-            "error",
-
-          message:
-            "Unknown API action: " +
-            action
-
-        };
-
-    }
-
-
-    return jsonpResponse(
-      result,
-      params.callback
-    );
-
-
-  } catch (error) {
-
-    return jsonpResponse(
-
-      {
-
-        status:
-          "error",
-
-        message:
-          error.message
-
-      },
-
-      e &&
-      e.parameter
-        ? e.parameter.callback
-        : null
-
-    );
-
-  }
-
-}
-
-
-/* ============================================================
-   JSONP RESPONSE
-============================================================ */
-
-function jsonpResponse(
-  data,
-  callback
-) {
-
-  const json =
-    JSON.stringify(
-      data
-    );
-
-
-  /*
-   * If callback exists, return JSONP.
-   */
-
-  if (callback) {
-
-    /*
-     * Only allow safe JavaScript callback names.
-     */
-
-    const safeCallback =
-      String(
-        callback
-      )
-      .replace(
-        /[^a-zA-Z0-9_$]/g,
-        ""
-      );
-
-
-    return ContentService
-      .createTextOutput(
-        safeCallback +
-        "(" +
-        json +
-        ");"
-      )
-      .setMimeType(
-        ContentService
-          .MimeType
-          .JAVASCRIPT
-      );
-
-  }
-
-
-  return ContentService
-    .createTextOutput(
-      json
-    )
-    .setMimeType(
-      ContentService
-        .MimeType
-        .JSON
-    );
-
-}
-
-
-/* ============================================================
-   REGISTER AGENT
-============================================================ */
-
-function handleRegister(params) {
-
-  setupDatabaseSilent();
-
-  const name = clean(params.name);
-  const phone = normalizePhone(params.phone);
-  const email = clean(params.email).toLowerCase();
-  const password = String(params.password || "");
-  const confirmPassword = String(params.confirmPassword || "");
-
-  if (!name || !phone || !email || !password || !confirmPassword) {
-    return {
-      status: "error",
-      message: "Full name, phone number, email and password are required."
-    };
-  }
-
-  if (password.length < 4) {
-    return {
-      status: "error",
-      message: "Password must be at least 4 characters."
-    };
-  }
-
-  if (password === "0000") {
-    return {
-      status: "error",
-      message: "0000 is reserved for password reset. Please choose another password."
-    };
-  }
-
-  if (password !== confirmPassword) {
-    return {
-      status: "error",
-      message: "Passwords do not match."
-    };
-  }
-
-  const sheet =
-    SpreadsheetApp.getActiveSpreadsheet()
-      .getSheetByName(CONFIG.SHEETS.AGENTS);
-
-  const agents = getSheetObjects(sheet);
-
-  const phoneExists = agents.some(function(agent) {
-    return normalizePhone(agent["Phone"] || "") === phone;
-  });
-
-  if (phoneExists) {
-    return {
-      status: "error",
-      message: "An agent account already exists with this phone number."
-    };
-  }
-
-  const emailExists = agents.some(function(agent) {
-    return String(agent["Email"] || "")
-      .toLowerCase()
-      .trim() === email;
-  });
-
-  if (emailExists) {
-    return {
-      status: "error",
-      message: "An agent account already exists with this email address."
-    };
-  }
-
-  const code = generateReferralCode(agents);
-  const agentId =
-    "AG-" +
-    Utilities.getUuid().substring(0, 8).toUpperCase();
-
-  const now = new Date();
-  const headers = sheet
-    .getRange(1, 1, 1, sheet.getLastColumn())
-    .getValues()[0];
-
-  const record = {
-    "Agent ID": agentId,
-    "Referral Code": code,
-    "Full Name": name,
-    "Phone": phone,
-    "Email": email,
-    "Password": password,
-    "Password Hash": "",
-    "Password Salt": "",
-    "Role": "agent",
-    "Status": "ACTIVE",
-    "Created At": now,
-    "Last Login": "",
-    "Notes": ""
-  };
-
-  const row = headers.map(function(header) {
-    return Object.prototype.hasOwnProperty.call(record, header)
-      ? record[header]
-      : "";
-  });
-
-  sheet.appendRow(row);
-
-  logActivity(
-    "REGISTER_AGENT",
-    name,
-    "agent",
-    code,
-    "New agent registered"
-  );
-
-  return {
-    status: "success",
-    message: "Agent account created successfully.",
-    code: code,
-    agentId: agentId,
-    name: name
-  };
-
-}
-
-
-/* ============================================================
-   PASSWORD SECURITY
-============================================================ */
-
-function generatePasswordSalt() {
-
-  return (
-    Utilities.getUuid() +
-    Utilities.getUuid()
-  );
-
-}
-
-
-function hashPassword(
-  password,
-  salt
-) {
-
-  const raw =
-    String(password) +
-    String(salt);
-
-
-  const digest =
-    Utilities.computeDigest(
-      Utilities.DigestAlgorithm.SHA_256,
-      raw,
-      Utilities.Charset.UTF_8
-    );
-
-
-  return digest
-    .map(
-      function(byte) {
-
-        const value =
-          byte < 0
-            ? byte + 256
-            : byte;
-
-        return (
-          "0" +
-          value.toString(16)
-        ).slice(-2);
-
-      }
-    )
-    .join("");
-
-}
-
-
-function verifyPassword(
-  password,
-  storedHash,
-  salt
-) {
-
-  if (
-    password === null ||
-    password === undefined ||
-    storedHash === null ||
-    storedHash === undefined ||
-    !salt
-  ) {
-
-    return false;
-
-  }
-
-
-  const suppliedHash =
-    hashPassword(
-      String(password),
-      String(salt)
-    );
-
-
-  return (
-    suppliedHash ===
-    String(storedHash).trim()
-  );
-
-}
-
-
-/* ============================================================
-   FORGOT PASSWORD
-============================================================ */
-
-function findAgentByIdentifier(sheet, identifier) {
-
-  const agents = getSheetObjects(sheet);
-  const value = String(identifier || "").trim();
-  const codeValue = value.toUpperCase();
-  const phoneValue = normalizePhone(value);
-
-  return agents.find(function(agent) {
-    const storedCode = String(agent["Referral Code"] || "")
-      .trim()
-      .toUpperCase();
-
-    const storedPhone = normalizePhone(agent["Phone"] || "");
-
-    return storedCode === codeValue ||
-      (storedPhone && storedPhone === phoneValue);
-  }) || null;
-}
-
-
-function handleForgotPassword(params) {
-
-  // This endpoint is kept for compatibility. The actual
-  // forgot-password request is now sent directly to Formspree.
-  return {
-    status: "success",
-    message: "Password reset request received."
-  };
-}
-
-
-function handleVerifyResetCode(params) {
-
-  return {
-    status: "error",
-    message: "Email verification is no longer required. Please contact SJ Luxury Travel and have your sheet password changed to 0000. Then sign in using 0000."
-  };
-}
-
-
-function handleResetPassword(params) {
-
-  const identifier = String(params.identifier || "").trim();
-  const newPassword = String(params.password || "");
-  const confirmPassword = String(params.confirmPassword || "");
-
-  if (!identifier || !newPassword || !confirmPassword) {
-    return {
-      status: "error",
-      message: "All password fields are required."
-    };
-  }
-
-  if (newPassword.length < 4) {
-    return {
-      status: "error",
-      message: "Password must be at least 4 characters."
-    };
-  }
-
-  if (newPassword === "0000") {
-    return {
-      status: "error",
-      message: "Please choose a new password instead of 0000."
-    };
-  }
-
-  if (newPassword !== confirmPassword) {
-    return {
-      status: "error",
-      message: "Passwords do not match."
-    };
-  }
-
-  const sheet =
-    SpreadsheetApp.getActiveSpreadsheet()
-      .getSheetByName(CONFIG.SHEETS.AGENTS);
-
-  const agent = findAgentByIdentifier(sheet, identifier);
-
-  if (!agent) {
-    return {
-      status: "error",
-      message: "Agent account could not be found."
-    };
-  }
-
-  const agentId = String(agent["Agent ID"] || "").trim();
-  const resetKey = "RESET_ZERO_" + agentId;
-
-  // The agent must have successfully logged in with 0000 first.
-  const resetApproved =
-    CacheService.getScriptCache().get(resetKey);
-
-  if (!resetApproved) {
-    return {
-      status: "error",
-      message: "Password reset is not authorised. Please log in using 0000 after SJ Luxury Travel has reset your sheet password."
-    };
-  }
-
-  // Make sure the sheet still contains exactly 0000.
-  const currentPassword = String(agent["Password"] || "");
-
-  if (currentPassword !== "0000") {
-    CacheService.getScriptCache().remove(resetKey);
-
-    return {
-      status: "error",
-      message: "This password reset window is no longer active."
-    };
-  }
-
-  const values = sheet.getDataRange().getValues();
-  const headers = values[0];
-  const passwordIndex = headers.indexOf("Password");
-  const idIndex = headers.indexOf("Agent ID");
-  const nameIndex = headers.indexOf("Full Name");
-  const roleIndex = headers.indexOf("Role");
-  const codeIndex = headers.indexOf("Referral Code");
-
-  if (passwordIndex === -1 || idIndex === -1) {
-    return {
-      status: "error",
-      message: "The Password column is missing from the Agents sheet."
-    };
-  }
-
-  for (let i = 1; i < values.length; i++) {
-
-    if (String(values[i][idIndex] || "").trim() === agentId) {
-
-      sheet
-        .getRange(i + 1, passwordIndex + 1)
-        .setValue(newPassword);
-
-      // Clear the old hash fields so the sheet clearly uses Password.
-      const oldHashIndex = headers.indexOf("Password Hash");
-      const oldSaltIndex = headers.indexOf("Password Salt");
-
-      if (oldHashIndex !== -1) {
-        sheet.getRange(i + 1, oldHashIndex + 1).clearContent();
-      }
-
-      if (oldSaltIndex !== -1) {
-        sheet.getRange(i + 1, oldSaltIndex + 1).clearContent();
-      }
-
-      CacheService.getScriptCache().remove(resetKey);
-
-      logActivity(
-        "PASSWORD_RESET",
-        values[i][nameIndex],
-        values[i][roleIndex],
-        values[i][codeIndex],
-        "Password changed after administrator reset to 0000"
-      );
-
-      return {
-        status: "success",
-        message: "Your password has been updated successfully. You can now log in with your new password."
-      };
-    }
-  }
-
-  return {
-    status: "error",
-    message: "Agent account could not be updated."
-  };
-}
-
-
-/* ============================================================
-   LOGIN
-============================================================ */
-
-function handleLogin(params) {
-
-  setupDatabaseSilent();
-
-  const identifier = String(params.identifier || "").trim();
-  const password = String(params.password || "");
-
-  if (!identifier || !password) {
-    return {
-      status: "error",
-      message: "Referral code/phone and password are required."
-    };
-  }
-
-  const sheet =
-    SpreadsheetApp.getActiveSpreadsheet()
-      .getSheetByName(CONFIG.SHEETS.AGENTS);
-
-  if (!sheet) {
-    return {
-      status: "error",
-      message: "Agent database could not be found."
-    };
-  }
-
-  const foundAgent = findAgentByIdentifier(sheet, identifier);
-
-  if (!foundAgent) {
-    return {
-      status: "error",
-      message: "Invalid login details."
-    };
-  }
-
-  const accountStatus = String(foundAgent["Status"] || "")
-    .trim()
-    .toUpperCase();
-
-  if (accountStatus !== "ACTIVE") {
-    return {
-      status: "error",
-      message: "This agent account is not active."
-    };
-  }
-
-  // Password is stored directly in the Agents sheet.
-  // Comparison is intentionally exact and case-sensitive.
-  const storedPassword = String(foundAgent["Password"] || "");
-
-  if (!storedPassword) {
-    return {
-      status: "error",
-      message: "No password is set for this account. Please contact SJ Luxury Travel."
-    };
-  }
-
-  if (password !== storedPassword) {
-
-    logActivity(
-      "LOGIN_FAILED",
-      foundAgent["Full Name"],
-      foundAgent["Role"],
-      foundAgent["Referral Code"],
-      "Incorrect password"
-    );
-
-    return {
-      status: "error",
-      message: "Invalid password."
-    };
-  }
-
-  // 0000 is the administrator's reset marker.
-  // It never creates a normal session.
-  if (password === "0000") {
-
-    const agentId = String(foundAgent["Agent ID"] || "").trim();
-
-    CacheService.getScriptCache().put(
-      "RESET_ZERO_" + agentId,
-      "1",
-      600
-    );
-
-    return {
-      status: "password_reset_required",
-      message: "Your password has been reset to 0000. Please create a new password to continue."
-    };
-  }
-
-  // Session is created only after exact password match.
-  const token = createSession(foundAgent);
-
-  updateAgentLastLogin(foundAgent["Agent ID"]);
-
-  logActivity(
-    "LOGIN",
-    foundAgent["Full Name"],
-    foundAgent["Role"],
-    foundAgent["Referral Code"],
-    "Successful password login"
-  );
-
-  return {
-    status: "success",
-    token: token,
-    role: String(foundAgent["Role"] || "agent").toLowerCase(),
-    name: foundAgent["Full Name"],
-    code: foundAgent["Referral Code"],
-    phone: foundAgent["Phone"] || "",
-    email: foundAgent["Email"] || ""
-  };
-
-}
-
-
-/* ============================================================
-   CREATE SESSION
-============================================================ */
-
-function createSession(
-  agent
-) {
-
-  const token =
-    Utilities
-      .getUuid() +
-      "-" +
-      Utilities
-        .getUuid();
-
-
-  const sessionData = {
-
-    agentId:
-      agent["Agent ID"],
-
-    code:
-      agent["Referral Code"],
-
-    name:
-      agent["Full Name"],
-
-    phone:
-      agent["Phone"],
-
-    email:
-      agent["Email"],
-
-    role:
-      String(
-        agent["Role"] ||
-        "agent"
-      )
-      .toLowerCase(),
-
-    createdAt:
-      new Date()
-        .toISOString()
-
-  };
-
-
-  CacheService
-    .getScriptCache()
-    .put(
-
-      "SESSION_" +
-      token,
-
-      JSON.stringify(
-        sessionData
-      ),
-
-      CONFIG.SESSION_SECONDS
-
-    );
-
-
-  return token;
-
-}
-
-
-/* ============================================================
-   GET SESSION
-============================================================ */
-
-function getSession(
-  token
-) {
-
-  if (!token) {
-
-    return null;
-
-  }
-
-
-  const cached =
-    CacheService
-      .getScriptCache()
-      .get(
-        "SESSION_" +
-        token
-      );
-
-
-  if (!cached) {
-
-    return null;
-
-  }
-
-
-  try {
-
-    return JSON.parse(
-      cached
-    );
-
-  } catch (
-    error
-  ) {
-
-    return null;
-
-  }
-
-}
-
-
-/* ============================================================
-   AUTHENTICATION CHECK
-============================================================ */
-
-function requireSession(
-  token
-) {
-
-  const session =
-    getSession(
-      token
-    );
-
-
-  if (!session) {
-
-    return {
-
-      valid:
-        false,
-
-      response: {
-
-        status:
-          "unauthorized",
-
-        message:
-          "Your session has expired. Please login again."
-
-      }
-
-    };
-
-  }
-
-
-  return {
-
-    valid:
-      true,
-
-    session:
-      session
-
-  };
-
-}
-
-
-/* ============================================================
-   LOAD CLIENTS
-============================================================ */
-
-function handleClients(
-  params
-) {
-
-  const auth =
-    requireSession(
-      params.token
-    );
-
-
-  if (!auth.valid) {
-
-    return auth.response;
-
-  }
-
-
-  const sheet =
-    SpreadsheetApp
-      .getActiveSpreadsheet()
-      .getSheetByName(
-        CONFIG.SHEETS.CLIENTS
-      );
-
-
-  if (!sheet) {
-
-    return {
-
-      status:
-        "success",
-
-      clients:
-        []
-
-    };
-
-  }
-
-
-  const rows =
-    getSheetObjects(
-      sheet
-    );
-
-
-  const isAdmin =
-    auth.session.role ===
-    "admin";
-
-
-  let clients =
-    rows.map(
-      function(row) {
-
-        return clientToObject(
-          row
-        );
-
-      }
-    );
-
-
-  /*
-   * Agents only see their own customers.
-   */
-
-  if (!isAdmin) {
-
-    clients =
-      clients.filter(
-        function(client) {
-
-          return (
-            String(
-              client.agentCode
-            )
-            .toUpperCase() ===
-            String(
-              auth.session.code
-            )
-            .toUpperCase()
-          );
-
-        }
-      );
-
-  }
-
-
-  /*
-   * Newest first.
-   */
-
-  clients.reverse();
-
-
-  return {
-
-    status:
-      "success",
-
-    clients:
-      clients
-
-  };
-
-}
-
-
-/* ============================================================
-   ADD CLIENT
-============================================================ */
-
-function handleAddClient(
-  params
-) {
-
-  const auth =
-    requireSession(
-      params.token
-    );
-
-
-  if (!auth.valid) {
-
-    return auth.response;
-
-  }
-
-
-  if (
-    !params.name ||
-    !params.phone ||
-    !params.service
-  ) {
-
-    return {
-
-      status:
-        "error",
-
-      message:
-        "Customer name, phone number and service are required."
-
-    };
-
-  }
-
-
-  const ss =
-    SpreadsheetApp
-      .getActiveSpreadsheet();
-
-
-  const sheet =
-    ss.getSheetByName(
-      CONFIG.SHEETS.CLIENTS
-    );
-
-
-  if (!sheet) {
-
-    setupDatabaseSilent();
-
-  }
-
-
-  const clientsSheet =
-    ss.getSheetByName(
-      CONFIG.SHEETS.CLIENTS
-    );
-
-
-  const clientId =
-    generateClientId();
-
-
-  const rowId =
-    Utilities
-      .getUuid();
-
-
-  const now =
-    new Date();
-
-
-  const initialStage =
-    "LEAD QUALIFICATION";
-
-
-  clientsSheet.appendRow([
-
-    rowId,
-
-    clientId,
-
-    clean(
-      params.name
-    ),
-
-    normalizePhone(
-      params.phone
-    ),
-
-    clean(
-      params.email
-    ),
-
-    clean(
-      params.service
-    ),
-
-    clean(
-      params.destination
-    ),
-
-    clean(
-      params.travelDate
-    ),
-
-    clean(
-      params.travellers
-    ),
-
-    clean(
-      params.budget
-    ),
-
-    clean(
-      params.specialRequests
-    ),
-
-    clean(
-      params.notes
-    ),
-
-    auth.session.code,
-
-    initialStage,
-
-    now,
-
-    now
-
-  ]);
-
-
-  logActivity(
-
-    "ADD_CLIENT",
-
-    auth.session.name,
-
-    auth.session.role,
-
-    clientId,
-
-    "New customer added by " +
-    auth.session.code
-
-  );
-
-
-  return {
-
-    status:
-      "success",
-
-    message:
-      "Customer successfully added.",
-
-    clientId:
-      clientId,
-
-    stage:
-      initialStage
-
-  };
-
-}
-
-
-/* ============================================================
-   GENERATE CLIENT ID
-============================================================ */
-
-function generateClientId() {
-
-  const sheet =
-    SpreadsheetApp
-      .getActiveSpreadsheet()
-      .getSheetByName(
-        CONFIG.SHEETS.CLIENTS
-      );
-
-
-  const year =
-    new Date()
-      .getFullYear();
-
-
-  const count =
-    Math.max(
-      0,
-      sheet.getLastRow() - 1
-    ) + 1;
-
-
-  return (
-
-    "SJ-" +
-
-    year +
-
-    "-" +
-
-    String(
-      count
-    )
-    .padStart(
-      4,
-      "0"
-    )
-
-  );
-
-}
-
-
-/* ============================================================
-   DASHBOARD STATISTICS
-============================================================ */
-
-function handleDashboard(
-  params
-) {
-
-  const auth =
-    requireSession(
-      params.token
-    );
-
-
-  if (!auth.valid) {
-
-    return auth.response;
-
-  }
-
-
-  const sheet =
-    SpreadsheetApp
-      .getActiveSpreadsheet()
-      .getSheetByName(
-        CONFIG.SHEETS.CLIENTS
-      );
-
-
-  if (!sheet) {
-
-    return {
-
-      status:
-        "success",
-
-      stats: {
-
-        total:
-          0,
-
-        leadQualification:
-          0,
-
-        consultation:
-          0,
-
-        quotation:
-          0,
-
-        bookingConfirmation:
-          0
-
-      }
-
-    };
-
-  }
-
-
-  let clients =
-    getSheetObjects(
-      sheet
-    );
-
-
-  /*
-   * Agents only see their own statistics.
-   */
-
-  if (
-    auth.session.role !==
-    "admin"
-  ) {
-
-    clients =
-      clients.filter(
-        function(row) {
-
-          return (
-            String(
-              row["Agent Code"] ||
-              ""
-            )
-            .toUpperCase() ===
-            String(
-              auth.session.code
-            )
-            .toUpperCase()
-          );
-
-        }
-      );
-
-  }
-
-
-  const stats = {
-
-    total:
-      clients.length,
-
-    leadQualification:
-      countStage(
-        clients,
-        "LEAD QUALIFICATION"
-      ),
-
-    consultation:
-      countStage(
-        clients,
-        "CONSULTATION"
-      ),
-
-    quotation:
-      countStage(
-        clients,
-        "QUOTATION"
-      ),
-
-    bookingConfirmation:
-      countStage(
-        clients,
-        "BOOKING CONFIRMATION"
-      )
-
-  };
-
-
-  return {
-
-    status:
-      "success",
-
-    stats:
-      stats
-
-  };
-
-}
-
-
-/* ============================================================
-   COUNT FUNNEL STAGE
-============================================================ */
-
-function countStage(
-  rows,
-  stage
-) {
-
-  return rows.filter(
-    function(row) {
-
-      return (
-
-        String(
-          row["Funnel Stage"] ||
-          ""
-        )
-        .toUpperCase()
-        .trim() ===
-        stage
-
-      );
-
-    }
-  ).length;
-
-}
-
-
-/* ============================================================
-   SEARCH CLIENTS
-============================================================ */
-
-function handleSearch(
-  params
-) {
-
-  const auth =
-    requireSession(
-      params.token
-    );
-
-
-  if (!auth.valid) {
-
-    return auth.response;
-
-  }
-
-
-  const query =
-    clean(
-      params.q
-    )
-    .toLowerCase();
-
-
-  if (!query) {
-
-    return handleClients(
-      params
-    );
-
-  }
-
-
-  const sheet =
-    SpreadsheetApp
-      .getActiveSpreadsheet()
-      .getSheetByName(
-        CONFIG.SHEETS.CLIENTS
-      );
-
-
-  if (!sheet) {
-
-    return {
-
-      status:
-        "success",
-
-      clients:
-        []
-
-    };
-
-  }
-
-
-  let rows =
-    getSheetObjects(
-      sheet
-    );
-
-
-  /*
-   * Filter by agent.
-   */
-
-  if (
-    auth.session.role !==
-    "admin"
-  ) {
-
-    rows =
-      rows.filter(
-        function(row) {
-
-          return (
-            String(
-              row["Agent Code"] ||
-              ""
-            )
-            .toUpperCase() ===
-            String(
-              auth.session.code
-            )
-            .toUpperCase()
-          );
-
-        }
-      );
-
-  }
-
-
-  /*
-   * Search across relevant fields.
-   */
-
-  rows =
-    rows.filter(
-      function(row) {
-
-        const searchable = [
-
-          row["Client ID"],
-
-          row["Customer Name"],
-
-          row["Phone"],
-
-          row["Email"],
-
-          row["Service"],
-
-          row["Destination"],
-
-          row["Agent Code"],
-
-          row["Funnel Stage"]
-
-        ]
-        .join(" ")
-        .toLowerCase();
-
-
-        return searchable
-          .includes(
-            query
-          );
-
-      }
-    );
-
-
-  return {
-
-    status:
-      "success",
-
-    clients:
-      rows
-        .map(
-          clientToObject
-        )
-        .reverse()
-
-  };
-
-}
-
-
-/* ============================================================
-   UPDATE FUNNEL STAGE
-============================================================ */
-
-function handleUpdateStage(
-  params
-) {
-
-  const auth =
-    requireSession(
-      params.token
-    );
-
-
-  if (!auth.valid) {
-
-    return auth.response;
-
-  }
-
-
-  /*
-   * Only administrators can move customers
-   * through the funnel.
-   */
-
-  if (
-    auth.session.role !==
-    "admin"
-  ) {
-
-    return {
-
-      status:
-        "error",
-
-      message:
-        "Only administrators can update customer stages."
-
-    };
-
-  }
-
-
-  const rowId =
-    clean(
-      params.rowId
-    );
-
-
-  const stage =
-    clean(
-      params.stage
-    );
-
-
-  if (!rowId || !stage) {
-
-    return {
-
-      status:
-        "error",
-
-      message:
-        "Customer row ID and stage are required."
-
-    };
-
-  }
-
-
-  if (
-    !CONFIG.STAGES.includes(
-      stage
-    )
-  ) {
-
-    return {
-
-      status:
-        "error",
-
-      message:
-        "Invalid funnel stage."
-
-    };
-
-  }
-
-
-  const sheet =
-    SpreadsheetApp
-      .getActiveSpreadsheet()
-      .getSheetByName(
-        CONFIG.SHEETS.CLIENTS
-      );
-
-
-  const values =
-    sheet
-      .getDataRange()
-      .getValues();
-
-
-  const headers =
-    values[0];
-
-
-  const rowIdIndex =
-    headers.indexOf(
-      "Row ID"
-    );
-
-
-  const stageIndex =
-    headers.indexOf(
-      "Funnel Stage"
-    );
-
-
-  const updatedIndex =
-    headers.indexOf(
-      "Updated At"
-    );
-
-
-  if (
-    rowIdIndex === -1 ||
-    stageIndex === -1
-  ) {
-
-    return {
-
-      status:
-        "error",
-
-      message:
-        "Client sheet structure is invalid."
-
-    };
-
-  }
-
-
-  let foundRow =
-    -1;
-
-
-  for (
-    let i = 1;
-    i < values.length;
-    i++
-  ) {
-
-    if (
-      String(
-        values[i][rowIdIndex]
-      ) ===
-      rowId
-    ) {
-
-      foundRow =
-        i + 1;
-
-      break;
-
-    }
-
-  }
-
-
-  if (
-    foundRow === -1
-  ) {
-
-    return {
-
-      status:
-        "error",
-
-      message:
-        "Customer could not be found."
-
-    };
-
-  }
-
-
-  sheet
-    .getRange(
-      foundRow,
-      stageIndex + 1
-    )
-    .setValue(
-      stage
-    );
-
-
-  if (
-    updatedIndex !== -1
-  ) {
-
-    sheet
-      .getRange(
-        foundRow,
-        updatedIndex + 1
-      )
-      .setValue(
-        new Date()
-      );
-
-  }
-
-
-  logActivity(
-
-    "UPDATE_STAGE",
-
-    auth.session.name,
-
-    auth.session.role,
-
-    rowId,
-
-    "Customer moved to " +
-    stage
-
-  );
-
-
-  return {
-
-    status:
-      "success",
-
-    message:
-      "Customer stage updated.",
-
-    stage:
-      stage
-
-  };
-
-}
-
-
-/* ============================================================
-   LOAD AGENTS
-============================================================ */
-
-function handleAgents(
-  params
-) {
-
-  const auth =
-    requireSession(
-      params.token
-    );
-
-
-  if (!auth.valid) {
-
-    return auth.response;
-
-  }
-
-
-  if (
-    auth.session.role !==
-    "admin"
-  ) {
-
-    return {
-
-      status:
-        "error",
-
-      message:
-        "Administrator access required."
-
-    };
-
-  }
-
-
-  const sheet =
-    SpreadsheetApp
-      .getActiveSpreadsheet()
-      .getSheetByName(
-        CONFIG.SHEETS.AGENTS
-      );
-
-
-  const rows =
-    getSheetObjects(
-      sheet
-    );
-
-
-  const agents =
-    rows.map(
-      function(agent) {
-
-        return {
-
-          id:
-            agent["Agent ID"],
-
-          code:
-            agent["Referral Code"],
-
-          name:
-            agent["Full Name"],
-
-          phone:
-            agent["Phone"],
-
-          email:
-            agent["Email"],
-
-          role:
-            agent["Role"],
-
-          status:
-            agent["Status"],
-
-          createdAt:
-            formatDate(
-              agent["Created At"]
-            ),
-
-          lastLogin:
-            formatDate(
-              agent["Last Login"]
-            )
-
-        };
-
-      }
-    );
-
-
-  return {
-
-    status:
-      "success",
-
-    agents:
-      agents
-
-  };
-
-}
-
-
-/* ============================================================
-   UPDATE LAST LOGIN
-============================================================ */
-
-function updateAgentLastLogin(
-  agentId
-) {
-
-  const sheet =
-    SpreadsheetApp
-      .getActiveSpreadsheet()
-      .getSheetByName(
-        CONFIG.SHEETS.AGENTS
-      );
-
-
-  if (!sheet) {
-
-    return;
-
-  }
-
-
-  const values =
-    sheet
-      .getDataRange()
-      .getValues();
-
-
-  const headers =
-    values[0];
-
-
-  const idIndex =
-    headers.indexOf(
-      "Agent ID"
-    );
-
-
-  const loginIndex =
-    headers.indexOf(
-      "Last Login"
-    );
-
-
-  if (
-    idIndex === -1 ||
-    loginIndex === -1
-  ) {
-
-    return;
-
-  }
-
-
-  for (
-    let i = 1;
-    i < values.length;
-    i++
-  ) {
-
-    if (
-      String(
-        values[i][idIndex]
-      ) ===
-      String(
-        agentId
-      )
-    ) {
-
-      sheet
-        .getRange(
-          i + 1,
-          loginIndex + 1
-        )
-        .setValue(
-          new Date()
-        );
-
-      return;
-
-    }
-
-  }
-
-}
-
-
-/* ============================================================
-   CLIENT OBJECT
-============================================================ */
-
-function clientToObject(
-  row
-) {
-
-  return {
-
-    rowId:
-      row["Row ID"],
-
-    id:
-      row["Client ID"],
-
-    name:
-      row["Customer Name"],
-
-    phone:
-      row["Phone"],
-
-    email:
-      row["Email"],
-
-    service:
-      row["Service"],
-
-    destination:
-      row["Destination"],
-
-    travelDate:
-      formatDate(
-        row["Travel Date"]
-      ),
-
-    travellers:
-      row["Travellers"],
-
-    budget:
-      row["Budget"],
-
-    specialRequests:
-      row["Special Requests"],
-
-    notes:
-      row["Notes"],
-
-    agentCode:
-      row["Agent Code"],
-
-    stage:
-      row["Funnel Stage"] ||
-      "LEAD QUALIFICATION",
-
-    createdAt:
-      formatDate(
-        row["Created At"]
-      ),
-
-    updatedAt:
-      formatDate(
-        row["Updated At"]
-      )
-
-  };
-
-}
-
-
-/* ============================================================
-   GET SHEET OBJECTS
-============================================================ */
-
-function getSheetObjects(
-  sheet
-) {
-
-  if (!sheet) {
-
-    return [];
-
-  }
-
-
-  const data =
-    sheet
-      .getDataRange()
-      .getValues();
-
-
-  if (
-    data.length <= 1
-  ) {
-
-    return [];
-
-  }
-
-
-  const headers =
-    data[0];
-
-
-  return data
-    .slice(1)
-    .filter(
-      function(row) {
-
-        return row.some(
-          function(value) {
-
-            return (
-              value !== "" &&
-              value !== null
+        let session =
+            localStorage.getItem(
+                "sj_agent_session"
             );
 
-          }
+        let currentUser =
+            JSON.parse(
+                localStorage.getItem(
+                    "sj_agent_user"
+                ) || "null"
+            );
+
+        let clients = [];
+
+        let searchTimer;
+
+
+        /* =========================================================
+           LOADING
+        ========================================================= */
+
+        function showLoading(
+            text = "Loading..."
+        ) {
+
+            document
+                .getElementById("loadingText")
+                .textContent = text;
+
+            document
+                .getElementById("loading")
+                .classList
+                .remove("hidden");
+
+        }
+
+
+        function hideLoading() {
+
+            document
+                .getElementById("loading")
+                .classList
+                .add("hidden");
+
+        }
+
+
+        /* =========================================================
+           API REQUEST
+        ========================================================= */
+
+        function api(
+            action,
+            params = {}
+        ) {
+
+            return new Promise(
+                function(resolve, reject) {
+
+                    const query =
+                        new URLSearchParams();
+
+                    query.append(
+                        "action",
+                        action
+                    );
+
+
+                    Object.keys(params)
+                        .forEach(
+                            function(key) {
+
+                                query.append(
+                                    key,
+                                    params[key] === undefined
+                                        ? ""
+                                        : params[key]
+                                );
+
+                            }
+                        );
+
+
+                    const callbackName =
+                        "sjCallback_" +
+                        Date.now() +
+                        "_" +
+                        Math.floor(
+                            Math.random() * 100000
+                        );
+
+
+                    query.append(
+                        "callback",
+                        callbackName
+                    );
+
+
+                    const script =
+                        document.createElement(
+                            "script"
+                        );
+
+
+                    let completed = false;
+
+
+                    window[callbackName] =
+                        function(data) {
+
+                            if (completed) {
+                                return;
+                            }
+
+                            completed = true;
+
+                            delete window[
+                                callbackName
+                            ];
+
+                            script.remove();
+
+                            resolve(data);
+
+                        };
+
+
+                    script.onerror =
+                        function() {
+
+                            if (completed) {
+                                return;
+                            }
+
+                            completed = true;
+
+                            delete window[
+                                callbackName
+                            ];
+
+                            script.remove();
+
+                            reject(
+                                new Error(
+                                    "Unable to connect to SJ Luxury Travel backend."
+                                )
+                            );
+
+                        };
+
+
+                    script.src =
+                        API_URL +
+                        "?t=" +
+                        Date.now() +
+                        "&" +
+                        query.toString();
+
+
+                    document.body.appendChild(
+                        script
+                    );
+
+
+                    setTimeout(
+                        function() {
+
+                            if (completed) {
+                                return;
+                            }
+
+                            completed = true;
+
+                            delete window[
+                                callbackName
+                            ];
+
+                            script.remove();
+
+                            reject(
+                                new Error(
+                                    "The SJ Luxury Travel backend did not respond. Please check the Apps Script deployment."
+                                )
+                            );
+
+                        },
+                        20000
+                    );
+
+                }
+            );
+
+        }
+
+
+        /* =========================================================
+           LOGIN
+        ========================================================= */
+
+        async function login() {
+
+            const identifier =
+                document
+                    .getElementById("loginIdentifier")
+                    .value
+                    .trim();
+
+            const password =
+                document
+                    .getElementById("loginPassword")
+                    .value;
+
+
+            const message =
+                document
+                    .getElementById("loginMessage");
+
+
+            // Never send a login request without a password.
+            if (!identifier) {
+
+                message.style.color = "#c0392b";
+                message.textContent =
+                    "Please enter your referral code or phone number.";
+
+                return;
+
+            }
+
+
+            if (!password) {
+
+                message.style.color = "#c0392b";
+                message.textContent =
+                    "Please enter your password.";
+
+                return;
+
+            }
+
+
+            message.style.color = "#555";
+            message.textContent = "Signing in...";
+
+
+            showLoading(
+                "Signing in..."
+            );
+
+
+            try {
+
+                const result =
+                    await api(
+                        "login",
+                        {
+                            identifier:
+                                identifier,
+
+                            password:
+                                password
+                        }
+                    );
+
+
+                /*
+                 * SECURITY RULE:
+                 * Only a SUCCESS response from the
+                 * backend is allowed to create a session.
+                 */
+                if (result && result.status === "password_reset_required") {
+
+                    message.style.color = "#b06b00";
+                    message.textContent = result.message;
+
+                    // Keep the identifier so the new password can be saved
+                    // against the same agent record.
+                    document.getElementById("loginIdentifier").value = identifier;
+
+                    showNewPassword();
+                    hideLoading();
+                    return;
+                }
+
+
+                if (
+                    !result ||
+                    result.status !== "success" ||
+                    !result.token
+                ) {
+
+                    message.style.color = "#c0392b";
+                    message.textContent =
+                        result?.message ||
+                        "Invalid login details.";
+
+                    hideLoading();
+                    return;
+                }
+
+
+                // Clear any previous client session first.
+                localStorage.removeItem(
+                    "sj_agent_session"
+                );
+
+                localStorage.removeItem(
+                    "sj_agent_user"
+                );
+
+
+                session =
+                    result.token;
+
+
+                currentUser = {
+
+                    role:
+                        result.role,
+
+                    name:
+                        result.name,
+
+                    code:
+                        result.code,
+
+                    phone:
+                        result.phone || "",
+
+                    email:
+                        result.email || ""
+
+                };
+
+
+                localStorage.setItem(
+                    "sj_agent_session",
+                    session
+                );
+
+
+                localStorage.setItem(
+                    "sj_agent_user",
+                    JSON.stringify(
+                        currentUser
+                    )
+                );
+
+
+                document
+                    .getElementById(
+                        "loginPassword"
+                    )
+                    .value = "";
+
+
+                message.textContent = "";
+
+
+                showDashboard();
+
+
+            } catch (error) {
+
+                message.style.color =
+                    "#c0392b";
+
+                message.textContent =
+                    "Unable to sign in. Please try again.";
+
+                console.error(
+                    "LOGIN ERROR:",
+                    error
+                );
+
+            } finally {
+
+                hideLoading();
+
+            }
+
+        }
+
+
+        /* =========================================================
+           REGISTER AGENT
+        ========================================================= */
+
+        async function registerAgent() {
+
+            const name =
+                document
+                    .getElementById("registerName")
+                    .value
+                    .trim();
+
+            const phone =
+                document
+                    .getElementById("registerPhone")
+                    .value
+                    .trim();
+
+            const email =
+                document
+                    .getElementById("registerEmail")
+                    .value
+                    .trim();
+
+            const password =
+                document
+                    .getElementById("registerPassword")
+                    .value;
+
+            const confirmPassword =
+                document
+                    .getElementById("registerConfirmPassword")
+                    .value;
+
+            const message =
+                document
+                    .getElementById("registerMessage");
+
+
+            if (
+                !name ||
+                !phone ||
+                !email ||
+                !password ||
+                !confirmPassword
+            ) {
+
+                message.style.color = "#c0392b";
+                message.textContent =
+                    "Please complete all required fields.";
+                return;
+            }
+
+
+            if (password.length < 4) {
+                message.style.color = "#c0392b";
+                message.textContent =
+                    "Password must be at least 4 characters.";
+                return;
+            }
+
+            if (password === "0000") {
+                message.style.color = "#c0392b";
+                message.textContent =
+                    "0000 is reserved for password reset. Please choose another password.";
+                return;
+            }
+
+
+            if (password !== confirmPassword) {
+                message.style.color = "#c0392b";
+                message.textContent =
+                    "Passwords do not match.";
+                return;
+            }
+
+
+            showLoading("Creating agent account...");
+
+
+            try {
+
+                const result =
+                    await api(
+                        "register",
+                        {
+                            name: name,
+                            phone: phone,
+                            email: email,
+                            password: password,
+                            confirmPassword: confirmPassword
+                        }
+                    );
+
+
+                if (
+                    !result ||
+                    result.status !== "success"
+                ) {
+
+                    message.style.color = "#c0392b";
+                    message.textContent =
+                        result?.message ||
+                        "Registration failed.";
+
+                    return;
+                }
+
+
+                message.style.color = "#16834d";
+                message.textContent =
+                    "Account created. Your referral code is " +
+                    result.code +
+                    ". Please sign in.";
+
+
+                document
+                    .getElementById("loginIdentifier")
+                    .value = result.code;
+
+                document
+                    .getElementById("loginPassword")
+                    .value = "";
+
+                document
+                    .getElementById("registerPassword")
+                    .value = "";
+
+                document
+                    .getElementById("registerConfirmPassword")
+                    .value = "";
+
+
+                setTimeout(
+                    function() {
+                        showLogin();
+                    },
+                    2500
+                );
+
+
+            } catch (error) {
+
+                message.style.color = "#c0392b";
+                message.textContent = error.message;
+
+            } finally {
+
+                hideLoading();
+
+            }
+
+        }
+
+
+        /* =========================================================
+           PASSWORD / AUTHENTICATION HELPERS
+        ========================================================= */
+
+        function hideAuthForms() {
+
+            [
+                "loginForm",
+                "registerForm",
+                "forgotPasswordForm",
+                "newPasswordForm"
+            ].forEach(function(id) {
+
+                const element = document.getElementById(id);
+
+                if (element) {
+                    element.classList.add("hidden");
+                }
+            });
+        }
+
+
+        function showLogin() {
+            hideAuthForms();
+            document.getElementById("loginForm").classList.remove("hidden");
+        }
+
+
+        function showRegister() {
+            hideAuthForms();
+            document.getElementById("registerForm").classList.remove("hidden");
+        }
+
+
+        function showForgotPassword() {
+            hideAuthForms();
+            document.getElementById("forgotPasswordForm").classList.remove("hidden");
+            document.getElementById("forgotMessage").textContent = "";
+        }
+
+
+        function showNewPassword() {
+            hideAuthForms();
+            document.getElementById("newPasswordForm").classList.remove("hidden");
+        }
+
+
+        function togglePassword(inputId, button) {
+
+            const input = document.getElementById(inputId);
+
+            if (input.type === "password") {
+                input.type = "text";
+                button.textContent = "HIDE";
+            } else {
+                input.type = "password";
+                button.textContent = "SHOW";
+            }
+        }
+
+
+        function updatePasswordStrength() {
+
+            const password =
+                document.getElementById("registerPassword").value;
+
+            const bar =
+                document.getElementById("passwordStrengthBar");
+
+            let strength = 0;
+
+            if (password.length >= 4) strength++;
+            if (password.length >= 8) strength++;
+            if (/[A-Z]/.test(password)) strength++;
+            if (/[0-9]/.test(password)) strength++;
+
+            bar.style.width = (strength * 25) + "%";
+        }
+
+
+        async function sendResetRequest() {
+
+            const identifier =
+                document.getElementById("resetIdentifier").value.trim();
+
+            const message =
+                document.getElementById("forgotMessage");
+
+            if (!identifier) {
+                message.style.color = "#c0392b";
+                message.textContent =
+                    "Please enter your phone number or referral code.";
+                return;
+            }
+
+            showLoading("Sending reset request...");
+
+            try {
+
+                const formData = new FormData();
+
+                formData.append("phone_or_referral_code", identifier);
+                formData.append("request_type", "SJ Luxury Travel Agent Password Reset");
+                formData.append("message", "Agent has requested a password reset. Please verify the agent and reset the Password cell to 0000 in the Agents sheet.");
+                formData.append("portal", "SJ Luxury Travel Agent Portal");
+                formData.append("submitted_at", new Date().toISOString());
+
+                const response = await fetch(
+                    "https://formspree.io/f/mppazakp",
+                    {
+                        method: "POST",
+                        body: formData,
+                        headers: {
+                            "Accept": "application/json"
+                        }
+                    }
+                );
+
+                if (!response.ok) {
+                    throw new Error("The reset request could not be sent.");
+                }
+
+                message.style.color = "#16834d";
+                message.textContent =
+                    "Reset request sent successfully. SJ Luxury Travel will verify your request and reset your password to 0000. Once that is done, log in with 0000 to create your new password.";
+
+            } catch (error) {
+
+                message.style.color = "#c0392b";
+                message.textContent =
+                    "Unable to send the reset request. Please try again.";
+
+                console.error("PASSWORD RESET REQUEST:", error);
+
+            } finally {
+                hideLoading();
+            }
+        }
+
+
+        async function resetPassword() {
+
+            const identifier =
+                document.getElementById("loginIdentifier").value.trim();
+
+            const password =
+                document.getElementById("newPassword").value;
+
+            const confirmPassword =
+                document.getElementById("newPasswordConfirm").value;
+
+            const message =
+                document.getElementById("newPasswordMessage");
+
+            if (!identifier) {
+                message.style.color = "#c0392b";
+                message.textContent =
+                    "Your referral code or phone number is missing. Please return to login.";
+                return;
+            }
+
+            if (!password || !confirmPassword) {
+                message.style.color = "#c0392b";
+                message.textContent =
+                    "Please enter and confirm your new password.";
+                return;
+            }
+
+            if (password.length < 4) {
+                message.style.color = "#c0392b";
+                message.textContent =
+                    "Password must be at least 4 characters.";
+                return;
+            }
+
+            if (password === "0000") {
+                message.style.color = "#c0392b";
+                message.textContent =
+                    "Please choose a different password. 0000 is reserved for reset.";
+                return;
+            }
+
+            if (password !== confirmPassword) {
+                message.style.color = "#c0392b";
+                message.textContent =
+                    "Passwords do not match.";
+                return;
+            }
+
+            showLoading("Updating password...");
+
+            try {
+
+                const result =
+                    await api(
+                        "resetPassword",
+                        {
+                            identifier: identifier,
+                            password: password,
+                            confirmPassword: confirmPassword
+                        }
+                    );
+
+                if (!result || result.status !== "success") {
+                    message.style.color = "#c0392b";
+                    message.textContent =
+                        result?.message ||
+                        "Unable to update password.";
+                    return;
+                }
+
+                message.style.color = "#16834d";
+                message.textContent =
+                    "Password updated successfully. Please log in with your new password.";
+
+                document.getElementById("newPassword").value = "";
+                document.getElementById("newPasswordConfirm").value = "";
+                document.getElementById("loginPassword").value = "";
+
+                setTimeout(function() {
+                    showLogin();
+                }, 1200);
+
+            } catch (error) {
+
+                message.style.color = "#c0392b";
+                message.textContent =
+                    "Unable to update password. Please try again.";
+
+                console.error("PASSWORD UPDATE:", error);
+
+            } finally {
+                hideLoading();
+            }
+        }
+
+
+        /* =========================================================
+           SHOW LOGIN
+        ========================================================= */
+
+        function showLogin() {
+
+            document
+                .getElementById(
+                    "loginForm"
+                )
+                .classList
+                .remove("hidden");
+
+
+            document
+                .getElementById(
+                    "registerForm"
+                )
+                .classList
+                .add("hidden");
+
+        }
+
+
+        /* =========================================================
+           SHOW REGISTER
+        ========================================================= */
+
+        function showRegister() {
+
+            document
+                .getElementById(
+                    "loginForm"
+                )
+                .classList
+                .add("hidden");
+
+
+            document
+                .getElementById(
+                    "registerForm"
+                )
+                .classList
+                .remove("hidden");
+
+        }
+
+
+        /* =========================================================
+           SHOW DASHBOARD
+        ========================================================= */
+
+        function showDashboard() {
+
+            document
+                .getElementById(
+                    "loginPage"
+                )
+                .classList
+                .add("hidden");
+
+
+            document
+                .getElementById(
+                    "dashboardPage"
+                )
+                .classList
+                .remove("hidden");
+
+
+            document
+                .getElementById(
+                    "userBadge"
+                )
+                .textContent =
+
+                currentUser.name +
+
+                " • " +
+
+                currentUser.code;
+
+
+            const isAdmin =
+                currentUser.role === "admin";
+
+
+            if (isAdmin) {
+
+                document
+                    .getElementById(
+                        "dashboardTitle"
+                    )
+                    .textContent =
+                    "All Customers";
+
+
+                document
+                    .getElementById(
+                        "addClientButton"
+                    )
+                    .classList
+                    .add("hidden");
+
+
+                document
+                    .getElementById(
+                        "adminPanel"
+                    )
+                    .classList
+                    .remove("hidden");
+
+            } else {
+
+                document
+                    .getElementById(
+                        "dashboardTitle"
+                    )
+                    .textContent =
+                    "My Customers";
+
+
+                document
+                    .getElementById(
+                        "addClientButton"
+                    )
+                    .classList
+                    .remove("hidden");
+
+
+                document
+                    .getElementById(
+                        "adminPanel"
+                    )
+                    .classList
+                    .add("hidden");
+
+            }
+
+
+            loadDashboard();
+
+        }
+
+
+        /* =========================================================
+           LOAD DASHBOARD
+        ========================================================= */
+
+        async function loadDashboard() {
+
+            if (!session) {
+
+                logout();
+
+                return;
+
+            }
+
+
+            showLoading(
+                "Loading dashboard..."
+            );
+
+
+            try {
+
+                const result =
+                    await api(
+                        "clients",
+                        {
+                            token:
+                                session
+                        }
+                    );
+
+
+                if (
+                    result.status ===
+                    "unauthorized"
+                ) {
+
+                    hideLoading();
+
+                    logout();
+
+                    return;
+
+                }
+
+
+                if (
+                    result.status !==
+                    "success"
+                ) {
+
+                    hideLoading();
+
+                    alert(
+                        result.message ||
+                        "Unable to load customers."
+                    );
+
+                    return;
+
+                }
+
+
+                clients =
+                    result.clients || [];
+
+
+                renderClients(
+                    clients
+                );
+
+
+                renderFunnel(
+                    clients
+                );
+
+
+                await loadStats();
+
+
+                hideLoading();
+
+
+            } catch (error) {
+
+                hideLoading();
+
+                console.error(
+                    error
+                );
+
+                alert(
+                    error.message
+                );
+
+            }
+
+        }
+
+
+        /* =========================================================
+           RENDER CLIENTS
+        ========================================================= */
+
+        function renderClients(
+            list
+        ) {
+
+            const tbody =
+                document
+                    .getElementById(
+                        "clientTable"
+                    );
+
+
+            tbody.innerHTML =
+                "";
+
+
+            if (
+                !list ||
+                !list.length
+            ) {
+
+                tbody.innerHTML = `
+
+                    <tr>
+
+                        <td
+                            colspan="8"
+                            class="empty-state"
+                        >
+
+                            No customers found.
+
+                        </td>
+
+                    </tr>
+
+                `;
+
+                return;
+
+            }
+
+
+            list.forEach(
+                function(client) {
+
+                    let action = "";
+
+
+                    if (
+                        currentUser &&
+                        currentUser.role ===
+                        "admin"
+                    ) {
+
+                        action = `
+
+                            <select
+                                onchange="changeStage(
+                                    '${escapeAttribute(client.rowId)}',
+                                    this.value
+                                )"
+                                style="
+                                    padding:7px;
+                                    border:1px solid #d8dee8;
+                                    border-radius:7px;
+                                    font-size:11px;
+                                "
+                            >
+
+                                ${buildStageOptions(
+                                    client.stage
+                                )}
+
+                            </select>
+
+                        `;
+
+                    } else {
+
+                        action = `
+
+                            <span
+                                style="
+                                    color:#777;
+                                    font-size:11px;
+                                "
+                            >
+
+                                SJ Travel tracking
+
+                            </span>
+
+                        `;
+
+                    }
+
+
+                    tbody.innerHTML += `
+
+                        <tr>
+
+                            <td>
+
+                                <strong>
+
+                                    ${escapeHtml(
+                                        client.id
+                                    )}
+
+                                </strong>
+
+                            </td>
+
+
+                            <td>
+
+                                <strong>
+
+                                    ${escapeHtml(
+                                        client.name
+                                    )}
+
+                                </strong>
+
+                            </td>
+
+
+                            <td>
+
+                                ${escapeHtml(
+                                    client.phone
+                                )}
+
+                            </td>
+
+
+                            <td>
+
+                                ${escapeHtml(
+                                    client.service
+                                )}
+
+                            </td>
+
+
+                            <td>
+
+                                ${escapeHtml(
+                                    client.destination ||
+                                    "-"
+                                )}
+
+                            </td>
+
+
+                            <td>
+
+                                ${escapeHtml(
+                                    client.agentCode
+                                )}
+
+                            </td>
+
+
+                            <td>
+
+                                <span class="stage">
+
+                                    ${escapeHtml(
+                                        client.stage
+                                    )}
+
+                                </span>
+
+                            </td>
+
+
+                            <td>
+
+                                ${action}
+
+                            </td>
+
+                        </tr>
+
+                    `;
+
+                }
+            );
+
+        }
+
+
+        /* =========================================================
+           FUNNEL STAGES
+        ========================================================= */
+
+        function getStages() {
+
+            return [
+
+                "LEAD QUALIFICATION",
+
+                "CONSULTATION",
+
+                "BESPOKE ITINERARY",
+
+                "QUOTATION",
+
+                "CLIENT APPROVAL",
+
+                "DEPOSIT PAYMENT",
+
+                "BOOKING CONFIRMATION"
+
+            ];
+
+        }
+
+
+        /* =========================================================
+           BUILD STAGE OPTIONS
+        ========================================================= */
+
+        function buildStageOptions(
+            selected
+        ) {
+
+            return getStages()
+                .map(
+                    function(stage) {
+
+                        return `
+
+                            <option
+                                value="${escapeAttribute(stage)}"
+                                ${
+                                    stage === selected
+                                        ? "selected"
+                                        : ""
+                                }
+                            >
+
+                                ${escapeHtml(
+                                    stage
+                                )}
+
+                            </option>
+
+                        `;
+
+                    }
+                )
+                .join("");
+
+        }
+
+
+        /* =========================================================
+           CHANGE STAGE
+        ========================================================= */
+
+        async function changeStage(
+            rowId,
+            stage
+        ) {
+
+            if (
+                !currentUser ||
+                currentUser.role !==
+                "admin"
+            ) {
+
+                return;
+
+            }
+
+
+            const confirmed =
+                confirm(
+                    "Move this customer to:\n\n" +
+                    stage +
+                    "?"
+                );
+
+
+            if (!confirmed) {
+
+                await loadDashboard();
+
+                return;
+
+            }
+
+
+            showLoading(
+                "Updating customer journey..."
+            );
+
+
+            try {
+
+                const result =
+                    await api(
+                        "updateStage",
+                        {
+
+                            token:
+                                session,
+
+                            rowId:
+                                rowId,
+
+                            stage:
+                                stage
+
+                        }
+                    );
+
+
+                if (
+                    result.status !==
+                    "success"
+                ) {
+
+                    hideLoading();
+
+                    alert(
+                        result.message ||
+                        "Unable to update stage."
+                    );
+
+                    return;
+
+                }
+
+
+                await loadDashboard();
+
+
+            } catch (error) {
+
+                hideLoading();
+
+                alert(
+                    error.message
+                );
+
+            }
+
+        }
+
+
+        /* =========================================================
+           LOAD STATISTICS
+        ========================================================= */
+
+        async function loadStats() {
+
+            try {
+
+                const result =
+                    await api(
+                        "dashboard",
+                        {
+                            token:
+                                session
+                        }
+                    );
+
+
+                if (
+                    !result ||
+                    result.status !==
+                    "success"
+                ) {
+
+                    return;
+
+                }
+
+
+                const stats =
+                    result.stats || {};
+
+
+                document
+                    .getElementById(
+                        "totalClients"
+                    )
+                    .textContent =
+                    stats.total || 0;
+
+
+                document
+                    .getElementById(
+                        "leadCount"
+                    )
+                    .textContent =
+                    stats.leadQualification || 0;
+
+
+                document
+                    .getElementById(
+                        "consultationCount"
+                    )
+                    .textContent =
+                    stats.consultation || 0;
+
+
+                document
+                    .getElementById(
+                        "quotationCount"
+                    )
+                    .textContent =
+                    stats.quotation || 0;
+
+
+                document
+                    .getElementById(
+                        "bookingCount"
+                    )
+                    .textContent =
+                    stats.bookingConfirmation || 0;
+
+
+            } catch (error) {
+
+                console.error(
+                    error
+                );
+
+            }
+
+        }
+
+
+        /* =========================================================
+           RENDER FUNNEL
+        ========================================================= */
+
+        function renderFunnel(
+            clientList = clients
+        ) {
+
+            const stages =
+                getStages();
+
+
+            const container =
+                document
+                    .getElementById(
+                        "funnelContainer"
+                    );
+
+
+            container.innerHTML =
+                "";
+
+
+            stages.forEach(
+                function(stage) {
+
+                    const count =
+                        clientList.filter(
+                            function(client) {
+
+                                return (
+                                    String(
+                                        client.stage || ""
+                                    )
+                                    .toUpperCase() ===
+                                    stage
+                                );
+
+                            }
+                        ).length;
+
+
+                    container.innerHTML += `
+
+                        <div class="funnel-step">
+
+                            <span>
+                                ${count}
+                            </span>
+
+                            ${escapeHtml(
+                                stage
+                            )}
+
+                        </div>
+
+                    `;
+
+                }
+            );
+
+        }
+
+
+        /* =========================================================
+           OPEN CLIENT MODAL
+        ========================================================= */
+
+        function openClientModal() {
+
+            document
+                .getElementById(
+                    "clientModal"
+                )
+                .classList
+                .remove("hidden");
+
+        }
+
+
+        /* =========================================================
+           CLOSE CLIENT MODAL
+        ========================================================= */
+
+        function closeClientModal() {
+
+            document
+                .getElementById(
+                    "clientModal"
+                )
+                .classList
+                .add("hidden");
+
+        }
+
+
+        /* =========================================================
+           SAVE CLIENT
+        ========================================================= */
+
+        async function saveClient() {
+
+            const message =
+                document
+                    .getElementById(
+                        "clientMessage"
+                    );
+
+
+            const data = {
+
+                name:
+                    document
+                        .getElementById(
+                            "clientName"
+                        )
+                        .value
+                        .trim(),
+
+                phone:
+                    document
+                        .getElementById(
+                            "clientPhone"
+                        )
+                        .value
+                        .trim(),
+
+                email:
+                    document
+                        .getElementById(
+                            "clientEmail"
+                        )
+                        .value
+                        .trim(),
+
+                service:
+                    document
+                        .getElementById(
+                            "clientService"
+                        )
+                        .value,
+
+                destination:
+                    document
+                        .getElementById(
+                            "clientDestination"
+                        )
+                        .value
+                        .trim(),
+
+                travelDate:
+                    document
+                        .getElementById(
+                            "clientTravelDate"
+                        )
+                        .value,
+
+                travellers:
+                    document
+                        .getElementById(
+                            "clientTravellers"
+                        )
+                        .value,
+
+                budget:
+                    document
+                        .getElementById(
+                            "clientBudget"
+                        )
+                        .value
+                        .trim(),
+
+                specialRequests:
+                    document
+                        .getElementById(
+                            "clientSpecialRequests"
+                        )
+                        .value
+                        .trim(),
+
+                notes:
+                    document
+                        .getElementById(
+                            "clientNotes"
+                        )
+                        .value
+                        .trim()
+
+            };
+
+
+            if (
+                !data.name ||
+                !data.phone ||
+                !data.service
+            ) {
+
+                message.style.color =
+                    "#c0392b";
+
+                message.textContent =
+                    "Please fill in the required fields.";
+
+                return;
+
+            }
+
+
+            message.style.color =
+                "#555";
+
+            message.textContent =
+                "Saving customer...";
+
+
+            showLoading(
+                "Saving customer..."
+            );
+
+
+            try {
+
+                const result =
+                    await api(
+                        "addClient",
+                        {
+
+                            token:
+                                session,
+
+                            name:
+                                data.name,
+
+                            phone:
+                                data.phone,
+
+                            email:
+                                data.email,
+
+                            service:
+                                data.service,
+
+                            destination:
+                                data.destination,
+
+                            travelDate:
+                                data.travelDate,
+
+                            travellers:
+                                data.travellers,
+
+                            budget:
+                                data.budget,
+
+                            specialRequests:
+                                data.specialRequests,
+
+                            notes:
+                                data.notes
+
+                        }
+                    );
+
+
+                if (
+                    !result ||
+                    result.status !==
+                    "success"
+                ) {
+
+                    hideLoading();
+
+                    message.style.color =
+                        "#c0392b";
+
+                    message.textContent =
+                        result?.message ||
+                        "Unable to save customer.";
+
+                    return;
+
+                }
+
+
+                hideLoading();
+
+
+                message.style.color =
+                    "#16834d";
+
+                message.textContent =
+                    "Customer successfully added.";
+
+
+                setTimeout(
+                    async function() {
+
+                        closeClientModal();
+
+                        clearClientForm();
+
+                        await loadDashboard();
+
+                    },
+                    800
+                );
+
+
+            } catch (error) {
+
+                hideLoading();
+
+                message.style.color =
+                    "#c0392b";
+
+                message.textContent =
+                    error.message;
+
+            }
+
+        }
+
+
+        /* =========================================================
+           CLEAR CUSTOMER FORM
+        ========================================================= */
+
+        function clearClientForm() {
+
+            const fields = [
+
+                "clientName",
+
+                "clientPhone",
+
+                "clientEmail",
+
+                "clientService",
+
+                "clientDestination",
+
+                "clientTravelDate",
+
+                "clientTravellers",
+
+                "clientBudget",
+
+                "clientSpecialRequests",
+
+                "clientNotes"
+
+            ];
+
+
+            fields.forEach(
+                function(id) {
+
+                    const element =
+                        document
+                            .getElementById(
+                                id
+                            );
+
+
+                    if (element) {
+
+                        element.value =
+                            "";
+
+                    }
+
+                }
+            );
+
+
+            document
+                .getElementById(
+                    "clientMessage"
+                )
+                .textContent =
+                "";
+
+        }
+
+
+        /* =========================================================
+           SEARCH
+        ========================================================= */
+
+        function searchCustomers() {
+
+            clearTimeout(
+                searchTimer
+            );
+
+
+            searchTimer =
+                setTimeout(
+                    async function() {
+
+                        const query =
+                            document
+                                .getElementById(
+                                    "searchInput"
+                                )
+                                .value
+                                .trim();
+
+
+                        if (!query) {
+
+                            renderClients(
+                                clients
+                            );
+
+                            renderFunnel(
+                                clients
+                            );
+
+                            return;
+
+                        }
+
+
+                        try {
+
+                            const result =
+                                await api(
+                                    "search",
+                                    {
+
+                                        token:
+                                            session,
+
+                                        q:
+                                            query
+
+                                    }
+                                );
+
+
+                            if (
+                                result.status ===
+                                "success"
+                            ) {
+
+                                const searchResults =
+                                    result.clients || [];
+
+                                renderClients(
+                                    searchResults
+                                );
+
+                                renderFunnel(
+                                    searchResults
+                                );
+
+                            }
+
+
+                        } catch (error) {
+
+                            console.error(
+                                error
+                            );
+
+                        }
+
+
+                    },
+                    300
+                );
+
+        }
+
+
+        /* =========================================================
+           DOWNLOAD REPORT
+        ========================================================= */
+
+        function downloadReport() {
+
+            if (
+                !currentUser ||
+                !clients
+            ) {
+
+                alert(
+                    "No customer information is available for the report."
+                );
+
+                return;
+
+            }
+
+
+            if (!clients.length) {
+
+                alert(
+                    "There are no customers available to download."
+                );
+
+                return;
+
+            }
+
+
+            const rows = [];
+
+
+            rows.push([
+                "SJ LUXURY TRAVEL LTD"
+            ]);
+
+
+            rows.push([
+                "AGENT CUSTOMER REPORT"
+            ]);
+
+
+            rows.push([
+                "Agent Name",
+                currentUser.name || ""
+            ]);
+
+
+            rows.push([
+                "Referral Code",
+                currentUser.code || ""
+            ]);
+
+
+            rows.push([
+                "Report Date",
+                new Date().toLocaleString()
+            ]);
+
+
+            rows.push([]);
+
+
+            rows.push([
+                "Client ID",
+                "Customer",
+                "Phone",
+                "Email",
+                "Service",
+                "Destination",
+                "Travel Date",
+                "Travellers",
+                "Budget",
+                "Special Requests",
+                "Notes",
+                "Agent",
+                "Funnel Stage"
+            ]);
+
+
+            clients.forEach(
+                function(client) {
+
+                    rows.push([
+
+                        client.id || "",
+
+                        client.name || "",
+
+                        client.phone || "",
+
+                        client.email || "",
+
+                        client.service || "",
+
+                        client.destination || "",
+
+                        client.travelDate || "",
+
+                        client.travellers || "",
+
+                        client.budget || "",
+
+                        client.specialRequests || "",
+
+                        client.notes || "",
+
+                        client.agentCode || "",
+
+                        client.stage || ""
+
+                    ]);
+
+                }
+            );
+
+
+            const csv =
+                rows
+                    .map(
+                        function(row) {
+
+                            return row
+                                .map(
+                                    function(value) {
+
+                                        return '"' +
+                                            String(
+                                                value ?? ""
+                                            )
+                                            .replace(
+                                                /"/g,
+                                                '""'
+                                            ) +
+                                            '"';
+
+                                    }
+                                )
+                                .join(",");
+
+                        }
+                    )
+                    .join("\r\n");
+
+
+            const blob =
+                new Blob(
+                    [
+                        "\uFEFF" +
+                        csv
+                    ],
+                    {
+                        type:
+                            "text/csv;charset=utf-8;"
+                    }
+                );
+
+
+            const url =
+                URL.createObjectURL(
+                    blob
+                );
+
+
+            const link =
+                document.createElement(
+                    "a"
+                );
+
+
+            const date =
+                new Date()
+                    .toISOString()
+                    .slice(0, 10);
+
+
+            const safeName =
+                String(
+                    currentUser.name ||
+                    "Agent"
+                )
+                .replace(
+                    /[^a-z0-9]/gi,
+                    "_"
+                );
+
+
+            link.href =
+                url;
+
+
+            link.download =
+                "SJ_Luxury_Travel_Report_" +
+                safeName +
+                "_" +
+                date +
+                ".csv";
+
+
+            document.body.appendChild(
+                link
+            );
+
+
+            link.click();
+
+
+            document.body.removeChild(
+                link
+            );
+
+
+            URL.revokeObjectURL(
+                url
+            );
+
+        }
+
+
+        /* =========================================================
+           LOAD AGENTS
+        ========================================================= */
+
+        async function loadAgents() {
+
+            if (
+                !currentUser ||
+                currentUser.role !==
+                "admin"
+            ) {
+
+                return;
+
+            }
+
+
+            showLoading(
+                "Loading agents..."
+            );
+
+
+            try {
+
+                const result =
+                    await api(
+                        "agents",
+                        {
+
+                            token:
+                                session
+
+                        }
+                    );
+
+
+                hideLoading();
+
+
+                if (
+                    !result ||
+                    result.status !==
+                    "success"
+                ) {
+
+                    alert(
+                        result?.message ||
+                        "Unable to load agents."
+                    );
+
+                    return;
+
+                }
+
+
+                const container =
+                    document
+                        .getElementById(
+                            "agentsContainer"
+                        );
+
+
+                const table =
+                    document
+                        .getElementById(
+                            "agentsTable"
+                        );
+
+
+                table.innerHTML =
+                    "";
+
+
+                result.agents
+                    .forEach(
+                        function(agent) {
+
+                            table.innerHTML += `
+
+                                <tr>
+
+                                    <td>
+
+                                        <strong>
+
+                                            ${escapeHtml(
+                                                agent.name
+                                            )}
+
+                                        </strong>
+
+                                    </td>
+
+
+                                    <td>
+
+                                        ${escapeHtml(
+                                            agent.code
+                                        )}
+
+                                    </td>
+
+
+                                    <td>
+
+                                        ${escapeHtml(
+                                            agent.phone
+                                        )}
+
+                                    </td>
+
+
+                                    <td>
+
+                                        ${escapeHtml(
+                                            agent.email || "-"
+                                        )}
+
+                                    </td>
+
+
+                                    <td>
+
+                                        <span class="stage">
+
+                                            ${escapeHtml(
+                                                agent.status
+                                            )}
+
+                                        </span>
+
+                                    </td>
+
+
+                                    <td>
+
+                                        ${escapeHtml(
+                                            agent.createdAt || "-"
+                                        )}
+
+                                    </td>
+
+                                </tr>
+
+                            `;
+
+                        }
+                    );
+
+
+                container
+                    .classList
+                    .remove("hidden");
+
+
+            } catch (error) {
+
+                hideLoading();
+
+                alert(
+                    error.message
+                );
+
+            }
+
+        }
+
+
+        /* =========================================================
+           LOGOUT
+        ========================================================= */
+
+        function logout() {
+
+            localStorage.removeItem(
+                "sj_agent_session"
+            );
+
+
+            localStorage.removeItem(
+                "sj_agent_user"
+            );
+
+
+            session =
+                null;
+
+
+            currentUser =
+                null;
+
+
+            clients =
+                [];
+
+
+            document
+                .getElementById(
+                    "dashboardPage"
+                )
+                .classList
+                .add("hidden");
+
+
+            document
+                .getElementById(
+                    "loginPage"
+                )
+                .classList
+                .remove("hidden");
+
+
+            document
+                .getElementById(
+                    "loginIdentifier"
+                )
+                .value =
+                "";
+
+
+            showLogin();
+
+        }
+
+
+        /* =========================================================
+           ESCAPE HTML
+        ========================================================= */
+
+        function escapeHtml(
+            value
+        ) {
+
+            return String(
+                value ?? ""
+            )
+
+                .replace(
+                    /&/g,
+                    "&amp;"
+                )
+
+                .replace(
+                    /</g,
+                    "&lt;"
+                )
+
+                .replace(
+                    />/g,
+                    "&gt;"
+                )
+
+                .replace(
+                    /"/g,
+                    "&quot;"
+                )
+
+                .replace(
+                    /'/g,
+                    "&#039;"
+                );
+
+        }
+
+
+        function escapeAttribute(
+            value
+        ) {
+
+            return escapeHtml(
+                value
+            );
+
+        }
+
+
+        /* =========================================================
+           AUTO LOGIN
+        ========================================================= */
+
+        window.addEventListener(
+            "load",
+            function() {
+
+                if (
+                    session &&
+                    currentUser
+                ) {
+
+                    showDashboard();
+
+                }
+
+            }
         );
 
-      }
-    )
-    .map(
-      function(row) {
 
-        const object = {};
+        /* =========================================================
+           CLOSE MODAL WHEN CLICKING OUTSIDE
+        ========================================================= */
+
+        document.addEventListener(
+            "click",
+            function(event) {
+
+                const modal =
+                    document.getElementById(
+                        "clientModal"
+                    );
 
 
-        headers.forEach(
-          function(header, index) {
+                if (
+                    event.target === modal
+                ) {
 
-            object[
-              header
-            ] =
-              row[index];
+                    closeClientModal();
 
-          }
+                }
+
+            }
         );
 
 
-        return object;
+        /* =========================================================
+           ENTER KEY LOGIN
+        ========================================================= */
 
-      }
-    );
+        document
+            .getElementById(
+                "loginIdentifier"
+            )
+            .addEventListener(
+                "keypress",
+                function(event) {
 
-}
+                    if (
+                        event.key === "Enter"
+                    ) {
 
+                        login();
 
-/* ============================================================
-   LOGGING
-============================================================ */
+                    }
 
-function logActivity(
-  action,
-  user,
-  role,
-  reference,
-  details
-) {
+                }
+            );
 
-  try {
+    </script>
 
-    const ss =
-      SpreadsheetApp
-        .getActiveSpreadsheet();
 
+</body>
 
-    let sheet =
-      ss.getSheetByName(
-        CONFIG.SHEETS.LOGS
-      );
-
-
-    if (!sheet) {
-
-      setupDatabaseSilent();
-
-      sheet =
-        ss.getSheetByName(
-          CONFIG.SHEETS.LOGS
-        );
-
-    }
-
-
-    sheet.appendRow([
-
-      new Date(),
-
-      action,
-
-      user,
-
-      role,
-
-      reference,
-
-      details
-
-    ]);
-
-  } catch (
-    error
-  ) {
-
-    console.error(
-      error
-    );
-
-  }
-
-}
-
-
-/* ============================================================
-   NORMALIZE PHONE
-============================================================ */
-
-function normalizePhone(
-  phone
-) {
-
-  if (
-    phone === undefined ||
-    phone === null
-  ) {
-
-    return "";
-
-  }
-
-
-  let value =
-    String(
-      phone
-    )
-    .trim()
-    .replace(
-      /[\s\-().]/g,
-      ""
-    );
-
-
-  /*
-   * Kenya format:
-   *
-   * 0712345678
-   * 254712345678
-   * +254712345678
-   */
-
-  if (
-    value.startsWith(
-      "+254"
-    )
-  ) {
-
-    value =
-      value.substring(
-        1
-      );
-
-  }
-
-
-  if (
-    value.startsWith(
-      "0"
-    ) &&
-    value.length === 10
-  ) {
-
-    value =
-      "254" +
-      value.substring(
-        1
-      );
-
-  }
-
-
-  return value;
-
-}
-
-
-/* ============================================================
-   CLEAN INPUT
-============================================================ */
-
-function clean(
-  value
-) {
-
-  if (
-    value === undefined ||
-    value === null
-  ) {
-
-    return "";
-
-  }
-
-
-  return String(
-    value
-  )
-  .trim();
-
-}
-
-
-/* ============================================================
-   FORMAT DATE
-============================================================ */
-
-function formatDate(
-  value
-) {
-
-  if (
-    !value
-  ) {
-
-    return "";
-
-  }
-
-
-  if (
-    Object.prototype
-      .toString
-      .call(value) ===
-    "[object Date]"
-  ) {
-
-    return Utilities
-      .formatDate(
-        value,
-        Session
-          .getScriptTimeZone(),
-        "dd MMM yyyy HH:mm"
-      );
-
-  }
-
-
-  return String(
-    value
-  );
-
-}
-
-
-/* ============================================================
-   REFRESH DATABASE
-============================================================ */
-
-function refreshDatabase() {
-
-  setupDatabaseSilent();
-
-
-  const ss =
-    SpreadsheetApp
-      .getActiveSpreadsheet();
-
-
-  const sheets = [
-
-    CONFIG.SHEETS.AGENTS,
-
-    CONFIG.SHEETS.CLIENTS,
-
-    CONFIG.SHEETS.LOGS
-
-  ];
-
-
-  sheets.forEach(
-    function(name) {
-
-      const sheet =
-        ss.getSheetByName(
-          name
-        );
-
-
-      if (sheet) {
-
-        formatSheet(
-          sheet
-        );
-
-      }
-
-    }
-  );
-
-
-  SpreadsheetApp
-    .getUi()
-    .alert(
-      "SJ Luxury Travel database refreshed."
-    );
-
-}
-
-
-/* ============================================================
-   SHOW AGENTS
-============================================================ */
-
-function showAgents() {
-
-  const ss =
-    SpreadsheetApp
-      .getActiveSpreadsheet();
-
-
-  const sheet =
-    ss.getSheetByName(
-      CONFIG.SHEETS.AGENTS
-    );
-
-
-  if (!sheet) {
-
-    setupDatabaseSilent();
-
-  }
-
-
-  const agents =
-    ss.getSheetByName(
-      CONFIG.SHEETS.AGENTS
-    );
-
-
-  ss.setActiveSheet(
-    agents
-  );
-
-}
-
-
-/* ============================================================
-   SHOW CUSTOMERS
-============================================================ */
-
-function showCustomers() {
-
-  const ss =
-    SpreadsheetApp
-      .getActiveSpreadsheet();
-
-
-  const sheet =
-    ss.getSheetByName(
-      CONFIG.SHEETS.CLIENTS
-    );
-
-
-  if (!sheet) {
-
-    setupDatabaseSilent();
-
-  }
-
-
-  ss.setActiveSheet(
-    ss.getSheetByName(
-      CONFIG.SHEETS.CLIENTS
-    )
-  );
-
-}
-
-
-/* ============================================================
-   SHOW LOGS
-============================================================ */
-
-function showLogs() {
-
-  const ss =
-    SpreadsheetApp
-      .getActiveSpreadsheet();
-
-
-  const sheet =
-    ss.getSheetByName(
-      CONFIG.SHEETS.LOGS
-    );
-
-
-  if (!sheet) {
-
-    setupDatabaseSilent();
-
-  }
-
-
-  ss.setActiveSheet(
-    ss.getSheetByName(
-      CONFIG.SHEETS.LOGS
-    )
-  );
-
-}
-
-
-/* ============================================================
-   TEST API
-============================================================ */
-
-function testAPI() {
-
-  try {
-
-    const response =
-      UrlFetchApp.fetch(
-        CONFIG.WEB_APP_URL +
-        "?action=status"
-      );
-
-
-    SpreadsheetApp
-      .getUi()
-      .alert(
-        "API TEST\n\n" +
-        response
-          .getContentText()
-      );
-
-
-  } catch (
-    error
-  ) {
-
-    SpreadsheetApp
-      .getUi()
-      .alert(
-        "API ERROR\n\n" +
-        error.message
-      );
-
-  }
-
-}
-
-
-/* ============================================================
-   ADMIN UTILITY
-============================================================ */
-
-/**
- * Run this manually if you want to recreate
- * the default administrator account.
- */
-
-function resetDefaultAdmin() {
-
-  const ui =
-    SpreadsheetApp
-      .getUi();
-
-
-  const response =
-    ui.alert(
-
-      "Reset Default Admin",
-
-      "This will create the default SJ-ADMIN account if it does not exist. Continue?",
-
-      ui.ButtonSet.YES_NO
-
-    );
-
-
-  if (
-    response !==
-    ui.Button.YES
-  ) {
-
-    return;
-
-  }
-
-
-  createDefaultAdmin();
-
-
-  ui.alert(
-
-    "Default administrator:",
-
-    "Referral Code: " +
-    CONFIG.DEFAULT_ADMIN.code +
-    "\n\nPhone: " +
-    CONFIG.DEFAULT_ADMIN.phone,
-
-    ui.ButtonSet.OK
-
-  );
-
-}
-
-
-/* ============================================================
-   INSTALL MENU
-============================================================ */
-
-function installMenu() {
-
-  onOpen();
-
-}
-
-
-/* ============================================================
-   END
-============================================================ */
+</html>
