@@ -192,15 +192,41 @@
 </style>
             
             <!-- Desktop Navigation Links -->
-            <nav class="hidden lg:flex items-center space-x-8 text-sm font-medium text-gray-600">
-                <a href="#hero" class="hover:text-navyBlue-600 transition">Home</a>
-                <a href="#" @click.prevent="bookingModalOpen = true" class="hover:text-navyBlue-600 transition flex items-center gap-1.5 font-medium">Book Transport</a>
-                <a href="#collection-section" class="hover:text-navyBlue-600 font-semibold text-navyBlue-600 transition">Rent Private Villas</a>
-                <a href="#popular" class="hover:text-navyBlue-600 transition">Popular Destinations</a>
-                <a href="agentportal.html" target="_blank" class="inline-flex items-center gap-2 px-5 py-3 rounded-full bg-navyBlue-900 text-dark blue text-sm font-medium hover:bg-navyBlue-800 transition-all shadow-md">
-    <i data-lucide="users" class="w-4 h-4 text-amber-400"></i>
-    <span>Agent Portal</span>
-</a>
+<nav class="hidden lg:flex items-center space-x-8 text-sm font-medium text-gray-600">
+
+    <a href="#hero"
+       class="hover:text-navyBlue-600 transition">
+        Home
+    </a>
+
+    <a href="#"
+       @click.prevent="bookingModalOpen = true"
+       class="hover:text-navyBlue-600 transition flex items-center gap-1.5">
+        Book Transport
+    </a>
+
+    <a href="#collection-section"
+       class="hover:text-navyBlue-600 transition font-semibold text-navyBlue-600">
+        Rent Private Villas
+    </a>
+
+    <a href="#popular"
+       class="hover:text-navyBlue-600 transition">
+        Popular Destinations
+    </a>
+
+    <a href="agentportal.html"
+       target="_blank"
+       rel="noopener noreferrer"
+       class="inline-flex items-center gap-2 px-5 py-3 rounded-full bg-navyBlue-900 text-white text-sm font-medium hover:bg-navyBlue-800 transition-all shadow-md">
+
+        <i data-lucide="users"
+           class="w-4 h-4 text-amber-400"></i>
+
+        Agent Portal
+    </a>
+
+</nav>
                 
                 <!-- Discover Dropdown Switcher -->
                 <div class="relative">
