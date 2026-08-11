@@ -1,0 +1,3275 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0"
+>
+
+<title>
+SJ Luxury Travel | Agent Portal
+</title>
+
+
+<style>
+
+/* =====================================================
+   GLOBAL
+   ===================================================== */
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+
+  margin: 0;
+
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+
+  background:
+    #f5f7fb;
+
+  color:
+    #172033;
+
+}
+
+
+/* =====================================================
+   LOGIN PAGE
+   ===================================================== */
+
+.login-page {
+
+  min-height: 100vh;
+
+  display:
+    flex;
+
+  align-items:
+    center;
+
+  justify-content:
+    center;
+
+  padding:
+    30px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #071a33,
+      #0d3157
+    );
+
+}
+
+
+.login-card {
+
+  width:
+    100%;
+
+  max-width:
+    460px;
+
+  background:
+    white;
+
+  border-radius:
+    22px;
+
+  padding:
+    40px;
+
+  box-shadow:
+    0 25px 70px
+    rgba(
+      0,
+      0,
+      0,
+      .25
+    );
+
+}
+
+
+.logo {
+
+  text-align:
+    center;
+
+  margin-bottom:
+    25px;
+
+}
+
+
+.logo h1 {
+
+  margin:
+    0;
+
+  font-size:
+    25px;
+
+  color:
+    #0b3156;
+
+}
+
+
+.logo p {
+
+  margin-top:
+    7px;
+
+  color:
+    #777;
+
+}
+
+
+.form-group {
+
+  margin-bottom:
+    18px;
+
+}
+
+
+.form-group label {
+
+  display:
+    block;
+
+  font-weight:
+    600;
+
+  margin-bottom:
+    7px;
+
+}
+
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+
+  width:
+    100%;
+
+  padding:
+    13px 14px;
+
+  border:
+    1px solid #d8dee8;
+
+  border-radius:
+    10px;
+
+  font-size:
+    14px;
+
+  outline:
+    none;
+
+}
+
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+
+  border-color:
+    #0b5c91;
+
+}
+
+
+.btn {
+
+  border:
+    none;
+
+  border-radius:
+    10px;
+
+  padding:
+    13px 20px;
+
+  font-weight:
+    700;
+
+  cursor:
+    pointer;
+
+  transition:
+    .2s;
+
+}
+
+
+.btn-primary {
+
+  width:
+    100%;
+
+  background:
+    #0b3156;
+
+  color:
+    white;
+
+}
+
+
+.btn-primary:hover {
+
+  background:
+    #124c7c;
+
+}
+
+
+.btn-secondary {
+
+  background:
+    #edf2f7;
+
+  color:
+    #172033;
+
+}
+
+
+.btn-danger {
+
+  background:
+    #c0392b;
+
+  color:
+    white;
+
+}
+
+
+.btn-success {
+
+  background:
+    #16834d;
+
+  color:
+    white;
+
+}
+
+
+.switch-link {
+
+  text-align:
+    center;
+
+  margin-top:
+    20px;
+
+}
+
+
+.switch-link a {
+
+  color:
+    #0b5c91;
+
+  font-weight:
+    bold;
+
+  cursor:
+    pointer;
+
+}
+
+
+.hidden {
+
+  display:
+    none !important;
+
+}
+
+
+/* =====================================================
+   DASHBOARD
+   ===================================================== */
+
+.dashboard {
+
+  min-height:
+    100vh;
+
+}
+
+
+.topbar {
+
+  background:
+    #071a33;
+
+  color:
+    white;
+
+  padding:
+    16px 25px;
+
+  display:
+    flex;
+
+  justify-content:
+    space-between;
+
+  align-items:
+    center;
+
+  gap:
+    20px;
+
+}
+
+
+.topbar-brand {
+
+  font-size:
+    20px;
+
+  font-weight:
+    800;
+
+}
+
+
+.user-area {
+
+  display:
+    flex;
+
+  align-items:
+    center;
+
+  gap:
+    15px;
+
+}
+
+
+.user-badge {
+
+  background:
+    rgba(
+      255,
+      255,
+      255,
+      .12
+    );
+
+  padding:
+    8px 12px;
+
+  border-radius:
+    8px;
+
+}
+
+
+.dashboard-container {
+
+  max-width:
+    1400px;
+
+  margin:
+    auto;
+
+  padding:
+    30px;
+
+}
+
+
+/* =====================================================
+   CARDS
+   ===================================================== */
+
+.stats {
+
+  display:
+    grid;
+
+  grid-template-columns:
+    repeat(
+      auto-fit,
+      minmax(
+        160px,
+        1fr
+      )
+    );
+
+  gap:
+    18px;
+
+  margin-bottom:
+    25px;
+
+}
+
+
+.stat-card {
+
+  background:
+    white;
+
+  border-radius:
+    15px;
+
+  padding:
+    22px;
+
+  box-shadow:
+    0 5px 20px
+    rgba(
+      0,
+      0,
+      0,
+      .06
+    );
+
+}
+
+
+.stat-card h3 {
+
+  margin:
+    0;
+
+  font-size:
+    30px;
+
+}
+
+
+.stat-card p {
+
+  color:
+    #777;
+
+  margin:
+    7px 0 0;
+
+}
+
+
+/* =====================================================
+   PANELS
+   ===================================================== */
+
+.panel {
+
+  background:
+    white;
+
+  border-radius:
+    16px;
+
+  padding:
+    25px;
+
+  margin-bottom:
+    25px;
+
+  box-shadow:
+    0 5px 20px
+    rgba(
+      0,
+      0,
+      0,
+      .05
+    );
+
+}
+
+
+.panel-header {
+
+  display:
+    flex;
+
+  justify-content:
+    space-between;
+
+  align-items:
+    center;
+
+  gap:
+    15px;
+
+  margin-bottom:
+    20px;
+
+}
+
+
+.panel-header h2 {
+
+  margin:
+    0;
+
+}
+
+
+/* =====================================================
+   TABLE
+   ===================================================== */
+
+.table-wrapper {
+
+  overflow-x:
+    auto;
+
+}
+
+
+table {
+
+  width:
+    100%;
+
+  border-collapse:
+    collapse;
+
+  min-width:
+    950px;
+
+}
+
+
+th {
+
+  background:
+    #f1f5f9;
+
+  text-align:
+    left;
+
+  padding:
+    13px;
+
+  font-size:
+    12px;
+
+  text-transform:
+    uppercase;
+
+}
+
+
+td {
+
+  padding:
+    13px;
+
+  border-bottom:
+    1px solid #edf0f4;
+
+  font-size:
+    14px;
+
+}
+
+
+.stage {
+
+  display:
+    inline-block;
+
+  padding:
+    6px 9px;
+
+  border-radius:
+    20px;
+
+  font-size:
+    11px;
+
+  font-weight:
+    700;
+
+  background:
+    #e8f0f8;
+
+  color:
+    #174d75;
+
+}
+
+
+/* =====================================================
+   FUNNEL
+   ===================================================== */
+
+.funnel {
+
+  display:
+    grid;
+
+  grid-template-columns:
+    repeat(
+      7,
+      1fr
+    );
+
+  gap:
+    8px;
+
+  overflow-x:
+    auto;
+
+}
+
+
+.funnel-step {
+
+  min-width:
+    120px;
+
+  padding:
+    15px;
+
+  text-align:
+    center;
+
+  background:
+    #edf2f7;
+
+  border-radius:
+    10px;
+
+}
+
+
+.funnel-step.active {
+
+  background:
+    #0b3156;
+
+  color:
+    white;
+
+}
+
+
+.funnel-step span {
+
+  display:
+    block;
+
+  font-size:
+    25px;
+
+  font-weight:
+    800;
+
+}
+
+
+/* =====================================================
+   MODAL
+   ===================================================== */
+
+.modal {
+
+  position:
+    fixed;
+
+  inset:
+    0;
+
+  background:
+    rgba(
+      0,
+      0,
+      0,
+      .6
+    );
+
+  display:
+    flex;
+
+  align-items:
+    center;
+
+  justify-content:
+    center;
+
+  padding:
+    20px;
+
+  z-index:
+    999;
+
+}
+
+
+.modal-content {
+
+  background:
+    white;
+
+  width:
+    100%;
+
+  max-width:
+    650px;
+
+  max-height:
+    90vh;
+
+  overflow-y:
+    auto;
+
+  border-radius:
+    18px;
+
+  padding:
+    30px;
+
+}
+
+
+.modal-header {
+
+  display:
+    flex;
+
+  justify-content:
+    space-between;
+
+  align-items:
+    center;
+
+  margin-bottom:
+    20px;
+
+}
+
+
+.close {
+
+  border:
+    none;
+
+  background:
+    transparent;
+
+  font-size:
+    28px;
+
+  cursor:
+    pointer;
+
+}
+
+
+/* =====================================================
+   MOBILE
+   ===================================================== */
+
+@media (
+  max-width: 700px
+) {
+
+  .login-card {
+
+    padding:
+      25px;
+
+  }
+
+  .dashboard-container {
+
+    padding:
+      15px;
+
+  }
+
+  .topbar {
+
+    flex-direction:
+      column;
+
+    align-items:
+      flex-start;
+
+  }
+
+  .funnel {
+
+    grid-template-columns:
+      repeat(
+        7,
+        120px
+      );
+
+  }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- ====================================================
+     LOGIN
+===================================================== -->
+
+<section
+  id="loginPage"
+  class="login-page"
+>
+
+  <div class="login-card">
+
+    <div class="logo">
+
+      <h1>
+        SJ LUXURY TRAVEL
+      </h1>
+
+      <p>
+        Agent & Partner Portal
+      </p>
+
+    </div>
+
+
+    <!-- LOGIN -->
+
+    <div id="loginForm">
+
+      <div class="form-group">
+
+        <label>
+          Referral Code or Phone Number
+        </label>
+
+        <input
+          id="loginIdentifier"
+          type="text"
+          placeholder="SJ-AG-1234 or 0712345678"
+        >
+
+      </div>
+
+
+      <button
+        class="btn btn-primary"
+        onclick="login()"
+      >
+
+        LOGIN
+
+      </button>
+
+
+      <div class="switch-link">
+
+        Don't have an agent account?
+
+        <br>
+
+        <a
+          onclick="showRegister()"
+        >
+          Become an SJ Luxury Travel Agent
+        </a>
+
+      </div>
+
+
+      <p
+        id="loginMessage"
+        style="
+          text-align:center;
+          color:#c0392b;
+          margin-top:15px;
+        "
+      ></p>
+
+    </div>
+
+
+    <!-- REGISTER -->
+
+    <div
+      id="registerForm"
+      class="hidden"
+    >
+
+      <h2>
+        Become an Agent
+      </h2>
+
+      <p>
+        Join the SJ Luxury Travel agent network.
+      </p>
+
+
+      <div class="form-group">
+
+        <label>
+          Full Name
+        </label>
+
+        <input
+          id="registerName"
+          type="text"
+          placeholder="Full name"
+        >
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label>
+          Phone Number
+        </label>
+
+        <input
+          id="registerPhone"
+          type="text"
+          placeholder="0712345678"
+        >
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label>
+          Email
+        </label>
+
+        <input
+          id="registerEmail"
+          type="email"
+          placeholder="email@example.com"
+        >
+
+      </div>
+
+
+      <button
+        class="btn btn-primary"
+        onclick="registerAgent()"
+      >
+
+        CREATE AGENT ACCOUNT
+
+      </button>
+
+
+      <div class="switch-link">
+
+        Already registered?
+
+        <br>
+
+        <a
+          onclick="showLogin()"
+        >
+          Return to Login
+        </a>
+
+      </div>
+
+
+      <p
+        id="registerMessage"
+        style="
+          text-align:center;
+          margin-top:15px;
+        "
+      ></p>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ====================================================
+     DASHBOARD
+===================================================== -->
+
+<section
+  id="dashboardPage"
+  class="dashboard hidden"
+>
+
+  <header class="topbar">
+
+    <div class="topbar-brand">
+
+      SJ LUXURY TRAVEL
+
+    </div>
+
+
+    <div class="user-area">
+
+      <div
+        id="userBadge"
+        class="user-badge"
+      ></div>
+
+      <button
+        class="btn btn-secondary"
+        onclick="logout()"
+      >
+
+        Logout
+
+      </button>
+
+    </div>
+
+  </header>
+
+
+  <main
+    class="dashboard-container"
+  >
+
+
+    <!-- STATS -->
+
+    <div
+      class="stats"
+      id="statsContainer"
+    >
+
+      <div class="stat-card">
+
+        <h3 id="totalClients">
+          0
+        </h3>
+
+        <p>
+          Total Customers
+        </p>
+
+      </div>
+
+
+      <div class="stat-card">
+
+        <h3 id="leadCount">
+          0
+        </h3>
+
+        <p>
+          Lead Qualification
+        </p>
+
+      </div>
+
+
+      <div class="stat-card">
+
+        <h3 id="consultationCount">
+          0
+        </h3>
+
+        <p>
+          Consultation
+        </p>
+
+      </div>
+
+
+      <div class="stat-card">
+
+        <h3 id="quotationCount">
+          0
+        </h3>
+
+        <p>
+          Quotations
+        </p>
+
+      </div>
+
+
+      <div class="stat-card">
+
+        <h3 id="bookingCount">
+          0
+        </h3>
+
+        <p>
+          Confirmed Bookings
+        </p>
+
+      </div>
+
+    </div>
+
+
+    <!-- ADMIN / AGENT ACTIONS -->
+
+    <div class="panel">
+
+      <div class="panel-header">
+
+        <h2 id="dashboardTitle">
+          My Customers
+        </h2>
+
+
+        <div>
+
+          <button
+            id="addClientButton"
+            class="btn btn-primary"
+            onclick="openClientModal()"
+          >
+
+            + Add Customer
+
+          </button>
+
+          <button
+            class="btn btn-secondary"
+            onclick="loadDashboard()"
+          >
+
+            Refresh
+
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <!-- SEARCH -->
+
+      <div
+        style="
+          margin-bottom:20px;
+        "
+      >
+
+        <input
+          id="searchInput"
+          type="text"
+          placeholder="Search customers..."
+          onkeyup="searchCustomers()"
+          style="
+            width:100%;
+            padding:13px;
+            border:1px solid #ddd;
+            border-radius:10px;
+          "
+        >
+
+      </div>
+
+
+      <!-- CUSTOMER TABLE -->
+
+      <div class="table-wrapper">
+
+        <table>
+
+          <thead>
+
+            <tr>
+
+              <th>
+                Client ID
+              </th>
+
+              <th>
+                Customer
+              </th>
+
+              <th>
+                Phone
+              </th>
+
+              <th>
+                Service
+              </th>
+
+              <th>
+                Destination
+              </th>
+
+              <th>
+                Agent
+              </th>
+
+              <th>
+                Funnel Stage
+              </th>
+
+              <th>
+                Action
+              </th>
+
+            </tr>
+
+          </thead>
+
+
+          <tbody
+            id="clientTable"
+          >
+
+          </tbody>
+
+        </table>
+
+      </div>
+
+    </div>
+
+
+    <!-- FUNNEL -->
+
+    <div class="panel">
+
+      <div class="panel-header">
+
+        <h2>
+          Customer Journey
+        </h2>
+
+      </div>
+
+
+      <div
+        class="funnel"
+        id="funnelContainer"
+      >
+
+      </div>
+
+    </div>
+
+
+    <!-- ADMIN AREA -->
+
+    <div
+      id="adminPanel"
+      class="panel hidden"
+    >
+
+      <div class="panel-header">
+
+        <h2>
+          Administration
+        </h2>
+
+      </div>
+
+
+      <p>
+        Administrator access allows you to manage
+        all agents and customer journeys.
+      </p>
+
+
+      <button
+        class="btn btn-secondary"
+        onclick="loadAgents()"
+      >
+
+        Manage Agents
+
+      </button>
+
+    </div>
+
+
+  </main>
+
+</section>
+
+
+<!-- ====================================================
+     ADD CUSTOMER MODAL
+===================================================== -->
+
+<div
+  id="clientModal"
+  class="modal hidden"
+>
+
+  <div class="modal-content">
+
+    <div class="modal-header">
+
+      <h2>
+        Add New Customer
+      </h2>
+
+      <button
+        class="close"
+        onclick="closeClientModal()"
+      >
+
+        &times;
+
+      </button>
+
+    </div>
+
+
+    <div class="form-group">
+
+      <label>
+        Customer Name *
+      </label>
+
+      <input
+        id="clientName"
+        type="text"
+      >
+
+    </div>
+
+
+    <div class="form-group">
+
+      <label>
+        Phone Number *
+      </label>
+
+      <input
+        id="clientPhone"
+        type="text"
+      >
+
+    </div>
+
+
+    <div class="form-group">
+
+      <label>
+        Email
+      </label>
+
+      <input
+        id="clientEmail"
+        type="email"
+      >
+
+    </div>
+
+
+    <div class="form-group">
+
+      <label>
+        Service *
+      </label>
+
+      <select
+        id="clientService"
+      >
+
+        <option value="">
+          Select Service
+        </option>
+
+        <option>
+          Luxury Safari
+        </option>
+
+        <option>
+          Beach Holiday
+        </option>
+
+        <option>
+          Private Villa
+        </option>
+
+        <option>
+          Honeymoon
+        </option>
+
+        <option>
+          Family Holiday
+        </option>
+
+        <option>
+          Luxury Travel
+        </option>
+
+        <option>
+          Corporate Travel
+        </option>
+
+        <option>
+          Private Jet
+        </option>
+
+        <option>
+          Luxury Yacht
+        </option>
+
+        <option>
+          Airport Transfer
+        </option>
+
+        <option>
+          Custom Itinerary
+        </option>
+
+        <option>
+          Other
+        </option>
+
+      </select>
+
+    </div>
+
+
+    <div class="form-group">
+
+      <label>
+        Destination
+      </label>
+
+      <input
+        id="clientDestination"
+        type="text"
+        placeholder="Destination"
+      >
+
+    </div>
+
+
+    <div class="form-group">
+
+      <label>
+        Travel Date
+      </label>
+
+      <input
+        id="clientTravelDate"
+        type="date"
+      >
+
+    </div>
+
+
+    <div class="form-group">
+
+      <label>
+        Number of Travellers
+      </label>
+
+      <input
+        id="clientTravellers"
+        type="number"
+        min="1"
+      >
+
+    </div>
+
+
+    <div class="form-group">
+
+      <label>
+        Budget
+      </label>
+
+      <input
+        id="clientBudget"
+        type="text"
+        placeholder="Approximate budget"
+      >
+
+    </div>
+
+
+    <div class="form-group">
+
+      <label>
+        Special Requests
+      </label>
+
+      <textarea
+        id="clientSpecialRequests"
+        rows="4"
+      ></textarea>
+
+    </div>
+
+
+    <div class="form-group">
+
+      <label>
+        Notes
+      </label>
+
+      <textarea
+        id="clientNotes"
+        rows="3"
+      ></textarea>
+
+    </div>
+
+
+    <button
+      class="btn btn-primary"
+      onclick="saveClient()"
+    >
+
+      SAVE CUSTOMER
+
+    </button>
+
+
+    <p
+      id="clientMessage"
+      style="
+        text-align:center;
+        margin-top:15px;
+      "
+    ></p>
+
+  </div>
+
+</div>
+
+
+<script>
+
+/* =====================================================
+   CONFIGURATION
+   ===================================================== */
+
+
+/*
+ * IMPORTANT:
+ *
+ * Replace this with your Apps Script Web App URL.
+ *
+ * Example:
+ *
+ * https://script.google.com/macros/s/XXXXXXXX/exec
+ */
+
+const API_URL =
+  'YOUR_APPS_SCRIPT_WEB_APP_URL';
+
+
+let session =
+  localStorage.getItem(
+    'sj_agent_session'
+  );
+
+
+let currentUser =
+  JSON.parse(
+    localStorage.getItem(
+      'sj_agent_user'
+    ) || 'null'
+  );
+
+
+let clients =
+  [];
+
+
+/* =====================================================
+   API CALL
+   ===================================================== */
+
+/*
+ * The website communicates with Apps Script
+ * through the deployed Web App.
+ */
+
+function api(
+  action,
+  params = {}
+) {
+
+  return new Promise(
+    function(resolve, reject) {
+
+      const query =
+        new URLSearchParams();
+
+
+      query.append(
+        'action',
+        action
+      );
+
+
+      Object.keys(
+        params
+      ).forEach(
+        function(key) {
+
+          query.append(
+
+            key,
+
+            params[key] === undefined
+              ? ''
+              : params[key]
+
+          );
+
+        }
+      );
+
+
+      /*
+       * JSONP-style callback.
+       */
+
+      const callbackName =
+        'sjCallback_' +
+        Date.now();
+
+
+      query.append(
+        'callback',
+        callbackName
+      );
+
+
+      const script =
+        document.createElement(
+          'script'
+        );
+
+
+      window[callbackName] =
+        function(data) {
+
+          delete window[
+            callbackName
+          ];
+
+
+          script.remove();
+
+
+          resolve(data);
+
+        };
+
+
+      script.onerror =
+        function() {
+
+          delete window[
+            callbackName
+          ];
+
+
+          script.remove();
+
+
+          reject(
+            new Error(
+              'Unable to connect to SJ Luxury Travel backend.'
+            )
+          );
+
+        };
+
+
+      script.src =
+        API_URL +
+        '?' +
+        query.toString();
+
+
+      document.body.appendChild(
+        script
+      );
+
+    }
+  );
+
+}
+
+
+/* =====================================================
+   LOGIN
+   ===================================================== */
+
+async function login() {
+
+  const identifier =
+    document
+      .getElementById(
+        'loginIdentifier'
+      )
+      .value
+      .trim();
+
+
+  const message =
+    document
+      .getElementById(
+        'loginMessage'
+      );
+
+
+  if (!identifier) {
+
+    message.textContent =
+      'Please enter your referral code or phone number.';
+
+    return;
+
+  }
+
+
+  message.style.color =
+    '#555';
+
+
+  message.textContent =
+    'Signing in...';
+
+
+  try {
+
+    const result =
+      await api(
+        'login',
+        {
+          identifier:
+            identifier
+        }
+      );
+
+
+    if (
+      result.status !==
+      'success'
+    ) {
+
+      message.style.color =
+        '#c0392b';
+
+      message.textContent =
+        result.message ||
+        'Login failed.';
+
+      return;
+
+    }
+
+
+    session =
+      result.token;
+
+
+    currentUser = {
+
+      role:
+        result.role,
+
+      name:
+        result.name,
+
+      code:
+        result.code,
+
+      phone:
+        result.phone || ''
+
+    };
+
+
+    localStorage.setItem(
+
+      'sj_agent_session',
+
+      session
+
+    );
+
+
+    localStorage.setItem(
+
+      'sj_agent_user',
+
+      JSON.stringify(
+        currentUser
+      )
+
+    );
+
+
+    showDashboard();
+
+
+  } catch (error) {
+
+    message.style.color =
+      '#c0392b';
+
+    message.textContent =
+      error.message;
+
+  }
+
+}
+
+
+/* =====================================================
+   REGISTER
+   ===================================================== */
+
+async function registerAgent() {
+
+  const name =
+    document
+      .getElementById(
+        'registerName'
+      )
+      .value
+      .trim();
+
+
+  const phone =
+    document
+      .getElementById(
+        'registerPhone'
+      )
+      .value
+      .trim();
+
+
+  const email =
+    document
+      .getElementById(
+        'registerEmail'
+      )
+      .value
+      .trim();
+
+
+  const message =
+    document
+      .getElementById(
+        'registerMessage'
+      );
+
+
+  if (!name || !phone) {
+
+    message.style.color =
+      '#c0392b';
+
+    message.textContent =
+      'Name and phone number are required.';
+
+    return;
+
+  }
+
+
+  message.style.color =
+    '#555';
+
+  message.textContent =
+    'Creating your agent account...';
+
+
+  try {
+
+    const result =
+      await api(
+        'register',
+        {
+
+          name:
+            name,
+
+          phone:
+            phone,
+
+          email:
+            email
+
+        }
+      );
+
+
+    if (
+      result.status !==
+      'success'
+    ) {
+
+      message.style.color =
+        '#c0392b';
+
+      message.textContent =
+        result.message;
+
+      return;
+
+    }
+
+
+    message.style.color =
+      '#16834d';
+
+
+    message.innerHTML =
+
+      'Account created successfully!<br><br>' +
+
+      '<strong>Your Referral Code:</strong><br>' +
+
+      '<span style="font-size:25px;">' +
+
+      result.code +
+
+      '</span><br><br>' +
+
+      'Keep this code safe. You can use it to access your agent portal.';
+
+
+    document
+      .getElementById(
+        'loginIdentifier'
+      )
+      .value =
+      result.code;
+
+
+    setTimeout(
+      showLogin,
+      4000
+    );
+
+
+  } catch (error) {
+
+    message.style.color =
+      '#c0392b';
+
+    message.textContent =
+      error.message;
+
+  }
+
+}
+
+
+/* =====================================================
+   SHOW LOGIN
+   ===================================================== */
+
+function showLogin() {
+
+  document
+    .getElementById(
+      'loginForm'
+    )
+    .classList
+    .remove(
+      'hidden'
+    );
+
+
+  document
+    .getElementById(
+      'registerForm'
+    )
+    .classList
+    .add(
+      'hidden'
+    );
+
+}
+
+
+/* =====================================================
+   SHOW REGISTER
+   ===================================================== */
+
+function showRegister() {
+
+  document
+    .getElementById(
+      'loginForm'
+    )
+    .classList
+    .add(
+      'hidden'
+    );
+
+
+  document
+    .getElementById(
+      'registerForm'
+    )
+    .classList
+    .remove(
+      'hidden'
+    );
+
+}
+
+
+/* =====================================================
+   SHOW DASHBOARD
+   ===================================================== */
+
+function showDashboard() {
+
+  document
+    .getElementById(
+      'loginPage'
+    )
+    .classList
+    .add(
+      'hidden'
+    );
+
+
+  document
+    .getElementById(
+      'dashboardPage'
+    )
+    .classList
+    .remove(
+      'hidden'
+    );
+
+
+  document
+    .getElementById(
+      'userBadge'
+    )
+    .textContent =
+
+      currentUser.name +
+
+      ' • ' +
+
+      currentUser.code;
+
+
+  if (
+    currentUser.role ===
+    'admin'
+  ) {
+
+    document
+      .getElementById(
+        'dashboardTitle'
+      )
+      .textContent =
+      'All Customers';
+
+
+    document
+      .getElementById(
+        'addClientButton'
+      )
+      .classList
+      .add(
+        'hidden'
+      );
+
+
+    document
+      .getElementById(
+        'adminPanel'
+      )
+      .classList
+      .remove(
+        'hidden'
+      );
+
+  } else {
+
+    document
+      .getElementById(
+        'dashboardTitle'
+      )
+      .textContent =
+      'My Customers';
+
+
+    document
+      .getElementById(
+        'addClientButton'
+      )
+      .classList
+      .remove(
+        'hidden'
+      );
+
+
+    document
+      .getElementById(
+        'adminPanel'
+      )
+      .classList
+      .add(
+        'hidden'
+      );
+
+  }
+
+
+  loadDashboard();
+
+}
+
+
+/* =====================================================
+   LOAD DASHBOARD
+   ===================================================== */
+
+async function loadDashboard() {
+
+  if (!session) {
+
+    return;
+
+  }
+
+
+  try {
+
+    const result =
+      await api(
+        'clients',
+        {
+          token:
+            session
+        }
+      );
+
+
+    if (
+      result.status ===
+      'unauthorized'
+    ) {
+
+      logout();
+
+      return;
+
+    }
+
+
+    if (
+      result.status !==
+      'success'
+    ) {
+
+      alert(
+        result.message ||
+        'Unable to load customers.'
+      );
+
+      return;
+
+    }
+
+
+    clients =
+      result.clients || [];
+
+
+    renderClients(
+      clients
+    );
+
+
+    loadStats();
+
+
+    renderFunnel();
+
+
+  } catch (error) {
+
+    console.error(
+      error
+    );
+
+  }
+
+}
+
+
+/* =====================================================
+   RENDER CLIENTS
+   ===================================================== */
+
+function renderClients(
+  list
+) {
+
+  const tbody =
+    document
+      .getElementById(
+        'clientTable'
+      );
+
+
+  tbody.innerHTML =
+    '';
+
+
+  if (
+    !list.length
+  ) {
+
+    tbody.innerHTML = `
+
+      <tr>
+
+        <td
+          colspan="8"
+          style="text-align:center;padding:40px;"
+        >
+
+          No customers found.
+
+        </td>
+
+      </tr>
+
+    `;
+
+    return;
+
+  }
+
+
+  list.forEach(
+    function(client) {
+
+      let action = '';
+
+
+      if (
+        currentUser.role ===
+        'admin'
+      ) {
+
+        action = `
+
+          <select
+            onchange="changeStage(
+              ${client.rowId},
+              this.value
+            )"
+          >
+
+            ${buildStageOptions(
+              client.stage
+            )}
+
+          </select>
+
+        `;
+
+      } else {
+
+        action = `
+
+          <span
+            style="color:#777;font-size:12px;"
+          >
+
+            Progress tracked by SJ Luxury Travel
+
+          </span>
+
+        `;
+
+      }
+
+
+      tbody.innerHTML += `
+
+        <tr>
+
+          <td>
+            <strong>
+              ${escapeHtml(
+                client.id
+              )}
+            </strong>
+          </td>
+
+
+          <td>
+
+            <strong>
+              ${escapeHtml(
+                client.name
+              )}
+            </strong>
+
+          </td>
+
+
+          <td>
+            ${escapeHtml(
+              client.phone
+            )}
+          </td>
+
+
+          <td>
+            ${escapeHtml(
+              client.service
+            )}
+          </td>
+
+
+          <td>
+            ${escapeHtml(
+              client.destination ||
+              '-'
+            )}
+          </td>
+
+
+          <td>
+            ${escapeHtml(
+              client.agentCode
+            )}
+          </td>
+
+
+          <td>
+
+            <span class="stage">
+
+              ${escapeHtml(
+                client.stage
+              )}
+
+            </span>
+
+          </td>
+
+
+          <td>
+
+            ${action}
+
+          </td>
+
+        </tr>
+
+      `;
+
+    }
+  );
+
+}
+
+
+/* =====================================================
+   BUILD FUNNEL OPTIONS
+   ===================================================== */
+
+function buildStageOptions(
+  selected
+) {
+
+  const stages = [
+
+    'LEAD QUALIFICATION',
+
+    'CONSULTATION',
+
+    'BESPOKE ITINERARY',
+
+    'QUOTATION',
+
+    'CLIENT APPROVAL',
+
+    'DEPOSIT PAYMENT',
+
+    'BOOKING CONFIRMATION'
+
+  ];
+
+
+  return stages.map(
+    function(stage) {
+
+      return `
+
+        <option
+          value="${stage}"
+          ${stage === selected
+            ? 'selected'
+            : ''}
+        >
+
+          ${stage}
+
+        </option>
+
+      `;
+
+    }
+  ).join('');
+
+}
+
+
+/* =====================================================
+   CHANGE FUNNEL STAGE
+   ===================================================== */
+
+async function changeStage(
+  rowId,
+  stage
+) {
+
+  if (
+    currentUser.role !==
+    'admin'
+  ) {
+
+    return;
+
+  }
+
+
+  const confirmed =
+    confirm(
+
+      'Move this customer to:\n\n' +
+
+      stage +
+
+      '?'
+
+    );
+
+
+  if (!confirmed) {
+
+    loadDashboard();
+
+    return;
+
+  }
+
+
+  try {
+
+    const result =
+      await api(
+        'updateStage',
+        {
+
+          token:
+            session,
+
+          rowId:
+            rowId,
+
+          stage:
+            stage
+
+        }
+      );
+
+
+    if (
+      result.status !==
+      'success'
+    ) {
+
+      alert(
+        result.message
+      );
+
+      return;
+
+    }
+
+
+    await loadDashboard();
+
+
+  } catch (error) {
+
+    alert(
+      error.message
+    );
+
+  }
+
+}
+
+
+/* =====================================================
+   LOAD STATS
+   ===================================================== */
+
+async function loadStats() {
+
+  const result =
+    await api(
+      'dashboard',
+      {
+        token:
+          session
+      }
+    );
+
+
+  if (
+    result.status !==
+    'success'
+  ) {
+
+    return;
+
+  }
+
+
+  const stats =
+    result.stats;
+
+
+  document
+    .getElementById(
+      'totalClients'
+    )
+    .textContent =
+    stats.total;
+
+
+  document
+    .getElementById(
+      'leadCount'
+    )
+    .textContent =
+    stats.leadQualification;
+
+
+  document
+    .getElementById(
+      'consultationCount'
+    )
+    .textContent =
+    stats.consultation;
+
+
+  document
+    .getElementById(
+      'quotationCount'
+    )
+    .textContent =
+    stats.quotation;
+
+
+  document
+    .getElementById(
+      'bookingCount'
+    )
+    .textContent =
+    stats.bookingConfirmation;
+
+}
+
+
+/* =====================================================
+   FUNNEL
+   ===================================================== */
+
+function renderFunnel() {
+
+  const stages = [
+
+    'LEAD QUALIFICATION',
+
+    'CONSULTATION',
+
+    'BESPOKE ITINERARY',
+
+    'QUOTATION',
+
+    'CLIENT APPROVAL',
+
+    'DEPOSIT PAYMENT',
+
+    'BOOKING CONFIRMATION'
+
+  ];
+
+
+  const container =
+    document
+      .getElementById(
+        'funnelContainer'
+      );
+
+
+  container.innerHTML =
+    '';
+
+
+  stages.forEach(
+    function(stage) {
+
+      const count =
+        clients.filter(
+          function(client) {
+
+            return (
+              client.stage ===
+              stage
+            );
+
+          }
+        ).length;
+
+
+      container.innerHTML += `
+
+        <div class="funnel-step">
+
+          <span>
+            ${count}
+          </span>
+
+          ${stage}
+
+        </div>
+
+      `;
+
+    }
+  );
+
+}
+
+
+/* =====================================================
+   ADD CLIENT MODAL
+   ===================================================== */
+
+function openClientModal() {
+
+  document
+    .getElementById(
+      'clientModal'
+    )
+    .classList
+    .remove(
+      'hidden'
+    );
+
+}
+
+
+function closeClientModal() {
+
+  document
+    .getElementById(
+      'clientModal'
+    )
+    .classList
+    .add(
+      'hidden'
+    );
+
+}
+
+
+/* =====================================================
+   SAVE CLIENT
+   ===================================================== */
+
+async function saveClient() {
+
+  const message =
+    document
+      .getElementById(
+        'clientMessage'
+      );
+
+
+  const data = {
+
+    name:
+      document
+        .getElementById(
+          'clientName'
+        )
+        .value
+        .trim(),
+
+    phone:
+      document
+        .getElementById(
+          'clientPhone'
+        )
+        .value
+        .trim(),
+
+    email:
+      document
+        .getElementById(
+          'clientEmail'
+        )
+        .value
+        .trim(),
+
+    service:
+      document
+        .getElementById(
+          'clientService'
+        )
+        .value,
+
+    destination:
+      document
+        .getElementById(
+          'clientDestination'
+        )
+        .value
+        .trim(),
+
+    travelDate:
+      document
+        .getElementById(
+          'clientTravelDate'
+        )
+        .value,
+
+    travellers:
+      document
+        .getElementById(
+          'clientTravellers'
+        )
+        .value,
+
+    budget:
+      document
+        .getElementById(
+          'clientBudget'
+        )
+        .value
+        .trim(),
+
+    specialRequests:
+      document
+        .getElementById(
+          'clientSpecialRequests'
+        )
+        .value
+        .trim(),
+
+    notes:
+      document
+        .getElementById(
+          'clientNotes'
+        )
+        .value
+        .trim()
+
+  };
+
+
+  if (
+    !data.name ||
+    !data.phone ||
+    !data.service
+  ) {
+
+    message.style.color =
+      '#c0392b';
+
+    message.textContent =
+      'Please fill in the required fields.';
+
+    return;
+
+  }
+
+
+  message.style.color =
+    '#555';
+
+  message.textContent =
+    'Saving customer...';
+
+
+  try {
+
+    const result =
+      await api(
+        'addClient',
+        {
+
+          token:
+            session,
+
+          name:
+            data.name,
+
+          phone:
+            data.phone,
+
+          email:
+            data.email,
+
+          service:
+            data.service,
+
+          destination:
+            data.destination,
+
+          travelDate:
+            data.travelDate,
+
+          travellers:
+            data.travellers,
+
+          budget:
+            data.budget,
+
+          specialRequests:
+            data.specialRequests,
+
+          notes:
+            data.notes
+
+        }
+      );
+
+
+    if (
+      result.status !==
+      'success'
+    ) {
+
+      message.style.color =
+        '#c0392b';
+
+      message.textContent =
+        result.message;
+
+      return;
+
+    }
+
+
+    message.style.color =
+      '#16834d';
+
+    message.textContent =
+      'Customer successfully added.';
+
+
+    setTimeout(
+      function() {
+
+        closeClientModal();
+
+        clearClientForm();
+
+        loadDashboard();
+
+      },
+      1000
+    );
+
+
+  } catch (error) {
+
+    message.style.color =
+      '#c0392b';
+
+    message.textContent =
+      error.message;
+
+  }
+
+}
+
+
+/* =====================================================
+   CLEAR CLIENT FORM
+   ===================================================== */
+
+function clearClientForm() {
+
+  const fields = [
+
+    'clientName',
+
+    'clientPhone',
+
+    'clientEmail',
+
+    'clientService',
+
+    'clientDestination',
+
+    'clientTravelDate',
+
+    'clientTravellers',
+
+    'clientBudget',
+
+    'clientSpecialRequests',
+
+    'clientNotes'
+
+  ];
+
+
+  fields.forEach(
+    function(id) {
+
+      const element =
+        document
+          .getElementById(
+            id
+          );
+
+
+      if (
+        element
+      ) {
+
+        element.value =
+          '';
+
+      }
+
+    }
+  );
+
+}
+
+
+/* =====================================================
+   SEARCH
+   ===================================================== */
+
+let searchTimer;
+
+
+function searchCustomers() {
+
+  clearTimeout(
+    searchTimer
+  );
+
+
+  searchTimer =
+    setTimeout(
+      async function() {
+
+        const query =
+          document
+            .getElementById(
+              'searchInput'
+            )
+            .value
+            .trim();
+
+
+        if (!query) {
+
+          renderClients(
+            clients
+          );
+
+          return;
+
+        }
+
+
+        try {
+
+          const result =
+            await api(
+              'search',
+              {
+
+                token:
+                  session,
+
+                q:
+                  query
+
+              }
+            );
+
+
+          if (
+            result.status ===
+            'success'
+          ) {
+
+            renderClients(
+              result.clients
+            );
+
+          }
+
+        } catch (error) {
+
+          console.error(
+            error
+          );
+
+        }
+
+      },
+      300
+    );
+
+}
+
+
+/* =====================================================
+   ADMIN AGENTS
+   ===================================================== */
+
+async function loadAgents() {
+
+  if (
+    currentUser.role !==
+    'admin'
+  ) {
+
+    return;
+
+  }
+
+
+  try {
+
+    const result =
+      await api(
+        'agents',
+        {
+
+          token:
+            session
+
+        }
+      );
+
+
+    if (
+      result.status !==
+      'success'
+    ) {
+
+      alert(
+        result.message
+      );
+
+      return;
+
+    }
+
+
+    let output =
+      '';
+
+
+    result.agents
+      .forEach(
+        function(agent) {
+
+          output +=
+
+            agent.name +
+
+            ' | ' +
+
+            agent.code +
+
+            ' | ' +
+
+            agent.phone +
+
+            ' | ' +
+
+            agent.status +
+
+            '\n';
+
+        }
+      );
+
+
+    alert(
+      'REGISTERED AGENTS\n\n' +
+      output
+    );
+
+
+  } catch (error) {
+
+    alert(
+      error.message
+    );
+
+  }
+
+}
+
+
+/* =====================================================
+   LOGOUT
+   ===================================================== */
+
+function logout() {
+
+  localStorage.removeItem(
+    'sj_agent_session'
+  );
+
+
+  localStorage.removeItem(
+    'sj_agent_user'
+  );
+
+
+  session =
+    null;
+
+
+  currentUser =
+    null;
+
+
+  document
+    .getElementById(
+      'dashboardPage'
+    )
+    .classList
+    .add(
+      'hidden'
+    );
+
+
+  document
+    .getElementById(
+      'loginPage'
+    )
+    .classList
+    .remove(
+      'hidden'
+    );
+
+
+  showLogin();
+
+}
+
+
+/* =====================================================
+   SECURITY / HTML ESCAPE
+   ===================================================== */
+
+function escapeHtml(
+  value
+) {
+
+  return String(
+    value || ''
+  )
+  .replace(
+    /&/g,
+    '&amp;'
+  )
+  .replace(
+    /</g,
+    '&lt;'
+  )
+  .replace(
+    />/g,
+    '&gt;'
+  )
+  .replace(
+    /"/g,
+    '&quot;'
+  )
+  .replace(
+    /'/g,
+    '&#039;'
+  );
+
+}
+
+
+/* =====================================================
+   AUTO LOGIN
+   ===================================================== */
+
+window.addEventListener(
+  'load',
+  function() {
+
+    if (
+      session &&
+      currentUser
+    ) {
+
+      showDashboard();
+
+    }
+
+  }
+);
+
+</script>
+
+
+</body>
+
+</html>
