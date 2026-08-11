@@ -1,865 +1,706 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<meta
-  name="viewport"
-  content="width=device-width, initial-scale=1.0"
->
-
-<title>
-SJ Luxury Travel | Agent Portal
-</title>
-
+<title>SJ Luxury Travel | Agent Portal</title>
 
 <style>
-
-/* =====================================================
-   GLOBAL
-   ===================================================== */
-
 * {
   box-sizing: border-box;
 }
 
-body {
-
-  margin: 0;
-
-  font-family:
-    Arial,
-    Helvetica,
-    sans-serif;
-
-  background:
-    #f5f7fb;
-
-  color:
-    #172033;
-
+html {
+  scroll-behavior: smooth;
 }
 
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #f5f7fb;
+  color: #172033;
+}
 
-/* =====================================================
-   LOGIN PAGE
-   ===================================================== */
+/* =========================
+   GLOBAL
+========================= */
+
+button,
+input,
+select,
+textarea {
+  font-family: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.btn {
+  border: none;
+  border-radius: 10px;
+  padding: 12px 18px;
+  font-weight: 700;
+  transition: .2s ease;
+  cursor: pointer;
+}
+
+.btn:disabled {
+  opacity: .6;
+  cursor: not-allowed;
+}
+
+.btn-primary {
+  background: #0b3156;
+  color: #fff;
+}
+
+.btn-primary:hover {
+  background: #124c7c;
+}
+
+.btn-secondary {
+  background: #edf2f7;
+  color: #172033;
+}
+
+.btn-secondary:hover {
+  background: #dfe7ef;
+}
+
+.btn-success {
+  background: #16834d;
+  color: white;
+}
+
+.btn-danger {
+  background: #c0392b;
+  color: white;
+}
+
+.btn-small {
+  padding: 8px 12px;
+  font-size: 12px;
+}
+
+.form-group {
+  margin-bottom: 18px;
+}
+
+.form-group label {
+  display: block;
+  font-weight: 700;
+  margin-bottom: 7px;
+  font-size: 14px;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  padding: 13px 14px;
+  border: 1px solid #d8dee8;
+  border-radius: 10px;
+  font-size: 14px;
+  outline: none;
+  background: #fff;
+  color: #172033;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  border-color: #0b5c91;
+  box-shadow: 0 0 0 3px rgba(11, 92, 145, .08);
+}
+
+/* =========================
+   LOGIN
+========================= */
 
 .login-page {
-
   min-height: 100vh;
-
-  display:
-    flex;
-
-  align-items:
-    center;
-
-  justify-content:
-    center;
-
-  padding:
-    30px;
-
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 30px;
   background:
+    radial-gradient(
+      circle at top right,
+      rgba(37, 109, 155, .35),
+      transparent 35%
+    ),
     linear-gradient(
       135deg,
       #071a33,
       #0d3157
     );
-
 }
-
 
 .login-card {
-
-  width:
-    100%;
-
-  max-width:
-    460px;
-
-  background:
-    white;
-
-  border-radius:
-    22px;
-
-  padding:
-    40px;
-
-  box-shadow:
-    0 25px 70px
-    rgba(
-      0,
-      0,
-      0,
-      .25
-    );
-
+  width: 100%;
+  max-width: 470px;
+  background: white;
+  border-radius: 22px;
+  padding: 40px;
+  box-shadow: 0 25px 70px rgba(0,0,0,.25);
 }
-
 
 .logo {
-
-  text-align:
-    center;
-
-  margin-bottom:
-    25px;
-
+  text-align: center;
+  margin-bottom: 30px;
 }
 
+.logo-mark {
+  width: 62px;
+  height: 62px;
+  border-radius: 50%;
+  margin: 0 auto 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #0b3156;
+  color: white;
+  font-size: 25px;
+  font-weight: 900;
+}
 
 .logo h1 {
-
-  margin:
-    0;
-
-  font-size:
-    25px;
-
-  color:
-    #0b3156;
-
+  margin: 0;
+  font-size: 25px;
+  color: #0b3156;
+  letter-spacing: .5px;
 }
-
 
 .logo p {
-
-  margin-top:
-    7px;
-
-  color:
-    #777;
-
+  margin: 7px 0 0;
+  color: #777;
+  font-size: 14px;
 }
-
-
-.form-group {
-
-  margin-bottom:
-    18px;
-
-}
-
-
-.form-group label {
-
-  display:
-    block;
-
-  font-weight:
-    600;
-
-  margin-bottom:
-    7px;
-
-}
-
-
-.form-group input,
-.form-group select,
-.form-group textarea {
-
-  width:
-    100%;
-
-  padding:
-    13px 14px;
-
-  border:
-    1px solid #d8dee8;
-
-  border-radius:
-    10px;
-
-  font-size:
-    14px;
-
-  outline:
-    none;
-
-}
-
-
-.form-group input:focus,
-.form-group select:focus,
-.form-group textarea:focus {
-
-  border-color:
-    #0b5c91;
-
-}
-
-
-.btn {
-
-  border:
-    none;
-
-  border-radius:
-    10px;
-
-  padding:
-    13px 20px;
-
-  font-weight:
-    700;
-
-  cursor:
-    pointer;
-
-  transition:
-    .2s;
-
-}
-
-
-.btn-primary {
-
-  width:
-    100%;
-
-  background:
-    #0b3156;
-
-  color:
-    white;
-
-}
-
-
-.btn-primary:hover {
-
-  background:
-    #124c7c;
-
-}
-
-
-.btn-secondary {
-
-  background:
-    #edf2f7;
-
-  color:
-    #172033;
-
-}
-
-
-.btn-danger {
-
-  background:
-    #c0392b;
-
-  color:
-    white;
-
-}
-
-
-.btn-success {
-
-  background:
-    #16834d;
-
-  color:
-    white;
-
-}
-
 
 .switch-link {
-
-  text-align:
-    center;
-
-  margin-top:
-    20px;
-
+  text-align: center;
+  margin-top: 20px;
+  font-size: 14px;
+  line-height: 1.7;
 }
-
 
 .switch-link a {
-
-  color:
-    #0b5c91;
-
-  font-weight:
-    bold;
-
-  cursor:
-    pointer;
-
+  color: #0b5c91;
+  font-weight: bold;
+  cursor: pointer;
 }
 
-
-.hidden {
-
-  display:
-    none !important;
-
+.message {
+  text-align: center;
+  margin-top: 15px;
+  font-size: 14px;
+  line-height: 1.5;
 }
 
+.login-info {
+  margin-top: 25px;
+  padding: 14px;
+  border-radius: 10px;
+  background: #f4f7fa;
+  color: #667085;
+  font-size: 12px;
+  line-height: 1.6;
+}
 
-/* =====================================================
+/* =========================
    DASHBOARD
-   ===================================================== */
+========================= */
 
 .dashboard {
-
-  min-height:
-    100vh;
-
+  min-height: 100vh;
 }
-
 
 .topbar {
-
-  background:
-    #071a33;
-
-  color:
-    white;
-
-  padding:
-    16px 25px;
-
-  display:
-    flex;
-
-  justify-content:
-    space-between;
-
-  align-items:
-    center;
-
-  gap:
-    20px;
-
+  background: #071a33;
+  color: white;
+  padding: 15px 25px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
 }
-
 
 .topbar-brand {
-
-  font-size:
-    20px;
-
-  font-weight:
-    800;
-
+  font-size: 20px;
+  font-weight: 800;
 }
 
+.topbar-subtitle {
+  font-size: 11px;
+  color: #b8c9d8;
+  margin-top: 3px;
+}
 
 .user-area {
-
-  display:
-    flex;
-
-  align-items:
-    center;
-
-  gap:
-    15px;
-
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
-
 
 .user-badge {
-
-  background:
-    rgba(
-      255,
-      255,
-      255,
-      .12
-    );
-
-  padding:
-    8px 12px;
-
-  border-radius:
-    8px;
-
+  background: rgba(255,255,255,.12);
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 13px;
 }
-
 
 .dashboard-container {
-
-  max-width:
-    1400px;
-
-  margin:
-    auto;
-
-  padding:
-    30px;
-
+  max-width: 1450px;
+  margin: auto;
+  padding: 30px;
 }
 
-
-/* =====================================================
-   CARDS
-   ===================================================== */
+/* =========================
+   STATS
+========================= */
 
 .stats {
-
-  display:
-    grid;
-
-  grid-template-columns:
-    repeat(
-      auto-fit,
-      minmax(
-        160px,
-        1fr
-      )
-    );
-
-  gap:
-    18px;
-
-  margin-bottom:
-    25px;
-
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 18px;
+  margin-bottom: 25px;
 }
-
 
 .stat-card {
-
-  background:
-    white;
-
-  border-radius:
-    15px;
-
-  padding:
-    22px;
-
-  box-shadow:
-    0 5px 20px
-    rgba(
-      0,
-      0,
-      0,
-      .06
-    );
-
+  background: white;
+  border-radius: 15px;
+  padding: 22px;
+  box-shadow: 0 5px 20px rgba(0,0,0,.06);
+  border: 1px solid #edf0f4;
 }
-
 
 .stat-card h3 {
-
-  margin:
-    0;
-
-  font-size:
-    30px;
-
+  margin: 0;
+  font-size: 30px;
+  color: #0b3156;
 }
-
 
 .stat-card p {
-
-  color:
-    #777;
-
-  margin:
-    7px 0 0;
-
+  color: #777;
+  margin: 7px 0 0;
+  font-size: 13px;
 }
 
-
-/* =====================================================
+/* =========================
    PANELS
-   ===================================================== */
+========================= */
 
 .panel {
-
-  background:
-    white;
-
-  border-radius:
-    16px;
-
-  padding:
-    25px;
-
-  margin-bottom:
-    25px;
-
-  box-shadow:
-    0 5px 20px
-    rgba(
-      0,
-      0,
-      0,
-      .05
-    );
-
+  background: white;
+  border-radius: 16px;
+  padding: 25px;
+  margin-bottom: 25px;
+  box-shadow: 0 5px 20px rgba(0,0,0,.05);
+  border: 1px solid #edf0f4;
 }
-
 
 .panel-header {
-
-  display:
-    flex;
-
-  justify-content:
-    space-between;
-
-  align-items:
-    center;
-
-  gap:
-    15px;
-
-  margin-bottom:
-    20px;
-
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 20px;
 }
-
 
 .panel-header h2 {
-
-  margin:
-    0;
-
+  margin: 0;
+  font-size: 20px;
 }
 
+.panel-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
 
-/* =====================================================
+/* =========================
+   SEARCH
+========================= */
+
+.search-box {
+  margin-bottom: 20px;
+  position: relative;
+}
+
+.search-box input {
+  width: 100%;
+  padding: 13px 14px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  outline: none;
+}
+
+.search-box input:focus {
+  border-color: #0b5c91;
+}
+
+/* =========================
    TABLE
-   ===================================================== */
+========================= */
 
 .table-wrapper {
-
-  overflow-x:
-    auto;
-
+  overflow-x: auto;
 }
-
 
 table {
-
-  width:
-    100%;
-
-  border-collapse:
-    collapse;
-
-  min-width:
-    950px;
-
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 1100px;
 }
-
 
 th {
-
-  background:
-    #f1f5f9;
-
-  text-align:
-    left;
-
-  padding:
-    13px;
-
-  font-size:
-    12px;
-
-  text-transform:
-    uppercase;
-
+  background: #f1f5f9;
+  text-align: left;
+  padding: 13px;
+  font-size: 11px;
+  text-transform: uppercase;
+  color: #596579;
+  white-space: nowrap;
 }
-
 
 td {
-
-  padding:
-    13px;
-
-  border-bottom:
-    1px solid #edf0f4;
-
-  font-size:
-    14px;
-
+  padding: 13px;
+  border-bottom: 1px solid #edf0f4;
+  font-size: 13px;
+  vertical-align: middle;
 }
 
+tr:hover td {
+  background: #fafcff;
+}
 
 .stage {
-
-  display:
-    inline-block;
-
-  padding:
-    6px 9px;
-
-  border-radius:
-    20px;
-
-  font-size:
-    11px;
-
-  font-weight:
-    700;
-
-  background:
-    #e8f0f8;
-
-  color:
-    #174d75;
-
+  display: inline-block;
+  padding: 6px 9px;
+  border-radius: 20px;
+  font-size: 10px;
+  font-weight: 700;
+  background: #e8f0f8;
+  color: #174d75;
+  white-space: nowrap;
 }
 
+.stage-select {
+  padding: 8px;
+  border: 1px solid #d8dee8;
+  border-radius: 8px;
+  font-size: 12px;
+}
 
-/* =====================================================
+/* =========================
    FUNNEL
-   ===================================================== */
+========================= */
+
+.funnel-wrapper {
+  overflow-x: auto;
+  padding-bottom: 5px;
+}
 
 .funnel {
-
-  display:
-    grid;
-
-  grid-template-columns:
-    repeat(
-      7,
-      1fr
-    );
-
-  gap:
-    8px;
-
-  overflow-x:
-    auto;
-
+  display: grid;
+  grid-template-columns: repeat(7, minmax(130px, 1fr));
+  gap: 8px;
+  min-width: 920px;
 }
-
 
 .funnel-step {
-
-  min-width:
-    120px;
-
-  padding:
-    15px;
-
-  text-align:
-    center;
-
-  background:
-    #edf2f7;
-
-  border-radius:
-    10px;
-
+  min-height: 110px;
+  padding: 15px 10px;
+  text-align: center;
+  background: #edf2f7;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
-
-
-.funnel-step.active {
-
-  background:
-    #0b3156;
-
-  color:
-    white;
-
-}
-
 
 .funnel-step span {
-
-  display:
-    block;
-
-  font-size:
-    25px;
-
-  font-weight:
-    800;
-
+  display: block;
+  font-size: 28px;
+  font-weight: 800;
+  color: #0b3156;
+  margin-bottom: 8px;
 }
 
+.funnel-step small {
+  font-size: 10px;
+  font-weight: 700;
+  color: #596579;
+  line-height: 1.4;
+}
 
-/* =====================================================
+.funnel-step.active {
+  background: #0b3156;
+  color: white;
+}
+
+.funnel-step.active span,
+.funnel-step.active small {
+  color: white;
+}
+
+/* =========================
+   ADMIN
+========================= */
+
+.admin-panel {
+  background: #fff;
+}
+
+.admin-warning {
+  background: #fff8e6;
+  border: 1px solid #f1d48a;
+  padding: 14px;
+  border-radius: 10px;
+  margin-bottom: 15px;
+  font-size: 13px;
+  color: #775b00;
+}
+
+/* =========================
    MODAL
-   ===================================================== */
+========================= */
 
 .modal {
-
-  position:
-    fixed;
-
-  inset:
-    0;
-
-  background:
-    rgba(
-      0,
-      0,
-      0,
-      .6
-    );
-
-  display:
-    flex;
-
-  align-items:
-    center;
-
-  justify-content:
-    center;
-
-  padding:
-    20px;
-
-  z-index:
-    999;
-
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  z-index: 999;
 }
-
 
 .modal-content {
-
-  background:
-    white;
-
-  width:
-    100%;
-
-  max-width:
-    650px;
-
-  max-height:
-    90vh;
-
-  overflow-y:
-    auto;
-
-  border-radius:
-    18px;
-
-  padding:
-    30px;
-
+  background: white;
+  width: 100%;
+  max-width: 680px;
+  max-height: 92vh;
+  overflow-y: auto;
+  border-radius: 18px;
+  padding: 30px;
 }
-
 
 .modal-header {
-
-  display:
-    flex;
-
-  justify-content:
-    space-between;
-
-  align-items:
-    center;
-
-  margin-bottom:
-    20px;
-
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
 }
 
+.modal-header h2 {
+  margin: 0;
+}
 
 .close {
-
-  border:
-    none;
-
-  background:
-    transparent;
-
-  font-size:
-    28px;
-
-  cursor:
-    pointer;
-
+  border: none;
+  background: transparent;
+  font-size: 28px;
+  cursor: pointer;
+  color: #555;
 }
 
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 15px;
+}
 
-/* =====================================================
+.form-full {
+  grid-column: 1 / -1;
+}
+
+/* =========================
+   LOADING
+========================= */
+
+.loading-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(7,26,51,.55);
+  z-index: 5000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.loading-box {
+  background: white;
+  padding: 25px 35px;
+  border-radius: 15px;
+  text-align: center;
+  box-shadow: 0 20px 50px rgba(0,0,0,.2);
+}
+
+.spinner {
+  width: 35px;
+  height: 35px;
+  border: 4px solid #e5e7eb;
+  border-top-color: #0b3156;
+  border-radius: 50%;
+  animation: spin .8s linear infinite;
+  margin: 0 auto 15px;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* =========================
+   TOAST
+========================= */
+
+.toast-container {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  z-index: 10000;
+}
+
+.toast {
+  background: #071a33;
+  color: white;
+  padding: 14px 18px;
+  border-radius: 10px;
+  margin-top: 10px;
+  box-shadow: 0 10px 30px rgba(0,0,0,.2);
+  max-width: 350px;
+  font-size: 13px;
+}
+
+.toast.success {
+  background: #16834d;
+}
+
+.toast.error {
+  background: #c0392b;
+}
+
+/* =========================
    MOBILE
-   ===================================================== */
+========================= */
 
-@media (
-  max-width: 700px
-) {
+@media (max-width: 1000px) {
+  .stats {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 700px) {
 
   .login-card {
-
-    padding:
-      25px;
-
+    padding: 25px;
   }
 
   .dashboard-container {
-
-    padding:
-      15px;
-
+    padding: 15px;
   }
 
   .topbar {
-
-    flex-direction:
-      column;
-
-    align-items:
-      flex-start;
-
+    flex-direction: column;
+    align-items: flex-start;
   }
 
-  .funnel {
-
-    grid-template-columns:
-      repeat(
-        7,
-        120px
-      );
-
+  .user-area {
+    width: 100%;
+    justify-content: space-between;
   }
 
+  .stats {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .panel {
+    padding: 18px;
+  }
+
+  .panel-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .panel-actions {
+    width: 100%;
+  }
+
+  .panel-actions button {
+    flex: 1;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .form-full {
+    grid-column: auto;
+  }
 }
 
+@media (max-width: 430px) {
+  .stats {
+    grid-template-columns: 1fr;
+  }
+
+  .login-page {
+    padding: 15px;
+  }
+
+  .login-card {
+    border-radius: 16px;
+  }
+}
 </style>
-
 </head>
-
 
 <body>
 
-
-<!-- ====================================================
-     LOGIN
+<!-- =====================================================
+     LOADING
 ===================================================== -->
 
-<section
-  id="loginPage"
-  class="login-page"
->
+<div id="loadingOverlay" class="loading-overlay hidden">
+  <div class="loading-box">
+    <div class="spinner"></div>
+    <strong id="loadingText">Loading...</strong>
+  </div>
+</div>
+
+<!-- =====================================================
+     LOGIN PAGE
+===================================================== -->
+
+<section id="loginPage" class="login-page">
 
   <div class="login-card">
 
     <div class="logo">
 
-      <h1>
-        SJ LUXURY TRAVEL
-      </h1>
+      <div class="logo-mark">
+        SJ
+      </div>
 
-      <p>
-        Agent & Partner Portal
-      </p>
+      <h1>SJ LUXURY TRAVEL</h1>
+
+      <p>Agent & Partner Portal</p>
 
     </div>
-
 
     <!-- LOGIN -->
 
@@ -874,21 +715,20 @@ td {
         <input
           id="loginIdentifier"
           type="text"
+          autocomplete="username"
           placeholder="SJ-AG-1234 or 0712345678"
         >
 
       </div>
 
-
       <button
+        id="loginButton"
         class="btn btn-primary"
+        style="width:100%;"
         onclick="login()"
       >
-
         LOGIN
-
       </button>
-
 
       <div class="switch-link">
 
@@ -896,48 +736,39 @@ td {
 
         <br>
 
-        <a
-          onclick="showRegister()"
-        >
+        <a onclick="showRegister()">
           Become an SJ Luxury Travel Agent
         </a>
 
       </div>
 
+      <p id="loginMessage" class="message"></p>
 
-      <p
-        id="loginMessage"
-        style="
-          text-align:center;
-          color:#c0392b;
-          margin-top:15px;
-        "
-      ></p>
+      <div class="login-info">
+
+        <strong>Agent Portal</strong><br>
+
+        Use your referral code or registered
+        phone number to access your customer
+        dashboard.
+
+      </div>
 
     </div>
 
-
     <!-- REGISTER -->
 
-    <div
-      id="registerForm"
-      class="hidden"
-    >
+    <div id="registerForm" class="hidden">
 
-      <h2>
-        Become an Agent
-      </h2>
+      <h2>Become an Agent</h2>
 
       <p>
         Join the SJ Luxury Travel agent network.
       </p>
 
-
       <div class="form-group">
 
-        <label>
-          Full Name
-        </label>
+        <label>Full Name *</label>
 
         <input
           id="registerName"
@@ -947,12 +778,9 @@ td {
 
       </div>
 
-
       <div class="form-group">
 
-        <label>
-          Phone Number
-        </label>
+        <label>Phone Number *</label>
 
         <input
           id="registerPhone"
@@ -962,12 +790,9 @@ td {
 
       </div>
 
-
       <div class="form-group">
 
-        <label>
-          Email
-        </label>
+        <label>Email</label>
 
         <input
           id="registerEmail"
@@ -977,16 +802,14 @@ td {
 
       </div>
 
-
       <button
+        id="registerButton"
         class="btn btn-primary"
+        style="width:100%;"
         onclick="registerAgent()"
       >
-
         CREATE AGENT ACCOUNT
-
       </button>
-
 
       <div class="switch-link">
 
@@ -994,22 +817,13 @@ td {
 
         <br>
 
-        <a
-          onclick="showLogin()"
-        >
+        <a onclick="showLogin()">
           Return to Login
         </a>
 
       </div>
 
-
-      <p
-        id="registerMessage"
-        style="
-          text-align:center;
-          margin-top:15px;
-        "
-      ></p>
+      <p id="registerMessage" class="message"></p>
 
     </div>
 
@@ -1017,24 +831,25 @@ td {
 
 </section>
 
-
-<!-- ====================================================
+<!-- =====================================================
      DASHBOARD
 ===================================================== -->
 
-<section
-  id="dashboardPage"
-  class="dashboard hidden"
->
+<section id="dashboardPage" class="dashboard hidden">
 
   <header class="topbar">
 
-    <div class="topbar-brand">
+    <div>
 
-      SJ LUXURY TRAVEL
+      <div class="topbar-brand">
+        SJ LUXURY TRAVEL
+      </div>
+
+      <div class="topbar-subtitle">
+        Agent & Partner Management Portal
+      </div>
 
     </div>
-
 
     <div class="user-area">
 
@@ -1047,96 +862,62 @@ td {
         class="btn btn-secondary"
         onclick="logout()"
       >
-
         Logout
-
       </button>
 
     </div>
 
   </header>
 
-
-  <main
-    class="dashboard-container"
-  >
-
+  <main class="dashboard-container">
 
     <!-- STATS -->
 
-    <div
-      class="stats"
-      id="statsContainer"
-    >
+    <div class="stats">
 
       <div class="stat-card">
 
-        <h3 id="totalClients">
-          0
-        </h3>
+        <h3 id="totalClients">0</h3>
 
-        <p>
-          Total Customers
-        </p>
+        <p>Total Customers</p>
 
       </div>
 
-
       <div class="stat-card">
 
-        <h3 id="leadCount">
-          0
-        </h3>
+        <h3 id="leadCount">0</h3>
 
-        <p>
-          Lead Qualification
-        </p>
+        <p>Lead Qualification</p>
 
       </div>
 
-
       <div class="stat-card">
 
-        <h3 id="consultationCount">
-          0
-        </h3>
+        <h3 id="consultationCount">0</h3>
 
-        <p>
-          Consultation
-        </p>
+        <p>Consultation</p>
 
       </div>
 
-
       <div class="stat-card">
 
-        <h3 id="quotationCount">
-          0
-        </h3>
+        <h3 id="quotationCount">0</h3>
 
-        <p>
-          Quotations
-        </p>
+        <p>Quotations</p>
 
       </div>
 
-
       <div class="stat-card">
 
-        <h3 id="bookingCount">
-          0
-        </h3>
+        <h3 id="bookingCount">0</h3>
 
-        <p>
-          Confirmed Bookings
-        </p>
+        <p>Confirmed Bookings</p>
 
       </div>
 
     </div>
 
-
-    <!-- ADMIN / AGENT ACTIONS -->
+    <!-- CUSTOMER PANEL -->
 
     <div class="panel">
 
@@ -1146,56 +927,39 @@ td {
           My Customers
         </h2>
 
-
-        <div>
+        <div class="panel-actions">
 
           <button
             id="addClientButton"
             class="btn btn-primary"
             onclick="openClientModal()"
           >
-
             + Add Customer
-
           </button>
 
           <button
             class="btn btn-secondary"
             onclick="loadDashboard()"
           >
-
             Refresh
-
           </button>
 
         </div>
 
       </div>
 
-
       <!-- SEARCH -->
 
-      <div
-        style="
-          margin-bottom:20px;
-        "
-      >
+      <div class="search-box">
 
         <input
           id="searchInput"
           type="text"
-          placeholder="Search customers..."
-          onkeyup="searchCustomers()"
-          style="
-            width:100%;
-            padding:13px;
-            border:1px solid #ddd;
-            border-radius:10px;
-          "
+          placeholder="Search customers by name, phone, service, destination or ID..."
+          oninput="searchCustomers()"
         >
 
       </div>
-
 
       <!-- CUSTOMER TABLE -->
 
@@ -1207,48 +971,27 @@ td {
 
             <tr>
 
-              <th>
-                Client ID
-              </th>
+              <th>Client ID</th>
 
-              <th>
-                Customer
-              </th>
+              <th>Customer</th>
 
-              <th>
-                Phone
-              </th>
+              <th>Phone</th>
 
-              <th>
-                Service
-              </th>
+              <th>Service</th>
 
-              <th>
-                Destination
-              </th>
+              <th>Destination</th>
 
-              <th>
-                Agent
-              </th>
+              <th>Agent</th>
 
-              <th>
-                Funnel Stage
-              </th>
+              <th>Funnel Stage</th>
 
-              <th>
-                Action
-              </th>
+              <th>Action</th>
 
             </tr>
 
           </thead>
 
-
-          <tbody
-            id="clientTable"
-          >
-
-          </tbody>
+          <tbody id="clientTable"></tbody>
 
         </table>
 
@@ -1256,70 +999,67 @@ td {
 
     </div>
 
-
-    <!-- FUNNEL -->
+    <!-- CUSTOMER JOURNEY -->
 
     <div class="panel">
 
       <div class="panel-header">
 
-        <h2>
-          Customer Journey
-        </h2>
+        <h2>Customer Journey</h2>
 
       </div>
 
+      <div class="funnel-wrapper">
 
-      <div
-        class="funnel"
-        id="funnelContainer"
-      >
+        <div
+          class="funnel"
+          id="funnelContainer"
+        ></div>
 
       </div>
 
     </div>
 
-
-    <!-- ADMIN AREA -->
+    <!-- ADMIN -->
 
     <div
       id="adminPanel"
-      class="panel hidden"
+      class="panel admin-panel hidden"
     >
 
       <div class="panel-header">
 
-        <h2>
-          Administration
-        </h2>
+        <h2>Administration</h2>
 
       </div>
 
+      <div class="admin-warning">
+
+        Administrator access is enabled.
+        Changes made here affect the central
+        SJ Luxury Travel customer database.
+
+      </div>
 
       <p>
-        Administrator access allows you to manage
-        all agents and customer journeys.
+        Manage registered agents and view the
+        entire customer journey.
       </p>
-
 
       <button
         class="btn btn-secondary"
         onclick="loadAgents()"
       >
-
         Manage Agents
-
       </button>
 
     </div>
-
 
   </main>
 
 </section>
 
-
-<!-- ====================================================
+<!-- =====================================================
      ADD CUSTOMER MODAL
 ===================================================== -->
 
@@ -1332,386 +1072,435 @@ td {
 
     <div class="modal-header">
 
-      <h2>
-        Add New Customer
-      </h2>
+      <h2>Add New Customer</h2>
 
       <button
         class="close"
         onclick="closeClientModal()"
       >
-
         &times;
-
       </button>
 
     </div>
 
+    <div class="form-grid">
 
-    <div class="form-group">
+      <div class="form-group">
 
-      <label>
-        Customer Name *
-      </label>
+        <label>Customer Name *</label>
 
-      <input
-        id="clientName"
-        type="text"
-      >
+        <input
+          id="clientName"
+          type="text"
+        >
 
-    </div>
+      </div>
 
+      <div class="form-group">
 
-    <div class="form-group">
+        <label>Phone Number *</label>
 
-      <label>
-        Phone Number *
-      </label>
+        <input
+          id="clientPhone"
+          type="text"
+        >
 
-      <input
-        id="clientPhone"
-        type="text"
-      >
+      </div>
 
-    </div>
+      <div class="form-group">
 
+        <label>Email</label>
 
-    <div class="form-group">
+        <input
+          id="clientEmail"
+          type="email"
+        >
 
-      <label>
-        Email
-      </label>
+      </div>
 
-      <input
-        id="clientEmail"
-        type="email"
-      >
+      <div class="form-group">
 
-    </div>
+        <label>Service *</label>
 
+        <select id="clientService">
 
-    <div class="form-group">
+          <option value="">
+            Select Service
+          </option>
 
-      <label>
-        Service *
-      </label>
+          <option>Luxury Safari</option>
 
-      <select
-        id="clientService"
-      >
+          <option>Beach Holiday</option>
 
-        <option value="">
-          Select Service
-        </option>
+          <option>Private Villa</option>
 
-        <option>
-          Luxury Safari
-        </option>
+          <option>Honeymoon</option>
 
-        <option>
-          Beach Holiday
-        </option>
+          <option>Family Holiday</option>
 
-        <option>
-          Private Villa
-        </option>
+          <option>Luxury Travel</option>
 
-        <option>
-          Honeymoon
-        </option>
+          <option>Corporate Travel</option>
 
-        <option>
-          Family Holiday
-        </option>
+          <option>Private Jet</option>
 
-        <option>
-          Luxury Travel
-        </option>
+          <option>Luxury Yacht</option>
 
-        <option>
-          Corporate Travel
-        </option>
+          <option>Airport Transfer</option>
 
-        <option>
-          Private Jet
-        </option>
+          <option>Custom Itinerary</option>
 
-        <option>
-          Luxury Yacht
-        </option>
+          <option>Other</option>
 
-        <option>
-          Airport Transfer
-        </option>
+        </select>
 
-        <option>
-          Custom Itinerary
-        </option>
+      </div>
 
-        <option>
-          Other
-        </option>
+      <div class="form-group">
 
-      </select>
+        <label>Destination</label>
 
-    </div>
+        <input
+          id="clientDestination"
+          type="text"
+          placeholder="e.g. Zanzibar, Maasai Mara"
+        >
 
+      </div>
 
-    <div class="form-group">
+      <div class="form-group">
 
-      <label>
-        Destination
-      </label>
+        <label>Travel Date</label>
 
-      <input
-        id="clientDestination"
-        type="text"
-        placeholder="Destination"
-      >
+        <input
+          id="clientTravelDate"
+          type="date"
+        >
 
-    </div>
+      </div>
 
+      <div class="form-group">
 
-    <div class="form-group">
+        <label>Number of Travellers</label>
 
-      <label>
-        Travel Date
-      </label>
+        <input
+          id="clientTravellers"
+          type="number"
+          min="1"
+          value="1"
+        >
 
-      <input
-        id="clientTravelDate"
-        type="date"
-      >
+      </div>
 
-    </div>
+      <div class="form-group">
 
+        <label>Budget</label>
 
-    <div class="form-group">
+        <input
+          id="clientBudget"
+          type="text"
+          placeholder="Approximate budget"
+        >
 
-      <label>
-        Number of Travellers
-      </label>
+      </div>
 
-      <input
-        id="clientTravellers"
-        type="number"
-        min="1"
-      >
+      <div class="form-group form-full">
+
+        <label>Special Requests</label>
+
+        <textarea
+          id="clientSpecialRequests"
+          rows="4"
+          placeholder="Customer preferences, dietary requirements, room preferences, etc."
+        ></textarea>
+
+      </div>
+
+      <div class="form-group form-full">
+
+        <label>Notes</label>
+
+        <textarea
+          id="clientNotes"
+          rows="3"
+          placeholder="Additional information"
+        ></textarea>
+
+      </div>
 
     </div>
-
-
-    <div class="form-group">
-
-      <label>
-        Budget
-      </label>
-
-      <input
-        id="clientBudget"
-        type="text"
-        placeholder="Approximate budget"
-      >
-
-    </div>
-
-
-    <div class="form-group">
-
-      <label>
-        Special Requests
-      </label>
-
-      <textarea
-        id="clientSpecialRequests"
-        rows="4"
-      ></textarea>
-
-    </div>
-
-
-    <div class="form-group">
-
-      <label>
-        Notes
-      </label>
-
-      <textarea
-        id="clientNotes"
-        rows="3"
-      ></textarea>
-
-    </div>
-
 
     <button
+      id="saveClientButton"
       class="btn btn-primary"
+      style="width:100%;"
       onclick="saveClient()"
     >
-
       SAVE CUSTOMER
-
     </button>
-
 
     <p
       id="clientMessage"
-      style="
-        text-align:center;
-        margin-top:15px;
-      "
+      class="message"
     ></p>
 
   </div>
 
 </div>
 
+<!-- =====================================================
+     TOAST
+===================================================== -->
+
+<div
+  id="toastContainer"
+  class="toast-container"
+></div>
 
 <script>
 
 /* =====================================================
    CONFIGURATION
-   ===================================================== */
-
+===================================================== */
 
 /*
- * IMPORTANT:
- *
- * Replace this with your Apps Script Web App URL.
- *
- * Example:
- *
- * https://script.google.com/macros/s/XXXXXXXX/exec
- */
+IMPORTANT:
 
-const API_URL = "https://script.google.com/a/macros/sjluxurytravels.com/s/AKfycbwF2BtLTV_1QFEGLxLmSFGKir-xOc9mnWTJMQ9_rZy78qxvsA9vRaBrKH99zZzlBUm2/exec";
+After deploying the Apps Script backend, paste the
+DEPLOYMENT URL here.
 
-let session =
-  localStorage.getItem(
-    'sj_agent_session'
-  );
+Correct format:
 
+https://script.google.com/macros/s/DEPLOYMENT_ID/exec
 
-let currentUser =
-  JSON.parse(
-    localStorage.getItem(
-      'sj_agent_user'
-    ) || 'null'
-  );
+Do NOT use:
 
+https://script.google.com/a/macros/sjluxurytravels.com/s/...
 
-let clients =
-  [];
+unless Google specifically gives you that as the
+deployed Web App URL.
+*/
+
+const API_URL =
+  "PASTE_YOUR_APPS_SCRIPT_WEB_APP_URL_HERE";
 
 
 /* =====================================================
-   API CALL
-   ===================================================== */
+   APPLICATION STATE
+===================================================== */
 
-/*
- * The website communicates with Apps Script
- * through the deployed Web App.
- */
+let session =
+  localStorage.getItem(
+    "sj_agent_session"
+  );
 
-function api(
-  action,
-  params = {}
-) {
+let currentUser = null;
+
+try {
+
+  currentUser =
+    JSON.parse(
+      localStorage.getItem(
+        "sj_agent_user"
+      ) || "null"
+    );
+
+} catch (error) {
+
+  currentUser = null;
+
+}
+
+let clients = [];
+
+let searchTimer = null;
+
+
+/* =====================================================
+   STAGES
+===================================================== */
+
+const FUNNEL_STAGES = [
+
+  "LEAD QUALIFICATION",
+
+  "CONSULTATION",
+
+  "BESPOKE ITINERARY",
+
+  "QUOTATION",
+
+  "CLIENT APPROVAL",
+
+  "DEPOSIT PAYMENT",
+
+  "BOOKING CONFIRMATION"
+
+];
+
+
+/* =====================================================
+   API FUNCTION
+===================================================== */
+
+function api(action, params = {}) {
 
   return new Promise(
     function(resolve, reject) {
 
+      if (
+        !API_URL ||
+        API_URL.includes(
+          "PASTE_YOUR_APPS_SCRIPT"
+        )
+      ) {
+
+        reject(
+          new Error(
+            "Apps Script Web App URL has not been configured."
+          )
+        );
+
+        return;
+
+      }
+
       const query =
         new URLSearchParams();
 
-
       query.append(
-        'action',
+        "action",
         action
       );
 
-
-      Object.keys(
-        params
-      ).forEach(
+      Object.keys(params).forEach(
         function(key) {
 
+          let value =
+            params[key];
+
+          if (
+            value === undefined ||
+            value === null
+          ) {
+
+            value = "";
+
+          }
+
           query.append(
-
             key,
-
-            params[key] === undefined
-              ? ''
-              : params[key]
-
+            String(value)
           );
 
         }
       );
 
-
       /*
-       * JSONP-style callback.
-       */
+       JSONP is used because the Apps Script
+       Web App is hosted on another domain.
+      */
 
       const callbackName =
-        'sjCallback_' +
-        Date.now();
-
+        "sjCallback_" +
+        Date.now() +
+        "_" +
+        Math.floor(
+          Math.random() * 100000
+        );
 
       query.append(
-        'callback',
+        "callback",
         callbackName
       );
 
-
       const script =
         document.createElement(
-          'script'
+          "script"
         );
 
+      let completed = false;
+
+      const timeout =
+        setTimeout(
+          function() {
+
+            if (completed) {
+              return;
+            }
+
+            completed = true;
+
+            delete window[
+              callbackName
+            ];
+
+            script.remove();
+
+            reject(
+              new Error(
+                "The SJ Luxury Travel backend did not respond. Check that the Apps Script Web App is deployed and accessible."
+              )
+            );
+
+          },
+          20000
+        );
 
       window[callbackName] =
         function(data) {
+
+          if (completed) {
+            return;
+          }
+
+          completed = true;
+
+          clearTimeout(
+            timeout
+          );
 
           delete window[
             callbackName
           ];
 
-
           script.remove();
-
 
           resolve(data);
 
         };
 
-
       script.onerror =
         function() {
+
+          if (completed) {
+            return;
+          }
+
+          completed = true;
+
+          clearTimeout(
+            timeout
+          );
 
           delete window[
             callbackName
           ];
 
-
           script.remove();
-
 
           reject(
             new Error(
-              'Unable to connect to SJ Luxury Travel backend.'
+              "Unable to connect to SJ Luxury Travel backend. Check your Apps Script Web App URL and deployment settings."
             )
           );
 
         };
 
-
       script.src =
         API_URL +
-        '?' +
+        "?" +
         query.toString();
-
 
       document.body.appendChild(
         script
@@ -1724,77 +1513,161 @@ function api(
 
 
 /* =====================================================
+   LOADING
+===================================================== */
+
+function showLoading(
+  text = "Loading..."
+) {
+
+  document
+    .getElementById(
+      "loadingText"
+    )
+    .textContent = text;
+
+  document
+    .getElementById(
+      "loadingOverlay"
+    )
+    .classList
+    .remove(
+      "hidden"
+    );
+
+}
+
+
+function hideLoading() {
+
+  document
+    .getElementById(
+      "loadingOverlay"
+    )
+    .classList
+    .add(
+      "hidden"
+    );
+
+}
+
+
+/* =====================================================
+   TOAST
+===================================================== */
+
+function showToast(
+  message,
+  type = ""
+) {
+
+  const container =
+    document.getElementById(
+      "toastContainer"
+    );
+
+  const toast =
+    document.createElement(
+      "div"
+    );
+
+  toast.className =
+    "toast " + type;
+
+  toast.textContent =
+    message;
+
+  container.appendChild(
+    toast
+  );
+
+  setTimeout(
+    function() {
+
+      toast.remove();
+
+    },
+    4000
+  );
+
+}
+
+
+/* =====================================================
    LOGIN
-   ===================================================== */
+===================================================== */
 
 async function login() {
 
   const identifier =
     document
       .getElementById(
-        'loginIdentifier'
+        "loginIdentifier"
       )
       .value
       .trim();
 
-
   const message =
-    document
-      .getElementById(
-        'loginMessage'
-      );
-
+    document.getElementById(
+      "loginMessage"
+    );
 
   if (!identifier) {
 
+    message.style.color =
+      "#c0392b";
+
     message.textContent =
-      'Please enter your referral code or phone number.';
+      "Please enter your referral code or phone number.";
 
     return;
 
   }
 
-
   message.style.color =
-    '#555';
-
+    "#555";
 
   message.textContent =
-    'Signing in...';
+    "Signing in...";
 
+  const button =
+    document.getElementById(
+      "loginButton"
+    );
+
+  button.disabled = true;
 
   try {
 
     const result =
       await api(
-        'login',
+        "login",
         {
           identifier:
             identifier
         }
       );
 
-
     if (
-      result.status !==
-      'success'
+      !result ||
+      result.status !== "success"
     ) {
 
       message.style.color =
-        '#c0392b';
+        "#c0392b";
 
       message.textContent =
-        result.message ||
-        'Login failed.';
+        result &&
+        result.message
+          ? result.message
+          : "Login failed.";
 
       return;
 
     }
 
-
     session =
       result.token;
-
 
     currentUser = {
 
@@ -1808,41 +1681,40 @@ async function login() {
         result.code,
 
       phone:
-        result.phone || ''
+        result.phone || "",
+
+      email:
+        result.email || ""
 
     };
 
-
     localStorage.setItem(
-
-      'sj_agent_session',
-
+      "sj_agent_session",
       session
-
     );
 
-
     localStorage.setItem(
-
-      'sj_agent_user',
-
+      "sj_agent_user",
       JSON.stringify(
         currentUser
       )
-
     );
 
+    message.textContent = "";
 
     showDashboard();
-
 
   } catch (error) {
 
     message.style.color =
-      '#c0392b';
+      "#c0392b";
 
     message.textContent =
       error.message;
+
+  } finally {
+
+    button.disabled = false;
 
   }
 
@@ -1851,69 +1723,69 @@ async function login() {
 
 /* =====================================================
    REGISTER
-   ===================================================== */
+===================================================== */
 
 async function registerAgent() {
 
   const name =
     document
       .getElementById(
-        'registerName'
+        "registerName"
       )
       .value
       .trim();
-
 
   const phone =
     document
       .getElementById(
-        'registerPhone'
+        "registerPhone"
       )
       .value
       .trim();
-
 
   const email =
     document
       .getElementById(
-        'registerEmail'
+        "registerEmail"
       )
       .value
       .trim();
 
-
   const message =
-    document
-      .getElementById(
-        'registerMessage'
-      );
-
+    document.getElementById(
+      "registerMessage"
+    );
 
   if (!name || !phone) {
 
     message.style.color =
-      '#c0392b';
+      "#c0392b";
 
     message.textContent =
-      'Name and phone number are required.';
+      "Name and phone number are required.";
 
     return;
 
   }
 
-
   message.style.color =
-    '#555';
+    "#555";
 
   message.textContent =
-    'Creating your agent account...';
+    "Creating your agent account...";
 
+  const button =
+    document.getElementById(
+      "registerButton"
+    );
+
+  button.disabled = true;
 
   try {
 
     const result =
       await api(
-        'register',
+        "register",
         {
 
           name:
@@ -1928,63 +1800,70 @@ async function registerAgent() {
         }
       );
 
-
     if (
-      result.status !==
-      'success'
+      !result ||
+      result.status !== "success"
     ) {
 
       message.style.color =
-        '#c0392b';
+        "#c0392b";
 
       message.textContent =
-        result.message;
+        result &&
+        result.message
+          ? result.message
+          : "Unable to create account.";
 
       return;
 
     }
 
-
     message.style.color =
-      '#16834d';
-
+      "#16834d";
 
     message.innerHTML =
 
-      'Account created successfully!<br><br>' +
+      "Account created successfully!<br><br>" +
 
-      '<strong>Your Referral Code:</strong><br>' +
+      "<strong>Your Referral Code:</strong><br>" +
 
-      '<span style="font-size:25px;">' +
+      "<span style='font-size:25px;'>" +
 
-      result.code +
+      escapeHtml(
+        result.code
+      ) +
 
-      '</span><br><br>' +
+      "</span><br><br>" +
 
-      'Keep this code safe. You can use it to access your agent portal.';
-
+      "Keep this code safe. You can use it to access your agent portal.";
 
     document
       .getElementById(
-        'loginIdentifier'
+        "loginIdentifier"
       )
       .value =
       result.code;
 
-
     setTimeout(
-      showLogin,
+      function() {
+
+        showLogin();
+
+      },
       4000
     );
-
 
   } catch (error) {
 
     message.style.color =
-      '#c0392b';
+      "#c0392b";
 
     message.textContent =
       error.message;
+
+  } finally {
+
+    button.disabled = false;
 
   }
 
@@ -1993,27 +1872,26 @@ async function registerAgent() {
 
 /* =====================================================
    SHOW LOGIN
-   ===================================================== */
+===================================================== */
 
 function showLogin() {
 
   document
     .getElementById(
-      'loginForm'
+      "loginForm"
     )
     .classList
     .remove(
-      'hidden'
+      "hidden"
     );
-
 
   document
     .getElementById(
-      'registerForm'
+      "registerForm"
     )
     .classList
     .add(
-      'hidden'
+      "hidden"
     );
 
 }
@@ -2021,27 +1899,26 @@ function showLogin() {
 
 /* =====================================================
    SHOW REGISTER
-   ===================================================== */
+===================================================== */
 
 function showRegister() {
 
   document
     .getElementById(
-      'loginForm'
+      "loginForm"
     )
     .classList
     .add(
-      'hidden'
+      "hidden"
     );
-
 
   document
     .getElementById(
-      'registerForm'
+      "registerForm"
     )
     .classList
     .remove(
-      'hidden'
+      "hidden"
     );
 
 }
@@ -2049,106 +1926,107 @@ function showRegister() {
 
 /* =====================================================
    SHOW DASHBOARD
-   ===================================================== */
+===================================================== */
 
 function showDashboard() {
 
+  if (
+    !session ||
+    !currentUser
+  ) {
+
+    logout();
+
+    return;
+
+  }
+
   document
     .getElementById(
-      'loginPage'
+      "loginPage"
     )
     .classList
     .add(
-      'hidden'
+      "hidden"
     );
-
 
   document
     .getElementById(
-      'dashboardPage'
+      "dashboardPage"
     )
     .classList
     .remove(
-      'hidden'
+      "hidden"
     );
-
 
   document
     .getElementById(
-      'userBadge'
+      "userBadge"
     )
     .textContent =
 
       currentUser.name +
-
-      ' • ' +
-
+      " • " +
       currentUser.code;
-
 
   if (
     currentUser.role ===
-    'admin'
+    "admin"
   ) {
 
     document
       .getElementById(
-        'dashboardTitle'
+        "dashboardTitle"
       )
       .textContent =
-      'All Customers';
-
+      "All Customers";
 
     document
       .getElementById(
-        'addClientButton'
+        "addClientButton"
       )
       .classList
       .add(
-        'hidden'
+        "hidden"
       );
-
 
     document
       .getElementById(
-        'adminPanel'
+        "adminPanel"
       )
       .classList
       .remove(
-        'hidden'
+        "hidden"
       );
 
   } else {
 
     document
       .getElementById(
-        'dashboardTitle'
+        "dashboardTitle"
       )
       .textContent =
-      'My Customers';
-
+      "My Customers";
 
     document
       .getElementById(
-        'addClientButton'
+        "addClientButton"
       )
       .classList
       .remove(
-        'hidden'
+        "hidden"
       );
-
 
     document
       .getElementById(
-        'adminPanel'
+        "adminPanel"
       )
       .classList
       .add(
-        'hidden'
+        "hidden"
       );
 
   }
-
 
   loadDashboard();
 
@@ -2157,32 +2035,33 @@ function showDashboard() {
 
 /* =====================================================
    LOAD DASHBOARD
-   ===================================================== */
+===================================================== */
 
 async function loadDashboard() {
 
   if (!session) {
-
     return;
-
   }
 
+  showLoading(
+    "Loading customer dashboard..."
+  );
 
   try {
 
     const result =
       await api(
-        'clients',
+        "clients",
         {
           token:
             session
         }
       );
 
-
     if (
+      !result ||
       result.status ===
-      'unauthorized'
+      "unauthorized"
     ) {
 
       logout();
@@ -2191,42 +2070,46 @@ async function loadDashboard() {
 
     }
 
-
     if (
       result.status !==
-      'success'
+      "success"
     ) {
 
-      alert(
+      showToast(
         result.message ||
-        'Unable to load customers.'
+        "Unable to load customers.",
+        "error"
       );
 
       return;
 
     }
 
-
     clients =
       result.clients || [];
-
 
     renderClients(
       clients
     );
 
-
-    loadStats();
-
-
     renderFunnel();
 
+    await loadStats();
 
   } catch (error) {
 
     console.error(
       error
     );
+
+    showToast(
+      error.message,
+      "error"
+    );
+
+  } finally {
+
+    hideLoading();
 
   }
 
@@ -2235,24 +2118,22 @@ async function loadDashboard() {
 
 /* =====================================================
    RENDER CLIENTS
-   ===================================================== */
+===================================================== */
 
 function renderClients(
   list
 ) {
 
   const tbody =
-    document
-      .getElementById(
-        'clientTable'
-      );
-
+    document.getElementById(
+      "clientTable"
+    );
 
   tbody.innerHTML =
-    '';
-
+    "";
 
   if (
+    !list ||
     !list.length
   ) {
 
@@ -2262,7 +2143,7 @@ function renderClients(
 
         <td
           colspan="8"
-          style="text-align:center;padding:40px;"
+          style="text-align:center;padding:40px;color:#777;"
         >
 
           No customers found.
@@ -2277,23 +2158,23 @@ function renderClients(
 
   }
 
-
   list.forEach(
     function(client) {
 
-      let action = '';
-
+      let action = "";
 
       if (
+        currentUser &&
         currentUser.role ===
-        'admin'
+        "admin"
       ) {
 
         action = `
 
           <select
+            class="stage-select"
             onchange="changeStage(
-              ${client.rowId},
+              ${Number(client.rowId)},
               this.value
             )"
           >
@@ -2311,17 +2192,16 @@ function renderClients(
         action = `
 
           <span
-            style="color:#777;font-size:12px;"
+            style="color:#777;font-size:11px;"
           >
 
-            Progress tracked by SJ Luxury Travel
+            SJ Travel
 
           </span>
 
         `;
 
       }
-
 
       tbody.innerHTML += `
 
@@ -2335,7 +2215,6 @@ function renderClients(
             </strong>
           </td>
 
-
           <td>
 
             <strong>
@@ -2346,13 +2225,11 @@ function renderClients(
 
           </td>
 
-
           <td>
             ${escapeHtml(
               client.phone
             )}
           </td>
-
 
           <td>
             ${escapeHtml(
@@ -2360,21 +2237,19 @@ function renderClients(
             )}
           </td>
 
-
           <td>
             ${escapeHtml(
               client.destination ||
-              '-'
+              "-"
             )}
           </td>
-
 
           <td>
             ${escapeHtml(
-              client.agentCode
+              client.agentCode ||
+              "-"
             )}
           </td>
-
 
           <td>
 
@@ -2387,7 +2262,6 @@ function renderClients(
             </span>
 
           </td>
-
 
           <td>
 
@@ -2406,59 +2280,44 @@ function renderClients(
 
 
 /* =====================================================
-   BUILD FUNNEL OPTIONS
-   ===================================================== */
+   BUILD STAGE OPTIONS
+===================================================== */
 
 function buildStageOptions(
   selected
 ) {
 
-  const stages = [
+  return FUNNEL_STAGES
+    .map(
+      function(stage) {
 
-    'LEAD QUALIFICATION',
+        return `
 
-    'CONSULTATION',
+          <option
+            value="${escapeHtml(stage)}"
+            ${
+              stage === selected
+                ? "selected"
+                : ""
+            }
+          >
 
-    'BESPOKE ITINERARY',
+            ${escapeHtml(stage)}
 
-    'QUOTATION',
+          </option>
 
-    'CLIENT APPROVAL',
+        `;
 
-    'DEPOSIT PAYMENT',
-
-    'BOOKING CONFIRMATION'
-
-  ];
-
-
-  return stages.map(
-    function(stage) {
-
-      return `
-
-        <option
-          value="${stage}"
-          ${stage === selected
-            ? 'selected'
-            : ''}
-        >
-
-          ${stage}
-
-        </option>
-
-      `;
-
-    }
-  ).join('');
+      }
+    )
+    .join("");
 
 }
 
 
 /* =====================================================
-   CHANGE FUNNEL STAGE
-   ===================================================== */
+   CHANGE STAGE
+===================================================== */
 
 async function changeStage(
   rowId,
@@ -2466,26 +2325,21 @@ async function changeStage(
 ) {
 
   if (
+    !currentUser ||
     currentUser.role !==
-    'admin'
+    "admin"
   ) {
 
     return;
 
   }
 
-
   const confirmed =
     confirm(
-
-      'Move this customer to:\n\n' +
-
+      "Move this customer to:\n\n" +
       stage +
-
-      '?'
-
+      "?"
     );
-
 
   if (!confirmed) {
 
@@ -2495,12 +2349,15 @@ async function changeStage(
 
   }
 
+  showLoading(
+    "Updating customer journey..."
+  );
 
   try {
 
     const result =
       await api(
-        'updateStage',
+        "updateStage",
         {
 
           token:
@@ -2515,29 +2372,49 @@ async function changeStage(
         }
       );
 
+    if (
+      result.status ===
+      "unauthorized"
+    ) {
+
+      logout();
+
+      return;
+
+    }
 
     if (
       result.status !==
-      'success'
+      "success"
     ) {
 
-      alert(
-        result.message
+      showToast(
+        result.message ||
+        "Unable to update stage.",
+        "error"
       );
 
       return;
 
     }
 
+    showToast(
+      "Customer journey updated.",
+      "success"
+    );
 
     await loadDashboard();
 
-
   } catch (error) {
 
-    alert(
-      error.message
+    showToast(
+      error.message,
+      "error"
     );
+
+  } finally {
+
+    hideLoading();
 
   }
 
@@ -2546,114 +2423,97 @@ async function changeStage(
 
 /* =====================================================
    LOAD STATS
-   ===================================================== */
+===================================================== */
 
 async function loadStats() {
 
-  const result =
-    await api(
-      'dashboard',
-      {
-        token:
-          session
-      }
+  try {
+
+    const result =
+      await api(
+        "dashboard",
+        {
+          token:
+            session
+        }
+      );
+
+    if (
+      !result ||
+      result.status !==
+      "success"
+    ) {
+
+      return;
+
+    }
+
+    const stats =
+      result.stats || {};
+
+    document
+      .getElementById(
+        "totalClients"
+      )
+      .textContent =
+      stats.total || 0;
+
+    document
+      .getElementById(
+        "leadCount"
+      )
+      .textContent =
+      stats.leadQualification || 0;
+
+    document
+      .getElementById(
+        "consultationCount"
+      )
+      .textContent =
+      stats.consultation || 0;
+
+    document
+      .getElementById(
+        "quotationCount"
+      )
+      .textContent =
+      stats.quotation || 0;
+
+    document
+      .getElementById(
+        "bookingCount"
+      )
+      .textContent =
+      stats.bookingConfirmation || 0;
+
+  } catch (error) {
+
+    console.error(
+      "Stats error:",
+      error
     );
 
-
-  if (
-    result.status !==
-    'success'
-  ) {
-
-    return;
-
   }
-
-
-  const stats =
-    result.stats;
-
-
-  document
-    .getElementById(
-      'totalClients'
-    )
-    .textContent =
-    stats.total;
-
-
-  document
-    .getElementById(
-      'leadCount'
-    )
-    .textContent =
-    stats.leadQualification;
-
-
-  document
-    .getElementById(
-      'consultationCount'
-    )
-    .textContent =
-    stats.consultation;
-
-
-  document
-    .getElementById(
-      'quotationCount'
-    )
-    .textContent =
-    stats.quotation;
-
-
-  document
-    .getElementById(
-      'bookingCount'
-    )
-    .textContent =
-    stats.bookingConfirmation;
 
 }
 
 
 /* =====================================================
-   FUNNEL
-   ===================================================== */
+   RENDER FUNNEL
+===================================================== */
 
 function renderFunnel() {
 
-  const stages = [
-
-    'LEAD QUALIFICATION',
-
-    'CONSULTATION',
-
-    'BESPOKE ITINERARY',
-
-    'QUOTATION',
-
-    'CLIENT APPROVAL',
-
-    'DEPOSIT PAYMENT',
-
-    'BOOKING CONFIRMATION'
-
-  ];
-
-
   const container =
-    document
-      .getElementById(
-        'funnelContainer'
-      );
-
+    document.getElementById(
+      "funnelContainer"
+    );
 
   container.innerHTML =
-    '';
+    "";
 
-
-  stages.forEach(
-    function(stage) {
+  FUNNEL_STAGES.forEach(
+    function(stage, index) {
 
       const count =
         clients.filter(
@@ -2667,16 +2527,23 @@ function renderFunnel() {
           }
         ).length;
 
-
       container.innerHTML += `
 
-        <div class="funnel-step">
+        <div
+          class="funnel-step ${
+            count > 0
+              ? "active"
+              : ""
+          }"
+        >
 
           <span>
             ${count}
           </span>
 
-          ${stage}
+          <small>
+            ${escapeHtml(stage)}
+          </small>
 
         </div>
 
@@ -2689,56 +2556,65 @@ function renderFunnel() {
 
 
 /* =====================================================
-   ADD CLIENT MODAL
-   ===================================================== */
+   OPEN CUSTOMER MODAL
+===================================================== */
 
 function openClientModal() {
 
   document
     .getElementById(
-      'clientModal'
+      "clientModal"
     )
     .classList
     .remove(
-      'hidden'
-    );
-
-}
-
-
-function closeClientModal() {
-
-  document
-    .getElementById(
-      'clientModal'
-    )
-    .classList
-    .add(
-      'hidden'
+      "hidden"
     );
 
 }
 
 
 /* =====================================================
-   SAVE CLIENT
-   ===================================================== */
+   CLOSE CUSTOMER MODAL
+===================================================== */
+
+function closeClientModal() {
+
+  document
+    .getElementById(
+      "clientModal"
+    )
+    .classList
+    .add(
+      "hidden"
+    );
+
+  document
+    .getElementById(
+      "clientMessage"
+    )
+    .textContent =
+    "";
+
+}
+
+
+/* =====================================================
+   SAVE CUSTOMER
+===================================================== */
 
 async function saveClient() {
 
   const message =
-    document
-      .getElementById(
-        'clientMessage'
-      );
-
+    document.getElementById(
+      "clientMessage"
+    );
 
   const data = {
 
     name:
       document
         .getElementById(
-          'clientName'
+          "clientName"
         )
         .value
         .trim(),
@@ -2746,7 +2622,7 @@ async function saveClient() {
     phone:
       document
         .getElementById(
-          'clientPhone'
+          "clientPhone"
         )
         .value
         .trim(),
@@ -2754,7 +2630,7 @@ async function saveClient() {
     email:
       document
         .getElementById(
-          'clientEmail'
+          "clientEmail"
         )
         .value
         .trim(),
@@ -2762,14 +2638,14 @@ async function saveClient() {
     service:
       document
         .getElementById(
-          'clientService'
+          "clientService"
         )
         .value,
 
     destination:
       document
         .getElementById(
-          'clientDestination'
+          "clientDestination"
         )
         .value
         .trim(),
@@ -2777,21 +2653,21 @@ async function saveClient() {
     travelDate:
       document
         .getElementById(
-          'clientTravelDate'
+          "clientTravelDate"
         )
         .value,
 
     travellers:
       document
         .getElementById(
-          'clientTravellers'
+          "clientTravellers"
         )
         .value,
 
     budget:
       document
         .getElementById(
-          'clientBudget'
+          "clientBudget"
         )
         .value
         .trim(),
@@ -2799,7 +2675,7 @@ async function saveClient() {
     specialRequests:
       document
         .getElementById(
-          'clientSpecialRequests'
+          "clientSpecialRequests"
         )
         .value
         .trim(),
@@ -2807,13 +2683,12 @@ async function saveClient() {
     notes:
       document
         .getElementById(
-          'clientNotes'
+          "clientNotes"
         )
         .value
         .trim()
 
   };
-
 
   if (
     !data.name ||
@@ -2822,28 +2697,33 @@ async function saveClient() {
   ) {
 
     message.style.color =
-      '#c0392b';
+      "#c0392b";
 
     message.textContent =
-      'Please fill in the required fields.';
+      "Please fill in Customer Name, Phone Number and Service.";
 
     return;
 
   }
 
-
   message.style.color =
-    '#555';
+    "#555";
 
   message.textContent =
-    'Saving customer...';
+    "Saving customer...";
 
+  const button =
+    document.getElementById(
+      "saveClientButton"
+    );
+
+  button.disabled = true;
 
   try {
 
     const result =
       await api(
-        'addClient',
+        "addClient",
         {
 
           token:
@@ -2882,51 +2762,68 @@ async function saveClient() {
         }
       );
 
-
     if (
-      result.status !==
-      'success'
+      result.status ===
+      "unauthorized"
     ) {
 
-      message.style.color =
-        '#c0392b';
-
-      message.textContent =
-        result.message;
+      logout();
 
       return;
 
     }
 
+    if (
+      result.status !==
+      "success"
+    ) {
+
+      message.style.color =
+        "#c0392b";
+
+      message.textContent =
+        result.message ||
+        "Unable to save customer.";
+
+      return;
+
+    }
 
     message.style.color =
-      '#16834d';
+      "#16834d";
 
     message.textContent =
-      'Customer successfully added.';
+      "Customer successfully added.";
 
+    showToast(
+      "Customer successfully added.",
+      "success"
+    );
 
     setTimeout(
-      function() {
+      async function() {
 
         closeClientModal();
 
         clearClientForm();
 
-        loadDashboard();
+        await loadDashboard();
 
       },
-      1000
+      800
     );
-
 
   } catch (error) {
 
     message.style.color =
-      '#c0392b';
+      "#c0392b";
 
     message.textContent =
       error.message;
+
+  } finally {
+
+    button.disabled = false;
 
   }
 
@@ -2934,52 +2831,41 @@ async function saveClient() {
 
 
 /* =====================================================
-   CLEAR CLIENT FORM
-   ===================================================== */
+   CLEAR CUSTOMER FORM
+===================================================== */
 
 function clearClientForm() {
 
   const fields = [
 
-    'clientName',
-
-    'clientPhone',
-
-    'clientEmail',
-
-    'clientService',
-
-    'clientDestination',
-
-    'clientTravelDate',
-
-    'clientTravellers',
-
-    'clientBudget',
-
-    'clientSpecialRequests',
-
-    'clientNotes'
+    "clientName",
+    "clientPhone",
+    "clientEmail",
+    "clientService",
+    "clientDestination",
+    "clientTravelDate",
+    "clientTravellers",
+    "clientBudget",
+    "clientSpecialRequests",
+    "clientNotes"
 
   ];
-
 
   fields.forEach(
     function(id) {
 
       const element =
-        document
-          .getElementById(
-            id
-          );
+        document.getElementById(
+          id
+        );
 
-
-      if (
-        element
-      ) {
+      if (element) {
 
         element.value =
-          '';
+          id ===
+          "clientTravellers"
+            ? "1"
+            : "";
 
       }
 
@@ -2991,17 +2877,13 @@ function clearClientForm() {
 
 /* =====================================================
    SEARCH
-   ===================================================== */
-
-let searchTimer;
-
+===================================================== */
 
 function searchCustomers() {
 
   clearTimeout(
     searchTimer
   );
-
 
   searchTimer =
     setTimeout(
@@ -3010,11 +2892,10 @@ function searchCustomers() {
         const query =
           document
             .getElementById(
-              'searchInput'
+              "searchInput"
             )
             .value
             .trim();
-
 
         if (!query) {
 
@@ -3026,12 +2907,11 @@ function searchCustomers() {
 
         }
 
-
         try {
 
           const result =
             await api(
-              'search',
+              "search",
               {
 
                 token:
@@ -3043,15 +2923,21 @@ function searchCustomers() {
               }
             );
 
-
           if (
             result.status ===
-            'success'
+            "success"
           ) {
 
             renderClients(
-              result.clients
+              result.clients || []
             );
+
+          } else if (
+            result.status ===
+            "unauthorized"
+          ) {
+
+            logout();
 
           }
 
@@ -3072,25 +2958,29 @@ function searchCustomers() {
 
 /* =====================================================
    ADMIN AGENTS
-   ===================================================== */
+===================================================== */
 
 async function loadAgents() {
 
   if (
+    !currentUser ||
     currentUser.role !==
-    'admin'
+    "admin"
   ) {
 
     return;
 
   }
 
+  showLoading(
+    "Loading registered agents..."
+  );
 
   try {
 
     const result =
       await api(
-        'agents',
+        "agents",
         {
 
           token:
@@ -3099,62 +2989,80 @@ async function loadAgents() {
         }
       );
 
+    if (
+      result.status ===
+      "unauthorized"
+    ) {
+
+      logout();
+
+      return;
+
+    }
 
     if (
       result.status !==
-      'success'
+      "success"
     ) {
 
-      alert(
-        result.message
+      showToast(
+        result.message ||
+        "Unable to load agents.",
+        "error"
       );
 
       return;
 
     }
 
-
     let output =
-      '';
+      "REGISTERED AGENTS\n\n";
 
+    result.agents.forEach(
+      function(agent, index) {
 
-    result.agents
-      .forEach(
-        function(agent) {
+        output +=
 
-          output +=
+          (index + 1) +
+          ". " +
 
-            agent.name +
+          agent.name +
 
-            ' | ' +
+          "\nCode: " +
 
-            agent.code +
+          agent.code +
 
-            ' | ' +
+          "\nPhone: " +
 
-            agent.phone +
+          agent.phone +
 
-            ' | ' +
+          "\nEmail: " +
 
-            agent.status +
+          agent.email +
 
-            '\n';
+          "\nStatus: " +
 
-        }
-      );
+          agent.status +
 
+          "\n\n";
+
+      }
+    );
 
     alert(
-      'REGISTERED AGENTS\n\n' +
       output
     );
 
-
   } catch (error) {
 
-    alert(
-      error.message
+    showToast(
+      error.message,
+      "error"
     );
+
+  } finally {
+
+    hideLoading();
 
   }
 
@@ -3163,47 +3071,51 @@ async function loadAgents() {
 
 /* =====================================================
    LOGOUT
-   ===================================================== */
+===================================================== */
 
 function logout() {
 
   localStorage.removeItem(
-    'sj_agent_session'
+    "sj_agent_session"
   );
-
 
   localStorage.removeItem(
-    'sj_agent_user'
+    "sj_agent_user"
   );
-
 
   session =
     null;
 
-
   currentUser =
     null;
 
+  clients =
+    [];
 
   document
     .getElementById(
-      'dashboardPage'
+      "dashboardPage"
     )
     .classList
     .add(
-      'hidden'
+      "hidden"
     );
-
 
   document
     .getElementById(
-      'loginPage'
+      "loginPage"
     )
     .classList
     .remove(
-      'hidden'
+      "hidden"
     );
 
+  document
+    .getElementById(
+      "loginIdentifier"
+    )
+    .value =
+    "";
 
   showLogin();
 
@@ -3211,46 +3123,101 @@ function logout() {
 
 
 /* =====================================================
-   SECURITY / HTML ESCAPE
-   ===================================================== */
+   HTML ESCAPE
+===================================================== */
 
 function escapeHtml(
   value
 ) {
 
   return String(
-    value || ''
+    value ?? ""
   )
+
   .replace(
     /&/g,
-    '&amp;'
+    "&amp;"
   )
+
   .replace(
     /</g,
-    '&lt;'
+    "&lt;"
   )
+
   .replace(
     />/g,
-    '&gt;'
+    "&gt;"
   )
+
   .replace(
     /"/g,
-    '&quot;'
+    "&quot;"
   )
+
   .replace(
     /'/g,
-    '&#039;'
+    "&#039;"
   );
 
 }
 
 
 /* =====================================================
+   ENTER KEY LOGIN
+===================================================== */
+
+document
+  .getElementById(
+    "loginIdentifier"
+  )
+  .addEventListener(
+    "keydown",
+    function(event) {
+
+      if (
+        event.key ===
+        "Enter"
+      ) {
+
+        login();
+
+      }
+
+    }
+  );
+
+
+/* =====================================================
+   CLOSE MODAL WHEN CLICKING OUTSIDE
+===================================================== */
+
+document
+  .getElementById(
+    "clientModal"
+  )
+  .addEventListener(
+    "click",
+    function(event) {
+
+      if (
+        event.target ===
+        this
+      ) {
+
+        closeClientModal();
+
+      }
+
+    }
+  );
+
+
+/* =====================================================
    AUTO LOGIN
-   ===================================================== */
+===================================================== */
 
 window.addEventListener(
-  'load',
+  "load",
   function() {
 
     if (
@@ -3267,7 +3234,5 @@ window.addEventListener(
 
 </script>
 
-
 </body>
-
 </html>
