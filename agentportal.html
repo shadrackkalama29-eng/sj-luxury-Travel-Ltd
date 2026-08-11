@@ -2227,6 +2227,9 @@
 
                 <div class="form-group">
                     <label>Password</label>
+                    <small style="display:block;margin-top:6px;color:#888;">
+                        Password is case-sensitive and must match exactly.
+                    </small>
                     <div class="password-wrap">
                         <input
                             id="loginPassword"
@@ -3627,9 +3630,11 @@
                     .trim();
 
             const password =
-                document
-                    .getElementById("loginPassword")
-                    .value;
+                String(
+                    document
+                        .getElementById("loginPassword")
+                        .value
+                );
 
 
             const message =
