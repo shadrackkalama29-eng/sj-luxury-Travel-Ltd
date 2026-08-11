@@ -2713,242 +2713,237 @@
 
 
 <style>
+<!-- =========================================================
+     CUSTOMER JOURNEY — COMPACT
+========================================================= -->
+<section class="customer-journey-compact" id="customer-journey">
+
+    <div class="journey-title">
+        <span>OUR PROCESS</span>
+        <h2>Customer Journey</h2>
+    </div>
+
+    <div class="journey-steps">
+
+        <div class="journey-item">
+            <div class="journey-count">01</div>
+            <h3>Lead Qualification</h3>
+        </div>
+
+        <div class="journey-connector"></div>
+
+        <div class="journey-item">
+            <div class="journey-count">02</div>
+            <h3>Consultation</h3>
+        </div>
+
+        <div class="journey-connector"></div>
+
+        <div class="journey-item">
+            <div class="journey-count">03</div>
+            <h3>Bespoke Itinerary</h3>
+        </div>
+
+        <div class="journey-connector"></div>
+
+        <div class="journey-item">
+            <div class="journey-count">04</div>
+            <h3>Quotation</h3>
+        </div>
+
+        <div class="journey-connector"></div>
+
+        <div class="journey-item">
+            <div class="journey-count">05</div>
+            <h3>Client Approval</h3>
+        </div>
+
+        <div class="journey-connector"></div>
+
+        <div class="journey-item">
+            <div class="journey-count">06</div>
+            <h3>Deposit Payment</h3>
+        </div>
+
+        <div class="journey-connector"></div>
+
+        <div class="journey-item">
+            <div class="journey-count">07</div>
+            <h3>Booking Confirmation</h3>
+        </div>
+
+    </div>
+
+</section>
+
+
+<style>
 
 /* =========================================================
-   CUSTOMER JOURNEY
+   CUSTOMER JOURNEY — COMPACT
 ========================================================= */
 
-.customer-journey {
-    position: relative;
-    padding: 110px 6%;
-    background:
-        radial-gradient(
-            circle at 50% 0%,
-            rgba(201, 170, 105, 0.10),
-            transparent 40%
-        ),
-        #07121d;
-    color: #ffffff;
-    overflow: hidden;
-}
-
-/* Subtle background detail */
-
-.customer-journey::before {
-    content: "";
-    position: absolute;
-    width: 520px;
-    height: 520px;
-    border: 1px solid rgba(255,255,255,0.05);
-    border-radius: 50%;
-    top: -260px;
-    right: -150px;
-}
-
-.customer-journey::after {
-    content: "";
-    position: absolute;
-    width: 380px;
-    height: 380px;
-    border: 1px solid rgba(201,170,105,0.06);
-    border-radius: 50%;
-    bottom: -220px;
-    left: -140px;
+.customer-journey-compact {
+    width: 100%;
+    padding: 55px 5%;
+    background: #07121d;
+    color: #fff;
 }
 
 
-/* HEADER */
+/* TITLE */
 
-.journey-header {
-    position: relative;
-    z-index: 2;
-    max-width: 760px;
-    margin: 0 auto 75px;
+.journey-title {
     text-align: center;
+    margin-bottom: 38px;
 }
 
-.journey-eyebrow {
-    display: inline-block;
-    margin-bottom: 16px;
+.journey-title span {
+    display: block;
+    margin-bottom: 8px;
     color: #c9aa69;
-    font-size: 11px;
+    font-size: 9px;
     font-weight: 700;
-    letter-spacing: 4px;
+    letter-spacing: 3px;
     text-transform: uppercase;
 }
 
-.journey-header h2 {
+.journey-title h2 {
     margin: 0;
     font-family: Georgia, "Times New Roman", serif;
-    font-size: clamp(42px, 5vw, 68px);
+    font-size: 30px;
     font-weight: 400;
-    line-height: 1.05;
-    letter-spacing: -1px;
-}
-
-.journey-header h2 span {
-    color: #c9aa69;
-    font-style: italic;
-}
-
-.journey-header p {
-    max-width: 620px;
-    margin: 22px auto 0;
-    color: rgba(255,255,255,0.62);
-    font-size: 15px;
-    line-height: 1.8;
 }
 
 
-/* TIMELINE */
+/* STEPS */
 
-.journey-timeline {
-    position: relative;
-    z-index: 2;
-    max-width: 1200px;
+.journey-steps {
+    max-width: 1100px;
     margin: auto;
-    display: flex;
-    align-items: stretch;
-}
-
-
-/* STEP */
-
-.journey-step {
-    position: relative;
-    flex: 1;
-    min-width: 0;
-    padding: 30px 18px 25px;
-    border: 1px solid rgba(255,255,255,0.08);
-    background: rgba(255,255,255,0.025);
-    backdrop-filter: blur(10px);
-    transition:
-        transform 0.35s ease,
-        background 0.35s ease,
-        border-color 0.35s ease;
-}
-
-.journey-step:first-child {
-    border-radius: 14px 0 0 14px;
-}
-
-.journey-step:last-child {
-    border-radius: 0 14px 14px 0;
-}
-
-.journey-step:hover {
-    transform: translateY(-8px);
-    background: rgba(201,170,105,0.08);
-    border-color: rgba(201,170,105,0.45);
-    z-index: 3;
-}
-
-
-/* NUMBER */
-
-.journey-number {
-    margin-bottom: 22px;
-    color: rgba(201,170,105,0.45);
-    font-family: Georgia, "Times New Roman", serif;
-    font-size: 34px;
-    line-height: 1;
-    transition: color 0.3s ease;
-}
-
-.journey-step:hover .journey-number {
-    color: #c9aa69;
-}
-
-
-/* ICON */
-
-.journey-icon {
-    width: 46px;
-    height: 46px;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 22px;
-    border: 1px solid rgba(201,170,105,0.35);
-    border-radius: 50%;
-    color: #c9aa69;
-    font-size: 17px;
-    transition: all 0.3s ease;
 }
 
-.journey-step:hover .journey-icon {
+
+/* ITEM */
+
+.journey-item {
+    flex: 1;
+    text-align: center;
+    min-width: 90px;
+}
+
+.journey-count {
+    width: 34px;
+    height: 34px;
+    margin: 0 auto 12px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid rgba(201,170,105,0.55);
+    border-radius: 50%;
+
+    color: #c9aa69;
+    font-size: 10px;
+    font-weight: 600;
+
+    transition: 0.25s ease;
+}
+
+.journey-item:hover .journey-count {
     background: #c9aa69;
     color: #07121d;
-    transform: rotate(8deg) scale(1.08);
 }
 
-
-/* CONTENT */
-
-.journey-content span {
-    display: block;
-    margin-bottom: 9px;
-    color: rgba(255,255,255,0.38);
-    font-size: 9px;
-    font-weight: 700;
-    letter-spacing: 2px;
-}
-
-.journey-content h3 {
-    margin: 0 0 12px;
-    color: #ffffff;
-    font-family: Georgia, "Times New Roman", serif;
-    font-size: 19px;
-    font-weight: 400;
-    line-height: 1.25;
-}
-
-.journey-content p {
+.journey-item h3 {
     margin: 0;
-    color: rgba(255,255,255,0.48);
-    font-size: 12px;
-    line-height: 1.7;
+    color: rgba(255,255,255,0.82);
+    font-size: 11px;
+    font-weight: 500;
+    line-height: 1.4;
+    white-space: nowrap;
 }
 
 
-/* CONNECTING LINE */
+/* CONNECTOR */
 
-.journey-line {
-    width: 18px;
-    min-width: 18px;
-    align-self: center;
+.journey-connector {
+    flex: 0 0 35px;
     height: 1px;
-    background:
-        linear-gradient(
-            90deg,
-            rgba(201,170,105,0.15),
-            rgba(201,170,105,0.7),
-            rgba(201,170,105,0.15)
-        );
+    margin-top: -27px;
+    background: rgba(201,170,105,0.3);
 }
 
 
-/* FINAL STEP */
+/* =========================================================
+   TABLET
+========================================================= */
 
-.journey-final {
-    background:
-        linear-gradient(
-            145deg,
-            rgba(201,170,105,0.12),
-            rgba(255,255,255,0.025)
-        );
+@media (max-width: 900px) {
+
+    .journey-steps {
+        flex-wrap: wrap;
+        gap: 25px 10px;
+    }
+
+    .journey-item {
+        flex: 0 0 calc(25% - 10px);
+    }
+
+    .journey-connector {
+        display: none;
+    }
+
 }
 
-.journey-final .journey-number {
-    color: #c9aa69;
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 600px) {
+
+    .customer-journey-compact {
+        padding: 45px 20px;
+    }
+
+    .journey-title {
+        margin-bottom: 30px;
+    }
+
+    .journey-title h2 {
+        font-size: 26px;
+    }
+
+    .journey-steps {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 25px 10px;
+    }
+
+    .journey-item {
+        flex: none;
+        width: 100%;
+    }
+
+    .journey-item h3 {
+        white-space: normal;
+        font-size: 10px;
+    }
+
+    .journey-count {
+        width: 32px;
+        height: 32px;
+        margin-bottom: 9px;
+    }
+
 }
 
-.journey-final .journey-icon {
-    background: rgba(201,170,105,0.12);
-    border-color: #c9aa69;
-}
-
-
+</style>
 /* =========================================================
    TABLET
 ========================================================= */
