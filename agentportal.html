@@ -2586,28 +2586,463 @@
             </div>
 
 
-            <!-- =================================================
-                 CUSTOMER JOURNEY
-            ================================================== -->
+            ```html
+<!-- =========================================================
+     CUSTOMER JOURNEY
+========================================================= -->
+<section class="customer-journey" id="customer-journey">
 
-            <div class="panel">
+    <div class="journey-header">
+        <span class="journey-eyebrow">THE SJ EXPERIENCE</span>
+        <h2>Customer <span>Journey</span></h2>
+        <p>
+            From your first enquiry to your confirmed booking,
+            every detail is carefully handled to create a seamless
+            luxury travel experience.
+        </p>
+    </div>
 
-                <div class="panel-header">
+    <div class="journey-timeline">
 
-                    <h2>
-                        Customer Journey
-                    </h2>
-
-                </div>
-
-
-                <div
-                    class="funnel"
-                    id="funnelContainer"
-                ></div>
-
+        <!-- 01 -->
+        <div class="journey-step">
+            <div class="journey-number">01</div>
+            <div class="journey-icon">✦</div>
+            <div class="journey-content">
+                <span>STEP ONE</span>
+                <h3>Lead Qualification</h3>
+                <p>
+                    We understand your travel needs, preferences and expectations.
+                </p>
             </div>
+        </div>
 
+        <div class="journey-line"></div>
+
+        <!-- 02 -->
+        <div class="journey-step">
+            <div class="journey-number">02</div>
+            <div class="journey-icon">◈</div>
+            <div class="journey-content">
+                <span>STEP TWO</span>
+                <h3>Personalised Consultation</h3>
+                <p>
+                    A dedicated consultation to understand your vision in detail.
+                </p>
+            </div>
+        </div>
+
+        <div class="journey-line"></div>
+
+        <!-- 03 -->
+        <div class="journey-step">
+            <div class="journey-number">03</div>
+            <div class="journey-icon">◇</div>
+            <div class="journey-content">
+                <span>STEP THREE</span>
+                <h3>Bespoke Itinerary</h3>
+                <p>
+                    Your journey is carefully designed around your unique requirements.
+                </p>
+            </div>
+        </div>
+
+        <div class="journey-line"></div>
+
+        <!-- 04 -->
+        <div class="journey-step">
+            <div class="journey-number">04</div>
+            <div class="journey-icon">◆</div>
+            <div class="journey-content">
+                <span>STEP FOUR</span>
+                <h3>Tailored Quotation</h3>
+                <p>
+                    Receive a transparent quotation crafted specifically for your trip.
+                </p>
+            </div>
+        </div>
+
+        <div class="journey-line"></div>
+
+        <!-- 05 -->
+        <div class="journey-step">
+            <div class="journey-number">05</div>
+            <div class="journey-icon">✓</div>
+            <div class="journey-content">
+                <span>STEP FIVE</span>
+                <h3>Client Approval</h3>
+                <p>
+                    Once everything is perfect, you approve your personalised journey.
+                </p>
+            </div>
+        </div>
+
+        <div class="journey-line"></div>
+
+        <!-- 06 -->
+        <div class="journey-step">
+            <div class="journey-number">06</div>
+            <div class="journey-icon">₰</div>
+            <div class="journey-content">
+                <span>STEP SIX</span>
+                <h3>Secure Deposit</h3>
+                <p>
+                    Secure your arrangements with the required deposit payment.
+                </p>
+            </div>
+        </div>
+
+        <div class="journey-line"></div>
+
+        <!-- 07 -->
+        <div class="journey-step journey-final">
+            <div class="journey-number">07</div>
+            <div class="journey-icon">✈</div>
+            <div class="journey-content">
+                <span>FINAL STEP</span>
+                <h3>Booking Confirmation</h3>
+                <p>
+                    Your travel arrangements are confirmed and you're ready to go.
+                </p>
+            </div>
+        </div>
+
+    </div>
+
+</section>
+
+
+<style>
+
+/* =========================================================
+   CUSTOMER JOURNEY
+========================================================= */
+
+.customer-journey {
+    position: relative;
+    padding: 110px 6%;
+    background:
+        radial-gradient(
+            circle at 50% 0%,
+            rgba(201, 170, 105, 0.10),
+            transparent 40%
+        ),
+        #07121d;
+    color: #ffffff;
+    overflow: hidden;
+}
+
+/* Subtle background detail */
+
+.customer-journey::before {
+    content: "";
+    position: absolute;
+    width: 520px;
+    height: 520px;
+    border: 1px solid rgba(255,255,255,0.05);
+    border-radius: 50%;
+    top: -260px;
+    right: -150px;
+}
+
+.customer-journey::after {
+    content: "";
+    position: absolute;
+    width: 380px;
+    height: 380px;
+    border: 1px solid rgba(201,170,105,0.06);
+    border-radius: 50%;
+    bottom: -220px;
+    left: -140px;
+}
+
+
+/* HEADER */
+
+.journey-header {
+    position: relative;
+    z-index: 2;
+    max-width: 760px;
+    margin: 0 auto 75px;
+    text-align: center;
+}
+
+.journey-eyebrow {
+    display: inline-block;
+    margin-bottom: 16px;
+    color: #c9aa69;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+}
+
+.journey-header h2 {
+    margin: 0;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: clamp(42px, 5vw, 68px);
+    font-weight: 400;
+    line-height: 1.05;
+    letter-spacing: -1px;
+}
+
+.journey-header h2 span {
+    color: #c9aa69;
+    font-style: italic;
+}
+
+.journey-header p {
+    max-width: 620px;
+    margin: 22px auto 0;
+    color: rgba(255,255,255,0.62);
+    font-size: 15px;
+    line-height: 1.8;
+}
+
+
+/* TIMELINE */
+
+.journey-timeline {
+    position: relative;
+    z-index: 2;
+    max-width: 1200px;
+    margin: auto;
+    display: flex;
+    align-items: stretch;
+}
+
+
+/* STEP */
+
+.journey-step {
+    position: relative;
+    flex: 1;
+    min-width: 0;
+    padding: 30px 18px 25px;
+    border: 1px solid rgba(255,255,255,0.08);
+    background: rgba(255,255,255,0.025);
+    backdrop-filter: blur(10px);
+    transition:
+        transform 0.35s ease,
+        background 0.35s ease,
+        border-color 0.35s ease;
+}
+
+.journey-step:first-child {
+    border-radius: 14px 0 0 14px;
+}
+
+.journey-step:last-child {
+    border-radius: 0 14px 14px 0;
+}
+
+.journey-step:hover {
+    transform: translateY(-8px);
+    background: rgba(201,170,105,0.08);
+    border-color: rgba(201,170,105,0.45);
+    z-index: 3;
+}
+
+
+/* NUMBER */
+
+.journey-number {
+    margin-bottom: 22px;
+    color: rgba(201,170,105,0.45);
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 34px;
+    line-height: 1;
+    transition: color 0.3s ease;
+}
+
+.journey-step:hover .journey-number {
+    color: #c9aa69;
+}
+
+
+/* ICON */
+
+.journey-icon {
+    width: 46px;
+    height: 46px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 22px;
+    border: 1px solid rgba(201,170,105,0.35);
+    border-radius: 50%;
+    color: #c9aa69;
+    font-size: 17px;
+    transition: all 0.3s ease;
+}
+
+.journey-step:hover .journey-icon {
+    background: #c9aa69;
+    color: #07121d;
+    transform: rotate(8deg) scale(1.08);
+}
+
+
+/* CONTENT */
+
+.journey-content span {
+    display: block;
+    margin-bottom: 9px;
+    color: rgba(255,255,255,0.38);
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+
+.journey-content h3 {
+    margin: 0 0 12px;
+    color: #ffffff;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 19px;
+    font-weight: 400;
+    line-height: 1.25;
+}
+
+.journey-content p {
+    margin: 0;
+    color: rgba(255,255,255,0.48);
+    font-size: 12px;
+    line-height: 1.7;
+}
+
+
+/* CONNECTING LINE */
+
+.journey-line {
+    width: 18px;
+    min-width: 18px;
+    align-self: center;
+    height: 1px;
+    background:
+        linear-gradient(
+            90deg,
+            rgba(201,170,105,0.15),
+            rgba(201,170,105,0.7),
+            rgba(201,170,105,0.15)
+        );
+}
+
+
+/* FINAL STEP */
+
+.journey-final {
+    background:
+        linear-gradient(
+            145deg,
+            rgba(201,170,105,0.12),
+            rgba(255,255,255,0.025)
+        );
+}
+
+.journey-final .journey-number {
+    color: #c9aa69;
+}
+
+.journey-final .journey-icon {
+    background: rgba(201,170,105,0.12);
+    border-color: #c9aa69;
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 1050px) {
+
+    .journey-timeline {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+    }
+
+    .journey-line {
+        display: none;
+    }
+
+    .journey-step,
+    .journey-step:first-child,
+    .journey-step:last-child {
+        border-radius: 14px;
+    }
+
+    .journey-step:last-child {
+        grid-column: span 2;
+    }
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 650px) {
+
+    .customer-journey {
+        padding: 80px 20px;
+    }
+
+    .journey-header {
+        margin-bottom: 50px;
+    }
+
+    .journey-header h2 {
+        font-size: 42px;
+    }
+
+    .journey-header p {
+        font-size: 14px;
+    }
+
+    .journey-timeline {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .journey-step,
+    .journey-step:last-child {
+        width: 100%;
+        border-radius: 14px;
+        padding: 24px;
+    }
+
+    .journey-step:last-child {
+        grid-column: auto;
+    }
+
+    .journey-line {
+        display: block;
+        width: 1px;
+        min-width: 1px;
+        height: 22px;
+        margin: 0 auto;
+        background: linear-gradient(
+            180deg,
+            rgba(201,170,105,0.15),
+            rgba(201,170,105,0.7),
+            rgba(201,170,105,0.15)
+        );
+    }
+
+    .journey-number {
+        font-size: 28px;
+        margin-bottom: 15px;
+    }
+
+    .journey-icon {
+        margin-bottom: 17px;
+    }
+
+}
+
+</style>
 
             <!-- =================================================
                  ADMIN
