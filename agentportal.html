@@ -2584,386 +2584,122 @@
                 </div>
 
             </div>
-```html
-<!-- =========================================================
-     CUSTOMER JOURNEY — SJ LUXURY TRAVEL
-========================================================= -->
 
-<section class="customer-journey" id="customer-journey">
 
-    <div class="journey-title">
-        <span>THE SJ EXPERIENCE</span>
-        <h2>Customer Journey</h2>
-    </div>
+            <!-- =================================================
+                 CUSTOMER JOURNEY
+            ================================================== -->
 
-    <div class="journey-steps">
+            <div class="panel">
 
-        <!-- 01 -->
-        <div class="journey-item">
-            <div class="journey-count">01</div>
-            <h3>Lead Qualification</h3>
-        </div>
+                <div class="panel-header">
 
-        <div class="journey-connector"></div>
+                    <h2>
+                        Customer Journey
+                    </h2>
 
-        <!-- 02 -->
-        <div class="journey-item">
-            <div class="journey-count">02</div>
-            <h3>Consultation</h3>
-        </div>
+                </div>
 
-        <div class="journey-connector"></div>
 
-        <!-- 03 -->
-        <div class="journey-item">
-            <div class="journey-count">03</div>
-            <h3>Bespoke Itinerary</h3>
-        </div>
+                <div
+                    class="funnel"
+                    id="funnelContainer"
+                ></div>
 
-        <div class="journey-connector"></div>
+            </div>
 
-        <!-- 04 -->
-        <div class="journey-item">
-            <div class="journey-count">04</div>
-            <h3>Quotation</h3>
-        </div>
 
-        <div class="journey-connector"></div>
+            <!-- =================================================
+                 ADMIN
+            ================================================== -->
 
-        <!-- 05 -->
-        <div class="journey-item">
-            <div class="journey-count">05</div>
-            <h3>Client Approval</h3>
-        </div>
-
-        <div class="journey-connector"></div>
-
-        <!-- 06 -->
-        <div class="journey-item">
-            <div class="journey-count">06</div>
-            <h3>Deposit Payment</h3>
-        </div>
-
-        <div class="journey-connector"></div>
-
-        <!-- 07 -->
-        <div class="journey-item">
-            <div class="journey-count">07</div>
-            <h3>Booking Confirmation</h3>
-        </div>
-
-    </div>
-
-</section>
-
-
-<style>
-
-/* =========================================================
-   CUSTOMER JOURNEY
-========================================================= */
-
-.customer-journey {
-    width: 100%;
-    padding: 52px 5%;
-    background: #07121d;
-    color: #ffffff;
-}
-
-
-/* =========================================================
-   TITLE
-========================================================= */
-
-.journey-title {
-    text-align: center;
-    margin-bottom: 38px;
-}
-
-.journey-title span {
-    display: block;
-    margin-bottom: 7px;
-
-    color: #c9aa69;
-
-    font-size: 9px;
-    font-weight: 700;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-}
-
-.journey-title h2 {
-    margin: 0;
-
-    font-family: Georgia, "Times New Roman", serif;
-    font-size: 30px;
-    font-weight: 400;
-    line-height: 1.2;
-}
-
-
-/* =========================================================
-   JOURNEY STEPS
-========================================================= */
-
-.journey-steps {
-    width: 100%;
-    max-width: 1120px;
-    margin: 0 auto;
-
-    display: flex;
-    align-items: flex-start;
-    justify-content: center;
-}
-
-
-/* =========================================================
-   JOURNEY ITEM
-========================================================= */
-
-.journey-item {
-    flex: 1;
-    min-width: 0;
-
-    text-align: center;
-}
-
-
-/* =========================================================
-   NUMBER
-========================================================= */
-
-.journey-count {
-    width: 34px;
-    height: 34px;
-
-    margin: 0 auto 11px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    border: 1px solid rgba(201, 170, 105, 0.55);
-    border-radius: 50%;
-
-    color: #c9aa69;
-
-    font-size: 10px;
-    font-weight: 600;
-
-    transition: all 0.25s ease;
-}
-
-.journey-item:hover .journey-count {
-    background: #c9aa69;
-    color: #07121d;
-    border-color: #c9aa69;
-}
-
-
-/* =========================================================
-   STEP TITLE
-========================================================= */
-
-.journey-item h3 {
-    margin: 0;
-
-    color: rgba(255, 255, 255, 0.85);
-
-    font-size: 11px;
-    font-weight: 500;
-    line-height: 1.4;
-
-    white-space: nowrap;
-}
-
-
-/* =========================================================
-   CONNECTOR
-========================================================= */
-
-.journey-connector {
-    flex: 0 0 32px;
-
-    height: 1px;
-
-    margin-top: 17px;
-
-    background: rgba(201, 170, 105, 0.30);
-}
-
-
-/* =========================================================
-   TABLET
-========================================================= */
-
-@media (max-width: 1050px) {
-
-    .customer-journey {
-        padding: 48px 4%;
-    }
-
-    .journey-steps {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 28px 12px;
-    }
-
-    .journey-connector {
-        display: none;
-    }
-
-    .journey-item {
-        width: 100%;
-    }
-
-}
-
-
-/* =========================================================
-   MOBILE
-========================================================= */
-
-@media (max-width: 650px) {
-
-    .customer-journey {
-        padding: 42px 20px;
-    }
-
-    .journey-title {
-        margin-bottom: 30px;
-    }
-
-    .journey-title span {
-        font-size: 8px;
-        letter-spacing: 2.5px;
-    }
-
-    .journey-title h2 {
-        font-size: 26px;
-    }
-
-    .journey-steps {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 25px 10px;
-    }
-
-    .journey-item {
-        width: 100%;
-    }
-
-    .journey-count {
-        width: 32px;
-        height: 32px;
-
-        margin-bottom: 9px;
-
-        font-size: 9px;
-    }
-
-    .journey-item h3 {
-        font-size: 10px;
-        line-height: 1.35;
-        white-space: normal;
-    }
-
-}
-
-
-/* =========================================================
-   SMALL MOBILE
-========================================================= */
-
-@media (max-width: 380px) {
-
-    .customer-journey {
-        padding: 38px 16px;
-    }
-
-    .journey-title h2 {
-        font-size: 24px;
-    }
-
-    .journey-steps {
-        gap: 22px 8px;
-    }
-
-    .journey-item h3 {
-        font-size: 9.5px;
-    }
-
-}
-
-</style>
-
-
-<!-- =========================================================
-     ADMIN
-========================================================= -->
-
-<div id="adminPanel" class="panel hidden">
-
-    <div class="panel-header">
-
-        <h2>
-            Administration
-        </h2>
-
-        <div class="panel-actions">
-
-            <button
-                class="btn btn-secondary"
-                onclick="loadAgents()"
+            <div
+                id="adminPanel"
+                class="panel hidden"
             >
-                Manage Agents
-            </button>
 
-        </div>
+                <div class="panel-header">
 
-    </div>
+                    <h2>
+                        Administration
+                    </h2>
 
-    <p style="color:#777;">
+                    <div class="panel-actions">
 
-        Administrator access allows you to
-        manage all agents and customer journeys.
+                        <button
+                            class="btn btn-secondary"
+                            onclick="loadAgents()"
+                        >
+                            Manage Agents
+                        </button>
 
-    </p>
+                    </div>
 
-    <div
-        id="agentsContainer"
-        class="hidden"
-    >
+                </div>
 
-        <div class="table-wrapper">
 
-            <table>
+                <p style="color:#777;">
 
-                <thead>
+                    Administrator access allows you to
+                    manage all agents and customer journeys.
 
-                    <tr>
+                </p>
 
-                        <th>Name</th>
-                        <th>Referral Code</th>
-                        <th>Phone</th>
-                        <th>Email</th>
-                        <th>Status</th>
-                        <th>Created</th>
 
-                    </tr>
+                <div
+                    id="agentsContainer"
+                    class="hidden"
+                >
 
-                </thead>
+                    <div class="table-wrapper">
 
-                <tbody id="agentsTable"></tbody>
+                        <table>
 
-            </table>
+                            <thead>
 
-        </div>
+                                <tr>
 
-    </div>
+                                    <th>
+                                        Name
+                                    </th>
 
-</div>
-```
+                                    <th>
+                                        Referral Code
+                                    </th>
+
+                                    <th>
+                                        Phone
+                                    </th>
+
+                                    <th>
+                                        Email
+                                    </th>
+
+                                    <th>
+                                        Status
+                                    </th>
+
+                                    <th>
+                                        Created
+                                    </th>
+
+                                </tr>
+
+                            </thead>
+
+
+                            <tbody id="agentsTable"></tbody>
+
+                        </table>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+        </main>
 
 
         <!-- =================================================
