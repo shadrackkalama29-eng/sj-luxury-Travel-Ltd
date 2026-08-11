@@ -1,4196 +1,5534 @@
 <!DOCTYPE html>
-
 <html lang="en">
 
 <head>
 
-<meta charset="UTF-8">
-
-<meta
-name="viewport"
-content="width=device-width, initial-scale=1.0"
-
->
-
-<title>SJ Luxury Travel | Agent Portal</title>
-
-<style>
-
-/* =========================================================
-   GLOBAL
-========================================================= */
-
-* {
-  box-sizing: border-box;
-}
-
-html {
-  scroll-behavior: smooth;
-}
-
-body {
-  margin: 0;
-  font-family: Arial, Helvetica, sans-serif;
-  background: #f5f7fb;
-  color: #172033;
-  overflow-x: hidden;
-}
-
-button,
-input,
-select,
-textarea {
-  font-family: inherit;
-}
-
-button {
-  border: 0;
-}
-
-.hidden {
-  display: none !important;
-}
-
-
-/* =========================================================
-   SJ LUXURY TRAVELS LOGO
-========================================================= */
-
-.sj-brand {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  text-decoration: none;
-  color: #0b3156;
-  width: 100%;
-  transition: .2s ease;
-}
-
-.sj-brand:hover {
-  transform: translateY(-1px);
-}
-
-.sj-text-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
-.sj-main-row {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  line-height: 1;
-}
-
-.sj-title {
-  font-size: 38px;
-  font-weight: 900;
-  letter-spacing: -2px;
-  color: #0b3156;
-}
-
-.sj-divider {
-  width: 1px;
-  height: 31px;
-  background: #168bc2;
-  margin: 0 9px;
-}
-
-.sj-luxury {
-  font-size: 23px;
-  font-weight: 300;
-  font-style: italic;
-  letter-spacing: -.5px;
-  color: #168bc2;
-}
-
-.sj-subtitle-row {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  margin-top: 7px;
-}
-
-.sj-subtitle {
-  font-size: 8px;
-  font-weight: 800;
-  letter-spacing: 3px;
-  color: #0b3156;
-  white-space: nowrap;
-}
-
-.sj-subtitle-row .line {
-  height: 1px;
-  width: 28px;
-  background: #168bc2;
-}
-
-
-/* =========================================================
-   LOGIN
-========================================================= */
-
-.login-page {
-  min-height: 100vh;
-  min-height: 100svh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 25px;
-
-  background:
-    linear-gradient(
-      135deg,
-      #06172d 0%,
-      #0b3156 50%,
-      #124d78 100%
-    );
-}
-
-.login-card {
-  width: 100%;
-  max-width: 470px;
-  background: #ffffff;
-  border-radius: 24px;
-  padding: 42px;
-
-  box-shadow:
-    0 30px 80px rgba(0,0,0,.28);
-}
-
-.login-card .sj-brand {
-  margin-bottom: 20px;
-}
-
-.login-card .sj-title {
-  font-size: 42px;
-}
-
-.login-card .sj-luxury {
-  font-size: 25px;
-}
-
-.login-card .sj-divider {
-  height: 34px;
-}
-
-.login-description {
-  text-align: center;
-  color: #777;
-  font-size: 14px;
-  margin: 8px 0 28px;
-}
-
-.logo {
-  text-align: center;
-  margin-bottom: 30px;
-}
-
-.logo-mark {
-  width: 65px;
-  height: 65px;
-  margin: 0 auto 15px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  background:
-    linear-gradient(
-      135deg,
-      #0b3156,
-      #168bc2
-    );
-
-  color: white;
-  font-size: 28px;
-  font-weight: 900;
-
-  box-shadow:
-    0 10px 25px rgba(11,49,86,.25);
-}
-
-.logo h1 {
-  margin: 0;
-  font-size: 25px;
-  letter-spacing: .5px;
-  color: #0b3156;
-}
-
-.logo p {
-  margin: 7px 0 0;
-  color: #777;
-  font-size: 14px;
-}
-
-
-/* =========================================================
-   FORMS
-========================================================= */
-
-.form-group {
-  margin-bottom: 18px;
-}
-
-.form-group label {
-  display: block;
-  margin-bottom: 7px;
-  font-weight: 700;
-  font-size: 13px;
-  color: #283548;
-}
-
-.form-group input,
-.form-group select,
-.form-group textarea {
-  width: 100%;
-  padding: 13px 14px;
-  border: 1px solid #d7dee8;
-  border-radius: 10px;
-  background: #fff;
-  color: #172033;
-  font-size: 14px;
-  outline: none;
-  transition: .2s;
-}
-
-.form-group input:focus,
-.form-group select:focus,
-.form-group textarea:focus {
-  border-color: #0b5c91;
-
-  box-shadow:
-    0 0 0 3px rgba(11,92,145,.08);
-}
-
-.form-group textarea {
-  resize: vertical;
-}
-
-
-/* =========================================================
-   BUTTONS
-========================================================= */
-
-.btn {
-  border: none;
-  border-radius: 10px;
-  padding: 12px 18px;
-  font-weight: 700;
-  cursor: pointer;
-  transition: .2s;
-  font-size: 13px;
-}
-
-.btn:hover {
-  transform: translateY(-1px);
-}
-
-.btn-primary {
-  background: #0b3156;
-  color: white;
-}
-
-.btn-primary:hover {
-  background: #124c7c;
-}
-
-.btn-primary.full {
-  width: 100%;
-}
-
-.btn-secondary {
-  background: #edf2f7;
-  color: #172033;
-}
-
-.btn-secondary:hover {
-  background: #dfe7ef;
-}
-
-.btn-success {
-  background: #16834d;
-  color: white;
-}
-
-.btn-danger {
-  background: #c0392b;
-  color: white;
-}
-
-
-/* =========================================================
-   SWITCH
-========================================================= */
-
-.switch-link {
-  text-align: center;
-  margin-top: 20px;
-  color: #666;
-  font-size: 14px;
-}
-
-.switch-link a {
-  color: #0b5c91;
-  font-weight: 700;
-  cursor: pointer;
-}
-
-
-/* =========================================================
-   DASHBOARD
-========================================================= */
-
-.dashboard {
-  min-height: 100vh;
-  background: #f5f7fb;
-}
-
-
-/* =========================================================
-   TOP BAR
-========================================================= */
-
-.topbar {
-  background: #071a33;
-  color: white;
-
-  padding: 14px 25px;
-
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-  gap: 20px;
-
-  position: sticky;
-  top: 0;
-  z-index: 100;
-}
-
-.topbar-brand-link {
-  display: flex;
-  align-items: center;
-  text-decoration: none;
-  color: white;
-  min-width: 0;
-}
-
-.topbar-logo {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.topbar-logo .sj-text-container {
-  align-items: flex-start;
-}
-
-.topbar-logo .sj-main-row {
-  justify-content: flex-start;
-}
-
-.topbar-logo .sj-title {
-  color: white;
-  font-size: 25px;
-}
-
-.topbar-logo .sj-luxury {
-  color: #58bde9;
-  font-size: 17px;
-}
-
-.topbar-logo .sj-divider {
-  height: 21px;
-  background: #58bde9;
-  margin: 0 6px;
-}
-
-.topbar-logo .sj-subtitle-row {
-  justify-content: flex-start;
-  margin-top: 3px;
-}
-
-.topbar-logo .sj-subtitle {
-  color: rgba(255,255,255,.85);
-  font-size: 6px;
-  letter-spacing: 2px;
-}
-
-.topbar-logo .sj-subtitle-row .line {
-  background: #58bde9;
-  width: 18px;
-}
-
-.user-area {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.user-badge {
-  background: rgba(255,255,255,.1);
-  border: 1px solid rgba(255,255,255,.12);
-
-  padding: 8px 12px;
-
-  border-radius: 8px;
-
-  font-size: 13px;
-
-  max-width: 250px;
-
-  overflow: hidden;
-
-  text-overflow: ellipsis;
-
-  white-space: nowrap;
-}
-
-
-/* =========================================================
-   BACK TO WEBSITE
-========================================================= */
-
-.back-website-btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-
-  gap: 7px;
-
-  padding: 9px 13px;
-
-  border-radius: 9px;
-
-  background: rgba(255,255,255,.10);
-
-  border: 1px solid rgba(255,255,255,.18);
-
-  color: white;
-
-  text-decoration: none;
-
-  font-size: 12px;
-
-  font-weight: 700;
-
-  transition: .2s ease;
-
-  white-space: nowrap;
-}
-
-.back-website-btn:hover {
-  background: rgba(255,255,255,.18);
-  transform: translateY(-1px);
-}
-
-
-/* =========================================================
-   DASHBOARD CONTAINER
-========================================================= */
-
-.dashboard-container {
-  width: 100%;
-  max-width: 1450px;
-  margin: auto;
-  padding: 30px;
-}
-
-
-/* =========================================================
-   STATS
-========================================================= */
-
-.stats {
-  display: grid;
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>SJ Luxury Travel | Agent Portal</title>
+
+    <style>
+
+        /* =========================================================
+           GLOBAL
+        ========================================================= */
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f4f5f7;
+            color: #172033;
+            overflow-x: hidden;
+        }
+
+        button,
+        input,
+        select,
+        textarea {
+            font-family: inherit;
+        }
+
+        button {
+            border: 0;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+
+        /* =========================================================
+           BRAND COLORS
+        ========================================================= */
+
+        :root {
+            --navy-50: #f4f6fa;
+            --navy-100: #e5ebf5;
+            --navy-600: #152A56;
+            --navy-700: #0B1B3D;
+            --navy-800: #061026;
+
+            --gold-50: #FDFBF4;
+            --gold-500: #D4AF37;
+            --gold-600: #AA841B;
+
+            --flight-blue: #2A26D9;
+
+            --neutral-bg: #F4F5F7;
+            --tour-orange: #E66F33;
+            --tour-green: #7A9A01;
+        }
+
+
+        /* =========================================================
+           SJ LUXURY TRAVELS LOGO
+        ========================================================= */
+
+        .sj-brand {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            color: var(--navy-700);
+            width: 100%;
+            transition: .2s ease;
+        }
+
+        .sj-brand:hover {
+            transform: translateY(-1px);
+        }
+
+        .sj-text-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .sj-main-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            line-height: 1;
+        }
+
+        .sj-title {
+            font-size: 38px;
+            font-weight: 900;
+            letter-spacing: -2px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #C5A059 0%,
+                    #D4AF37 50%,
+                    #AA7C11 100%
+                );
+
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .sj-divider {
+            width: 1px;
+            height: 31px;
+            background: var(--gold-500);
+            margin: 0 9px;
+        }
+
+        .sj-luxury {
+            font-size: 23px;
+            font-weight: 300;
+            font-style: italic;
+            letter-spacing: -.5px;
+            color: var(--navy-700);
+        }
+
+        .sj-subtitle-row {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 7px;
+        }
+
+        .sj-subtitle {
+            font-size: 8px;
+            font-weight: 800;
+            letter-spacing: 3px;
+            color: var(--navy-700);
+            white-space: nowrap;
+        }
+
+        .sj-subtitle-row .line {
+            height: 1px;
+            width: 28px;
+            background: var(--gold-500);
+        }
+
+
+        /* =========================================================
+           LOGIN
+        ========================================================= */
+
+        .login-page {
+            min-height: 100vh;
+            min-height: 100svh;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            padding: 25px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #061026 0%,
+                    #0B1B3D 50%,
+                    #152A56 100%
+                );
+        }
+
+        .login-card {
+            width: 100%;
+            max-width: 470px;
+
+            background: #ffffff;
+
+            border-radius: 24px;
+
+            padding: 42px;
+
+            box-shadow:
+                0 30px 80px rgba(0, 0, 0, .28);
+        }
+
+        .login-card .sj-brand {
+            margin-bottom: 20px;
+        }
+
+        .login-card .sj-title {
+            font-size: 42px;
+        }
+
+        .login-card .sj-luxury {
+            font-size: 25px;
+        }
+
+        .login-card .sj-divider {
+            height: 34px;
+        }
+
+        .login-description {
+            text-align: center;
+            color: #777;
+            font-size: 14px;
+            margin: 8px 0 28px;
+        }
+
+        .logo {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .logo-mark {
+            width: 65px;
+            height: 65px;
+            margin: 0 auto 15px;
+
+            border-radius: 50%;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    var(--navy-700),
+                    var(--gold-500)
+                );
+
+            color: white;
+            font-size: 28px;
+            font-weight: 900;
+
+            box-shadow:
+                0 10px 25px rgba(11, 27, 61, .25);
+        }
+
+        .logo h1 {
+            margin: 0;
+            font-size: 25px;
+            letter-spacing: .5px;
+            color: var(--navy-700);
+        }
+
+        .logo p {
+            margin: 7px 0 0;
+            color: #777;
+            font-size: 14px;
+        }
+
+
+        /* =========================================================
+           FORMS
+        ========================================================= */
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 7px;
+            font-weight: 700;
+            font-size: 13px;
+            color: #283548;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+
+            padding: 13px 14px;
+
+            border: 1px solid #d7dee8;
+
+            border-radius: 10px;
+
+            background: #fff;
+
+            color: #172033;
+
+            font-size: 14px;
+
+            outline: none;
+
+            transition: .2s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: var(--gold-600);
+
+            box-shadow:
+                0 0 0 3px rgba(212, 175, 55, .10);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+        }
+
+
+        /* =========================================================
+           BUTTONS
+        ========================================================= */
+
+        .btn {
+            border: none;
+
+            border-radius: 10px;
+
+            padding: 12px 18px;
+
+            font-weight: 700;
 
-  grid-template-columns:
-    repeat(
-      auto-fit,
-      minmax(170px, 1fr)
-    );
+            cursor: pointer;
+
+            transition: .2s;
 
-  gap: 18px;
+            font-size: 13px;
+        }
 
-  margin-bottom: 25px;
-}
+        .btn:hover {
+            transform: translateY(-1px);
+        }
 
-.stat-card {
-  background: white;
+        .btn-primary {
+            background: var(--navy-700);
+            color: white;
+        }
 
-  border-radius: 15px;
+        .btn-primary:hover {
+            background: var(--navy-600);
+        }
 
-  padding: 22px;
+        .btn-primary.full {
+            width: 100%;
+        }
 
-  box-shadow:
-    0 5px 20px rgba(0,0,0,.06);
+        .btn-secondary {
+            background: #edf2f7;
+            color: #172033;
+        }
+
+        .btn-secondary:hover {
+            background: #dfe7ef;
+        }
+
+        .btn-success {
+            background: #16834d;
+            color: white;
+        }
+
+        .btn-danger {
+            background: #c0392b;
+            color: white;
+        }
+
+        .btn-report {
+            background: var(--gold-500);
+            color: var(--navy-800);
+        }
+
+        .btn-report:hover {
+            background: var(--gold-600);
+            color: white;
+        }
+
+
+        /* =========================================================
+           SWITCH
+        ========================================================= */
+
+        .switch-link {
+            text-align: center;
+            margin-top: 20px;
+            color: #666;
+            font-size: 14px;
+        }
+
+        .switch-link a {
+            color: var(--navy-600);
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+
+        /* =========================================================
+           DASHBOARD
+        ========================================================= */
 
-  border: 1px solid #edf0f4;
-}
+        .dashboard {
+            min-height: 100vh;
+            background: var(--neutral-bg);
+        }
 
-.stat-card h3 {
-  margin: 0;
-  font-size: 30px;
-  color: #0b3156;
-}
 
-.stat-card p {
-  margin: 7px 0 0;
-  color: #777;
-  font-size: 13px;
-}
+        /* =========================================================
+           TOP BAR
+        ========================================================= */
 
+        .topbar {
+            background: var(--navy-800);
+            color: white;
 
-/* =========================================================
-   PANELS
-========================================================= */
+            padding: 14px 25px;
 
-.panel {
-  background: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
 
-  border-radius: 16px;
+            gap: 20px;
 
-  padding: 25px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
 
-  margin-bottom: 25px;
+            border-bottom: 1px solid rgba(212, 175, 55, .25);
+        }
 
-  box-shadow:
-    0 5px 20px rgba(0,0,0,.05);
+        .topbar-brand-link {
+            display: flex;
+            align-items: center;
 
-  border: 1px solid #edf0f4;
-}
+            text-decoration: none;
+            color: white;
 
-.panel-header {
-  display: flex;
+            min-width: 0;
+        }
 
-  justify-content: space-between;
+        .topbar-logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
 
-  align-items: center;
+        .topbar-logo .sj-text-container {
+            align-items: flex-start;
+        }
 
-  gap: 15px;
+        .topbar-logo .sj-main-row {
+            justify-content: flex-start;
+        }
 
-  margin-bottom: 20px;
-}
+        .topbar-logo .sj-title {
+            font-size: 25px;
+        }
 
-.panel-header h2 {
-  margin: 0;
-  font-size: 20px;
-  color: #172033;
-}
+        .topbar-logo .sj-luxury {
+            color: #ffffff;
+            font-size: 17px;
+        }
 
-.panel-actions {
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-}
+        .topbar-logo .sj-divider {
+            height: 21px;
+            background: var(--gold-500);
+            margin: 0 6px;
+        }
 
+        .topbar-logo .sj-subtitle-row {
+            justify-content: flex-start;
+            margin-top: 3px;
+        }
 
-/* =========================================================
-   SEARCH
-========================================================= */
+        .topbar-logo .sj-subtitle {
+            color: rgba(255,255,255,.85);
+            font-size: 6px;
+            letter-spacing: 2px;
+        }
 
-.search-box {
-  margin-bottom: 20px;
-  position: relative;
-}
+        .topbar-logo .sj-subtitle-row .line {
+            background: var(--gold-500);
+            width: 18px;
+        }
 
-.search-box input {
-  width: 100%;
+        .user-area {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
 
-  padding: 14px 15px 14px 42px;
+        .user-badge {
+            background: rgba(255,255,255,.08);
 
-  border: 1px solid #d8dee8;
+            border: 1px solid rgba(212,175,55,.25);
 
-  border-radius: 10px;
+            padding: 8px 12px;
 
-  outline: none;
+            border-radius: 8px;
 
-  font-size: 14px;
-}
+            font-size: 13px;
 
-.search-icon {
-  position: absolute;
+            max-width: 250px;
 
-  left: 15px;
+            overflow: hidden;
 
-  top: 50%;
+            text-overflow: ellipsis;
 
-  transform: translateY(-50%);
+            white-space: nowrap;
+        }
 
-  color: #777;
-}
 
+        /* =========================================================
+           BACK TO WEBSITE
+        ========================================================= */
 
-/* =========================================================
-   TABLE
-========================================================= */
+        .back-website-btn {
+            display: inline-flex;
 
-.table-wrapper {
-  width: 100%;
+            align-items: center;
+            justify-content: center;
 
-  overflow-x: auto;
+            gap: 7px;
 
-  border: 1px solid #edf0f4;
+            padding: 9px 13px;
 
-  border-radius: 10px;
+            border-radius: 9px;
 
-  -webkit-overflow-scrolling: touch;
+            background: rgba(255,255,255,.08);
 
-  scrollbar-width: thin;
-}
+            border: 1px solid rgba(212,175,55,.25);
 
-.table-wrapper::-webkit-scrollbar {
-  height: 7px;
-}
+            color: white;
 
-.table-wrapper::-webkit-scrollbar-thumb {
-  background: #cbd5e1;
-  border-radius: 20px;
-}
+            text-decoration: none;
 
-table {
-  width: 100%;
+            font-size: 12px;
 
-  border-collapse: collapse;
+            font-weight: 700;
 
-  min-width: 1050px;
-}
+            transition: .2s ease;
 
-th {
-  background: #f1f5f9;
+            white-space: nowrap;
+        }
 
-  text-align: left;
+        .back-website-btn:hover {
+            background: rgba(212,175,55,.15);
+            transform: translateY(-1px);
+        }
 
-  padding: 13px;
 
-  font-size: 11px;
+        /* =========================================================
+           DASHBOARD CONTAINER
+        ========================================================= */
 
-  text-transform: uppercase;
+        .dashboard-container {
+            width: 100%;
+            max-width: 1450px;
 
-  letter-spacing: .4px;
+            margin: auto;
 
-  color: #596579;
+            padding: 30px;
+        }
 
-  white-space: nowrap;
-}
 
-td {
-  padding: 13px;
+        /* =========================================================
+           STATS
+        ========================================================= */
 
-  border-bottom: 1px solid #edf0f4;
+        .stats {
+            display: grid;
 
-  font-size: 13px;
+            grid-template-columns:
+                repeat(auto-fit, minmax(170px, 1fr));
 
-  vertical-align: middle;
-}
+            gap: 18px;
 
-tr:last-child td {
-  border-bottom: none;
-}
+            margin-bottom: 25px;
+        }
 
-tr:hover td {
-  background: #fafbfd;
-}
+        .stat-card {
+            background: white;
 
+            border-radius: 15px;
 
-/* =========================================================
-   STAGE BADGES
-========================================================= */
+            padding: 22px;
 
-.stage {
-  display: inline-block;
+            box-shadow:
+                0 5px 20px rgba(0,0,0,.06);
 
-  padding: 6px 9px;
+            border: 1px solid #edf0f4;
 
-  border-radius: 20px;
+            position: relative;
 
-  font-size: 10px;
+            overflow: hidden;
+        }
 
-  font-weight: 800;
+        .stat-card::after {
+            content: "";
 
-  background: #e8f0f8;
+            position: absolute;
 
-  color: #174d75;
+            right: -30px;
+            bottom: -30px;
 
-  white-space: nowrap;
-}
+            width: 90px;
+            height: 90px;
 
+            border-radius: 50%;
 
-/* =========================================================
-   FUNNEL
-========================================================= */
+            background: rgba(212,175,55,.08);
+        }
 
-.funnel {
-  display: grid;
+        .stat-card h3 {
+            margin: 0;
+            font-size: 30px;
+            color: var(--navy-700);
+        }
 
-  grid-template-columns:
-    repeat(7, 1fr);
+        .stat-card p {
+            margin: 7px 0 0;
+            color: #777;
+            font-size: 13px;
+        }
 
-  gap: 8px;
 
-  overflow-x: auto;
-}
+        /* =========================================================
+           PANELS
+        ========================================================= */
 
-.funnel-step {
-  min-width: 120px;
+        .panel {
+            background: white;
 
-  padding: 16px 10px;
+            border-radius: 16px;
 
-  text-align: center;
+            padding: 25px;
 
-  background: #edf2f7;
+            margin-bottom: 25px;
 
-  border-radius: 10px;
+            box-shadow:
+                0 5px 20px rgba(0,0,0,.05);
 
-  color: #344054;
-}
+            border: 1px solid #edf0f4;
+        }
 
-.funnel-step span {
-  display: block;
+        .panel-header {
+            display: flex;
 
-  font-size: 27px;
+            justify-content: space-between;
 
-  font-weight: 900;
+            align-items: center;
 
-  color: #0b3156;
+            gap: 15px;
 
-  margin-bottom: 5px;
-}
+            margin-bottom: 20px;
+        }
 
-.funnel-step.active {
-  background: #0b3156;
-  color: white;
-}
+        .panel-header h2 {
+            margin: 0;
+            font-size: 20px;
+            color: #172033;
+        }
 
-.funnel-step.active span {
-  color: white;
-}
+        .panel-actions {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
 
 
-/* =========================================================
-   MODAL
-========================================================= */
+        /* =========================================================
+           SEARCH
+        ========================================================= */
 
-.modal {
-  position: fixed;
+        .search-box {
+            margin-bottom: 20px;
+            position: relative;
+        }
 
-  inset: 0;
+        .search-box input {
+            width: 100%;
 
-  background: rgba(0,0,0,.62);
+            padding: 14px 15px 14px 42px;
 
-  display: flex;
+            border: 1px solid #d8dee8;
 
-  align-items: center;
+            border-radius: 10px;
 
-  justify-content: center;
+            outline: none;
 
-  padding: 20px;
+            font-size: 14px;
+        }
 
-  z-index: 999;
-}
+        .search-box input:focus {
+            border-color: var(--gold-500);
 
-.modal-content {
-  background: white;
+            box-shadow:
+                0 0 0 3px rgba(212,175,55,.08);
+        }
 
-  width: 100%;
+        .search-icon {
+            position: absolute;
 
-  max-width: 680px;
+            left: 15px;
 
-  max-height: 90vh;
+            top: 50%;
 
-  overflow-y: auto;
+            transform: translateY(-50%);
 
-  border-radius: 18px;
+            color: #777;
+        }
 
-  padding: 30px;
 
-  box-shadow:
-    0 30px 80px rgba(0,0,0,.25);
-}
+        /* =========================================================
+           TABLE
+        ========================================================= */
 
-.modal-header {
-  display: flex;
+        .table-wrapper {
+            width: 100%;
 
-  justify-content: space-between;
+            overflow-x: auto;
 
-  align-items: center;
+            border: 1px solid #edf0f4;
 
-  margin-bottom: 20px;
-}
+            border-radius: 10px;
 
-.modal-header h2 {
-  margin: 0;
-}
+            -webkit-overflow-scrolling: touch;
 
-.close {
-  border: none;
+            scrollbar-width: thin;
+        }
 
-  background: transparent;
+        .table-wrapper::-webkit-scrollbar {
+            height: 7px;
+        }
 
-  font-size: 28px;
+        .table-wrapper::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 20px;
+        }
 
-  cursor: pointer;
+        table {
+            width: 100%;
 
-  color: #777;
-}
+            border-collapse: collapse;
 
+            min-width: 1050px;
+        }
 
-/* =========================================================
-   MESSAGE
-========================================================= */
+        th {
+            background: #f1f5f9;
 
-.message {
-  text-align: center;
+            text-align: left;
 
-  margin-top: 15px;
+            padding: 13px;
 
-  font-size: 13px;
+            font-size: 11px;
 
-  min-height: 20px;
-}
+            text-transform: uppercase;
 
+            letter-spacing: .4px;
 
-/* =========================================================
-   LOADING
-========================================================= */
+            color: #596579;
 
-.loading {
-  position: fixed;
+            white-space: nowrap;
+        }
 
-  inset: 0;
+        td {
+            padding: 13px;
 
-  background: rgba(255,255,255,.75);
+            border-bottom: 1px solid #edf0f4;
 
-  z-index: 2000;
+            font-size: 13px;
 
-  display: flex;
+            vertical-align: middle;
+        }
 
-  align-items: center;
+        tr:last-child td {
+            border-bottom: none;
+        }
 
-  justify-content: center;
-}
+        tr:hover td {
+            background: #fafbfd;
+        }
 
-.loading-box {
-  background: white;
 
-  padding: 25px 35px;
+        /* =========================================================
+           STAGE BADGES
+        ========================================================= */
 
-  border-radius: 14px;
+        .stage {
+            display: inline-block;
 
-  box-shadow:
-    0 20px 50px rgba(0,0,0,.15);
+            padding: 6px 9px;
 
-  text-align: center;
-}
+            border-radius: 20px;
 
-.spinner {
-  width: 35px;
+            font-size: 10px;
 
-  height: 35px;
+            font-weight: 800;
 
-  border: 4px solid #e5e7eb;
+            background: #e8f0f8;
 
-  border-top-color: #0b3156;
+            color: #174d75;
 
-  border-radius: 50%;
+            white-space: nowrap;
+        }
 
-  animation: spin .8s linear infinite;
 
-  margin: 0 auto 12px;
-}
+        /* =========================================================
+           FUNNEL / CUSTOMER JOURNEY
+        ========================================================= */
 
-@keyframes spin {
+        .funnel {
+            display: grid;
 
-  to {
-    transform: rotate(360deg);
-  }
+            grid-template-columns:
+                repeat(7, minmax(0, 1fr));
 
-}
+            gap: 8px;
 
+            width: 100%;
+        }
 
-/* =========================================================
-   EMPTY STATE
-========================================================= */
+        .funnel-step {
+            min-width: 0;
 
-.empty-state {
-  text-align: center;
+            padding: 16px 8px;
 
-  padding: 45px;
+            text-align: center;
 
-  color: #777;
-}
+            background: #edf2f7;
 
+            border-radius: 10px;
 
-/* =========================================================
-   TABLET
-========================================================= */
+            color: #344054;
 
-@media (max-width: 1000px) {
+            font-size: 11px;
 
-  .dashboard-container {
-    padding: 22px;
-  }
+            font-weight: 700;
 
-  .stats {
-    grid-template-columns:
-      repeat(3, minmax(150px, 1fr));
-  }
+            line-height: 1.35;
 
-  .topbar {
-    padding: 12px 18px;
-  }
+            overflow-wrap: anywhere;
 
-}
+            word-break: normal;
 
+            display: flex;
 
-/* =========================================================
-   MOBILE
-========================================================= */
+            flex-direction: column;
 
-@media (max-width: 700px) {
+            align-items: center;
 
-  body {
-    overflow-x: hidden;
-  }
+            justify-content: center;
+        }
 
+        .funnel-step span {
+            display: block;
 
-  /* LOGIN */
+            font-size: 27px;
 
-  .login-page {
-    min-height: 100svh;
+            line-height: 1;
 
-    padding: 15px;
+            font-weight: 900;
 
-    align-items: flex-start;
+            color: var(--navy-700);
 
-    padding-top: 35px;
+            margin-bottom: 7px;
+        }
 
-    padding-bottom: 35px;
-  }
+        .funnel-step.active {
+            background: var(--navy-700);
+            color: white;
+        }
 
-  .login-card {
-    max-width: 100%;
+        .funnel-step.active span {
+            color: white;
+        }
 
-    padding: 25px 20px;
 
-    border-radius: 18px;
-  }
+        /* =========================================================
+           MODAL
+        ========================================================= */
 
-  .login-card .sj-title {
-    font-size: 34px;
-  }
+        .modal {
+            position: fixed;
 
-  .login-card .sj-luxury {
-    font-size: 21px;
-  }
+            inset: 0;
 
-  .login-card .sj-divider {
-    height: 28px;
+            background: rgba(0,0,0,.62);
 
-    margin: 0 7px;
-  }
+            display: flex;
 
-  .login-card .sj-subtitle {
-    font-size: 7px;
+            align-items: center;
 
-    letter-spacing: 2px;
-  }
+            justify-content: center;
 
-  .login-card .sj-subtitle-row .line {
-    width: 20px;
-  }
+            padding: 20px;
 
-  .login-description {
-    font-size: 13px;
+            z-index: 999;
+        }
 
-    margin-bottom: 22px;
-  }
+        .modal-content {
+            background: white;
 
+            width: 100%;
 
-  /* MOBILE FORM */
+            max-width: 680px;
 
-  .form-group input,
-  .form-group select,
-  .form-group textarea {
-    font-size: 16px;
+            max-height: 90vh;
 
-    padding: 13px;
-  }
+            overflow-y: auto;
 
-  .btn {
-    min-height: 44px;
-  }
+            border-radius: 18px;
 
+            padding: 30px;
 
-  /* TOP BAR */
+            box-shadow:
+                0 30px 80px rgba(0,0,0,.25);
+        }
 
-  .topbar {
-    position: relative;
+        .modal-header {
+            display: flex;
 
-    padding: 12px;
+            justify-content: space-between;
 
-    gap: 12px;
+            align-items: center;
 
-    flex-direction: column;
+            margin-bottom: 20px;
+        }
 
-    align-items: stretch;
-  }
+        .modal-header h2 {
+            margin: 0;
+        }
 
-  .topbar-brand-link {
-    justify-content: center;
-  }
+        .close {
+            border: none;
 
-  .topbar-logo .sj-title {
-    font-size: 24px;
-  }
+            background: transparent;
 
-  .topbar-logo .sj-luxury {
-    font-size: 16px;
-  }
+            font-size: 28px;
 
-  .topbar-logo .sj-subtitle {
-    font-size: 6px;
-  }
+            cursor: pointer;
 
-  .user-area {
-    width: 100%;
+            color: #777;
+        }
 
-    display: grid;
 
-    grid-template-columns:
-      minmax(0, 1fr)
-      auto
-      auto;
+        /* =========================================================
+           MESSAGE
+        ========================================================= */
 
-    gap: 8px;
-  }
+        .message {
+            text-align: center;
 
-  .user-badge {
-    min-width: 0;
+            margin-top: 15px;
 
-    max-width: none;
+            font-size: 13px;
 
-    overflow: hidden;
+            min-height: 20px;
+        }
 
-    text-overflow: ellipsis;
 
-    white-space: nowrap;
-  }
+        /* =========================================================
+           LOADING
+        ========================================================= */
 
-  .back-website-btn {
-    width: 100%;
-  }
+        .loading {
+            position: fixed;
 
+            inset: 0;
 
-  /* DASHBOARD */
+            background: rgba(255,255,255,.75);
 
-  .dashboard-container {
-    padding: 12px;
-  }
+            z-index: 2000;
 
+            display: flex;
 
-  /* STATS */
+            align-items: center;
 
-  .stats {
-    grid-template-columns:
-      repeat(2, minmax(0, 1fr));
+            justify-content: center;
+        }
 
-    gap: 10px;
+        .loading-box {
+            background: white;
 
-    margin-bottom: 15px;
-  }
+            padding: 25px 35px;
 
-  .stat-card {
-    padding: 16px 13px;
+            border-radius: 14px;
 
-    border-radius: 12px;
-  }
+            box-shadow:
+                0 20px 50px rgba(0,0,0,.15);
 
-  .stat-card h3 {
-    font-size: 24px;
-  }
+            text-align: center;
+        }
 
-  .stat-card p {
-    font-size: 11px;
+        .spinner {
+            width: 35px;
 
-    line-height: 1.3;
-  }
+            height: 35px;
 
+            border: 4px solid #e5e7eb;
 
-  /* PANELS */
+            border-top-color: var(--gold-500);
 
-  .panel {
-    padding: 15px;
+            border-radius: 50%;
 
-    border-radius: 13px;
+            animation: spin .8s linear infinite;
 
-    margin-bottom: 15px;
-  }
+            margin: 0 auto 12px;
+        }
 
-  .panel-header {
-    align-items: flex-start;
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
 
-    flex-direction: column;
-  }
 
-  .panel-header h2 {
-    font-size: 17px;
-  }
+        /* =========================================================
+           EMPTY STATE
+        ========================================================= */
 
-  .panel-actions {
-    width: 100%;
+        .empty-state {
+            text-align: center;
 
-    display: grid;
+            padding: 45px;
 
-    grid-template-columns:
-      1fr 1fr;
-  }
+            color: #777;
+        }
 
-  .panel-actions .btn {
-    width: 100%;
-  }
 
+        /* =========================================================
+           FOOTER
+        ========================================================= */
 
-  /* SEARCH */
+        .portal-footer {
+            background: #ffffff;
 
-  .search-box input {
-    font-size: 16px;
+            border-top: 1px solid #e5e7eb;
 
-    padding:
-      13px
-      13px
-      13px
-      40px;
-  }
+            color: #4b5563;
 
+            font-size: 12px;
 
-  /* FUNNEL */
+            padding: 64px 16px;
 
-  .funnel {
-    display: flex;
+            position: relative;
 
-    overflow-x: auto;
+            overflow: hidden;
+        }
 
-    gap: 8px;
+        .footer-glow {
+            position: absolute;
 
-    padding-bottom: 5px;
+            bottom: 0;
+            right: 0;
 
-    scroll-snap-type: x mandatory;
-  }
+            width: 380px;
+            height: 380px;
 
-  .funnel-step {
-    flex: 0 0 125px;
+            background: rgba(11,19,43,.04);
 
-    min-width: 125px;
+            border-radius: 50%;
 
-    scroll-snap-align: start;
-  }
+            filter: blur(45px);
 
+            pointer-events: none;
+        }
 
-  /* MODAL */
+        .footer-container {
+            width: 100%;
 
-  .modal {
-    padding: 10px;
+            max-width: 1280px;
 
-    align-items: flex-end;
-  }
+            margin: 0 auto;
 
-  .modal-content {
-    max-height: 94svh;
+            position: relative;
 
-    border-radius:
-      18px
-      18px
-      0
-      0;
+            z-index: 2;
+        }
 
-    padding:
-      20px
-      16px;
-  }
+        .footer-newsletter {
+            background: #0B132B;
 
-  .modal-header h2 {
-    font-size: 19px;
-  }
+            color: white;
 
+            border-radius: 24px;
 
-  /* TABLE */
+            padding: 36px;
 
-  .table-wrapper {
-    margin-left: -2px;
+            box-shadow:
+                0 20px 45px rgba(0,0,0,.16);
 
-    margin-right: -2px;
+            border: 1px solid rgba(212,175,55,.40);
 
-    border-radius: 8px;
-  }
+            position: relative;
 
-  table {
-    min-width: 950px;
-  }
+            overflow: hidden;
 
-  th {
-    padding: 11px;
+            display: grid;
 
-    font-size: 10px;
-  }
+            grid-template-columns:
+                minmax(0, 7fr)
+                minmax(0, 5fr);
 
-  td {
-    padding: 11px;
+            gap: 32px;
 
-    font-size: 12px;
-  }
+            align-items: center;
 
-}
+            margin-bottom: 48px;
+        }
 
+        .footer-newsletter::after {
+            content: "";
 
-/* =========================================================
-   SMALL PHONES
-========================================================= */
+            position: absolute;
 
-@media (max-width: 480px) {
+            right: -40px;
+            bottom: -40px;
 
-  .user-area {
-    grid-template-columns: 1fr 1fr;
-  }
+            width: 260px;
+            height: 260px;
 
-  .user-badge {
-    grid-column: 1 / -1;
-  }
+            background: rgba(212,175,55,.08);
 
-  .back-website-btn,
-  .user-area .btn {
-    width: 100%;
-  }
+            border-radius: 50%;
 
-}
+            filter: blur(30px);
 
+            pointer-events: none;
+        }
 
-/* =========================================================
-   VERY SMALL PHONES
-========================================================= */
+        .vip-badge {
+            display: inline-flex;
 
-@media (max-width: 400px) {
+            align-items: center;
 
-  .login-card {
-    padding:
-      22px
-      16px;
-  }
+            gap: 8px;
 
-  .login-card .sj-title {
-    font-size: 29px;
-  }
+            padding: 5px 12px;
 
-  .login-card .sj-luxury {
-    font-size: 18px;
-  }
+            border-radius: 999px;
 
-  .login-card .sj-divider {
-    height: 24px;
+            background: #1C2541;
 
-    margin: 0 5px;
-  }
+            border: 1px solid rgba(212,175,55,.30);
 
-  .stats {
-    grid-template-columns:
-      1fr 1fr;
-  }
+            margin-bottom: 12px;
+        }
 
-  .stat-card h3 {
-    font-size: 21px;
-  }
+        .vip-dot {
+            width: 8px;
+            height: 8px;
 
-  .stat-card p {
-    font-size: 10px;
-  }
+            border-radius: 50%;
 
-  .panel-actions {
-    grid-template-columns:
-      1fr;
-  }
+            background: var(--gold-500);
 
-}
+            animation: pulseGold 1.8s infinite;
+        }
 
+        @keyframes pulseGold {
+            0%, 100% {
+                opacity: 1;
+            }
 
-/* =========================================================
-   TOUCH DEVICES
-========================================================= */
+            50% {
+                opacity: .35;
+            }
+        }
 
-@media (hover: none) {
+        .vip-text {
+            font-size: 10px;
 
-  .btn:hover,
-  .sj-brand:hover,
-  .back-website-btn:hover {
-    transform: none;
-  }
+            text-transform: uppercase;
 
-}
+            letter-spacing: 2px;
 
-</style>
+            color: var(--gold-500);
+
+            font-weight: 900;
+        }
+
+        .footer-newsletter h3 {
+            margin: 0 0 10px;
+
+            font-size: 27px;
+
+            line-height: 1.25;
+
+            color: white;
+        }
+
+        .footer-newsletter p {
+            margin: 0;
+
+            color: #d1d5db;
+
+            line-height: 1.6;
+        }
+
+        .newsletter-form {
+            display: flex;
+
+            gap: 10px;
+
+            position: relative;
+
+            z-index: 3;
+        }
+
+        .newsletter-form input {
+            flex: 1;
+
+            min-width: 0;
+
+            background: #1C2541;
+
+            border: 1px solid rgba(212,175,55,.40);
+
+            color: white;
+
+            padding: 14px 16px;
+
+            border-radius: 12px;
+
+            outline: none;
+
+            font-size: 12px;
+        }
+
+        .newsletter-form input:focus {
+            border-color: var(--gold-500);
+        }
+
+        .newsletter-form button {
+            background: var(--gold-500);
+
+            color: #0B132B;
+
+            padding: 14px 22px;
+
+            border-radius: 12px;
+
+            font-size: 11px;
+
+            font-weight: 900;
+
+            text-transform: uppercase;
+
+            letter-spacing: 1.5px;
+
+            cursor: pointer;
+
+            white-space: nowrap;
+
+            transition: .2s;
+        }
+
+        .newsletter-form button:hover {
+            background: #c29f31;
+        }
+
+        .newsletter-note {
+            margin-top: 8px !important;
+
+            font-size: 10px;
+
+            color: #9ca3af !important;
+        }
+
+        .newsletter-note a {
+            color: var(--gold-500);
+
+            text-decoration: underline;
+        }
+
+        .footer-grid {
+            display: grid;
+
+            grid-template-columns:
+                2fr
+                1fr
+                1fr
+                1fr;
+
+            gap: 32px;
+
+            padding-top: 4px;
+        }
+
+        .footer-column {
+            min-width: 0;
+        }
+
+        .footer-brand-column {
+            max-width: 390px;
+        }
+
+        .footer-logo {
+            display: inline-flex;
+
+            align-items: center;
+
+            text-decoration: none;
+
+            margin-bottom: 15px;
+        }
+
+        .footer-logo .sj-title {
+            font-size: 28px;
+        }
+
+        .footer-logo .sj-luxury {
+            font-size: 20px;
+        }
+
+        .footer-logo .sj-divider {
+            height: 24px;
+
+            margin: 0 7px;
+        }
+
+        .footer-logo .sj-subtitle {
+            font-size: 7px;
+
+            letter-spacing: 2.5px;
+        }
+
+        .footer-logo .sj-subtitle-row {
+            gap: 6px;
+
+            margin-top: 5px;
+        }
+
+        .footer-logo .sj-subtitle-row .line {
+            width: 18px;
+        }
+
+        .footer-description {
+            color: #6b7280;
+
+            line-height: 1.7;
+
+            margin: 0 0 15px;
+        }
+
+        .social-icons {
+            display: flex;
+
+            gap: 10px;
+        }
+
+        .social-icon {
+            width: 34px;
+            height: 34px;
+
+            border-radius: 50%;
+
+            background: #f3f4f6;
+
+            border: 1px solid #e5e7eb;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            text-decoration: none;
+
+            color: #0B132B;
+
+            font-size: 12px;
+
+            font-weight: 900;
+
+            transition: .2s;
+        }
+
+        .social-icon:hover {
+            background: #0B132B;
+
+            color: var(--gold-500);
+        }
+
+        .footer-heading {
+            margin: 0 0 14px;
+
+            font-size: 12px;
+
+            font-weight: 800;
+
+            color: #111827;
+
+            text-transform: uppercase;
+
+            letter-spacing: 1px;
+        }
+
+        .footer-links {
+            list-style: none;
+
+            margin: 0;
+            padding: 0;
+        }
+
+        .footer-links li {
+            margin-bottom: 9px;
+        }
+
+        .footer-links a {
+            color: #6b7280;
+
+            text-decoration: none;
+
+            font-weight: 500;
+
+            transition: .2s;
+        }
+
+        .footer-links a:hover {
+            color: #0B132B;
+        }
+
+        .contact-line {
+            display: flex;
+
+            align-items: flex-start;
+
+            gap: 8px;
+
+            color: #6b7280;
+
+            margin-bottom: 10px;
+
+            line-height: 1.5;
+        }
+
+        .contact-line a {
+            color: #0B132B;
+
+            font-weight: 700;
+
+            text-decoration: none;
+        }
+
+        .contact-line a:hover {
+            text-decoration: underline;
+        }
+
+        .bottom-footer {
+            padding-top: 30px;
+
+            margin-top: 35px;
+
+            border-top: 1px solid #e5e7eb;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 20px;
+
+            flex-wrap: wrap;
+
+            color: #6b7280;
+        }
+
+        .bottom-footer p {
+            margin: 0;
+        }
+
+        .bottom-footer a {
+            color: #0B132B;
+
+            text-decoration: none;
+
+            font-weight: 700;
+        }
+
+        .bottom-footer a:hover {
+            text-decoration: underline;
+        }
+
+        .bottom-links {
+            display: flex;
+
+            gap: 20px;
+
+            flex-wrap: wrap;
+        }
+
+        .bottom-links a {
+            color: #6b7280;
+
+            font-weight: 500;
+        }
+
+
+        /* =========================================================
+           TABLET
+        ========================================================= */
+
+        @media (max-width: 1000px) {
+
+            .dashboard-container {
+                padding: 22px;
+            }
+
+            .stats {
+                grid-template-columns:
+                    repeat(3, minmax(150px, 1fr));
+            }
+
+            .topbar {
+                padding: 12px 18px;
+            }
+
+            .funnel {
+                grid-template-columns:
+                    repeat(4, minmax(150px, 1fr));
+            }
+
+            .footer-grid {
+                grid-template-columns:
+                    repeat(2, minmax(0, 1fr));
+            }
+
+            .footer-brand-column {
+                max-width: none;
+                grid-column: 1 / -1;
+            }
+        }
+
+
+        /* =========================================================
+           MOBILE
+        ========================================================= */
+
+        @media (max-width: 700px) {
+
+            body {
+                overflow-x: hidden;
+            }
+
+
+            /* LOGIN */
+
+            .login-page {
+                min-height: 100svh;
+
+                padding: 15px;
+
+                align-items: flex-start;
+
+                padding-top: 35px;
+
+                padding-bottom: 35px;
+            }
+
+            .login-card {
+                max-width: 100%;
+
+                padding: 25px 20px;
+
+                border-radius: 18px;
+            }
+
+            .login-card .sj-title {
+                font-size: 34px;
+            }
+
+            .login-card .sj-luxury {
+                font-size: 21px;
+            }
+
+            .login-card .sj-divider {
+                height: 28px;
+
+                margin: 0 7px;
+            }
+
+            .login-card .sj-subtitle {
+                font-size: 7px;
+
+                letter-spacing: 2px;
+            }
+
+            .login-card .sj-subtitle-row .line {
+                width: 20px;
+            }
+
+            .login-description {
+                font-size: 13px;
+
+                margin-bottom: 22px;
+            }
+
+
+            /* MOBILE FORM */
+
+            .form-group input,
+            .form-group select,
+            .form-group textarea {
+                font-size: 16px;
+
+                padding: 13px;
+            }
+
+            .btn {
+                min-height: 44px;
+            }
+
+
+            /* TOP BAR */
+
+            .topbar {
+                position: relative;
+
+                padding: 12px;
+
+                gap: 12px;
+
+                flex-direction: column;
+
+                align-items: stretch;
+            }
+
+            .topbar-brand-link {
+                justify-content: center;
+            }
+
+            .topbar-logo .sj-title {
+                font-size: 24px;
+            }
+
+            .topbar-logo .sj-luxury {
+                font-size: 16px;
+            }
+
+            .topbar-logo .sj-subtitle {
+                font-size: 6px;
+            }
+
+            .user-area {
+                width: 100%;
+
+                display: grid;
+
+                grid-template-columns:
+                    minmax(0, 1fr)
+                    auto
+                    auto;
+
+                gap: 8px;
+            }
+
+            .user-badge {
+                min-width: 0;
+
+                max-width: none;
+
+                overflow: hidden;
+
+                text-overflow: ellipsis;
+
+                white-space: nowrap;
+            }
+
+            .back-website-btn {
+                width: 100%;
+            }
+
+
+            /* DASHBOARD */
+
+            .dashboard-container {
+                padding: 12px;
+            }
+
+
+            /* STATS */
+
+            .stats {
+                grid-template-columns:
+                    repeat(2, minmax(0, 1fr));
+
+                gap: 10px;
+
+                margin-bottom: 15px;
+            }
+
+            .stat-card {
+                padding: 16px 13px;
+
+                border-radius: 12px;
+            }
+
+            .stat-card h3 {
+                font-size: 24px;
+            }
+
+            .stat-card p {
+                font-size: 11px;
+
+                line-height: 1.3;
+            }
+
+
+            /* PANELS */
+
+            .panel {
+                padding: 15px;
+
+                border-radius: 13px;
+
+                margin-bottom: 15px;
+            }
+
+            .panel-header {
+                align-items: flex-start;
+
+                flex-direction: column;
+            }
+
+            .panel-header h2 {
+                font-size: 17px;
+            }
+
+            .panel-actions {
+                width: 100%;
+
+                display: grid;
+
+                grid-template-columns:
+                    repeat(2, minmax(0, 1fr));
+            }
+
+            .panel-actions .btn {
+                width: 100%;
+            }
+
+
+            /* SEARCH */
+
+            .search-box input {
+                font-size: 16px;
+
+                padding:
+                    13px
+                    13px
+                    13px
+                    40px;
+            }
+
+
+            /* CUSTOMER JOURNEY */
+
+            .funnel {
+                display: grid;
+
+                grid-template-columns:
+                    repeat(2, minmax(0, 1fr));
+
+                gap: 8px;
+
+                width: 100%;
+
+                overflow: visible;
+            }
+
+            .funnel-step {
+                width: 100%;
+
+                min-width: 0;
+
+                min-height: 86px;
+
+                padding: 12px 7px;
+
+                font-size: 10px;
+
+                line-height: 1.3;
+
+                overflow-wrap: break-word;
+            }
+
+            .funnel-step span {
+                font-size: 24px;
+
+                margin-bottom: 6px;
+            }
+
+            .funnel-step:last-child {
+                grid-column: 1 / -1;
+            }
+
+
+            /* MODAL */
+
+            .modal {
+                padding: 10px;
+
+                align-items: flex-end;
+            }
+
+            .modal-content {
+                max-height: 94svh;
+
+                border-radius:
+                    18px
+                    18px
+                    0
+                    0;
+
+                padding:
+                    20px
+                    16px;
+            }
+
+            .modal-header h2 {
+                font-size: 19px;
+            }
+
+
+            /* TABLE */
+
+            .table-wrapper {
+                margin-left: -2px;
+
+                margin-right: -2px;
+
+                border-radius: 8px;
+            }
+
+            table {
+                min-width: 950px;
+            }
+
+            th {
+                padding: 11px;
+
+                font-size: 10px;
+            }
+
+            td {
+                padding: 11px;
+
+                font-size: 12px;
+            }
+
+
+            /* FOOTER */
+
+            .portal-footer {
+                padding: 40px 15px;
+            }
+
+            .footer-newsletter {
+                grid-template-columns: 1fr;
+
+                padding: 25px 20px;
+
+                border-radius: 18px;
+
+                gap: 22px;
+            }
+
+            .footer-newsletter h3 {
+                font-size: 22px;
+            }
+
+            .newsletter-form {
+                flex-direction: column;
+            }
+
+            .newsletter-form button {
+                width: 100%;
+            }
+
+            .footer-grid {
+                grid-template-columns:
+                    repeat(2, minmax(0, 1fr));
+
+                gap: 30px 20px;
+            }
+
+            .footer-brand-column {
+                grid-column: 1 / -1;
+            }
+
+            .bottom-footer {
+                flex-direction: column;
+
+                text-align: center;
+
+                justify-content: center;
+            }
+
+            .bottom-links {
+                justify-content: center;
+            }
+        }
+
+
+        /* =========================================================
+           SMALL PHONES
+        ========================================================= */
+
+        @media (max-width: 480px) {
+
+            .user-area {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .user-badge {
+                grid-column: 1 / -1;
+            }
+
+            .back-website-btn,
+            .user-area .btn {
+                width: 100%;
+            }
+
+            .panel-actions {
+                grid-template-columns:
+                    1fr 1fr;
+            }
+
+            .funnel {
+                grid-template-columns:
+                    1fr 1fr;
+            }
+
+            .funnel-step {
+                min-height: 82px;
+
+                font-size: 9px;
+            }
+
+            .funnel-step span {
+                font-size: 22px;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-brand-column {
+                grid-column: auto;
+            }
+
+            .bottom-links {
+                flex-direction: column;
+
+                gap: 8px;
+            }
+        }
+
+
+        /* =========================================================
+           VERY SMALL PHONES
+        ========================================================= */
+
+        @media (max-width: 400px) {
+
+            .login-card {
+                padding:
+                    22px
+                    16px;
+            }
+
+            .login-card .sj-title {
+                font-size: 29px;
+            }
+
+            .login-card .sj-luxury {
+                font-size: 18px;
+            }
+
+            .login-card .sj-divider {
+                height: 24px;
+
+                margin: 0 5px;
+            }
+
+            .stats {
+                grid-template-columns:
+                    1fr 1fr;
+            }
+
+            .stat-card h3 {
+                font-size: 21px;
+            }
+
+            .stat-card p {
+                font-size: 10px;
+            }
+
+            .panel-actions {
+                grid-template-columns:
+                    1fr;
+            }
+
+            .funnel {
+                grid-template-columns:
+                    1fr;
+            }
+
+            .funnel-step:last-child {
+                grid-column: auto;
+            }
+
+            .funnel-step {
+                min-height: 70px;
+
+                flex-direction: row;
+
+                gap: 8px;
+
+                justify-content: flex-start;
+
+                text-align: left;
+
+                padding: 12px;
+            }
+
+            .funnel-step span {
+                margin: 0;
+
+                min-width: 30px;
+
+                text-align: center;
+            }
+        }
+
+
+        /* =========================================================
+           TOUCH DEVICES
+        ========================================================= */
+
+        @media (hover: none) {
+
+            .btn:hover,
+            .sj-brand:hover,
+            .back-website-btn:hover {
+                transform: none;
+            }
+        }
+
+    </style>
 
 </head>
 
+
 <body>
 
-<!-- =======================================================
-     LOADING
-======================================================== -->
 
-<div
-  id="loading"
-  class="loading hidden"
->
+    <!-- =======================================================
+         LOADING
+    ======================================================== -->
 
-  <div class="loading-box">
+    <div
+        id="loading"
+        class="loading hidden"
+    >
 
-```
-<div class="spinner"></div>
+        <div class="loading-box">
 
-<strong id="loadingText">
-  Loading...
-</strong>
-```
+            <div class="spinner"></div>
 
-  </div>
+            <strong id="loadingText">
+                Loading...
+            </strong>
 
-</div>
-
-<!-- =======================================================
-     LOGIN PAGE
-======================================================== -->
-
-<section
-  id="loginPage"
-  class="login-page"
->
-
-  <div class="login-card">
-<!-- SJ LUXURY TRAVELS LOGO -->
-<a
-    href="https://www.sjluxurytravels.com/"
-    class="sj-brand"
-    aria-label="SJ Luxury Travels"
->
-    <div class="sj-text-container">
-        <div class="sj-main-row">
-            <span class="sj-title">SJ</span>
-            <span class="sj-divider">|</span>
-            <span class="sj-luxury">luxury</span>
         </div>
 
-        <div class="sj-subtitle-row">
-            <span class="line"></span>
-            <span class="sj-subtitle">TRAVELS LTD</span>
-            <span class="line"></span>
+    </div>
+
+
+    <!-- =======================================================
+         LOGIN PAGE
+    ======================================================== -->
+
+    <section
+        id="loginPage"
+        class="login-page"
+    >
+
+        <div class="login-card">
+
+
+            <!-- SJ LUXURY TRAVELS LOGO -->
+
+            <a
+                href="https://www.sjluxurytravels.com/"
+                class="sj-brand"
+                aria-label="SJ Luxury Travels"
+            >
+
+                <div class="sj-text-container">
+
+                    <div class="sj-main-row">
+
+                        <span class="sj-title">
+                            SJ
+                        </span>
+
+                        <span class="sj-divider">
+                        </span>
+
+                        <span class="sj-luxury">
+                            luxury
+                        </span>
+
+                    </div>
+
+
+                    <div class="sj-subtitle-row">
+
+                        <span class="line"></span>
+
+                        <span class="sj-subtitle">
+                            TRAVELS LTD
+                        </span>
+
+                        <span class="line"></span>
+
+                    </div>
+
+                </div>
+
+            </a>
+
+
+            <p class="login-description">
+                Agent & Partner Portal
+            </p>
+
+
+            <!-- LOGIN -->
+
+            <div id="loginForm">
+
+                <div class="form-group">
+
+                    <label>
+                        Referral Code or Phone Number
+                    </label>
+
+                    <input
+                        id="loginIdentifier"
+                        type="text"
+                        placeholder="SJ-AG-1234 or 0712345678"
+                        autocomplete="username"
+                    >
+
+                </div>
+
+
+                <button
+                    class="btn btn-primary full"
+                    onclick="login()"
+                >
+                    LOGIN
+                </button>
+
+
+                <div class="switch-link">
+
+                    Don't have an agent account?
+
+                    <br>
+
+                    <a onclick="showRegister()">
+                        Become an SJ Luxury Travel Agent
+                    </a>
+
+                </div>
+
+
+                <p
+                    id="loginMessage"
+                    class="message"
+                ></p>
+
+            </div>
+
+
+            <!-- REGISTER -->
+
+            <div
+                id="registerForm"
+                class="hidden"
+            >
+
+                <h2>
+                    Become an Agent
+                </h2>
+
+                <p style="color:#777;">
+                    Join the SJ Luxury Travel agent network.
+                </p>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Full Name *
+                    </label>
+
+                    <input
+                        id="registerName"
+                        type="text"
+                        placeholder="Full name"
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Phone Number *
+                    </label>
+
+                    <input
+                        id="registerPhone"
+                        type="text"
+                        placeholder="0712345678"
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Email
+                    </label>
+
+                    <input
+                        id="registerEmail"
+                        type="email"
+                        placeholder="email@example.com"
+                    >
+
+                </div>
+
+
+                <button
+                    class="btn btn-primary full"
+                    onclick="registerAgent()"
+                >
+                    CREATE AGENT ACCOUNT
+                </button>
+
+
+                <div class="switch-link">
+
+                    Already registered?
+
+                    <br>
+
+                    <a onclick="showLogin()">
+                        Return to Login
+                    </a>
+
+                </div>
+
+
+                <p
+                    id="registerMessage"
+                    class="message"
+                ></p>
+
+            </div>
+
         </div>
-    </div>
-</a>
-<p class="login-description">
-  Agent & Partner Portal
-</p>
+
+    </section>
 
 
-<!-- LOGIN -->
+    <!-- =======================================================
+         DASHBOARD
+    ======================================================== -->
 
-<div id="loginForm">
-
-  <div class="form-group">
-
-    <label>
-      Referral Code or Phone Number
-    </label>
-
-    <input
-      id="loginIdentifier"
-      type="text"
-      placeholder="SJ-AG-1234 or 0712345678"
-      autocomplete="username"
+    <section
+        id="dashboardPage"
+        class="dashboard hidden"
     >
 
-  </div>
 
+        <!-- TOP BAR -->
 
-  <button
-    class="btn btn-primary full"
-    onclick="login()"
-  >
-    LOGIN
-  </button>
+        <header class="topbar">
 
 
-  <div class="switch-link">
+            <!-- SJ LOGO -->
 
-    Don't have an agent account?
+            <a
+                href="https://www.sjluxurytravels.com/"
+                class="topbar-brand-link"
+                aria-label="SJ Luxury Travels"
+            >
 
-    <br>
+                <div class="topbar-logo">
 
-    <a onclick="showRegister()">
-      Become an SJ Luxury Travel Agent
-    </a>
+                    <div class="sj-text-container">
 
-  </div>
+                        <div class="sj-main-row">
 
+                            <span class="sj-title">
+                                SJ
+                            </span>
 
-  <p
-    id="loginMessage"
-    class="message"
-  ></p>
+                            <span class="sj-divider"></span>
 
-</div>
+                            <span class="sj-luxury">
+                                luxury
+                            </span>
 
+                        </div>
 
-<!-- REGISTER -->
 
-<div
-  id="registerForm"
-  class="hidden"
->
+                        <div class="sj-subtitle-row">
 
-  <h2>
-    Become an Agent
-  </h2>
+                            <span class="line"></span>
 
-  <p style="color:#777;">
-    Join the SJ Luxury Travel agent network.
-  </p>
+                            <span class="sj-subtitle">
+                                TRAVELS LTD
+                            </span>
 
+                            <span class="line"></span>
 
-  <div class="form-group">
+                        </div>
 
-    <label>
-      Full Name *
-    </label>
+                    </div>
 
-    <input
-      id="registerName"
-      type="text"
-      placeholder="Full name"
-    >
+                </div>
 
-  </div>
+            </a>
 
 
-  <div class="form-group">
+            <!-- USER AREA -->
 
-    <label>
-      Phone Number *
-    </label>
+            <div class="user-area">
 
-    <input
-      id="registerPhone"
-      type="text"
-      placeholder="0712345678"
-    >
+                <div
+                    id="userBadge"
+                    class="user-badge"
+                ></div>
 
-  </div>
 
+                <!-- BACK TO MAIN WEBSITE -->
 
-  <div class="form-group">
+                <a
+                    href="https://www.sjluxurytravels.com/"
+                    class="back-website-btn"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    ← Back to Website
+                </a>
 
-    <label>
-      Email
-    </label>
 
-    <input
-      id="registerEmail"
-      type="email"
-      placeholder="email@example.com"
-    >
+                <!-- LOGOUT -->
 
-  </div>
+                <button
+                    class="btn btn-secondary"
+                    onclick="logout()"
+                >
+                    Logout
+                </button>
 
+            </div>
 
-  <button
-    class="btn btn-primary full"
-    onclick="registerAgent()"
-  >
-    CREATE AGENT ACCOUNT
-  </button>
+        </header>
 
 
-  <div class="switch-link">
+        <main class="dashboard-container">
 
-    Already registered?
 
-    <br>
+            <!-- =================================================
+                 STATISTICS
+            ================================================== -->
 
-    <a onclick="showLogin()">
-      Return to Login
-    </a>
+            <div
+                class="stats"
+                id="statsContainer"
+            >
 
-  </div>
+                <div class="stat-card">
 
+                    <h3 id="totalClients">
+                        0
+                    </h3>
 
-  <p
-    id="registerMessage"
-    class="message"
-  ></p>
+                    <p>
+                        Total Customers
+                    </p>
 
-</div>
-  </div>
+                </div>
 
-</section>
 
-<!-- =======================================================
-     DASHBOARD
-======================================================== -->
+                <div class="stat-card">
 
-<section
-  id="dashboardPage"
-  class="dashboard hidden"
->
+                    <h3 id="leadCount">
+                        0
+                    </h3>
 
-  <!-- TOP BAR -->
+                    <p>
+                        Lead Qualification
+                    </p>
 
-  <header class="topbar">
-<!-- SJ LOGO -->
+                </div>
 
-<a
-  href="https://www.sjluxurytravels.com/"
-  class="topbar-brand-link"
-  aria-label="SJ Luxury Travels"
->
 
-  <div class="topbar-logo">
+                <div class="stat-card">
 
-    <div class="sj-text-container">
+                    <h3 id="consultationCount">
+                        0
+                    </h3>
 
-      <div class="sj-main-row">
+                    <p>
+                        Consultation
+                    </p>
 
-        <span class="sj-title">
-          SJ
-        </span>
+                </div>
 
-        <span class="sj-divider"></span>
 
-        <span class="sj-luxury">
-          luxury
-        </span>
+                <div class="stat-card">
 
-      </div>
+                    <h3 id="quotationCount">
+                        0
+                    </h3>
 
+                    <p>
+                        Quotations
+                    </p>
 
-      <div class="sj-subtitle-row">
+                </div>
 
-        <span class="line"></span>
 
-        <span class="sj-subtitle">
-          TRAVELS LTD
-        </span>
+                <div class="stat-card">
 
-        <span class="line"></span>
+                    <h3 id="bookingCount">
+                        0
+                    </h3>
 
-      </div>
+                    <p>
+                        Confirmed Bookings
+                    </p>
 
-    </div>
+                </div>
 
-  </div>
+            </div>
 
-</a>
 
+            <!-- =================================================
+                 CUSTOMER PANEL
+            ================================================== -->
 
-<!-- USER AREA -->
+            <div class="panel">
 
-<div class="user-area">
+                <div class="panel-header">
 
+                    <h2 id="dashboardTitle">
+                        My Customers
+                    </h2>
 
-  <div
-    id="userBadge"
-    class="user-badge"
-  ></div>
+                    <div class="panel-actions">
 
+                        <button
+                            id="addClientButton"
+                            class="btn btn-primary"
+                            onclick="openClientModal()"
+                        >
+                            + Add Customer
+                        </button>
 
-  <!-- BACK TO MAIN WEBSITE -->
 
-  <a
-    href="https://www.sjluxurytravels.com/"
-    class="back-website-btn"
-    target="_blank"
-    rel="noopener noreferrer"
-  >
-    ← Back to Website
-  </a>
+                        <button
+                            class="btn btn-report"
+                            onclick="downloadReport()"
+                        >
+                            ↓ Download Report
+                        </button>
 
 
-  <!-- LOGOUT -->
+                        <button
+                            class="btn btn-secondary"
+                            onclick="loadDashboard()"
+                        >
+                            Refresh
+                        </button>
 
-  <button
-    class="btn btn-secondary"
-    onclick="logout()"
-  >
-    Logout
-  </button>
+                    </div>
 
+                </div>
 
-</div>
 
-  </header>
+                <!-- SEARCH -->
 
-  <main class="dashboard-container">
+                <div class="search-box">
 
-<!-- =================================================
-     STATISTICS
-================================================== -->
+                    <span class="search-icon">
+                        🔎
+                    </span>
 
-<div
-  class="stats"
-  id="statsContainer"
->
+                    <input
+                        id="searchInput"
+                        type="text"
+                        placeholder="Search customers by name, phone, ID, destination or service..."
+                        onkeyup="searchCustomers()"
+                    >
 
+                </div>
 
-  <div class="stat-card">
 
-    <h3 id="totalClients">
-      0
-    </h3>
+                <!-- CUSTOMER TABLE -->
 
-    <p>
-      Total Customers
-    </p>
+                <div class="table-wrapper">
 
-  </div>
+                    <table>
 
+                        <thead>
 
-  <div class="stat-card">
+                            <tr>
 
-    <h3 id="leadCount">
-      0
-    </h3>
+                                <th>
+                                    Client ID
+                                </th>
 
-    <p>
-      Lead Qualification
-    </p>
+                                <th>
+                                    Customer
+                                </th>
 
-  </div>
+                                <th>
+                                    Phone
+                                </th>
 
+                                <th>
+                                    Service
+                                </th>
 
-  <div class="stat-card">
+                                <th>
+                                    Destination
+                                </th>
 
-    <h3 id="consultationCount">
-      0
-    </h3>
+                                <th>
+                                    Agent
+                                </th>
 
-    <p>
-      Consultation
-    </p>
+                                <th>
+                                    Funnel Stage
+                                </th>
 
-  </div>
+                                <th>
+                                    Action
+                                </th>
 
+                            </tr>
 
-  <div class="stat-card">
+                        </thead>
 
-    <h3 id="quotationCount">
-      0
-    </h3>
 
-    <p>
-      Quotations
-    </p>
+                        <tbody id="clientTable"></tbody>
 
-  </div>
+                    </table>
 
+                </div>
 
-  <div class="stat-card">
+            </div>
 
-    <h3 id="bookingCount">
-      0
-    </h3>
 
-    <p>
-      Confirmed Bookings
-    </p>
+            <!-- =================================================
+                 CUSTOMER JOURNEY
+            ================================================== -->
 
-  </div>
+            <div class="panel">
 
+                <div class="panel-header">
 
-</div>
+                    <h2>
+                        Customer Journey
+                    </h2>
 
+                </div>
 
-<!-- =================================================
-     CUSTOMER PANEL
-================================================== -->
 
-<div class="panel">
+                <div
+                    class="funnel"
+                    id="funnelContainer"
+                ></div>
 
+            </div>
 
-  <div class="panel-header">
 
+            <!-- =================================================
+                 ADMIN
+            ================================================== -->
 
-    <h2 id="dashboardTitle">
-      My Customers
-    </h2>
+            <div
+                id="adminPanel"
+                class="panel hidden"
+            >
 
+                <div class="panel-header">
 
-    <div class="panel-actions">
+                    <h2>
+                        Administration
+                    </h2>
 
+                    <div class="panel-actions">
 
-      <button
-        id="addClientButton"
-        class="btn btn-primary"
-        onclick="openClientModal()"
-      >
-        + Add Customer
-      </button>
+                        <button
+                            class="btn btn-secondary"
+                            onclick="loadAgents()"
+                        >
+                            Manage Agents
+                        </button>
 
+                    </div>
 
-      <button
-        class="btn btn-secondary"
-        onclick="loadDashboard()"
-      >
-        Refresh
-      </button>
+                </div>
 
 
-    </div>
+                <p style="color:#777;">
 
-  </div>
+                    Administrator access allows you to
+                    manage all agents and customer journeys.
 
+                </p>
 
-  <!-- SEARCH -->
 
-  <div class="search-box">
+                <div
+                    id="agentsContainer"
+                    class="hidden"
+                >
 
-    <span class="search-icon">
-      🔎
-    </span>
+                    <div class="table-wrapper">
 
-    <input
-      id="searchInput"
-      type="text"
-      placeholder="Search customers by name, phone, ID, destination or service..."
-      onkeyup="searchCustomers()"
-    >
+                        <table>
 
-  </div>
+                            <thead>
 
+                                <tr>
 
-  <!-- CUSTOMER TABLE -->
+                                    <th>
+                                        Name
+                                    </th>
 
-  <div class="table-wrapper">
+                                    <th>
+                                        Referral Code
+                                    </th>
 
-    <table>
+                                    <th>
+                                        Phone
+                                    </th>
 
-      <thead>
+                                    <th>
+                                        Email
+                                    </th>
 
-        <tr>
+                                    <th>
+                                        Status
+                                    </th>
 
-          <th>
-            Client ID
-          </th>
+                                    <th>
+                                        Created
+                                    </th>
 
-          <th>
-            Customer
-          </th>
+                                </tr>
 
-          <th>
-            Phone
-          </th>
+                            </thead>
 
-          <th>
-            Service
-          </th>
 
-          <th>
-            Destination
-          </th>
+                            <tbody id="agentsTable"></tbody>
 
-          <th>
-            Agent
-          </th>
+                        </table>
 
-          <th>
-            Funnel Stage
-          </th>
+                    </div>
 
-          <th>
-            Action
-          </th>
+                </div>
 
-        </tr>
+            </div>
 
-      </thead>
 
+        </main>
 
-      <tbody id="clientTable"></tbody>
 
-    </table>
+        <!-- =================================================
+             FOOTER
+        ================================================== -->
 
-  </div>
-
-</div>
-
-
-<!-- =================================================
-     CUSTOMER JOURNEY
-================================================== -->
-
-<div class="panel">
-
-  <div class="panel-header">
-
-    <h2>
-      Customer Journey
-    </h2>
-
-  </div>
-
-
-  <div
-    class="funnel"
-    id="funnelContainer"
-  ></div>
-
-</div>
-
-
-<!-- =================================================
-     ADMIN
-================================================== -->
-
-<div
-  id="adminPanel"
-  class="panel hidden"
->
-
-  <div class="panel-header">
-
-    <h2>
-      Administration
-    </h2>
-
-    <div class="panel-actions">
-
-      <button
-        class="btn btn-secondary"
-        onclick="loadAgents()"
-      >
-        Manage Agents
-      </button>
-
-    </div>
-
-  </div>
-
-
-  <p style="color:#777;">
-
-    Administrator access allows you to
-    manage all agents and customer journeys.
-
-  </p>
-
-
-  <div
-    id="agentsContainer"
-    class="hidden"
-  >
-
-    <div class="table-wrapper">
-
-      <table>
-
-        <thead>
-
-          <tr>
-
-            <th>
-              Name
-            </th>
-
-            <th>
-              Referral Code
-            </th>
-
-            <th>
-              Phone
-            </th>
-
-            <th>
-              Email
-            </th>
-
-            <th>
-              Status
-            </th>
-
-            <th>
-              Created
-            </th>
-
-          </tr>
-
-        </thead>
-
-
-        <tbody id="agentsTable"></tbody>
-
-      </table>
-
-    </div>
-
-  </div>
-
-</div>
-```
-
-  </main>
-
-</section>
-
-<!-- =======================================================
-     ADD CUSTOMER MODAL
-======================================================== -->
-
-<div
-  id="clientModal"
-  class="modal hidden"
->
-
-  <div class="modal-content">
-
-```
-<div class="modal-header">
-
-  <h2>
-    Add New Customer
-  </h2>
-
-  <button
-    class="close"
-    onclick="closeClientModal()"
-  >
-    &times;
-  </button>
-
-</div>
-
-
-<div class="form-group">
-
-  <label>
-    Customer Name *
-  </label>
-
-  <input
-    id="clientName"
-    type="text"
-    placeholder="Customer full name"
-  >
-
-</div>
-
-
-<div class="form-group">
-
-  <label>
-    Phone Number *
-  </label>
-
-  <input
-    id="clientPhone"
-    type="text"
-    placeholder="0712345678"
-  >
-
-</div>
-
-
-<div class="form-group">
-
-  <label>
-    Email
-  </label>
-
-  <input
-    id="clientEmail"
-    type="email"
-    placeholder="customer@email.com"
-  >
-
-</div>
-
-
-<div class="form-group">
-
-  <label>
-    Service *
-  </label>
-
-  <select id="clientService">
-
-    <option value="">
-      Select Service
-    </option>
-
-    <option value="Luxury Safari">
-      Luxury Safari
-    </option>
-
-    <option value="Beach Holiday">
-      Beach Holiday
-    </option>
-
-    <option value="Private Villa">
-      Private Villa
-    </option>
-
-    <option value="Honeymoon">
-      Honeymoon
-    </option>
-
-    <option value="Family Holiday">
-      Family Holiday
-    </option>
-
-    <option value="Luxury Travel">
-      Luxury Travel
-    </option>
-
-    <option value="Corporate Travel">
-      Corporate Travel
-    </option>
-
-    <option value="Private Jet">
-      Private Jet
-    </option>
-
-    <option value="Luxury Yacht">
-      Luxury Yacht
-    </option>
-
-    <option value="Airport Transfer">
-      Airport Transfer
-    </option>
-
-    <option value="Custom Itinerary">
-      Custom Itinerary
-    </option>
-
-    <option value="Other">
-      Other
-    </option>
-
-  </select>
-
-</div>
-
-
-<div class="form-group">
-
-  <label>
-    Destination
-  </label>
-
-  <input
-    id="clientDestination"
-    type="text"
-    placeholder="e.g. Maasai Mara, Zanzibar, Dubai"
-  >
-
-</div>
-
-
-<div class="form-group">
-
-  <label>
-    Travel Date
-  </label>
-
-  <input
-    id="clientTravelDate"
-    type="date"
-  >
-
-</div>
-
-
-<div class="form-group">
-
-  <label>
-    Number of Travellers
-  </label>
-
-  <input
-    id="clientTravellers"
-    type="number"
-    min="1"
-    placeholder="e.g. 2"
-  >
-
-</div>
-
-
-<div class="form-group">
-
-  <label>
-    Budget
-  </label>
-
-  <input
-    id="clientBudget"
-    type="text"
-    placeholder="Approximate budget"
-  >
-
-</div>
-
-
-<div class="form-group">
-
-  <label>
-    Special Requests
-  </label>
-
-  <textarea
-    id="clientSpecialRequests"
-    rows="4"
-    placeholder="Any special requirements..."
-  ></textarea>
-
-</div>
-
-
-<div class="form-group">
-
-  <label>
-    Notes
-  </label>
-
-  <textarea
-    id="clientNotes"
-    rows="3"
-    placeholder="Additional notes..."
-  ></textarea>
-
-</div>
-
-
-<button
-  class="btn btn-primary full"
-  onclick="saveClient()"
->
-  SAVE CUSTOMER
-</button>
-
-
-<p
-  id="clientMessage"
-  class="message"
-></p>
-
-  </div>
-
-</div>
-
-<script>
-
-/* =========================================================
-   CONFIGURATION
-========================================================= */
-
-const API_URL =
-  "https://script.google.com/macros/s/AKfycbyFmDVuaaRmAVKnieJPeUZy0Yo9uFnrjkr_8mY30rtOUH3qRv9T9mNhHWoUmMP43ZAi/exec";
-
-
-/* =========================================================
-   GLOBAL VARIABLES
-========================================================= */
-
-let session =
-  localStorage.getItem(
-    "sj_agent_session"
-  );
-
-let currentUser =
-  JSON.parse(
-    localStorage.getItem(
-      "sj_agent_user"
-    ) || "null"
-  );
-
-let clients = [];
-
-let searchTimer;
-
-
-/* =========================================================
-   LOADING
-========================================================= */
-
-function showLoading(
-  text = "Loading..."
-) {
-
-  document
-    .getElementById("loadingText")
-    .textContent = text;
-
-  document
-    .getElementById("loading")
-    .classList
-    .remove("hidden");
-
-}
-
-
-function hideLoading() {
-
-  document
-    .getElementById("loading")
-    .classList
-    .add("hidden");
-
-}
-
-
-/* =========================================================
-   API REQUEST
-========================================================= */
-
-function api(
-  action,
-  params = {}
-) {
-
-  return new Promise(
-    function(resolve, reject) {
-
-      const query =
-        new URLSearchParams();
-
-      query.append(
-        "action",
-        action
-      );
-
-
-      Object.keys(params)
-        .forEach(
-          function(key) {
-
-            query.append(
-              key,
-              params[key] === undefined
-                ? ""
-                : params[key]
-            );
-
-          }
-        );
-
-
-      const callbackName =
-        "sjCallback_" +
-        Date.now() +
-        "_" +
-        Math.floor(
-          Math.random() * 100000
-        );
-
-
-      query.append(
-        "callback",
-        callbackName
-      );
-
-
-      const script =
-        document.createElement(
-          "script"
-        );
-
-
-      let completed = false;
-
-
-      window[callbackName] =
-        function(data) {
-
-          if (completed) {
-            return;
-          }
-
-          completed = true;
-
-          delete window[
-            callbackName
-          ];
-
-          script.remove();
-
-          resolve(data);
-
-        };
-
-
-      script.onerror =
-        function() {
-
-          if (completed) {
-            return;
-          }
-
-          completed = true;
-
-          delete window[
-            callbackName
-          ];
-
-          script.remove();
-
-          reject(
-            new Error(
-              "Unable to connect to SJ Luxury Travel backend."
-            )
-          );
-
-        };
-
-
-      script.src =
-        API_URL +
-        "?t=" +
-        Date.now() +
-        "&" +
-        query.toString();
-
-
-      document.body.appendChild(
-        script
-      );
-
-
-      setTimeout(
-        function() {
-
-          if (completed) {
-            return;
-          }
-
-          completed = true;
-
-          delete window[
-            callbackName
-          ];
-
-          script.remove();
-
-          reject(
-            new Error(
-              "The SJ Luxury Travel backend did not respond. Please check the Apps Script deployment."
-            )
-          );
-
-        },
-        20000
-      );
-
-    }
-  );
-
-}
-
-
-/* =========================================================
-   LOGIN
-========================================================= */
-
-async function login() {
-
-  const identifier =
-    document
-      .getElementById(
-        "loginIdentifier"
-      )
-      .value
-      .trim();
-
-
-  const message =
-    document
-      .getElementById(
-        "loginMessage"
-      );
-
-
-  if (!identifier) {
-
-    message.style.color =
-      "#c0392b";
-
-    message.textContent =
-      "Please enter your referral code or phone number.";
-
-    return;
-
-  }
-
-
-  message.style.color =
-    "#555";
-
-  message.textContent =
-    "Signing in...";
-
-
-  showLoading(
-    "Signing in..."
-  );
-
-
-  try {
-
-    const result =
-      await api(
-        "login",
-        {
-          identifier:
-            identifier
-        }
-      );
-
-
-    if (
-      !result ||
-      result.status !== "success"
-    ) {
-
-      message.style.color =
-        "#c0392b";
-
-      message.textContent =
-        result?.message ||
-        "Login failed.";
-
-      hideLoading();
-
-      return;
-
-    }
-
-
-    session =
-      result.token;
-
-
-    currentUser = {
-
-      role:
-        result.role,
-
-      name:
-        result.name,
-
-      code:
-        result.code,
-
-      phone:
-        result.phone || "",
-
-      email:
-        result.email || ""
-
-    };
-
-
-    localStorage.setItem(
-      "sj_agent_session",
-      session
-    );
-
-
-    localStorage.setItem(
-      "sj_agent_user",
-      JSON.stringify(
-        currentUser
-      )
-    );
-
-
-    message.textContent =
-      "";
-
-
-    showDashboard();
-
-
-  } catch (error) {
-
-    message.style.color =
-      "#c0392b";
-
-    message.textContent =
-      error.message;
-
-    hideLoading();
-
-  }
-
-}
-
-
-/* =========================================================
-   REGISTER AGENT
-========================================================= */
-
-async function registerAgent() {
-
-  const name =
-    document
-      .getElementById(
-        "registerName"
-      )
-      .value
-      .trim();
-
-
-  const phone =
-    document
-      .getElementById(
-        "registerPhone"
-      )
-      .value
-      .trim();
-
-
-  const email =
-    document
-      .getElementById(
-        "registerEmail"
-      )
-      .value
-      .trim();
-
-
-  const message =
-    document
-      .getElementById(
-        "registerMessage"
-      );
-
-
-  if (!name || !phone) {
-
-    message.style.color =
-      "#c0392b";
-
-    message.textContent =
-      "Name and phone number are required.";
-
-    return;
-
-  }
-
-
-  message.style.color =
-    "#555";
-
-  message.textContent =
-    "Creating your agent account...";
-
-
-  showLoading(
-    "Creating agent account..."
-  );
-
-
-  try {
-
-    const result =
-      await api(
-        "register",
-        {
-
-          name:
-            name,
-
-          phone:
-            phone,
-
-          email:
-            email
-
-        }
-      );
-
-
-    if (
-      !result ||
-      result.status !== "success"
-    ) {
-
-      message.style.color =
-        "#c0392b";
-
-      message.textContent =
-        result?.message ||
-        "Registration failed.";
-
-      hideLoading();
-
-      return;
-
-    }
-
-
-    hideLoading();
-
-
-    message.style.color =
-      "#16834d";
-
-
-    message.innerHTML =
-
-      "Account created successfully!" +
-
-      "<br><br>" +
-
-      "<strong>Your Referral Code:</strong>" +
-
-      "<br>" +
-
-      "<span style='font-size:25px;font-weight:900;'>" +
-
-      escapeHtml(
-        result.code
-      ) +
-
-      "</span>" +
-
-      "<br><br>" +
-
-      "Save this code. You can use it to access your agent portal.";
-
-
-    document
-      .getElementById(
-        "loginIdentifier"
-      )
-      .value =
-      result.code;
-
-
-    setTimeout(
-      showLogin,
-      5000
-    );
-
-
-  } catch (error) {
-
-    hideLoading();
-
-    message.style.color =
-      "#c0392b";
-
-    message.textContent =
-      error.message;
-
-  }
-
-}
-
-
-/* =========================================================
-   SHOW LOGIN
-========================================================= */
-
-function showLogin() {
-
-  document
-    .getElementById(
-      "loginForm"
-    )
-    .classList
-    .remove("hidden");
-
-
-  document
-    .getElementById(
-      "registerForm"
-    )
-    .classList
-    .add("hidden");
-
-}
-
-
-/* =========================================================
-   SHOW REGISTER
-========================================================= */
-
-function showRegister() {
-
-  document
-    .getElementById(
-      "loginForm"
-    )
-    .classList
-    .add("hidden");
-
-
-  document
-    .getElementById(
-      "registerForm"
-    )
-    .classList
-    .remove("hidden");
-
-}
-
-
-/* =========================================================
-   SHOW DASHBOARD
-========================================================= */
-
-function showDashboard() {
-
-  document
-    .getElementById(
-      "loginPage"
-    )
-    .classList
-    .add("hidden");
-
-
-  document
-    .getElementById(
-      "dashboardPage"
-    )
-    .classList
-    .remove("hidden");
-
-
-  document
-    .getElementById(
-      "userBadge"
-    )
-    .textContent =
-
-      currentUser.name +
-
-      " • " +
-
-      currentUser.code;
-
-
-  const isAdmin =
-    currentUser.role === "admin";
-
-
-  if (isAdmin) {
-
-    document
-      .getElementById(
-        "dashboardTitle"
-      )
-      .textContent =
-      "All Customers";
-
-
-    document
-      .getElementById(
-        "addClientButton"
-      )
-      .classList
-      .add("hidden");
-
-
-    document
-      .getElementById(
-        "adminPanel"
-      )
-      .classList
-      .remove("hidden");
-
-  } else {
-
-    document
-      .getElementById(
-        "dashboardTitle"
-      )
-      .textContent =
-      "My Customers";
-
-
-    document
-      .getElementById(
-        "addClientButton"
-      )
-      .classList
-      .remove("hidden");
-
-
-    document
-      .getElementById(
-        "adminPanel"
-      )
-      .classList
-      .add("hidden");
-
-  }
-
-
-  loadDashboard();
-
-}
-
-
-/* =========================================================
-   LOAD DASHBOARD
-========================================================= */
-
-async function loadDashboard() {
-
-  if (!session) {
-
-    logout();
-
-    return;
-
-  }
-
-
-  showLoading(
-    "Loading dashboard..."
-  );
-
-
-  try {
-
-    const result =
-      await api(
-        "clients",
-        {
-          token:
-            session
-        }
-      );
-
-
-    if (
-      result.status ===
-      "unauthorized"
-    ) {
-
-      hideLoading();
-
-      logout();
-
-      return;
-
-    }
-
-
-    if (
-      result.status !==
-      "success"
-    ) {
-
-      hideLoading();
-
-      alert(
-        result.message ||
-        "Unable to load customers."
-      );
-
-      return;
-
-    }
-
-
-    clients =
-      result.clients || [];
-
-
-    renderClients(
-      clients
-    );
-
-
-    renderFunnel(
-      clients
-    );
-
-
-    await loadStats();
-
-
-    hideLoading();
-
-  } catch (error) {
-
-    hideLoading();
-
-    console.error(
-      error
-    );
-
-    alert(
-      error.message
-    );
-
-  }
-
-}
-
-
-/* =========================================================
-   RENDER CLIENTS
-========================================================= */
-
-function renderClients(
-  list
-) {
-
-  const tbody =
-    document
-      .getElementById(
-        "clientTable"
-      );
-
-
-  tbody.innerHTML =
-    "";
-
-
-  if (
-    !list ||
-    !list.length
-  ) {
-
-    tbody.innerHTML = `
-
-      <tr>
-
-        <td
-          colspan="8"
-          class="empty-state"
+        <footer
+            id="footer"
+            class="portal-footer"
         >
 
-          No customers found.
+            <div class="footer-glow"></div>
 
-        </td>
+            <div class="footer-container">
 
-      </tr>
 
-    `;
+                <!-- NEWSLETTER -->
 
-    return;
+                <div class="footer-newsletter">
 
-  }
+                    <div>
 
+                        <div class="vip-badge">
 
-  list.forEach(
-    function(client) {
+                            <span class="vip-dot"></span>
 
-      let action = "";
+                            <span class="vip-text">
+                                VIP Dispatch
+                            </span>
 
+                        </div>
 
-      if (
-        currentUser &&
-        currentUser.role ===
-        "admin"
-      ) {
+                        <h3>
+                            Subscribe for private flight updates & exclusive Watamu retreats
+                        </h3>
 
-        action = `
+                        <p>
+                            Receive privileged access to our seasonal private aviation schedules and limited coastal estate releases.
+                        </p>
 
-          <select
-            onchange="changeStage(
-              '${escapeAttribute(client.rowId)}',
-              this.value
-            )"
-            style="
-              padding:7px;
-              border:1px solid #d8dee8;
-              border-radius:7px;
-              font-size:11px;
-            "
-          >
+                    </div>
 
-            ${buildStageOptions(
-              client.stage
-            )}
 
-          </select>
+                    <div>
 
-        `;
+                        <form
+                            action="https://formspree.io/f/mppazakp"
+                            method="POST"
+                            class="newsletter-form"
+                        >
 
-      } else {
+                            <input
+                                type="email"
+                                name="email"
+                                placeholder="Enter your email address"
+                                required
+                            >
 
-        action = `
+                            <button type="submit">
+                                Subscribe
+                            </button>
 
-          <span
-            style="
-              color:#777;
-              font-size:11px;
-            "
-          >
+                        </form>
 
-            SJ Travel tracking
+                        <p class="newsletter-note">
+                            Unsubscribe at any time.
+                            Read our
+                            <a href="#">
+                                privacy policy
+                            </a>.
+                        </p>
 
-          </span>
+                    </div>
 
-        `;
+                </div>
 
-      }
 
+                <!-- MAIN FOOTER LINKS -->
 
-      tbody.innerHTML += `
+                <div class="footer-grid">
 
-        <tr>
 
-          <td>
+                    <!-- BRAND INFO -->
 
-            <strong>
+                    <div class="footer-column footer-brand-column">
 
-              ${escapeHtml(
-                client.id
-              )}
+                        <a
+                            href="https://www.sjluxurytravels.com/"
+                            class="footer-logo"
+                        >
 
-            </strong>
+                            <div class="sj-text-container">
 
-          </td>
+                                <div class="sj-main-row">
 
+                                    <span class="sj-title">
+                                        SJ
+                                    </span>
 
-          <td>
+                                    <span class="sj-divider"></span>
 
-            <strong>
+                                    <span class="sj-luxury">
+                                        luxury
+                                    </span>
 
-              ${escapeHtml(
-                client.name
-              )}
+                                </div>
 
-            </strong>
+                                <div class="sj-subtitle-row">
 
-          </td>
+                                    <span class="line"></span>
 
+                                    <span class="sj-subtitle">
+                                        TRAVELS LTD
+                                    </span>
 
-          <td>
+                                    <span class="line"></span>
 
-            ${escapeHtml(
-              client.phone
-            )}
+                                </div>
 
-          </td>
+                            </div>
 
+                        </a>
 
-          <td>
 
-            ${escapeHtml(
-              client.service
-            )}
+                        <p class="footer-description">
 
-          </td>
+                            Setting the luxury standard for global citizens seeking seamless air charters, elite wilderness safaris, and exclusive private villa bookings across East Africa.
 
+                        </p>
 
-          <td>
 
-            ${escapeHtml(
-              client.destination ||
-              "-"
-            )}
+                        <div class="social-icons">
 
-          </td>
+                            <a
+                                href="#"
+                                class="social-icon"
+                                aria-label="Facebook"
+                            >
+                                f
+                            </a>
 
+                            <a
+                                href="#"
+                                class="social-icon"
+                                aria-label="Instagram"
+                            >
+                                ◎
+                            </a>
 
-          <td>
+                            <a
+                                href="#"
+                                class="social-icon"
+                                aria-label="LinkedIn"
+                            >
+                                in
+                            </a>
 
-            ${escapeHtml(
-              client.agentCode
-            )}
+                        </div>
 
-          </td>
+                    </div>
 
 
-          <td>
+                    <!-- QUICK LINKS -->
 
-            <span class="stage">
+                    <div class="footer-column">
 
-              ${escapeHtml(
-                client.stage
-              )}
+                        <h4 class="footer-heading">
+                            Quick Links
+                        </h4>
 
-            </span>
+                        <ul class="footer-links">
 
-          </td>
+                            <li>
+                                <a href="https://www.sjluxurytravels.com/">
+                                    Home
+                                </a>
+                            </li>
 
+                            <li>
+                                <a href="https://www.sjluxurytravels.com/">
+                                    Book Transport
+                                </a>
+                            </li>
 
-          <td>
+                            <li>
+                                <a href="https://www.sjluxurytravels.com/">
+                                    Watamu Private Villas
+                                </a>
+                            </li>
 
-            ${action}
+                            <li>
+                                <a href="https://www.sjluxurytravels.com/">
+                                    Popular Destinations
+                                </a>
+                            </li>
 
-          </td>
+                            <li>
+                                <a href="https://www.sjluxurytravels.com/">
+                                    Expeditions
+                                </a>
+                            </li>
 
-        </tr>
+                        </ul>
 
-      `;
+                    </div>
 
-    }
-  );
 
-}
+                    <!-- SERVICES -->
 
+                    <div class="footer-column">
 
-/* =========================================================
-   FUNNEL STAGES
-========================================================= */
+                        <h4 class="footer-heading">
+                            Services
+                        </h4>
 
-function getStages() {
+                        <ul class="footer-links">
 
-  return [
+                            <li>
+                                <a href="https://www.sjluxurytravels.com/">
+                                    Flight Bookings
+                                </a>
+                            </li>
 
-    "LEAD QUALIFICATION",
+                            <li>
+                                <a href="https://www.sjluxurytravels.com/">
+                                    Corporate Logistics
+                                </a>
+                            </li>
 
-    "CONSULTATION",
+                            <li>
+                                <a href="https://www.sjluxurytravels.com/">
+                                    Hotel Reservations
+                                </a>
+                            </li>
 
-    "BESPOKE ITINERARY",
+                            <li>
+                                <a href="https://www.sjluxurytravels.com/">
+                                    Wilderness Safaris
+                                </a>
+                            </li>
 
-    "QUOTATION",
+                            <li>
+                                <a href="https://www.sjluxurytravels.com/">
+                                    Airport Transfers
+                                </a>
+                            </li>
 
-    "CLIENT APPROVAL",
+                        </ul>
 
-    "DEPOSIT PAYMENT",
+                    </div>
 
-    "BOOKING CONFIRMATION"
 
-  ];
+                    <!-- CONTACT DESK -->
 
-}
+                    <div class="footer-column">
 
+                        <h4 class="footer-heading">
+                            Contact Desk
+                        </h4>
 
-/* =========================================================
-   BUILD STAGE OPTIONS
-========================================================= */
+                        <div class="contact-line">
+                            Nairobi, Kenya
+                        </div>
 
-function buildStageOptions(
-  selected
-) {
+                        <div class="contact-line">
 
-  return getStages()
-    .map(
-      function(stage) {
+                            <span>
+                                ☎
+                            </span>
 
-        return `
+                            <a
+                                href="https://wa.me/254143299781"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+                                +(254) 143 299 781
+                            </a>
 
-          <option
-            value="${escapeAttribute(stage)}"
-            ${
-              stage === selected
-                ? "selected"
-                : ""
-            }
-          >
+                        </div>
 
-            ${escapeHtml(
-              stage
-            )}
+                        <div class="contact-line">
 
-          </option>
+                            <span>
+                                ✉
+                            </span>
 
-        `;
+                            <a href="mailto:info@sjluxurytravels.com">
+                                info@sjluxurytravels.com
+                            </a>
 
-      }
-    )
-    .join("");
+                        </div>
 
-}
+                    </div>
 
+                </div>
 
-/* =========================================================
-   CHANGE STAGE
-========================================================= */
 
-async function changeStage(
-  rowId,
-  stage
-) {
+                <!-- BOTTOM BAR -->
 
-  if (
-    !currentUser ||
-    currentUser.role !==
-    "admin"
-  ) {
+                <div class="bottom-footer">
 
-    return;
+                    <p>
+                        &copy; 2026 SJ Luxury Travel Ltd. All rights reserved.
+                    </p>
 
-  }
+                    <p>
+                        Designed & Powered by
+                        <a
+                            href="https://kenflixdesigns.co.ke"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            kenflixdesigns.co.ke
+                        </a>
+                    </p>
 
+                    <div class="bottom-links">
 
-  const confirmed =
-    confirm(
-      "Move this customer to:\n\n" +
-      stage +
-      "?"
-    );
+                        <a href="#">
+                            Privacy Policy
+                        </a>
 
+                        <a href="#">
+                            Terms of Service
+                        </a>
 
-  if (!confirmed) {
+                        <a href="#">
+                            Site Map
+                        </a>
 
-    await loadDashboard();
+                    </div>
 
-    return;
+                </div>
 
-  }
+            </div>
 
+        </footer>
 
-  showLoading(
-    "Updating customer journey..."
-  );
+    </section>
 
 
-  try {
+    <!-- =======================================================
+         ADD CUSTOMER MODAL
+    ======================================================== -->
 
-    const result =
-      await api(
-        "updateStage",
-        {
+    <div
+        id="clientModal"
+        class="modal hidden"
+    >
 
-          token:
-            session,
+        <div class="modal-content">
 
-          rowId:
-            rowId,
 
-          stage:
-            stage
+            <div class="modal-header">
 
-        }
-      );
+                <h2>
+                    Add New Customer
+                </h2>
 
+                <button
+                    class="close"
+                    onclick="closeClientModal()"
+                >
+                    &times;
+                </button>
 
-    if (
-      result.status !==
-      "success"
-    ) {
+            </div>
 
-      hideLoading();
 
-      alert(
-        result.message ||
-        "Unable to update stage."
-      );
+            <div class="form-group">
 
-      return;
+                <label>
+                    Customer Name *
+                </label>
 
-    }
+                <input
+                    id="clientName"
+                    type="text"
+                    placeholder="Customer full name"
+                >
 
+            </div>
 
-    await loadDashboard();
 
+            <div class="form-group">
 
-  } catch (error) {
+                <label>
+                    Phone Number *
+                </label>
 
-    hideLoading();
+                <input
+                    id="clientPhone"
+                    type="text"
+                    placeholder="0712345678"
+                >
 
-    alert(
-      error.message
-    );
+            </div>
 
-  }
 
-}
+            <div class="form-group">
 
+                <label>
+                    Email
+                </label>
 
-/* =========================================================
-   LOAD STATISTICS
-========================================================= */
+                <input
+                    id="clientEmail"
+                    type="email"
+                    placeholder="customer@email.com"
+                >
 
-async function loadStats() {
+            </div>
 
-  try {
 
-    const result =
-      await api(
-        "dashboard",
-        {
-          token:
-            session
-        }
-      );
+            <div class="form-group">
 
+                <label>
+                    Service *
+                </label>
 
-    if (
-      !result ||
-      result.status !==
-      "success"
-    ) {
+                <select id="clientService">
 
-      return;
+                    <option value="">
+                        Select Service
+                    </option>
 
-    }
+                    <option value="Luxury Safari">
+                        Luxury Safari
+                    </option>
 
+                    <option value="Beach Holiday">
+                        Beach Holiday
+                    </option>
 
-    const stats =
-      result.stats || {};
+                    <option value="Private Villa">
+                        Private Villa
+                    </option>
 
+                    <option value="Honeymoon">
+                        Honeymoon
+                    </option>
 
-    document
-      .getElementById(
-        "totalClients"
-      )
-      .textContent =
-      stats.total || 0;
+                    <option value="Family Holiday">
+                        Family Holiday
+                    </option>
 
+                    <option value="Luxury Travel">
+                        Luxury Travel
+                    </option>
 
-    document
-      .getElementById(
-        "leadCount"
-      )
-      .textContent =
-      stats.leadQualification || 0;
+                    <option value="Corporate Travel">
+                        Corporate Travel
+                    </option>
 
+                    <option value="Private Jet">
+                        Private Jet
+                    </option>
 
-    document
-      .getElementById(
-        "consultationCount"
-      )
-      .textContent =
-      stats.consultation || 0;
+                    <option value="Luxury Yacht">
+                        Luxury Yacht
+                    </option>
 
+                    <option value="Airport Transfer">
+                        Airport Transfer
+                    </option>
 
-    document
-      .getElementById(
-        "quotationCount"
-      )
-      .textContent =
-      stats.quotation || 0;
+                    <option value="Custom Itinerary">
+                        Custom Itinerary
+                    </option>
 
+                    <option value="Other">
+                        Other
+                    </option>
 
-    document
-      .getElementById(
-        "bookingCount"
-      )
-      .textContent =
-      stats.bookingConfirmation || 0;
+                </select>
 
-  } catch (error) {
+            </div>
 
-    console.error(
-      error
-    );
 
-  }
+            <div class="form-group">
 
-}
+                <label>
+                    Destination
+                </label>
 
+                <input
+                    id="clientDestination"
+                    type="text"
+                    placeholder="e.g. Maasai Mara, Zanzibar, Dubai"
+                >
 
-/* =========================================================
-   RENDER FUNNEL
-========================================================= */
+            </div>
 
-function renderFunnel(
-  clientList = clients
-) {
 
-  const stages =
-    getStages();
+            <div class="form-group">
 
+                <label>
+                    Travel Date
+                </label>
 
-  const container =
-    document
-      .getElementById(
-        "funnelContainer"
-      );
+                <input
+                    id="clientTravelDate"
+                    type="date"
+                >
 
+            </div>
 
-  container.innerHTML =
-    "";
 
+            <div class="form-group">
 
-  stages.forEach(
-    function(stage) {
+                <label>
+                    Number of Travellers
+                </label>
 
-      const count =
-        clientList.filter(
-          function(client) {
+                <input
+                    id="clientTravellers"
+                    type="number"
+                    min="1"
+                    placeholder="e.g. 2"
+                >
 
-            return (
-              String(
-                client.stage || ""
-              )
-              .toUpperCase() ===
-              stage
-            );
+            </div>
 
-          }
-        ).length;
 
+            <div class="form-group">
 
-      container.innerHTML += `
+                <label>
+                    Budget
+                </label>
 
-        <div class="funnel-step">
+                <input
+                    id="clientBudget"
+                    type="text"
+                    placeholder="Approximate budget"
+                >
 
-          <span>
-            ${count}
-          </span>
+            </div>
 
-          ${escapeHtml(
-            stage
-          )}
+
+            <div class="form-group">
+
+                <label>
+                    Special Requests
+                </label>
+
+                <textarea
+                    id="clientSpecialRequests"
+                    rows="4"
+                    placeholder="Any special requirements..."
+                ></textarea>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Notes
+                </label>
+
+                <textarea
+                    id="clientNotes"
+                    rows="3"
+                    placeholder="Additional notes..."
+                ></textarea>
+
+            </div>
+
+
+            <button
+                class="btn btn-primary full"
+                onclick="saveClient()"
+            >
+                SAVE CUSTOMER
+            </button>
+
+
+            <p
+                id="clientMessage"
+                class="message"
+            ></p>
 
         </div>
 
-      `;
-
-    }
-  );
-
-}
+    </div>
 
 
-/* =========================================================
-   OPEN CLIENT MODAL
-========================================================= */
-
-function openClientModal() {
-
-  document
-    .getElementById(
-      "clientModal"
-    )
-    .classList
-    .remove("hidden");
-
-}
+    <script>
 
 
-/* =========================================================
-   CLOSE CLIENT MODAL
-========================================================= */
+        /* =========================================================
+           CONFIGURATION
+        ========================================================= */
 
-function closeClientModal() {
-
-  document
-    .getElementById(
-      "clientModal"
-    )
-    .classList
-    .add("hidden");
-
-}
+        const API_URL =
+            "https://script.google.com/macros/s/AKfycbyFmDVuaaRmAVKnieJPeUZy0Yo9uFnrjkr_8mY30rtOUH3qRv9T9mNhHWoUmMP43ZAi/exec";
 
 
-/* =========================================================
-   SAVE CLIENT
-========================================================= */
+        /* =========================================================
+           GLOBAL VARIABLES
+        ========================================================= */
 
-async function saveClient() {
+        let session =
+            localStorage.getItem(
+                "sj_agent_session"
+            );
 
-  const message =
-    document
-      .getElementById(
-        "clientMessage"
-      );
+        let currentUser =
+            JSON.parse(
+                localStorage.getItem(
+                    "sj_agent_user"
+                ) || "null"
+            );
 
+        let clients = [];
 
-  const data = {
-
-    name:
-      document
-        .getElementById(
-          "clientName"
-        )
-        .value
-        .trim(),
-
-    phone:
-      document
-        .getElementById(
-          "clientPhone"
-        )
-        .value
-        .trim(),
-
-    email:
-      document
-        .getElementById(
-          "clientEmail"
-        )
-        .value
-        .trim(),
-
-    service:
-      document
-        .getElementById(
-          "clientService"
-        )
-        .value,
-
-    destination:
-      document
-        .getElementById(
-          "clientDestination"
-        )
-        .value
-        .trim(),
-
-    travelDate:
-      document
-        .getElementById(
-          "clientTravelDate"
-        )
-        .value,
-
-    travellers:
-      document
-        .getElementById(
-          "clientTravellers"
-        )
-        .value,
-
-    budget:
-      document
-        .getElementById(
-          "clientBudget"
-        )
-        .value
-        .trim(),
-
-    specialRequests:
-      document
-        .getElementById(
-          "clientSpecialRequests"
-        )
-        .value
-        .trim(),
-
-    notes:
-      document
-        .getElementById(
-          "clientNotes"
-        )
-        .value
-        .trim()
-
-  };
+        let searchTimer;
 
 
-  if (
-    !data.name ||
-    !data.phone ||
-    !data.service
-  ) {
+        /* =========================================================
+           LOADING
+        ========================================================= */
 
-    message.style.color =
-      "#c0392b";
+        function showLoading(
+            text = "Loading..."
+        ) {
 
-    message.textContent =
-      "Please fill in the required fields.";
+            document
+                .getElementById("loadingText")
+                .textContent = text;
 
-    return;
-
-  }
-
-
-  message.style.color =
-    "#555";
-
-  message.textContent =
-    "Saving customer...";
-
-
-  showLoading(
-    "Saving customer..."
-  );
-
-
-  try {
-
-    const result =
-      await api(
-        "addClient",
-        {
-
-          token:
-            session,
-
-          name:
-            data.name,
-
-          phone:
-            data.phone,
-
-          email:
-            data.email,
-
-          service:
-            data.service,
-
-          destination:
-            data.destination,
-
-          travelDate:
-            data.travelDate,
-
-          travellers:
-            data.travellers,
-
-          budget:
-            data.budget,
-
-          specialRequests:
-            data.specialRequests,
-
-          notes:
-            data.notes
+            document
+                .getElementById("loading")
+                .classList
+                .remove("hidden");
 
         }
-      );
 
 
-    if (
-      !result ||
-      result.status !==
-      "success"
-    ) {
+        function hideLoading() {
 
-      hideLoading();
+            document
+                .getElementById("loading")
+                .classList
+                .add("hidden");
 
-      message.style.color =
-        "#c0392b";
-
-      message.textContent =
-        result?.message ||
-        "Unable to save customer.";
-
-      return;
-
-    }
+        }
 
 
-    hideLoading();
+        /* =========================================================
+           API REQUEST
+        ========================================================= */
+
+        function api(
+            action,
+            params = {}
+        ) {
+
+            return new Promise(
+                function(resolve, reject) {
+
+                    const query =
+                        new URLSearchParams();
+
+                    query.append(
+                        "action",
+                        action
+                    );
 
 
-    message.style.color =
-      "#16834d";
+                    Object.keys(params)
+                        .forEach(
+                            function(key) {
 
-    message.textContent =
-      "Customer successfully added.";
+                                query.append(
+                                    key,
+                                    params[key] === undefined
+                                        ? ""
+                                        : params[key]
+                                );
 
-
-    setTimeout(
-      async function() {
-
-        closeClientModal();
-
-        clearClientForm();
-
-        await loadDashboard();
-
-      },
-      800
-    );
+                            }
+                        );
 
 
-  } catch (error) {
-
-    hideLoading();
-
-    message.style.color =
-      "#c0392b";
-
-    message.textContent =
-      error.message;
-
-  }
-
-}
+                    const callbackName =
+                        "sjCallback_" +
+                        Date.now() +
+                        "_" +
+                        Math.floor(
+                            Math.random() * 100000
+                        );
 
 
-/* =========================================================
-   CLEAR CUSTOMER FORM
-========================================================= */
-
-function clearClientForm() {
-
-  const fields = [
-
-    "clientName",
-
-    "clientPhone",
-
-    "clientEmail",
-
-    "clientService",
-
-    "clientDestination",
-
-    "clientTravelDate",
-
-    "clientTravellers",
-
-    "clientBudget",
-
-    "clientSpecialRequests",
-
-    "clientNotes"
-
-  ];
+                    query.append(
+                        "callback",
+                        callbackName
+                    );
 
 
-  fields.forEach(
-    function(id) {
-
-      const element =
-        document
-          .getElementById(
-            id
-          );
+                    const script =
+                        document.createElement(
+                            "script"
+                        );
 
 
-      if (element) {
-
-        element.value =
-          "";
-
-      }
-
-    }
-  );
+                    let completed = false;
 
 
-  document
-    .getElementById(
-      "clientMessage"
-    )
-    .textContent =
-    "";
+                    window[callbackName] =
+                        function(data) {
 
-}
+                            if (completed) {
+                                return;
+                            }
+
+                            completed = true;
+
+                            delete window[
+                                callbackName
+                            ];
+
+                            script.remove();
+
+                            resolve(data);
+
+                        };
 
 
-/* =========================================================
-   SEARCH
-========================================================= */
+                    script.onerror =
+                        function() {
 
-function searchCustomers() {
+                            if (completed) {
+                                return;
+                            }
 
-  clearTimeout(
-    searchTimer
-  );
+                            completed = true;
+
+                            delete window[
+                                callbackName
+                            ];
+
+                            script.remove();
+
+                            reject(
+                                new Error(
+                                    "Unable to connect to SJ Luxury Travel backend."
+                                )
+                            );
+
+                        };
 
 
-  searchTimer =
-    setTimeout(
-      async function() {
+                    script.src =
+                        API_URL +
+                        "?t=" +
+                        Date.now() +
+                        "&" +
+                        query.toString();
 
-        const query =
-          document
-            .getElementById(
-              "searchInput"
+
+                    document.body.appendChild(
+                        script
+                    );
+
+
+                    setTimeout(
+                        function() {
+
+                            if (completed) {
+                                return;
+                            }
+
+                            completed = true;
+
+                            delete window[
+                                callbackName
+                            ];
+
+                            script.remove();
+
+                            reject(
+                                new Error(
+                                    "The SJ Luxury Travel backend did not respond. Please check the Apps Script deployment."
+                                )
+                            );
+
+                        },
+                        20000
+                    );
+
+                }
+            );
+
+        }
+
+
+        /* =========================================================
+           LOGIN
+        ========================================================= */
+
+        async function login() {
+
+            const identifier =
+                document
+                    .getElementById(
+                        "loginIdentifier"
+                    )
+                    .value
+                    .trim();
+
+
+            const message =
+                document
+                    .getElementById(
+                        "loginMessage"
+                    );
+
+
+            if (!identifier) {
+
+                message.style.color =
+                    "#c0392b";
+
+                message.textContent =
+                    "Please enter your referral code or phone number.";
+
+                return;
+
+            }
+
+
+            message.style.color =
+                "#555";
+
+            message.textContent =
+                "Signing in...";
+
+
+            showLoading(
+                "Signing in..."
+            );
+
+
+            try {
+
+                const result =
+                    await api(
+                        "login",
+                        {
+                            identifier:
+                                identifier
+                        }
+                    );
+
+
+                if (
+                    !result ||
+                    result.status !== "success"
+                ) {
+
+                    message.style.color =
+                        "#c0392b";
+
+                    message.textContent =
+                        result?.message ||
+                        "Login failed.";
+
+                    hideLoading();
+
+                    return;
+
+                }
+
+
+                session =
+                    result.token;
+
+
+                currentUser = {
+
+                    role:
+                        result.role,
+
+                    name:
+                        result.name,
+
+                    code:
+                        result.code,
+
+                    phone:
+                        result.phone || "",
+
+                    email:
+                        result.email || ""
+
+                };
+
+
+                localStorage.setItem(
+                    "sj_agent_session",
+                    session
+                );
+
+
+                localStorage.setItem(
+                    "sj_agent_user",
+                    JSON.stringify(
+                        currentUser
+                    )
+                );
+
+
+                message.textContent =
+                    "";
+
+
+                showDashboard();
+
+
+            } catch (error) {
+
+                message.style.color =
+                    "#c0392b";
+
+                message.textContent =
+                    error.message;
+
+                hideLoading();
+
+            }
+
+        }
+
+
+        /* =========================================================
+           REGISTER AGENT
+        ========================================================= */
+
+        async function registerAgent() {
+
+            const name =
+                document
+                    .getElementById(
+                        "registerName"
+                    )
+                    .value
+                    .trim();
+
+
+            const phone =
+                document
+                    .getElementById(
+                        "registerPhone"
+                    )
+                    .value
+                    .trim();
+
+
+            const email =
+                document
+                    .getElementById(
+                        "registerEmail"
+                    )
+                    .value
+                    .trim();
+
+
+            const message =
+                document
+                    .getElementById(
+                        "registerMessage"
+                    );
+
+
+            if (!name || !phone) {
+
+                message.style.color =
+                    "#c0392b";
+
+                message.textContent =
+                    "Name and phone number are required.";
+
+                return;
+
+            }
+
+
+            message.style.color =
+                "#555";
+
+            message.textContent =
+                "Creating your agent account...";
+
+
+            showLoading(
+                "Creating agent account..."
+            );
+
+
+            try {
+
+                const result =
+                    await api(
+                        "register",
+                        {
+
+                            name:
+                                name,
+
+                            phone:
+                                phone,
+
+                            email:
+                                email
+
+                        }
+                    );
+
+
+                if (
+                    !result ||
+                    result.status !== "success"
+                ) {
+
+                    message.style.color =
+                        "#c0392b";
+
+                    message.textContent =
+                        result?.message ||
+                        "Registration failed.";
+
+                    hideLoading();
+
+                    return;
+
+                }
+
+
+                hideLoading();
+
+
+                message.style.color =
+                    "#16834d";
+
+
+                message.innerHTML =
+
+                    "Account created successfully!" +
+
+                    "<br><br>" +
+
+                    "<strong>Your Referral Code:</strong>" +
+
+                    "<br>" +
+
+                    "<span style='font-size:25px;font-weight:900;'>" +
+
+                    escapeHtml(
+                        result.code
+                    ) +
+
+                    "</span>" +
+
+                    "<br><br>" +
+
+                    "Save this code. You can use it to access your agent portal.";
+
+
+                document
+                    .getElementById(
+                        "loginIdentifier"
+                    )
+                    .value =
+                    result.code;
+
+
+                setTimeout(
+                    showLogin,
+                    5000
+                );
+
+
+            } catch (error) {
+
+                hideLoading();
+
+                message.style.color =
+                    "#c0392b";
+
+                message.textContent =
+                    error.message;
+
+            }
+
+        }
+
+
+        /* =========================================================
+           SHOW LOGIN
+        ========================================================= */
+
+        function showLogin() {
+
+            document
+                .getElementById(
+                    "loginForm"
+                )
+                .classList
+                .remove("hidden");
+
+
+            document
+                .getElementById(
+                    "registerForm"
+                )
+                .classList
+                .add("hidden");
+
+        }
+
+
+        /* =========================================================
+           SHOW REGISTER
+        ========================================================= */
+
+        function showRegister() {
+
+            document
+                .getElementById(
+                    "loginForm"
+                )
+                .classList
+                .add("hidden");
+
+
+            document
+                .getElementById(
+                    "registerForm"
+                )
+                .classList
+                .remove("hidden");
+
+        }
+
+
+        /* =========================================================
+           SHOW DASHBOARD
+        ========================================================= */
+
+        function showDashboard() {
+
+            document
+                .getElementById(
+                    "loginPage"
+                )
+                .classList
+                .add("hidden");
+
+
+            document
+                .getElementById(
+                    "dashboardPage"
+                )
+                .classList
+                .remove("hidden");
+
+
+            document
+                .getElementById(
+                    "userBadge"
+                )
+                .textContent =
+
+                currentUser.name +
+
+                " • " +
+
+                currentUser.code;
+
+
+            const isAdmin =
+                currentUser.role === "admin";
+
+
+            if (isAdmin) {
+
+                document
+                    .getElementById(
+                        "dashboardTitle"
+                    )
+                    .textContent =
+                    "All Customers";
+
+
+                document
+                    .getElementById(
+                        "addClientButton"
+                    )
+                    .classList
+                    .add("hidden");
+
+
+                document
+                    .getElementById(
+                        "adminPanel"
+                    )
+                    .classList
+                    .remove("hidden");
+
+            } else {
+
+                document
+                    .getElementById(
+                        "dashboardTitle"
+                    )
+                    .textContent =
+                    "My Customers";
+
+
+                document
+                    .getElementById(
+                        "addClientButton"
+                    )
+                    .classList
+                    .remove("hidden");
+
+
+                document
+                    .getElementById(
+                        "adminPanel"
+                    )
+                    .classList
+                    .add("hidden");
+
+            }
+
+
+            loadDashboard();
+
+        }
+
+
+        /* =========================================================
+           LOAD DASHBOARD
+        ========================================================= */
+
+        async function loadDashboard() {
+
+            if (!session) {
+
+                logout();
+
+                return;
+
+            }
+
+
+            showLoading(
+                "Loading dashboard..."
+            );
+
+
+            try {
+
+                const result =
+                    await api(
+                        "clients",
+                        {
+                            token:
+                                session
+                        }
+                    );
+
+
+                if (
+                    result.status ===
+                    "unauthorized"
+                ) {
+
+                    hideLoading();
+
+                    logout();
+
+                    return;
+
+                }
+
+
+                if (
+                    result.status !==
+                    "success"
+                ) {
+
+                    hideLoading();
+
+                    alert(
+                        result.message ||
+                        "Unable to load customers."
+                    );
+
+                    return;
+
+                }
+
+
+                clients =
+                    result.clients || [];
+
+
+                renderClients(
+                    clients
+                );
+
+
+                renderFunnel(
+                    clients
+                );
+
+
+                await loadStats();
+
+
+                hideLoading();
+
+
+            } catch (error) {
+
+                hideLoading();
+
+                console.error(
+                    error
+                );
+
+                alert(
+                    error.message
+                );
+
+            }
+
+        }
+
+
+        /* =========================================================
+           RENDER CLIENTS
+        ========================================================= */
+
+        function renderClients(
+            list
+        ) {
+
+            const tbody =
+                document
+                    .getElementById(
+                        "clientTable"
+                    );
+
+
+            tbody.innerHTML =
+                "";
+
+
+            if (
+                !list ||
+                !list.length
+            ) {
+
+                tbody.innerHTML = `
+
+                    <tr>
+
+                        <td
+                            colspan="8"
+                            class="empty-state"
+                        >
+
+                            No customers found.
+
+                        </td>
+
+                    </tr>
+
+                `;
+
+                return;
+
+            }
+
+
+            list.forEach(
+                function(client) {
+
+                    let action = "";
+
+
+                    if (
+                        currentUser &&
+                        currentUser.role ===
+                        "admin"
+                    ) {
+
+                        action = `
+
+                            <select
+                                onchange="changeStage(
+                                    '${escapeAttribute(client.rowId)}',
+                                    this.value
+                                )"
+                                style="
+                                    padding:7px;
+                                    border:1px solid #d8dee8;
+                                    border-radius:7px;
+                                    font-size:11px;
+                                "
+                            >
+
+                                ${buildStageOptions(
+                                    client.stage
+                                )}
+
+                            </select>
+
+                        `;
+
+                    } else {
+
+                        action = `
+
+                            <span
+                                style="
+                                    color:#777;
+                                    font-size:11px;
+                                "
+                            >
+
+                                SJ Travel tracking
+
+                            </span>
+
+                        `;
+
+                    }
+
+
+                    tbody.innerHTML += `
+
+                        <tr>
+
+                            <td>
+
+                                <strong>
+
+                                    ${escapeHtml(
+                                        client.id
+                                    )}
+
+                                </strong>
+
+                            </td>
+
+
+                            <td>
+
+                                <strong>
+
+                                    ${escapeHtml(
+                                        client.name
+                                    )}
+
+                                </strong>
+
+                            </td>
+
+
+                            <td>
+
+                                ${escapeHtml(
+                                    client.phone
+                                )}
+
+                            </td>
+
+
+                            <td>
+
+                                ${escapeHtml(
+                                    client.service
+                                )}
+
+                            </td>
+
+
+                            <td>
+
+                                ${escapeHtml(
+                                    client.destination ||
+                                    "-"
+                                )}
+
+                            </td>
+
+
+                            <td>
+
+                                ${escapeHtml(
+                                    client.agentCode
+                                )}
+
+                            </td>
+
+
+                            <td>
+
+                                <span class="stage">
+
+                                    ${escapeHtml(
+                                        client.stage
+                                    )}
+
+                                </span>
+
+                            </td>
+
+
+                            <td>
+
+                                ${action}
+
+                            </td>
+
+                        </tr>
+
+                    `;
+
+                }
+            );
+
+        }
+
+
+        /* =========================================================
+           FUNNEL STAGES
+        ========================================================= */
+
+        function getStages() {
+
+            return [
+
+                "LEAD QUALIFICATION",
+
+                "CONSULTATION",
+
+                "BESPOKE ITINERARY",
+
+                "QUOTATION",
+
+                "CLIENT APPROVAL",
+
+                "DEPOSIT PAYMENT",
+
+                "BOOKING CONFIRMATION"
+
+            ];
+
+        }
+
+
+        /* =========================================================
+           BUILD STAGE OPTIONS
+        ========================================================= */
+
+        function buildStageOptions(
+            selected
+        ) {
+
+            return getStages()
+                .map(
+                    function(stage) {
+
+                        return `
+
+                            <option
+                                value="${escapeAttribute(stage)}"
+                                ${
+                                    stage === selected
+                                        ? "selected"
+                                        : ""
+                                }
+                            >
+
+                                ${escapeHtml(
+                                    stage
+                                )}
+
+                            </option>
+
+                        `;
+
+                    }
+                )
+                .join("");
+
+        }
+
+
+        /* =========================================================
+           CHANGE STAGE
+        ========================================================= */
+
+        async function changeStage(
+            rowId,
+            stage
+        ) {
+
+            if (
+                !currentUser ||
+                currentUser.role !==
+                "admin"
+            ) {
+
+                return;
+
+            }
+
+
+            const confirmed =
+                confirm(
+                    "Move this customer to:\n\n" +
+                    stage +
+                    "?"
+                );
+
+
+            if (!confirmed) {
+
+                await loadDashboard();
+
+                return;
+
+            }
+
+
+            showLoading(
+                "Updating customer journey..."
+            );
+
+
+            try {
+
+                const result =
+                    await api(
+                        "updateStage",
+                        {
+
+                            token:
+                                session,
+
+                            rowId:
+                                rowId,
+
+                            stage:
+                                stage
+
+                        }
+                    );
+
+
+                if (
+                    result.status !==
+                    "success"
+                ) {
+
+                    hideLoading();
+
+                    alert(
+                        result.message ||
+                        "Unable to update stage."
+                    );
+
+                    return;
+
+                }
+
+
+                await loadDashboard();
+
+
+            } catch (error) {
+
+                hideLoading();
+
+                alert(
+                    error.message
+                );
+
+            }
+
+        }
+
+
+        /* =========================================================
+           LOAD STATISTICS
+        ========================================================= */
+
+        async function loadStats() {
+
+            try {
+
+                const result =
+                    await api(
+                        "dashboard",
+                        {
+                            token:
+                                session
+                        }
+                    );
+
+
+                if (
+                    !result ||
+                    result.status !==
+                    "success"
+                ) {
+
+                    return;
+
+                }
+
+
+                const stats =
+                    result.stats || {};
+
+
+                document
+                    .getElementById(
+                        "totalClients"
+                    )
+                    .textContent =
+                    stats.total || 0;
+
+
+                document
+                    .getElementById(
+                        "leadCount"
+                    )
+                    .textContent =
+                    stats.leadQualification || 0;
+
+
+                document
+                    .getElementById(
+                        "consultationCount"
+                    )
+                    .textContent =
+                    stats.consultation || 0;
+
+
+                document
+                    .getElementById(
+                        "quotationCount"
+                    )
+                    .textContent =
+                    stats.quotation || 0;
+
+
+                document
+                    .getElementById(
+                        "bookingCount"
+                    )
+                    .textContent =
+                    stats.bookingConfirmation || 0;
+
+
+            } catch (error) {
+
+                console.error(
+                    error
+                );
+
+            }
+
+        }
+
+
+        /* =========================================================
+           RENDER FUNNEL
+        ========================================================= */
+
+        function renderFunnel(
+            clientList = clients
+        ) {
+
+            const stages =
+                getStages();
+
+
+            const container =
+                document
+                    .getElementById(
+                        "funnelContainer"
+                    );
+
+
+            container.innerHTML =
+                "";
+
+
+            stages.forEach(
+                function(stage) {
+
+                    const count =
+                        clientList.filter(
+                            function(client) {
+
+                                return (
+                                    String(
+                                        client.stage || ""
+                                    )
+                                    .toUpperCase() ===
+                                    stage
+                                );
+
+                            }
+                        ).length;
+
+
+                    container.innerHTML += `
+
+                        <div class="funnel-step">
+
+                            <span>
+                                ${count}
+                            </span>
+
+                            ${escapeHtml(
+                                stage
+                            )}
+
+                        </div>
+
+                    `;
+
+                }
+            );
+
+        }
+
+
+        /* =========================================================
+           OPEN CLIENT MODAL
+        ========================================================= */
+
+        function openClientModal() {
+
+            document
+                .getElementById(
+                    "clientModal"
+                )
+                .classList
+                .remove("hidden");
+
+        }
+
+
+        /* =========================================================
+           CLOSE CLIENT MODAL
+        ========================================================= */
+
+        function closeClientModal() {
+
+            document
+                .getElementById(
+                    "clientModal"
+                )
+                .classList
+                .add("hidden");
+
+        }
+
+
+        /* =========================================================
+           SAVE CLIENT
+        ========================================================= */
+
+        async function saveClient() {
+
+            const message =
+                document
+                    .getElementById(
+                        "clientMessage"
+                    );
+
+
+            const data = {
+
+                name:
+                    document
+                        .getElementById(
+                            "clientName"
+                        )
+                        .value
+                        .trim(),
+
+                phone:
+                    document
+                        .getElementById(
+                            "clientPhone"
+                        )
+                        .value
+                        .trim(),
+
+                email:
+                    document
+                        .getElementById(
+                            "clientEmail"
+                        )
+                        .value
+                        .trim(),
+
+                service:
+                    document
+                        .getElementById(
+                            "clientService"
+                        )
+                        .value,
+
+                destination:
+                    document
+                        .getElementById(
+                            "clientDestination"
+                        )
+                        .value
+                        .trim(),
+
+                travelDate:
+                    document
+                        .getElementById(
+                            "clientTravelDate"
+                        )
+                        .value,
+
+                travellers:
+                    document
+                        .getElementById(
+                            "clientTravellers"
+                        )
+                        .value,
+
+                budget:
+                    document
+                        .getElementById(
+                            "clientBudget"
+                        )
+                        .value
+                        .trim(),
+
+                specialRequests:
+                    document
+                        .getElementById(
+                            "clientSpecialRequests"
+                        )
+                        .value
+                        .trim(),
+
+                notes:
+                    document
+                        .getElementById(
+                            "clientNotes"
+                        )
+                        .value
+                        .trim()
+
+            };
+
+
+            if (
+                !data.name ||
+                !data.phone ||
+                !data.service
+            ) {
+
+                message.style.color =
+                    "#c0392b";
+
+                message.textContent =
+                    "Please fill in the required fields.";
+
+                return;
+
+            }
+
+
+            message.style.color =
+                "#555";
+
+            message.textContent =
+                "Saving customer...";
+
+
+            showLoading(
+                "Saving customer..."
+            );
+
+
+            try {
+
+                const result =
+                    await api(
+                        "addClient",
+                        {
+
+                            token:
+                                session,
+
+                            name:
+                                data.name,
+
+                            phone:
+                                data.phone,
+
+                            email:
+                                data.email,
+
+                            service:
+                                data.service,
+
+                            destination:
+                                data.destination,
+
+                            travelDate:
+                                data.travelDate,
+
+                            travellers:
+                                data.travellers,
+
+                            budget:
+                                data.budget,
+
+                            specialRequests:
+                                data.specialRequests,
+
+                            notes:
+                                data.notes
+
+                        }
+                    );
+
+
+                if (
+                    !result ||
+                    result.status !==
+                    "success"
+                ) {
+
+                    hideLoading();
+
+                    message.style.color =
+                        "#c0392b";
+
+                    message.textContent =
+                        result?.message ||
+                        "Unable to save customer.";
+
+                    return;
+
+                }
+
+
+                hideLoading();
+
+
+                message.style.color =
+                    "#16834d";
+
+                message.textContent =
+                    "Customer successfully added.";
+
+
+                setTimeout(
+                    async function() {
+
+                        closeClientModal();
+
+                        clearClientForm();
+
+                        await loadDashboard();
+
+                    },
+                    800
+                );
+
+
+            } catch (error) {
+
+                hideLoading();
+
+                message.style.color =
+                    "#c0392b";
+
+                message.textContent =
+                    error.message;
+
+            }
+
+        }
+
+
+        /* =========================================================
+           CLEAR CUSTOMER FORM
+        ========================================================= */
+
+        function clearClientForm() {
+
+            const fields = [
+
+                "clientName",
+
+                "clientPhone",
+
+                "clientEmail",
+
+                "clientService",
+
+                "clientDestination",
+
+                "clientTravelDate",
+
+                "clientTravellers",
+
+                "clientBudget",
+
+                "clientSpecialRequests",
+
+                "clientNotes"
+
+            ];
+
+
+            fields.forEach(
+                function(id) {
+
+                    const element =
+                        document
+                            .getElementById(
+                                id
+                            );
+
+
+                    if (element) {
+
+                        element.value =
+                            "";
+
+                    }
+
+                }
+            );
+
+
+            document
+                .getElementById(
+                    "clientMessage"
+                )
+                .textContent =
+                "";
+
+        }
+
+
+        /* =========================================================
+           SEARCH
+        ========================================================= */
+
+        function searchCustomers() {
+
+            clearTimeout(
+                searchTimer
+            );
+
+
+            searchTimer =
+                setTimeout(
+                    async function() {
+
+                        const query =
+                            document
+                                .getElementById(
+                                    "searchInput"
+                                )
+                                .value
+                                .trim();
+
+
+                        if (!query) {
+
+                            renderClients(
+                                clients
+                            );
+
+                            renderFunnel(
+                                clients
+                            );
+
+                            return;
+
+                        }
+
+
+                        try {
+
+                            const result =
+                                await api(
+                                    "search",
+                                    {
+
+                                        token:
+                                            session,
+
+                                        q:
+                                            query
+
+                                    }
+                                );
+
+
+                            if (
+                                result.status ===
+                                "success"
+                            ) {
+
+                                const searchResults =
+                                    result.clients || [];
+
+                                renderClients(
+                                    searchResults
+                                );
+
+                                renderFunnel(
+                                    searchResults
+                                );
+
+                            }
+
+
+                        } catch (error) {
+
+                            console.error(
+                                error
+                            );
+
+                        }
+
+
+                    },
+                    300
+                );
+
+        }
+
+
+        /* =========================================================
+           DOWNLOAD REPORT
+        ========================================================= */
+
+        function downloadReport() {
+
+            if (
+                !currentUser ||
+                !clients
+            ) {
+
+                alert(
+                    "No customer information is available for the report."
+                );
+
+                return;
+
+            }
+
+
+            if (!clients.length) {
+
+                alert(
+                    "There are no customers available to download."
+                );
+
+                return;
+
+            }
+
+
+            const rows = [];
+
+
+            rows.push([
+                "SJ LUXURY TRAVEL LTD"
+            ]);
+
+
+            rows.push([
+                "AGENT CUSTOMER REPORT"
+            ]);
+
+
+            rows.push([
+                "Agent Name",
+                currentUser.name || ""
+            ]);
+
+
+            rows.push([
+                "Referral Code",
+                currentUser.code || ""
+            ]);
+
+
+            rows.push([
+                "Report Date",
+                new Date().toLocaleString()
+            ]);
+
+
+            rows.push([]);
+
+
+            rows.push([
+                "Client ID",
+                "Customer",
+                "Phone",
+                "Email",
+                "Service",
+                "Destination",
+                "Travel Date",
+                "Travellers",
+                "Budget",
+                "Special Requests",
+                "Notes",
+                "Agent",
+                "Funnel Stage"
+            ]);
+
+
+            clients.forEach(
+                function(client) {
+
+                    rows.push([
+
+                        client.id || "",
+
+                        client.name || "",
+
+                        client.phone || "",
+
+                        client.email || "",
+
+                        client.service || "",
+
+                        client.destination || "",
+
+                        client.travelDate || "",
+
+                        client.travellers || "",
+
+                        client.budget || "",
+
+                        client.specialRequests || "",
+
+                        client.notes || "",
+
+                        client.agentCode || "",
+
+                        client.stage || ""
+
+                    ]);
+
+                }
+            );
+
+
+            const csv =
+                rows
+                    .map(
+                        function(row) {
+
+                            return row
+                                .map(
+                                    function(value) {
+
+                                        return '"' +
+                                            String(
+                                                value ?? ""
+                                            )
+                                            .replace(
+                                                /"/g,
+                                                '""'
+                                            ) +
+                                            '"';
+
+                                    }
+                                )
+                                .join(",");
+
+                        }
+                    )
+                    .join("\r\n");
+
+
+            const blob =
+                new Blob(
+                    [
+                        "\uFEFF" +
+                        csv
+                    ],
+                    {
+                        type:
+                            "text/csv;charset=utf-8;"
+                    }
+                );
+
+
+            const url =
+                URL.createObjectURL(
+                    blob
+                );
+
+
+            const link =
+                document.createElement(
+                    "a"
+                );
+
+
+            const date =
+                new Date()
+                    .toISOString()
+                    .slice(0, 10);
+
+
+            const safeName =
+                String(
+                    currentUser.name ||
+                    "Agent"
+                )
+                .replace(
+                    /[^a-z0-9]/gi,
+                    "_"
+                );
+
+
+            link.href =
+                url;
+
+
+            link.download =
+                "SJ_Luxury_Travel_Report_" +
+                safeName +
+                "_" +
+                date +
+                ".csv";
+
+
+            document.body.appendChild(
+                link
+            );
+
+
+            link.click();
+
+
+            document.body.removeChild(
+                link
+            );
+
+
+            URL.revokeObjectURL(
+                url
+            );
+
+        }
+
+
+        /* =========================================================
+           LOAD AGENTS
+        ========================================================= */
+
+        async function loadAgents() {
+
+            if (
+                !currentUser ||
+                currentUser.role !==
+                "admin"
+            ) {
+
+                return;
+
+            }
+
+
+            showLoading(
+                "Loading agents..."
+            );
+
+
+            try {
+
+                const result =
+                    await api(
+                        "agents",
+                        {
+
+                            token:
+                                session
+
+                        }
+                    );
+
+
+                hideLoading();
+
+
+                if (
+                    !result ||
+                    result.status !==
+                    "success"
+                ) {
+
+                    alert(
+                        result?.message ||
+                        "Unable to load agents."
+                    );
+
+                    return;
+
+                }
+
+
+                const container =
+                    document
+                        .getElementById(
+                            "agentsContainer"
+                        );
+
+
+                const table =
+                    document
+                        .getElementById(
+                            "agentsTable"
+                        );
+
+
+                table.innerHTML =
+                    "";
+
+
+                result.agents
+                    .forEach(
+                        function(agent) {
+
+                            table.innerHTML += `
+
+                                <tr>
+
+                                    <td>
+
+                                        <strong>
+
+                                            ${escapeHtml(
+                                                agent.name
+                                            )}
+
+                                        </strong>
+
+                                    </td>
+
+
+                                    <td>
+
+                                        ${escapeHtml(
+                                            agent.code
+                                        )}
+
+                                    </td>
+
+
+                                    <td>
+
+                                        ${escapeHtml(
+                                            agent.phone
+                                        )}
+
+                                    </td>
+
+
+                                    <td>
+
+                                        ${escapeHtml(
+                                            agent.email || "-"
+                                        )}
+
+                                    </td>
+
+
+                                    <td>
+
+                                        <span class="stage">
+
+                                            ${escapeHtml(
+                                                agent.status
+                                            )}
+
+                                        </span>
+
+                                    </td>
+
+
+                                    <td>
+
+                                        ${escapeHtml(
+                                            agent.createdAt || "-"
+                                        )}
+
+                                    </td>
+
+                                </tr>
+
+                            `;
+
+                        }
+                    );
+
+
+                container
+                    .classList
+                    .remove("hidden");
+
+
+            } catch (error) {
+
+                hideLoading();
+
+                alert(
+                    error.message
+                );
+
+            }
+
+        }
+
+
+        /* =========================================================
+           LOGOUT
+        ========================================================= */
+
+        function logout() {
+
+            localStorage.removeItem(
+                "sj_agent_session"
+            );
+
+
+            localStorage.removeItem(
+                "sj_agent_user"
+            );
+
+
+            session =
+                null;
+
+
+            currentUser =
+                null;
+
+
+            clients =
+                [];
+
+
+            document
+                .getElementById(
+                    "dashboardPage"
+                )
+                .classList
+                .add("hidden");
+
+
+            document
+                .getElementById(
+                    "loginPage"
+                )
+                .classList
+                .remove("hidden");
+
+
+            document
+                .getElementById(
+                    "loginIdentifier"
+                )
+                .value =
+                "";
+
+
+            showLogin();
+
+        }
+
+
+        /* =========================================================
+           ESCAPE HTML
+        ========================================================= */
+
+        function escapeHtml(
+            value
+        ) {
+
+            return String(
+                value ?? ""
             )
-            .value
-            .trim();
 
+                .replace(
+                    /&/g,
+                    "&amp;"
+                )
 
-        if (!query) {
+                .replace(
+                    /</g,
+                    "&lt;"
+                )
 
-          renderClients(
-            clients
-          );
+                .replace(
+                    />/g,
+                    "&gt;"
+                )
 
-          return;
+                .replace(
+                    /"/g,
+                    "&quot;"
+                )
+
+                .replace(
+                    /'/g,
+                    "&#039;"
+                );
 
         }
 
 
-        try {
+        function escapeAttribute(
+            value
+        ) {
 
-          const result =
-            await api(
-              "search",
-              {
-
-                token:
-                  session,
-
-                q:
-                  query
-
-              }
+            return escapeHtml(
+                value
             );
 
-
-          if (
-            result.status ===
-            "success"
-          ) {
-
-            renderClients(
-              result.clients || []
-            );
-
-          }
-
-        } catch (error) {
-
-          console.error(
-            error
-          );
-
         }
 
-      },
-      300
-    );
 
-}
+        /* =========================================================
+           AUTO LOGIN
+        ========================================================= */
 
+        window.addEventListener(
+            "load",
+            function() {
 
-/* =========================================================
-   LOAD AGENTS
-========================================================= */
+                if (
+                    session &&
+                    currentUser
+                ) {
 
-async function loadAgents() {
+                    showDashboard();
 
-  if (
-    !currentUser ||
-    currentUser.role !==
-    "admin"
-  ) {
+                }
 
-    return;
-
-  }
-
-
-  showLoading(
-    "Loading agents..."
-  );
-
-
-  try {
-
-    const result =
-      await api(
-        "agents",
-        {
-
-          token:
-            session
-
-        }
-      );
-
-
-    hideLoading();
-
-
-    if (
-      !result ||
-      result.status !==
-      "success"
-    ) {
-
-      alert(
-        result?.message ||
-        "Unable to load agents."
-      );
-
-      return;
-
-    }
-
-
-    const container =
-      document
-        .getElementById(
-          "agentsContainer"
+            }
         );
 
 
-    const table =
-      document
-        .getElementById(
-          "agentsTable"
+        /* =========================================================
+           CLOSE MODAL WHEN CLICKING OUTSIDE
+        ========================================================= */
+
+        document.addEventListener(
+            "click",
+            function(event) {
+
+                const modal =
+                    document.getElementById(
+                        "clientModal"
+                    );
+
+
+                if (
+                    event.target === modal
+                ) {
+
+                    closeClientModal();
+
+                }
+
+            }
         );
 
 
-    table.innerHTML =
-      "";
+        /* =========================================================
+           ENTER KEY LOGIN
+        ========================================================= */
 
+        document
+            .getElementById(
+                "loginIdentifier"
+            )
+            .addEventListener(
+                "keypress",
+                function(event) {
 
-    result.agents
-      .forEach(
-        function(agent) {
+                    if (
+                        event.key === "Enter"
+                    ) {
 
-          table.innerHTML += `
+                        login();
 
-            <tr>
+                    }
 
-              <td>
+                }
+            );
 
-                <strong>
+    </script>
 
-                  ${escapeHtml(
-                    agent.name
-                  )}
-
-                </strong>
-
-              </td>
-
-
-              <td>
-
-                ${escapeHtml(
-                  agent.code
-                )}
-
-              </td>
-
-
-              <td>
-
-                ${escapeHtml(
-                  agent.phone
-                )}
-
-              </td>
-
-
-              <td>
-
-                ${escapeHtml(
-                  agent.email || "-"
-                )}
-
-              </td>
-
-
-              <td>
-
-                <span class="stage">
-
-                  ${escapeHtml(
-                    agent.status
-                  )}
-
-                </span>
-
-              </td>
-
-
-              <td>
-
-                ${escapeHtml(
-                  agent.createdAt || "-"
-                )}
-
-              </td>
-
-            </tr>
-
-          `;
-
-        }
-      );
-
-
-    container
-      .classList
-      .remove("hidden");
-
-
-  } catch (error) {
-
-    hideLoading();
-
-    alert(
-      error.message
-    );
-
-  }
-
-}
-
-
-/* =========================================================
-   LOGOUT
-========================================================= */
-
-function logout() {
-
-  localStorage.removeItem(
-    "sj_agent_session"
-  );
-
-
-  localStorage.removeItem(
-    "sj_agent_user"
-  );
-
-
-  session =
-    null;
-
-
-  currentUser =
-    null;
-
-
-  clients =
-    [];
-
-
-  document
-    .getElementById(
-      "dashboardPage"
-    )
-    .classList
-    .add("hidden");
-
-
-  document
-    .getElementById(
-      "loginPage"
-    )
-    .classList
-    .remove("hidden");
-
-
-  document
-    .getElementById(
-      "loginIdentifier"
-    )
-    .value =
-    "";
-
-
-  showLogin();
-
-}
-
-
-/* =========================================================
-   ESCAPE HTML
-========================================================= */
-
-function escapeHtml(
-  value
-) {
-
-  return String(
-    value ?? ""
-  )
-
-    .replace(
-      /&/g,
-      "&amp;"
-    )
-
-    .replace(
-      /</g,
-      "&lt;"
-    )
-
-    .replace(
-      />/g,
-      "&gt;"
-    )
-
-    .replace(
-      /"/g,
-      "&quot;"
-    )
-
-    .replace(
-      /'/g,
-      "&#039;"
-    );
-
-}
-
-
-function escapeAttribute(
-  value
-) {
-
-  return escapeHtml(
-    value
-  );
-
-}
-
-
-/* =========================================================
-   AUTO LOGIN
-========================================================= */
-
-window.addEventListener(
-  "load",
-  function() {
-
-    if (
-      session &&
-      currentUser
-    ) {
-
-      showDashboard();
-
-    }
-
-  }
-);
-
-
-/* =========================================================
-   CLOSE MODAL WHEN CLICKING OUTSIDE
-========================================================= */
-
-document.addEventListener(
-  "click",
-  function(event) {
-
-    const modal =
-      document.getElementById(
-        "clientModal"
-      );
-
-
-    if (
-      event.target === modal
-    ) {
-
-      closeClientModal();
-
-    }
-
-  }
-);
-
-
-/* =========================================================
-   ENTER KEY LOGIN
-========================================================= */
-
-document
-  .getElementById(
-    "loginIdentifier"
-  )
-  .addEventListener(
-    "keypress",
-    function(event) {
-
-      if (
-        event.key === "Enter"
-      ) {
-
-        login();
-
-      }
-
-    }
-  );
-
-</script>
 
 </body>
 
