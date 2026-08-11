@@ -3728,31 +3728,42 @@
                     .getElementById("loginPassword")
                     .value;
 
+
             const message =
                 document
                     .getElementById("loginMessage");
 
 
+            // Never send a login request without a password.
             if (!identifier) {
+
                 message.style.color = "#c0392b";
                 message.textContent =
                     "Please enter your referral code or phone number.";
+
                 return;
+
             }
 
 
             if (!password) {
+
                 message.style.color = "#c0392b";
                 message.textContent =
                     "Please enter your password.";
+
                 return;
+
             }
 
 
             message.style.color = "#555";
             message.textContent = "Signing in...";
 
-            showLoading("Signing in...");
+
+            showLoading(
+                "Signing in..."
+            );
 
 
             try {
@@ -3761,35 +3772,71 @@
                     await api(
                         "login",
                         {
-                            identifier: identifier,
-                            password: password
+                            identifier:
+                                identifier,
+
+                            password:
+                                password
                         }
                     );
 
 
+                /*
+                 * SECURITY RULE:
+                 * Only a SUCCESS response from the
+                 * backend is allowed to create a session.
+                 */
                 if (
                     !result ||
-                    result.status !== "success"
+                    result.status !== "success" ||
+                    !result.token
                 ) {
 
-                    message.style.color = "#c0392b";
+                    message.style.color =
+                        "#c0392b";
+
                     message.textContent =
-                        result?.message || "Login failed.";
+                        result?.message ||
+                        "Invalid login details.";
 
                     hideLoading();
+
                     return;
+
                 }
 
 
-                session = result.token;
+                // Clear any previous client session first.
+                localStorage.removeItem(
+                    "sj_agent_session"
+                );
+
+                localStorage.removeItem(
+                    "sj_agent_user"
+                );
+
+
+                session =
+                    result.token;
 
 
                 currentUser = {
-                    role: result.role,
-                    name: result.name,
-                    code: result.code,
-                    phone: result.phone || "",
-                    email: result.email || ""
+
+                    role:
+                        result.role,
+
+                    name:
+                        result.name,
+
+                    code:
+                        result.code,
+
+                    phone:
+                        result.phone || "",
+
+                    email:
+                        result.email || ""
+
                 };
 
 
@@ -3798,26 +3845,43 @@
                     session
                 );
 
+
                 localStorage.setItem(
                     "sj_agent_user",
-                    JSON.stringify(currentUser)
+                    JSON.stringify(
+                        currentUser
+                    )
                 );
 
 
                 document
-                    .getElementById("loginPassword")
+                    .getElementById(
+                        "loginPassword"
+                    )
                     .value = "";
 
 
                 message.textContent = "";
+
 
                 showDashboard();
 
 
             } catch (error) {
 
-                message.style.color = "#c0392b";
-                message.textContent = error.message;
+                message.style.color =
+                    "#c0392b";
+
+                message.textContent =
+                    "Unable to sign in. Please try again.";
+
+                console.error(
+                    "LOGIN ERROR:",
+                    error
+                );
+
+            } finally {
+
                 hideLoading();
 
             }
