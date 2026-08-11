@@ -1,12 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0"
+>
 
 <title>SJ Luxury Travel | Agent Portal</title>
 
 <style>
+
+/* =========================================================
+   GLOBAL
+========================================================= */
+
 * {
   box-sizing: border-box;
 }
@@ -16,15 +27,19 @@ html {
 }
 
 body {
-  margin: 0;
-  font-family: Arial, Helvetica, sans-serif;
-  background: #f5f7fb;
-  color: #172033;
-}
 
-/* =========================
-   GLOBAL
-========================= */
+  margin: 0;
+
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+
+  background: #f5f7fb;
+
+  color: #172033;
+
+}
 
 button,
 input,
@@ -34,659 +49,1005 @@ textarea {
 }
 
 button {
-  cursor: pointer;
+  border: 0;
 }
 
 .hidden {
   display: none !important;
 }
 
-.btn {
-  border: none;
-  border-radius: 10px;
-  padding: 12px 18px;
-  font-weight: 700;
-  transition: .2s ease;
-  cursor: pointer;
+
+/* =========================================================
+   LOGIN
+========================================================= */
+
+.login-page {
+
+  min-height: 100vh;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  padding: 25px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #06172d 0%,
+      #0b3156 50%,
+      #124d78 100%
+    );
+
 }
 
-.btn:disabled {
-  opacity: .6;
-  cursor: not-allowed;
+.login-card {
+
+  width: 100%;
+
+  max-width: 470px;
+
+  background: #ffffff;
+
+  border-radius: 24px;
+
+  padding: 42px;
+
+  box-shadow:
+    0 30px 80px rgba(0,0,0,.28);
+
 }
 
-.btn-primary {
-  background: #0b3156;
-  color: #fff;
+.logo {
+
+  text-align: center;
+
+  margin-bottom: 30px;
+
 }
 
-.btn-primary:hover {
-  background: #124c7c;
-}
+.logo-mark {
 
-.btn-secondary {
-  background: #edf2f7;
-  color: #172033;
-}
+  width: 65px;
 
-.btn-secondary:hover {
-  background: #dfe7ef;
-}
+  height: 65px;
 
-.btn-success {
-  background: #16834d;
+  margin: 0 auto 15px;
+
+  border-radius: 50%;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  background:
+    linear-gradient(
+      135deg,
+      #0b3156,
+      #168bc2
+    );
+
   color: white;
+
+  font-size: 28px;
+
+  font-weight: 900;
+
+  box-shadow:
+    0 10px 25px rgba(11,49,86,.25);
+
 }
 
-.btn-danger {
-  background: #c0392b;
-  color: white;
+.logo h1 {
+
+  margin: 0;
+
+  font-size: 25px;
+
+  letter-spacing: .5px;
+
+  color: #0b3156;
+
 }
 
-.btn-small {
-  padding: 8px 12px;
-  font-size: 12px;
+.logo p {
+
+  margin: 7px 0 0;
+
+  color: #777;
+
+  font-size: 14px;
+
 }
+
+
+/* =========================================================
+   FORMS
+========================================================= */
 
 .form-group {
+
   margin-bottom: 18px;
+
 }
 
 .form-group label {
+
   display: block;
-  font-weight: 700;
+
   margin-bottom: 7px;
-  font-size: 14px;
+
+  font-weight: 700;
+
+  font-size: 13px;
+
+  color: #283548;
+
 }
 
 .form-group input,
 .form-group select,
 .form-group textarea {
+
   width: 100%;
+
   padding: 13px 14px;
-  border: 1px solid #d8dee8;
+
+  border: 1px solid #d7dee8;
+
   border-radius: 10px;
-  font-size: 14px;
-  outline: none;
+
   background: #fff;
+
   color: #172033;
+
+  font-size: 14px;
+
+  outline: none;
+
+  transition: .2s;
+
 }
 
 .form-group input:focus,
 .form-group select:focus,
 .form-group textarea:focus {
+
   border-color: #0b5c91;
-  box-shadow: 0 0 0 3px rgba(11, 92, 145, .08);
+
+  box-shadow:
+    0 0 0 3px rgba(11,92,145,.08);
+
 }
 
-/* =========================
-   LOGIN
-========================= */
+.form-group textarea {
 
-.login-page {
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 30px;
-  background:
-    radial-gradient(
-      circle at top right,
-      rgba(37, 109, 155, .35),
-      transparent 35%
-    ),
-    linear-gradient(
-      135deg,
-      #071a33,
-      #0d3157
-    );
+  resize: vertical;
+
 }
 
-.login-card {
-  width: 100%;
-  max-width: 470px;
-  background: white;
-  border-radius: 22px;
-  padding: 40px;
-  box-shadow: 0 25px 70px rgba(0,0,0,.25);
+
+/* =========================================================
+   BUTTONS
+========================================================= */
+
+.btn {
+
+  border: none;
+
+  border-radius: 10px;
+
+  padding: 12px 18px;
+
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition: .2s;
+
+  font-size: 13px;
+
 }
 
-.logo {
-  text-align: center;
-  margin-bottom: 30px;
+.btn:hover {
+
+  transform: translateY(-1px);
+
 }
 
-.logo-mark {
-  width: 62px;
-  height: 62px;
-  border-radius: 50%;
-  margin: 0 auto 15px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.btn-primary {
+
   background: #0b3156;
+
   color: white;
-  font-size: 25px;
-  font-weight: 900;
+
 }
 
-.logo h1 {
-  margin: 0;
-  font-size: 25px;
-  color: #0b3156;
-  letter-spacing: .5px;
+.btn-primary:hover {
+
+  background: #124c7c;
+
 }
 
-.logo p {
-  margin: 7px 0 0;
-  color: #777;
-  font-size: 14px;
+.btn-primary.full {
+
+  width: 100%;
+
 }
+
+.btn-secondary {
+
+  background: #edf2f7;
+
+  color: #172033;
+
+}
+
+.btn-secondary:hover {
+
+  background: #dfe7ef;
+
+}
+
+.btn-success {
+
+  background: #16834d;
+
+  color: white;
+
+}
+
+.btn-danger {
+
+  background: #c0392b;
+
+  color: white;
+
+}
+
+
+/* =========================================================
+   SWITCH
+========================================================= */
 
 .switch-link {
+
   text-align: center;
+
   margin-top: 20px;
+
+  color: #666;
+
   font-size: 14px;
-  line-height: 1.7;
+
 }
 
 .switch-link a {
+
   color: #0b5c91;
-  font-weight: bold;
+
+  font-weight: 700;
+
   cursor: pointer;
+
 }
 
-.message {
-  text-align: center;
-  margin-top: 15px;
-  font-size: 14px;
-  line-height: 1.5;
-}
 
-.login-info {
-  margin-top: 25px;
-  padding: 14px;
-  border-radius: 10px;
-  background: #f4f7fa;
-  color: #667085;
-  font-size: 12px;
-  line-height: 1.6;
-}
-
-/* =========================
+/* =========================================================
    DASHBOARD
-========================= */
+========================================================= */
 
 .dashboard {
+
   min-height: 100vh;
+
+  background: #f5f7fb;
+
 }
 
+
+/* =========================================================
+   TOP BAR
+========================================================= */
+
 .topbar {
+
   background: #071a33;
+
   color: white;
-  padding: 15px 25px;
+
+  padding: 14px 25px;
+
   display: flex;
+
   justify-content: space-between;
+
   align-items: center;
+
   gap: 20px;
+
   position: sticky;
+
   top: 0;
+
   z-index: 100;
+
 }
 
 .topbar-brand {
-  font-size: 20px;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+  font-size: 18px;
+
   font-weight: 800;
+
 }
 
-.topbar-subtitle {
-  font-size: 11px;
-  color: #b8c9d8;
-  margin-top: 3px;
+.brand-mini {
+
+  width: 34px;
+
+  height: 34px;
+
+  border-radius: 50%;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  background: #168bc2;
+
+  font-weight: 900;
+
 }
 
 .user-area {
+
   display: flex;
+
   align-items: center;
+
   gap: 12px;
+
 }
 
 .user-badge {
-  background: rgba(255,255,255,.12);
+
+  background: rgba(255,255,255,.1);
+
+  border: 1px solid rgba(255,255,255,.12);
+
   padding: 8px 12px;
+
   border-radius: 8px;
+
   font-size: 13px;
+
 }
+
+
+/* =========================================================
+   DASHBOARD CONTAINER
+========================================================= */
 
 .dashboard-container {
+
+  width: 100%;
+
   max-width: 1450px;
+
   margin: auto;
+
   padding: 30px;
+
 }
 
-/* =========================
+
+/* =========================================================
    STATS
-========================= */
+========================================================= */
 
 .stats {
+
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+
+  grid-template-columns:
+    repeat(
+      auto-fit,
+      minmax(170px, 1fr)
+    );
+
   gap: 18px;
+
   margin-bottom: 25px;
+
 }
 
 .stat-card {
+
   background: white;
+
   border-radius: 15px;
+
   padding: 22px;
-  box-shadow: 0 5px 20px rgba(0,0,0,.06);
+
+  box-shadow:
+    0 5px 20px rgba(0,0,0,.06);
+
   border: 1px solid #edf0f4;
+
 }
 
 .stat-card h3 {
+
   margin: 0;
+
   font-size: 30px;
+
   color: #0b3156;
+
 }
 
 .stat-card p {
-  color: #777;
+
   margin: 7px 0 0;
+
+  color: #777;
+
   font-size: 13px;
+
 }
 
-/* =========================
+
+/* =========================================================
    PANELS
-========================= */
+========================================================= */
 
 .panel {
+
   background: white;
+
   border-radius: 16px;
+
   padding: 25px;
+
   margin-bottom: 25px;
-  box-shadow: 0 5px 20px rgba(0,0,0,.05);
+
+  box-shadow:
+    0 5px 20px rgba(0,0,0,.05);
+
   border: 1px solid #edf0f4;
+
 }
 
 .panel-header {
+
   display: flex;
+
   justify-content: space-between;
+
   align-items: center;
+
   gap: 15px;
+
   margin-bottom: 20px;
+
 }
 
 .panel-header h2 {
+
   margin: 0;
+
   font-size: 20px;
+
+  color: #172033;
+
 }
 
 .panel-actions {
+
   display: flex;
+
   gap: 8px;
+
   flex-wrap: wrap;
+
 }
 
-/* =========================
+
+/* =========================================================
    SEARCH
-========================= */
+========================================================= */
 
 .search-box {
+
   margin-bottom: 20px;
+
   position: relative;
+
 }
 
 .search-box input {
+
   width: 100%;
-  padding: 13px 14px;
-  border: 1px solid #ddd;
+
+  padding: 14px 15px 14px 42px;
+
+  border: 1px solid #d8dee8;
+
   border-radius: 10px;
+
   outline: none;
+
+  font-size: 14px;
+
 }
 
-.search-box input:focus {
-  border-color: #0b5c91;
+.search-icon {
+
+  position: absolute;
+
+  left: 15px;
+
+  top: 50%;
+
+  transform: translateY(-50%);
+
+  color: #777;
+
 }
 
-/* =========================
+
+/* =========================================================
    TABLE
-========================= */
+========================================================= */
 
 .table-wrapper {
+
+  width: 100%;
+
   overflow-x: auto;
+
+  border: 1px solid #edf0f4;
+
+  border-radius: 10px;
+
 }
 
 table {
+
   width: 100%;
+
   border-collapse: collapse;
-  min-width: 1100px;
+
+  min-width: 1050px;
+
 }
 
 th {
+
   background: #f1f5f9;
+
   text-align: left;
+
   padding: 13px;
+
   font-size: 11px;
+
   text-transform: uppercase;
+
+  letter-spacing: .4px;
+
   color: #596579;
-  white-space: nowrap;
+
 }
 
 td {
+
   padding: 13px;
+
   border-bottom: 1px solid #edf0f4;
+
   font-size: 13px;
+
   vertical-align: middle;
+
+}
+
+tr:last-child td {
+
+  border-bottom: none;
+
 }
 
 tr:hover td {
-  background: #fafcff;
+
+  background: #fafbfd;
+
 }
+
+
+/* =========================================================
+   STAGE BADGES
+========================================================= */
 
 .stage {
+
   display: inline-block;
+
   padding: 6px 9px;
+
   border-radius: 20px;
+
   font-size: 10px;
-  font-weight: 700;
+
+  font-weight: 800;
+
   background: #e8f0f8;
+
   color: #174d75;
+
   white-space: nowrap;
+
 }
 
-.stage-select {
-  padding: 8px;
-  border: 1px solid #d8dee8;
-  border-radius: 8px;
-  font-size: 12px;
-}
 
-/* =========================
+/* =========================================================
    FUNNEL
-========================= */
-
-.funnel-wrapper {
-  overflow-x: auto;
-  padding-bottom: 5px;
-}
+========================================================= */
 
 .funnel {
+
   display: grid;
-  grid-template-columns: repeat(7, minmax(130px, 1fr));
+
+  grid-template-columns:
+    repeat(7, 1fr);
+
   gap: 8px;
-  min-width: 920px;
+
+  overflow-x: auto;
+
 }
 
 .funnel-step {
-  min-height: 110px;
-  padding: 15px 10px;
+
+  min-width: 120px;
+
+  padding: 16px 10px;
+
   text-align: center;
+
   background: #edf2f7;
+
   border-radius: 10px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+
+  color: #344054;
+
 }
 
 .funnel-step span {
-  display: block;
-  font-size: 28px;
-  font-weight: 800;
-  color: #0b3156;
-  margin-bottom: 8px;
-}
 
-.funnel-step small {
-  font-size: 10px;
-  font-weight: 700;
-  color: #596579;
-  line-height: 1.4;
+  display: block;
+
+  font-size: 27px;
+
+  font-weight: 900;
+
+  color: #0b3156;
+
+  margin-bottom: 5px;
+
 }
 
 .funnel-step.active {
+
   background: #0b3156;
+
   color: white;
+
 }
 
-.funnel-step.active span,
-.funnel-step.active small {
+.funnel-step.active span {
+
   color: white;
+
 }
 
-/* =========================
-   ADMIN
-========================= */
 
-.admin-panel {
-  background: #fff;
-}
-
-.admin-warning {
-  background: #fff8e6;
-  border: 1px solid #f1d48a;
-  padding: 14px;
-  border-radius: 10px;
-  margin-bottom: 15px;
-  font-size: 13px;
-  color: #775b00;
-}
-
-/* =========================
+/* =========================================================
    MODAL
-========================= */
+========================================================= */
 
 .modal {
+
   position: fixed;
+
   inset: 0;
-  background: rgba(0,0,0,.6);
+
+  background: rgba(0,0,0,.62);
+
   display: flex;
+
   align-items: center;
+
   justify-content: center;
+
   padding: 20px;
+
   z-index: 999;
+
 }
 
 .modal-content {
+
   background: white;
+
   width: 100%;
+
   max-width: 680px;
-  max-height: 92vh;
+
+  max-height: 90vh;
+
   overflow-y: auto;
+
   border-radius: 18px;
+
   padding: 30px;
+
+  box-shadow:
+    0 30px 80px rgba(0,0,0,.25);
+
 }
 
 .modal-header {
+
   display: flex;
+
   justify-content: space-between;
+
   align-items: center;
+
   margin-bottom: 20px;
+
 }
 
 .modal-header h2 {
+
   margin: 0;
+
 }
 
 .close {
+
   border: none;
+
   background: transparent;
+
   font-size: 28px;
+
   cursor: pointer;
-  color: #555;
+
+  color: #777;
+
 }
 
-.form-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 0 15px;
+
+/* =========================================================
+   MESSAGE
+========================================================= */
+
+.message {
+
+  text-align: center;
+
+  margin-top: 15px;
+
+  font-size: 13px;
+
+  min-height: 20px;
+
 }
 
-.form-full {
-  grid-column: 1 / -1;
-}
 
-/* =========================
+/* =========================================================
    LOADING
-========================= */
+========================================================= */
 
-.loading-overlay {
+.loading {
+
   position: fixed;
+
   inset: 0;
-  background: rgba(7,26,51,.55);
-  z-index: 5000;
+
+  background: rgba(255,255,255,.75);
+
+  z-index: 2000;
+
   display: flex;
+
   align-items: center;
+
   justify-content: center;
+
 }
 
 .loading-box {
+
   background: white;
+
   padding: 25px 35px;
-  border-radius: 15px;
+
+  border-radius: 14px;
+
+  box-shadow:
+    0 20px 50px rgba(0,0,0,.15);
+
   text-align: center;
-  box-shadow: 0 20px 50px rgba(0,0,0,.2);
+
 }
 
 .spinner {
+
   width: 35px;
+
   height: 35px;
+
   border: 4px solid #e5e7eb;
+
   border-top-color: #0b3156;
+
   border-radius: 50%;
+
   animation: spin .8s linear infinite;
-  margin: 0 auto 15px;
+
+  margin: 0 auto 12px;
+
 }
 
 @keyframes spin {
+
   to {
     transform: rotate(360deg);
   }
+
 }
 
-/* =========================
-   TOAST
-========================= */
 
-.toast-container {
-  position: fixed;
-  right: 20px;
-  bottom: 20px;
-  z-index: 10000;
+/* =========================================================
+   EMPTY STATE
+========================================================= */
+
+.empty-state {
+
+  text-align: center;
+
+  padding: 45px;
+
+  color: #777;
+
 }
 
-.toast {
-  background: #071a33;
-  color: white;
-  padding: 14px 18px;
-  border-radius: 10px;
-  margin-top: 10px;
-  box-shadow: 0 10px 30px rgba(0,0,0,.2);
-  max-width: 350px;
-  font-size: 13px;
-}
 
-.toast.success {
-  background: #16834d;
-}
-
-.toast.error {
-  background: #c0392b;
-}
-
-/* =========================
+/* =========================================================
    MOBILE
-========================= */
-
-@media (max-width: 1000px) {
-  .stats {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
+========================================================= */
 
 @media (max-width: 700px) {
 
   .login-card {
+
     padding: 25px;
+
   }
 
   .dashboard-container {
+
     padding: 15px;
+
   }
 
   .topbar {
+
+    padding: 12px 15px;
+
     flex-direction: column;
+
     align-items: flex-start;
+
   }
 
   .user-area {
-    width: 100%;
-    justify-content: space-between;
-  }
 
-  .stats {
-    grid-template-columns: 1fr 1fr;
+    width: 100%;
+
+    justify-content: space-between;
+
   }
 
   .panel {
+
     padding: 18px;
+
   }
 
   .panel-header {
+
     align-items: flex-start;
+
     flex-direction: column;
+
   }
 
   .panel-actions {
+
     width: 100%;
+
   }
 
-  .panel-actions button {
+  .panel-actions .btn {
+
     flex: 1;
+
   }
 
-  .form-grid {
-    grid-template-columns: 1fr;
+  .funnel {
+
+    grid-template-columns:
+      repeat(7, 125px);
+
   }
 
-  .form-full {
-    grid-column: auto;
-  }
 }
 
-@media (max-width: 430px) {
-  .stats {
-    grid-template-columns: 1fr;
-  }
-
-  .login-page {
-    padding: 15px;
-  }
-
-  .login-card {
-    border-radius: 16px;
-  }
-}
 </style>
+
 </head>
+
 
 <body>
 
-<!-- =====================================================
-     LOADING
-===================================================== -->
 
-<div id="loadingOverlay" class="loading-overlay hidden">
+<!-- =======================================================
+     LOADING
+======================================================== -->
+
+<div
+  id="loading"
+  class="loading hidden"
+>
+
   <div class="loading-box">
+
     <div class="spinner"></div>
-    <strong id="loadingText">Loading...</strong>
+
+    <strong id="loadingText">
+      Loading...
+    </strong>
+
   </div>
+
 </div>
 
-<!-- =====================================================
-     LOGIN PAGE
-===================================================== -->
 
-<section id="loginPage" class="login-page">
+<!-- =======================================================
+     LOGIN PAGE
+======================================================== -->
+
+<section
+  id="loginPage"
+  class="login-page"
+>
 
   <div class="login-card">
 
@@ -696,11 +1057,16 @@ tr:hover td {
         SJ
       </div>
 
-      <h1>SJ LUXURY TRAVEL</h1>
+      <h1>
+        SJ LUXURY TRAVEL
+      </h1>
 
-      <p>Agent & Partner Portal</p>
+      <p>
+        Agent & Partner Portal
+      </p>
 
     </div>
+
 
     <!-- LOGIN -->
 
@@ -715,20 +1081,20 @@ tr:hover td {
         <input
           id="loginIdentifier"
           type="text"
-          autocomplete="username"
           placeholder="SJ-AG-1234 or 0712345678"
+          autocomplete="username"
         >
 
       </div>
 
+
       <button
-        id="loginButton"
-        class="btn btn-primary"
-        style="width:100%;"
+        class="btn btn-primary full"
         onclick="login()"
       >
         LOGIN
       </button>
+
 
       <div class="switch-link">
 
@@ -742,33 +1108,36 @@ tr:hover td {
 
       </div>
 
-      <p id="loginMessage" class="message"></p>
 
-      <div class="login-info">
-
-        <strong>Agent Portal</strong><br>
-
-        Use your referral code or registered
-        phone number to access your customer
-        dashboard.
-
-      </div>
+      <p
+        id="loginMessage"
+        class="message"
+      ></p>
 
     </div>
 
+
     <!-- REGISTER -->
 
-    <div id="registerForm" class="hidden">
+    <div
+      id="registerForm"
+      class="hidden"
+    >
 
-      <h2>Become an Agent</h2>
+      <h2>
+        Become an Agent
+      </h2>
 
-      <p>
+      <p style="color:#777;">
         Join the SJ Luxury Travel agent network.
       </p>
 
+
       <div class="form-group">
 
-        <label>Full Name *</label>
+        <label>
+          Full Name *
+        </label>
 
         <input
           id="registerName"
@@ -778,9 +1147,12 @@ tr:hover td {
 
       </div>
 
+
       <div class="form-group">
 
-        <label>Phone Number *</label>
+        <label>
+          Phone Number *
+        </label>
 
         <input
           id="registerPhone"
@@ -790,9 +1162,12 @@ tr:hover td {
 
       </div>
 
+
       <div class="form-group">
 
-        <label>Email</label>
+        <label>
+          Email
+        </label>
 
         <input
           id="registerEmail"
@@ -802,14 +1177,14 @@ tr:hover td {
 
       </div>
 
+
       <button
-        id="registerButton"
-        class="btn btn-primary"
-        style="width:100%;"
+        class="btn btn-primary full"
         onclick="registerAgent()"
       >
         CREATE AGENT ACCOUNT
       </button>
+
 
       <div class="switch-link">
 
@@ -823,7 +1198,11 @@ tr:hover td {
 
       </div>
 
-      <p id="registerMessage" class="message"></p>
+
+      <p
+        id="registerMessage"
+        class="message"
+      ></p>
 
     </div>
 
@@ -831,25 +1210,28 @@ tr:hover td {
 
 </section>
 
-<!-- =====================================================
-     DASHBOARD
-===================================================== -->
 
-<section id="dashboardPage" class="dashboard hidden">
+<!-- =======================================================
+     DASHBOARD
+======================================================== -->
+
+<section
+  id="dashboardPage"
+  class="dashboard hidden"
+>
 
   <header class="topbar">
 
-    <div>
+    <div class="topbar-brand">
 
-      <div class="topbar-brand">
-        SJ LUXURY TRAVEL
+      <div class="brand-mini">
+        SJ
       </div>
 
-      <div class="topbar-subtitle">
-        Agent & Partner Management Portal
-      </div>
+      SJ LUXURY TRAVEL
 
     </div>
+
 
     <div class="user-area">
 
@@ -869,55 +1251,89 @@ tr:hover td {
 
   </header>
 
+
   <main class="dashboard-container">
 
-    <!-- STATS -->
 
-    <div class="stats">
+    <!-- =================================================
+         STATISTICS
+    ================================================== -->
+
+    <div
+      class="stats"
+      id="statsContainer"
+    >
 
       <div class="stat-card">
 
-        <h3 id="totalClients">0</h3>
+        <h3 id="totalClients">
+          0
+        </h3>
 
-        <p>Total Customers</p>
+        <p>
+          Total Customers
+        </p>
 
       </div>
 
+
       <div class="stat-card">
 
-        <h3 id="leadCount">0</h3>
+        <h3 id="leadCount">
+          0
+        </h3>
 
-        <p>Lead Qualification</p>
+        <p>
+          Lead Qualification
+        </p>
 
       </div>
 
+
       <div class="stat-card">
 
-        <h3 id="consultationCount">0</h3>
+        <h3 id="consultationCount">
+          0
+        </h3>
 
-        <p>Consultation</p>
+        <p>
+          Consultation
+        </p>
 
       </div>
 
+
       <div class="stat-card">
 
-        <h3 id="quotationCount">0</h3>
+        <h3 id="quotationCount">
+          0
+        </h3>
 
-        <p>Quotations</p>
+        <p>
+          Quotations
+        </p>
 
       </div>
 
+
       <div class="stat-card">
 
-        <h3 id="bookingCount">0</h3>
+        <h3 id="bookingCount">
+          0
+        </h3>
 
-        <p>Confirmed Bookings</p>
+        <p>
+          Confirmed Bookings
+        </p>
 
       </div>
 
     </div>
 
-    <!-- CUSTOMER PANEL -->
+
+    <!-- =================================================
+         CUSTOMER PANEL
+    ================================================== -->
 
     <div class="panel">
 
@@ -948,18 +1364,24 @@ tr:hover td {
 
       </div>
 
+
       <!-- SEARCH -->
 
       <div class="search-box">
 
+        <span class="search-icon">
+          🔎
+        </span>
+
         <input
           id="searchInput"
           type="text"
-          placeholder="Search customers by name, phone, service, destination or ID..."
-          oninput="searchCustomers()"
+          placeholder="Search customers by name, phone, ID, destination or service..."
+          onkeyup="searchCustomers()"
         >
 
       </div>
+
 
       <!-- CUSTOMER TABLE -->
 
@@ -971,27 +1393,46 @@ tr:hover td {
 
             <tr>
 
-              <th>Client ID</th>
+              <th>
+                Client ID
+              </th>
 
-              <th>Customer</th>
+              <th>
+                Customer
+              </th>
 
-              <th>Phone</th>
+              <th>
+                Phone
+              </th>
 
-              <th>Service</th>
+              <th>
+                Service
+              </th>
 
-              <th>Destination</th>
+              <th>
+                Destination
+              </th>
 
-              <th>Agent</th>
+              <th>
+                Agent
+              </th>
 
-              <th>Funnel Stage</th>
+              <th>
+                Funnel Stage
+              </th>
 
-              <th>Action</th>
+              <th>
+                Action
+              </th>
 
             </tr>
 
           </thead>
 
-          <tbody id="clientTable"></tbody>
+
+          <tbody id="clientTable">
+
+          </tbody>
 
         </table>
 
@@ -999,69 +1440,129 @@ tr:hover td {
 
     </div>
 
-    <!-- CUSTOMER JOURNEY -->
+
+    <!-- =================================================
+         CUSTOMER JOURNEY
+    ================================================== -->
 
     <div class="panel">
 
       <div class="panel-header">
 
-        <h2>Customer Journey</h2>
+        <h2>
+          Customer Journey
+        </h2>
 
       </div>
 
-      <div class="funnel-wrapper">
 
-        <div
-          class="funnel"
-          id="funnelContainer"
-        ></div>
-
-      </div>
+      <div
+        class="funnel"
+        id="funnelContainer"
+      ></div>
 
     </div>
 
-    <!-- ADMIN -->
+
+    <!-- =================================================
+         ADMIN
+    ================================================== -->
 
     <div
       id="adminPanel"
-      class="panel admin-panel hidden"
+      class="panel hidden"
     >
 
       <div class="panel-header">
 
-        <h2>Administration</h2>
+        <h2>
+          Administration
+        </h2>
+
+        <div class="panel-actions">
+
+          <button
+            class="btn btn-secondary"
+            onclick="loadAgents()"
+          >
+            Manage Agents
+          </button>
+
+        </div>
 
       </div>
 
-      <div class="admin-warning">
 
-        Administrator access is enabled.
-        Changes made here affect the central
-        SJ Luxury Travel customer database.
+      <p style="color:#777;">
 
-      </div>
+        Administrator access allows you to
+        manage all agents and customer journeys.
 
-      <p>
-        Manage registered agents and view the
-        entire customer journey.
       </p>
 
-      <button
-        class="btn btn-secondary"
-        onclick="loadAgents()"
+
+      <div
+        id="agentsContainer"
+        class="hidden"
       >
-        Manage Agents
-      </button>
+
+        <div class="table-wrapper">
+
+          <table>
+
+            <thead>
+
+              <tr>
+
+                <th>
+                  Name
+                </th>
+
+                <th>
+                  Referral Code
+                </th>
+
+                <th>
+                  Phone
+                </th>
+
+                <th>
+                  Email
+                </th>
+
+                <th>
+                  Status
+                </th>
+
+                <th>
+                  Created
+                </th>
+
+              </tr>
+
+            </thead>
+
+            <tbody id="agentsTable">
+
+            </tbody>
+
+          </table>
+
+        </div>
+
+      </div>
 
     </div>
+
 
   </main>
 
 </section>
 
-<!-- =====================================================
+
+<!-- =======================================================
      ADD CUSTOMER MODAL
-===================================================== -->
+======================================================== -->
 
 <div
   id="clientModal"
@@ -1072,7 +1573,9 @@ tr:hover td {
 
     <div class="modal-header">
 
-      <h2>Add New Customer</h2>
+      <h2>
+        Add New Customer
+      </h2>
 
       <button
         class="close"
@@ -1083,161 +1586,214 @@ tr:hover td {
 
     </div>
 
-    <div class="form-grid">
 
-      <div class="form-group">
+    <div class="form-group">
 
-        <label>Customer Name *</label>
+      <label>
+        Customer Name *
+      </label>
 
-        <input
-          id="clientName"
-          type="text"
-        >
-
-      </div>
-
-      <div class="form-group">
-
-        <label>Phone Number *</label>
-
-        <input
-          id="clientPhone"
-          type="text"
-        >
-
-      </div>
-
-      <div class="form-group">
-
-        <label>Email</label>
-
-        <input
-          id="clientEmail"
-          type="email"
-        >
-
-      </div>
-
-      <div class="form-group">
-
-        <label>Service *</label>
-
-        <select id="clientService">
-
-          <option value="">
-            Select Service
-          </option>
-
-          <option>Luxury Safari</option>
-
-          <option>Beach Holiday</option>
-
-          <option>Private Villa</option>
-
-          <option>Honeymoon</option>
-
-          <option>Family Holiday</option>
-
-          <option>Luxury Travel</option>
-
-          <option>Corporate Travel</option>
-
-          <option>Private Jet</option>
-
-          <option>Luxury Yacht</option>
-
-          <option>Airport Transfer</option>
-
-          <option>Custom Itinerary</option>
-
-          <option>Other</option>
-
-        </select>
-
-      </div>
-
-      <div class="form-group">
-
-        <label>Destination</label>
-
-        <input
-          id="clientDestination"
-          type="text"
-          placeholder="e.g. Zanzibar, Maasai Mara"
-        >
-
-      </div>
-
-      <div class="form-group">
-
-        <label>Travel Date</label>
-
-        <input
-          id="clientTravelDate"
-          type="date"
-        >
-
-      </div>
-
-      <div class="form-group">
-
-        <label>Number of Travellers</label>
-
-        <input
-          id="clientTravellers"
-          type="number"
-          min="1"
-          value="1"
-        >
-
-      </div>
-
-      <div class="form-group">
-
-        <label>Budget</label>
-
-        <input
-          id="clientBudget"
-          type="text"
-          placeholder="Approximate budget"
-        >
-
-      </div>
-
-      <div class="form-group form-full">
-
-        <label>Special Requests</label>
-
-        <textarea
-          id="clientSpecialRequests"
-          rows="4"
-          placeholder="Customer preferences, dietary requirements, room preferences, etc."
-        ></textarea>
-
-      </div>
-
-      <div class="form-group form-full">
-
-        <label>Notes</label>
-
-        <textarea
-          id="clientNotes"
-          rows="3"
-          placeholder="Additional information"
-        ></textarea>
-
-      </div>
+      <input
+        id="clientName"
+        type="text"
+        placeholder="Customer full name"
+      >
 
     </div>
 
+
+    <div class="form-group">
+
+      <label>
+        Phone Number *
+      </label>
+
+      <input
+        id="clientPhone"
+        type="text"
+        placeholder="0712345678"
+      >
+
+    </div>
+
+
+    <div class="form-group">
+
+      <label>
+        Email
+      </label>
+
+      <input
+        id="clientEmail"
+        type="email"
+        placeholder="customer@email.com"
+      >
+
+    </div>
+
+
+    <div class="form-group">
+
+      <label>
+        Service *
+      </label>
+
+      <select id="clientService">
+
+        <option value="">
+          Select Service
+        </option>
+
+        <option value="Luxury Safari">
+          Luxury Safari
+        </option>
+
+        <option value="Beach Holiday">
+          Beach Holiday
+        </option>
+
+        <option value="Private Villa">
+          Private Villa
+        </option>
+
+        <option value="Honeymoon">
+          Honeymoon
+        </option>
+
+        <option value="Family Holiday">
+          Family Holiday
+        </option>
+
+        <option value="Luxury Travel">
+          Luxury Travel
+        </option>
+
+        <option value="Corporate Travel">
+          Corporate Travel
+        </option>
+
+        <option value="Private Jet">
+          Private Jet
+        </option>
+
+        <option value="Luxury Yacht">
+          Luxury Yacht
+        </option>
+
+        <option value="Airport Transfer">
+          Airport Transfer
+        </option>
+
+        <option value="Custom Itinerary">
+          Custom Itinerary
+        </option>
+
+        <option value="Other">
+          Other
+        </option>
+
+      </select>
+
+    </div>
+
+
+    <div class="form-group">
+
+      <label>
+        Destination
+      </label>
+
+      <input
+        id="clientDestination"
+        type="text"
+        placeholder="e.g. Maasai Mara, Zanzibar, Dubai"
+      >
+
+    </div>
+
+
+    <div class="form-group">
+
+      <label>
+        Travel Date
+      </label>
+
+      <input
+        id="clientTravelDate"
+        type="date"
+      >
+
+    </div>
+
+
+    <div class="form-group">
+
+      <label>
+        Number of Travellers
+      </label>
+
+      <input
+        id="clientTravellers"
+        type="number"
+        min="1"
+        placeholder="e.g. 2"
+      >
+
+    </div>
+
+
+    <div class="form-group">
+
+      <label>
+        Budget
+      </label>
+
+      <input
+        id="clientBudget"
+        type="text"
+        placeholder="Approximate budget"
+      >
+
+    </div>
+
+
+    <div class="form-group">
+
+      <label>
+        Special Requests
+      </label>
+
+      <textarea
+        id="clientSpecialRequests"
+        rows="4"
+        placeholder="Any special requirements..."
+      ></textarea>
+
+    </div>
+
+
+    <div class="form-group">
+
+      <label>
+        Notes
+      </label>
+
+      <textarea
+        id="clientNotes"
+        rows="3"
+        placeholder="Additional notes..."
+      ></textarea>
+
+    </div>
+
+
     <button
-      id="saveClientButton"
-      class="btn btn-primary"
-      style="width:100%;"
+      class="btn btn-primary full"
       onclick="saveClient()"
     >
       SAVE CUSTOMER
     </button>
+
 
     <p
       id="clientMessage"
@@ -1248,122 +1804,83 @@ tr:hover td {
 
 </div>
 
-<!-- =====================================================
-     TOAST
-===================================================== -->
-
-<div
-  id="toastContainer"
-  class="toast-container"
-></div>
 
 <script>
 
-/* =====================================================
+/* =========================================================
    CONFIGURATION
-===================================================== */
+========================================================= */
 
 /*
-IMPORTANT:
-
-After deploying the Apps Script backend, paste the
-DEPLOYMENT URL here.
-
-Correct format:
-
-https://script.google.com/macros/s/DEPLOYMENT_ID/exec
-
-Do NOT use:
-
-https://script.google.com/a/macros/sjluxurytravels.com/s/...
-
-unless Google specifically gives you that as the
-deployed Web App URL.
+   YOUR EXISTING APPS SCRIPT WEB APP URL
 */
 
 const API_URL =
-  "PASTE_YOUR_APPS_SCRIPT_WEB_APP_URL_HERE";
+  "https://script.google.com/a/macros/sjluxurytravels.com/s/AKfycbwF2BtLTV_1QFEGLxLmSFGKir-xOc9mnWTJMQ9_rZy78qxvsA9vRaBrKH99zZzlBUm2/exec";
 
 
-/* =====================================================
-   APPLICATION STATE
-===================================================== */
+/* =========================================================
+   GLOBAL VARIABLES
+========================================================= */
 
 let session =
   localStorage.getItem(
     "sj_agent_session"
   );
 
-let currentUser = null;
-
-try {
-
-  currentUser =
-    JSON.parse(
-      localStorage.getItem(
-        "sj_agent_user"
-      ) || "null"
-    );
-
-} catch (error) {
-
-  currentUser = null;
-
-}
+let currentUser =
+  JSON.parse(
+    localStorage.getItem(
+      "sj_agent_user"
+    ) || "null"
+  );
 
 let clients = [];
 
-let searchTimer = null;
+let searchTimer;
 
 
-/* =====================================================
-   STAGES
-===================================================== */
+/* =========================================================
+   LOADING
+========================================================= */
 
-const FUNNEL_STAGES = [
+function showLoading(
+  text = "Loading..."
+) {
 
-  "LEAD QUALIFICATION",
+  document
+    .getElementById("loadingText")
+    .textContent = text;
 
-  "CONSULTATION",
+  document
+    .getElementById("loading")
+    .classList
+    .remove("hidden");
 
-  "BESPOKE ITINERARY",
-
-  "QUOTATION",
-
-  "CLIENT APPROVAL",
-
-  "DEPOSIT PAYMENT",
-
-  "BOOKING CONFIRMATION"
-
-];
+}
 
 
-/* =====================================================
-   API FUNCTION
-===================================================== */
+function hideLoading() {
 
-function api(action, params = {}) {
+  document
+    .getElementById("loading")
+    .classList
+    .add("hidden");
+
+}
+
+
+/* =========================================================
+   API REQUEST
+========================================================= */
+
+function api(
+  action,
+  params = {}
+) {
 
   return new Promise(
     function(resolve, reject) {
-
-      if (
-        !API_URL ||
-        API_URL.includes(
-          "PASTE_YOUR_APPS_SCRIPT"
-        )
-      ) {
-
-        reject(
-          new Error(
-            "Apps Script Web App URL has not been configured."
-          )
-        );
-
-        return;
-
-      }
 
       const query =
         new URLSearchParams();
@@ -1373,33 +1890,20 @@ function api(action, params = {}) {
         action
       );
 
-      Object.keys(params).forEach(
-        function(key) {
+      Object.keys(params)
+        .forEach(
+          function(key) {
 
-          let value =
-            params[key];
-
-          if (
-            value === undefined ||
-            value === null
-          ) {
-
-            value = "";
+            query.append(
+              key,
+              params[key] === undefined
+                ? ""
+                : params[key]
+            );
 
           }
+        );
 
-          query.append(
-            key,
-            String(value)
-          );
-
-        }
-      );
-
-      /*
-       JSONP is used because the Apps Script
-       Web App is hosted on another domain.
-      */
 
       const callbackName =
         "sjCallback_" +
@@ -1409,43 +1913,21 @@ function api(action, params = {}) {
           Math.random() * 100000
         );
 
+
       query.append(
         "callback",
         callbackName
       );
+
 
       const script =
         document.createElement(
           "script"
         );
 
+
       let completed = false;
 
-      const timeout =
-        setTimeout(
-          function() {
-
-            if (completed) {
-              return;
-            }
-
-            completed = true;
-
-            delete window[
-              callbackName
-            ];
-
-            script.remove();
-
-            reject(
-              new Error(
-                "The SJ Luxury Travel backend did not respond. Check that the Apps Script Web App is deployed and accessible."
-              )
-            );
-
-          },
-          20000
-        );
 
       window[callbackName] =
         function(data) {
@@ -1455,10 +1937,6 @@ function api(action, params = {}) {
           }
 
           completed = true;
-
-          clearTimeout(
-            timeout
-          );
 
           delete window[
             callbackName
@@ -1470,6 +1948,7 @@ function api(action, params = {}) {
 
         };
 
+
       script.onerror =
         function() {
 
@@ -1479,9 +1958,42 @@ function api(action, params = {}) {
 
           completed = true;
 
-          clearTimeout(
-            timeout
+          delete window[
+            callbackName
+          ];
+
+          script.remove();
+
+          reject(
+            new Error(
+              "Unable to connect to SJ Luxury Travel backend."
+            )
           );
+
+        };
+
+
+      script.src =
+        API_URL +
+        "?t=" +
+        Date.now() +
+        "&" +
+        query.toString();
+
+
+      document.body.appendChild(
+        script
+      );
+
+
+      setTimeout(
+        function() {
+
+          if (completed) {
+            return;
+          }
+
+          completed = true;
 
           delete window[
             callbackName
@@ -1491,19 +2003,12 @@ function api(action, params = {}) {
 
           reject(
             new Error(
-              "Unable to connect to SJ Luxury Travel backend. Check your Apps Script Web App URL and deployment settings."
+              "The SJ Luxury Travel backend did not respond. Please check the Apps Script deployment."
             )
           );
 
-        };
-
-      script.src =
-        API_URL +
-        "?" +
-        query.toString();
-
-      document.body.appendChild(
-        script
+        },
+        20000
       );
 
     }
@@ -1512,90 +2017,9 @@ function api(action, params = {}) {
 }
 
 
-/* =====================================================
-   LOADING
-===================================================== */
-
-function showLoading(
-  text = "Loading..."
-) {
-
-  document
-    .getElementById(
-      "loadingText"
-    )
-    .textContent = text;
-
-  document
-    .getElementById(
-      "loadingOverlay"
-    )
-    .classList
-    .remove(
-      "hidden"
-    );
-
-}
-
-
-function hideLoading() {
-
-  document
-    .getElementById(
-      "loadingOverlay"
-    )
-    .classList
-    .add(
-      "hidden"
-    );
-
-}
-
-
-/* =====================================================
-   TOAST
-===================================================== */
-
-function showToast(
-  message,
-  type = ""
-) {
-
-  const container =
-    document.getElementById(
-      "toastContainer"
-    );
-
-  const toast =
-    document.createElement(
-      "div"
-    );
-
-  toast.className =
-    "toast " + type;
-
-  toast.textContent =
-    message;
-
-  container.appendChild(
-    toast
-  );
-
-  setTimeout(
-    function() {
-
-      toast.remove();
-
-    },
-    4000
-  );
-
-}
-
-
-/* =====================================================
+/* =========================================================
    LOGIN
-===================================================== */
+========================================================= */
 
 async function login() {
 
@@ -1607,10 +2031,13 @@ async function login() {
       .value
       .trim();
 
+
   const message =
-    document.getElementById(
-      "loginMessage"
-    );
+    document
+      .getElementById(
+        "loginMessage"
+      );
+
 
   if (!identifier) {
 
@@ -1624,18 +2051,18 @@ async function login() {
 
   }
 
+
   message.style.color =
     "#555";
 
   message.textContent =
     "Signing in...";
 
-  const button =
-    document.getElementById(
-      "loginButton"
-    );
 
-  button.disabled = true;
+  showLoading(
+    "Signing in..."
+  );
+
 
   try {
 
@@ -1648,6 +2075,7 @@ async function login() {
         }
       );
 
+
     if (
       !result ||
       result.status !== "success"
@@ -1657,17 +2085,19 @@ async function login() {
         "#c0392b";
 
       message.textContent =
-        result &&
-        result.message
-          ? result.message
-          : "Login failed.";
+        result?.message ||
+        "Login failed.";
+
+      hideLoading();
 
       return;
 
     }
 
+
     session =
       result.token;
+
 
     currentUser = {
 
@@ -1688,10 +2118,12 @@ async function login() {
 
     };
 
+
     localStorage.setItem(
       "sj_agent_session",
       session
     );
+
 
     localStorage.setItem(
       "sj_agent_user",
@@ -1700,9 +2132,13 @@ async function login() {
       )
     );
 
-    message.textContent = "";
+
+    message.textContent =
+      "";
+
 
     showDashboard();
+
 
   } catch (error) {
 
@@ -1712,18 +2148,16 @@ async function login() {
     message.textContent =
       error.message;
 
-  } finally {
-
-    button.disabled = false;
+    hideLoading();
 
   }
 
 }
 
 
-/* =====================================================
-   REGISTER
-===================================================== */
+/* =========================================================
+   REGISTER AGENT
+========================================================= */
 
 async function registerAgent() {
 
@@ -1735,6 +2169,7 @@ async function registerAgent() {
       .value
       .trim();
 
+
   const phone =
     document
       .getElementById(
@@ -1742,6 +2177,7 @@ async function registerAgent() {
       )
       .value
       .trim();
+
 
   const email =
     document
@@ -1751,10 +2187,13 @@ async function registerAgent() {
       .value
       .trim();
 
+
   const message =
-    document.getElementById(
-      "registerMessage"
-    );
+    document
+      .getElementById(
+        "registerMessage"
+      );
+
 
   if (!name || !phone) {
 
@@ -1768,18 +2207,18 @@ async function registerAgent() {
 
   }
 
+
   message.style.color =
     "#555";
 
   message.textContent =
     "Creating your agent account...";
 
-  const button =
-    document.getElementById(
-      "registerButton"
-    );
 
-  button.disabled = true;
+  showLoading(
+    "Creating agent account..."
+  );
+
 
   try {
 
@@ -1800,6 +2239,7 @@ async function registerAgent() {
         }
       );
 
+
     if (
       !result ||
       result.status !== "success"
@@ -1809,33 +2249,45 @@ async function registerAgent() {
         "#c0392b";
 
       message.textContent =
-        result &&
-        result.message
-          ? result.message
-          : "Unable to create account.";
+        result?.message ||
+        "Registration failed.";
+
+      hideLoading();
 
       return;
 
     }
 
+
+    hideLoading();
+
+
     message.style.color =
       "#16834d";
 
+
     message.innerHTML =
 
-      "Account created successfully!<br><br>" +
+      "Account created successfully!" +
 
-      "<strong>Your Referral Code:</strong><br>" +
+      "<br><br>" +
 
-      "<span style='font-size:25px;'>" +
+      "<strong>Your Referral Code:</strong>" +
+
+      "<br>" +
+
+      "<span style='font-size:25px;font-weight:900;'>" +
 
       escapeHtml(
         result.code
       ) +
 
-      "</span><br><br>" +
+      "</span>" +
 
-      "Keep this code safe. You can use it to access your agent portal.";
+      "<br><br>" +
+
+      "Save this code. You can use it to access your agent portal.";
+
 
     document
       .getElementById(
@@ -1844,16 +2296,16 @@ async function registerAgent() {
       .value =
       result.code;
 
+
     setTimeout(
-      function() {
-
-        showLogin();
-
-      },
-      4000
+      showLogin,
+      5000
     );
 
+
   } catch (error) {
+
+    hideLoading();
 
     message.style.color =
       "#c0392b";
@@ -1861,18 +2313,14 @@ async function registerAgent() {
     message.textContent =
       error.message;
 
-  } finally {
-
-    button.disabled = false;
-
   }
 
 }
 
 
-/* =====================================================
+/* =========================================================
    SHOW LOGIN
-===================================================== */
+========================================================= */
 
 function showLogin() {
 
@@ -1881,25 +2329,22 @@ function showLogin() {
       "loginForm"
     )
     .classList
-    .remove(
-      "hidden"
-    );
+    .remove("hidden");
+
 
   document
     .getElementById(
       "registerForm"
     )
     .classList
-    .add(
-      "hidden"
-    );
+    .add("hidden");
 
 }
 
 
-/* =====================================================
+/* =========================================================
    SHOW REGISTER
-===================================================== */
+========================================================= */
 
 function showRegister() {
 
@@ -1908,56 +2353,40 @@ function showRegister() {
       "loginForm"
     )
     .classList
-    .add(
-      "hidden"
-    );
+    .add("hidden");
+
 
   document
     .getElementById(
       "registerForm"
     )
     .classList
-    .remove(
-      "hidden"
-    );
+    .remove("hidden");
 
 }
 
 
-/* =====================================================
+/* =========================================================
    SHOW DASHBOARD
-===================================================== */
+========================================================= */
 
 function showDashboard() {
-
-  if (
-    !session ||
-    !currentUser
-  ) {
-
-    logout();
-
-    return;
-
-  }
 
   document
     .getElementById(
       "loginPage"
     )
     .classList
-    .add(
-      "hidden"
-    );
+    .add("hidden");
+
 
   document
     .getElementById(
       "dashboardPage"
     )
     .classList
-    .remove(
-      "hidden"
-    );
+    .remove("hidden");
+
 
   document
     .getElementById(
@@ -1966,13 +2395,17 @@ function showDashboard() {
     .textContent =
 
       currentUser.name +
+
       " • " +
+
       currentUser.code;
 
-  if (
-    currentUser.role ===
-    "admin"
-  ) {
+
+  const isAdmin =
+    currentUser.role === "admin";
+
+
+  if (isAdmin) {
 
     document
       .getElementById(
@@ -1981,23 +2414,21 @@ function showDashboard() {
       .textContent =
       "All Customers";
 
+
     document
       .getElementById(
         "addClientButton"
       )
       .classList
-      .add(
-        "hidden"
-      );
+      .add("hidden");
+
 
     document
       .getElementById(
         "adminPanel"
       )
       .classList
-      .remove(
-        "hidden"
-      );
+      .remove("hidden");
 
   } else {
 
@@ -2008,44 +2439,49 @@ function showDashboard() {
       .textContent =
       "My Customers";
 
+
     document
       .getElementById(
         "addClientButton"
       )
       .classList
-      .remove(
-        "hidden"
-      );
+      .remove("hidden");
+
 
     document
       .getElementById(
         "adminPanel"
       )
       .classList
-      .add(
-        "hidden"
-      );
+      .add("hidden");
 
   }
+
 
   loadDashboard();
 
 }
 
 
-/* =====================================================
+/* =========================================================
    LOAD DASHBOARD
-===================================================== */
+========================================================= */
 
 async function loadDashboard() {
 
   if (!session) {
+
+    logout();
+
     return;
+
   }
 
+
   showLoading(
-    "Loading customer dashboard..."
+    "Loading dashboard..."
   );
+
 
   try {
 
@@ -2058,11 +2494,13 @@ async function loadDashboard() {
         }
       );
 
+
     if (
-      !result ||
       result.status ===
       "unauthorized"
     ) {
+
+      hideLoading();
 
       logout();
 
@@ -2070,67 +2508,78 @@ async function loadDashboard() {
 
     }
 
+
     if (
       result.status !==
       "success"
     ) {
 
-      showToast(
+      hideLoading();
+
+      alert(
         result.message ||
-        "Unable to load customers.",
-        "error"
+        "Unable to load customers."
       );
 
       return;
 
     }
 
+
     clients =
       result.clients || [];
+
 
     renderClients(
       clients
     );
 
-    renderFunnel();
+
+    renderFunnel(
+      clients
+    );
+
 
     await loadStats();
 
+
+    hideLoading();
+
   } catch (error) {
+
+    hideLoading();
 
     console.error(
       error
     );
 
-    showToast(
-      error.message,
-      "error"
+    alert(
+      error.message
     );
-
-  } finally {
-
-    hideLoading();
 
   }
 
 }
 
 
-/* =====================================================
+/* =========================================================
    RENDER CLIENTS
-===================================================== */
+========================================================= */
 
 function renderClients(
   list
 ) {
 
   const tbody =
-    document.getElementById(
-      "clientTable"
-    );
+    document
+      .getElementById(
+        "clientTable"
+      );
+
 
   tbody.innerHTML =
     "";
+
 
   if (
     !list ||
@@ -2143,7 +2592,7 @@ function renderClients(
 
         <td
           colspan="8"
-          style="text-align:center;padding:40px;color:#777;"
+          class="empty-state"
         >
 
           No customers found.
@@ -2158,10 +2607,12 @@ function renderClients(
 
   }
 
+
   list.forEach(
     function(client) {
 
       let action = "";
+
 
       if (
         currentUser &&
@@ -2172,11 +2623,16 @@ function renderClients(
         action = `
 
           <select
-            class="stage-select"
             onchange="changeStage(
-              ${Number(client.rowId)},
+              '${escapeAttribute(client.rowId)}',
               this.value
             )"
+            style="
+              padding:7px;
+              border:1px solid #d8dee8;
+              border-radius:7px;
+              font-size:11px;
+            "
           >
 
             ${buildStageOptions(
@@ -2192,16 +2648,20 @@ function renderClients(
         action = `
 
           <span
-            style="color:#777;font-size:11px;"
+            style="
+              color:#777;
+              font-size:11px;
+            "
           >
 
-            SJ Travel
+            SJ Travel tracking
 
           </span>
 
         `;
 
       }
+
 
       tbody.innerHTML += `
 
@@ -2215,6 +2675,7 @@ function renderClients(
             </strong>
           </td>
 
+
           <td>
 
             <strong>
@@ -2225,17 +2686,20 @@ function renderClients(
 
           </td>
 
+
           <td>
             ${escapeHtml(
               client.phone
             )}
           </td>
 
+
           <td>
             ${escapeHtml(
               client.service
             )}
           </td>
+
 
           <td>
             ${escapeHtml(
@@ -2244,12 +2708,13 @@ function renderClients(
             )}
           </td>
 
+
           <td>
             ${escapeHtml(
-              client.agentCode ||
-              "-"
+              client.agentCode
             )}
           </td>
+
 
           <td>
 
@@ -2262,6 +2727,7 @@ function renderClients(
             </span>
 
           </td>
+
 
           <td>
 
@@ -2279,22 +2745,49 @@ function renderClients(
 }
 
 
-/* =====================================================
+/* =========================================================
+   FUNNEL STAGES
+========================================================= */
+
+function getStages() {
+
+  return [
+
+    "LEAD QUALIFICATION",
+
+    "CONSULTATION",
+
+    "BESPOKE ITINERARY",
+
+    "QUOTATION",
+
+    "CLIENT APPROVAL",
+
+    "DEPOSIT PAYMENT",
+
+    "BOOKING CONFIRMATION"
+
+  ];
+
+}
+
+
+/* =========================================================
    BUILD STAGE OPTIONS
-===================================================== */
+========================================================= */
 
 function buildStageOptions(
   selected
 ) {
 
-  return FUNNEL_STAGES
+  return getStages()
     .map(
       function(stage) {
 
         return `
 
           <option
-            value="${escapeHtml(stage)}"
+            value="${escapeAttribute(stage)}"
             ${
               stage === selected
                 ? "selected"
@@ -2302,7 +2795,9 @@ function buildStageOptions(
             }
           >
 
-            ${escapeHtml(stage)}
+            ${escapeHtml(
+              stage
+            )}
 
           </option>
 
@@ -2315,9 +2810,9 @@ function buildStageOptions(
 }
 
 
-/* =====================================================
+/* =========================================================
    CHANGE STAGE
-===================================================== */
+========================================================= */
 
 async function changeStage(
   rowId,
@@ -2326,13 +2821,13 @@ async function changeStage(
 
   if (
     !currentUser ||
-    currentUser.role !==
-    "admin"
+    currentUser.role !== "admin"
   ) {
 
     return;
 
   }
+
 
   const confirmed =
     confirm(
@@ -2341,17 +2836,20 @@ async function changeStage(
       "?"
     );
 
+
   if (!confirmed) {
 
-    loadDashboard();
+    await loadDashboard();
 
     return;
 
   }
 
+
   showLoading(
     "Updating customer journey..."
   );
+
 
   try {
 
@@ -2372,58 +2870,43 @@ async function changeStage(
         }
       );
 
-    if (
-      result.status ===
-      "unauthorized"
-    ) {
-
-      logout();
-
-      return;
-
-    }
 
     if (
       result.status !==
       "success"
     ) {
 
-      showToast(
+      hideLoading();
+
+      alert(
         result.message ||
-        "Unable to update stage.",
-        "error"
+        "Unable to update stage."
       );
 
       return;
 
     }
 
-    showToast(
-      "Customer journey updated.",
-      "success"
-    );
 
     await loadDashboard();
 
+
   } catch (error) {
 
-    showToast(
-      error.message,
-      "error"
-    );
-
-  } finally {
-
     hideLoading();
+
+    alert(
+      error.message
+    );
 
   }
 
 }
 
 
-/* =====================================================
-   LOAD STATS
-===================================================== */
+/* =========================================================
+   LOAD STATISTICS
+========================================================= */
 
 async function loadStats() {
 
@@ -2438,6 +2921,7 @@ async function loadStats() {
         }
       );
 
+
     if (
       !result ||
       result.status !==
@@ -2448,8 +2932,10 @@ async function loadStats() {
 
     }
 
+
     const stats =
       result.stats || {};
+
 
     document
       .getElementById(
@@ -2458,12 +2944,14 @@ async function loadStats() {
       .textContent =
       stats.total || 0;
 
+
     document
       .getElementById(
         "leadCount"
       )
       .textContent =
       stats.leadQualification || 0;
+
 
     document
       .getElementById(
@@ -2472,12 +2960,14 @@ async function loadStats() {
       .textContent =
       stats.consultation || 0;
 
+
     document
       .getElementById(
         "quotationCount"
       )
       .textContent =
       stats.quotation || 0;
+
 
     document
       .getElementById(
@@ -2489,7 +2979,6 @@ async function loadStats() {
   } catch (error) {
 
     console.error(
-      "Stats error:",
       error
     );
 
@@ -2498,52 +2987,59 @@ async function loadStats() {
 }
 
 
-/* =====================================================
+/* =========================================================
    RENDER FUNNEL
-===================================================== */
+========================================================= */
 
-function renderFunnel() {
+function renderFunnel(
+  clientList = clients
+) {
+
+  const stages =
+    getStages();
+
 
   const container =
-    document.getElementById(
-      "funnelContainer"
-    );
+    document
+      .getElementById(
+        "funnelContainer"
+      );
+
 
   container.innerHTML =
     "";
 
-  FUNNEL_STAGES.forEach(
-    function(stage, index) {
+
+  stages.forEach(
+    function(stage) {
 
       const count =
-        clients.filter(
+        clientList.filter(
           function(client) {
 
             return (
-              client.stage ===
+              String(
+                client.stage || ""
+              )
+              .toUpperCase() ===
               stage
             );
 
           }
         ).length;
 
+
       container.innerHTML += `
 
-        <div
-          class="funnel-step ${
-            count > 0
-              ? "active"
-              : ""
-          }"
-        >
+        <div class="funnel-step">
 
           <span>
             ${count}
           </span>
 
-          <small>
-            ${escapeHtml(stage)}
-          </small>
+          ${escapeHtml(
+            stage
+          )}
 
         </div>
 
@@ -2555,9 +3051,9 @@ function renderFunnel() {
 }
 
 
-/* =====================================================
-   OPEN CUSTOMER MODAL
-===================================================== */
+/* =========================================================
+   OPEN CLIENT MODAL
+========================================================= */
 
 function openClientModal() {
 
@@ -2566,16 +3062,14 @@ function openClientModal() {
       "clientModal"
     )
     .classList
-    .remove(
-      "hidden"
-    );
+    .remove("hidden");
 
 }
 
 
-/* =====================================================
-   CLOSE CUSTOMER MODAL
-===================================================== */
+/* =========================================================
+   CLOSE CLIENT MODAL
+========================================================= */
 
 function closeClientModal() {
 
@@ -2584,30 +3078,23 @@ function closeClientModal() {
       "clientModal"
     )
     .classList
-    .add(
-      "hidden"
-    );
-
-  document
-    .getElementById(
-      "clientMessage"
-    )
-    .textContent =
-    "";
+    .add("hidden");
 
 }
 
 
-/* =====================================================
-   SAVE CUSTOMER
-===================================================== */
+/* =========================================================
+   SAVE CLIENT
+========================================================= */
 
 async function saveClient() {
 
   const message =
-    document.getElementById(
-      "clientMessage"
-    );
+    document
+      .getElementById(
+        "clientMessage"
+      );
+
 
   const data = {
 
@@ -2690,6 +3177,7 @@ async function saveClient() {
 
   };
 
+
   if (
     !data.name ||
     !data.phone ||
@@ -2700,11 +3188,12 @@ async function saveClient() {
       "#c0392b";
 
     message.textContent =
-      "Please fill in Customer Name, Phone Number and Service.";
+      "Please fill in the required fields.";
 
     return;
 
   }
+
 
   message.style.color =
     "#555";
@@ -2712,12 +3201,11 @@ async function saveClient() {
   message.textContent =
     "Saving customer...";
 
-  const button =
-    document.getElementById(
-      "saveClientButton"
-    );
 
-  button.disabled = true;
+  showLoading(
+    "Saving customer..."
+  );
+
 
   try {
 
@@ -2762,32 +3250,29 @@ async function saveClient() {
         }
       );
 
-    if (
-      result.status ===
-      "unauthorized"
-    ) {
-
-      logout();
-
-      return;
-
-    }
 
     if (
+      !result ||
       result.status !==
       "success"
     ) {
+
+      hideLoading();
 
       message.style.color =
         "#c0392b";
 
       message.textContent =
-        result.message ||
+        result?.message ||
         "Unable to save customer.";
 
       return;
 
     }
+
+
+    hideLoading();
+
 
     message.style.color =
       "#16834d";
@@ -2795,10 +3280,6 @@ async function saveClient() {
     message.textContent =
       "Customer successfully added.";
 
-    showToast(
-      "Customer successfully added.",
-      "success"
-    );
 
     setTimeout(
       async function() {
@@ -2813,7 +3294,10 @@ async function saveClient() {
       800
     );
 
+
   } catch (error) {
+
+    hideLoading();
 
     message.style.color =
       "#c0392b";
@@ -2821,69 +3305,83 @@ async function saveClient() {
     message.textContent =
       error.message;
 
-  } finally {
-
-    button.disabled = false;
-
   }
 
 }
 
 
-/* =====================================================
+/* =========================================================
    CLEAR CUSTOMER FORM
-===================================================== */
+========================================================= */
 
 function clearClientForm() {
 
   const fields = [
 
     "clientName",
+
     "clientPhone",
+
     "clientEmail",
+
     "clientService",
+
     "clientDestination",
+
     "clientTravelDate",
+
     "clientTravellers",
+
     "clientBudget",
+
     "clientSpecialRequests",
+
     "clientNotes"
 
   ];
+
 
   fields.forEach(
     function(id) {
 
       const element =
-        document.getElementById(
-          id
-        );
+        document
+          .getElementById(
+            id
+          );
+
 
       if (element) {
 
         element.value =
-          id ===
-          "clientTravellers"
-            ? "1"
-            : "";
+          "";
 
       }
 
     }
   );
 
+
+  document
+    .getElementById(
+      "clientMessage"
+    )
+    .textContent =
+    "";
+
 }
 
 
-/* =====================================================
+/* =========================================================
    SEARCH
-===================================================== */
+========================================================= */
 
 function searchCustomers() {
 
   clearTimeout(
     searchTimer
   );
+
 
   searchTimer =
     setTimeout(
@@ -2897,6 +3395,7 @@ function searchCustomers() {
             .value
             .trim();
 
+
         if (!query) {
 
           renderClients(
@@ -2906,6 +3405,7 @@ function searchCustomers() {
           return;
 
         }
+
 
         try {
 
@@ -2923,6 +3423,7 @@ function searchCustomers() {
               }
             );
 
+
           if (
             result.status ===
             "success"
@@ -2931,13 +3432,6 @@ function searchCustomers() {
             renderClients(
               result.clients || []
             );
-
-          } else if (
-            result.status ===
-            "unauthorized"
-          ) {
-
-            logout();
 
           }
 
@@ -2956,9 +3450,9 @@ function searchCustomers() {
 }
 
 
-/* =====================================================
-   ADMIN AGENTS
-===================================================== */
+/* =========================================================
+   LOAD AGENTS
+========================================================= */
 
 async function loadAgents() {
 
@@ -2972,9 +3466,11 @@ async function loadAgents() {
 
   }
 
+
   showLoading(
-    "Loading registered agents..."
+    "Loading agents..."
   );
+
 
   try {
 
@@ -2989,89 +3485,121 @@ async function loadAgents() {
         }
       );
 
-    if (
-      result.status ===
-      "unauthorized"
-    ) {
 
-      logout();
+    hideLoading();
 
-      return;
-
-    }
 
     if (
+      !result ||
       result.status !==
       "success"
     ) {
 
-      showToast(
-        result.message ||
-        "Unable to load agents.",
-        "error"
+      alert(
+        result?.message ||
+        "Unable to load agents."
       );
 
       return;
 
     }
 
-    let output =
-      "REGISTERED AGENTS\n\n";
 
-    result.agents.forEach(
-      function(agent, index) {
+    const container =
+      document
+        .getElementById(
+          "agentsContainer"
+        );
 
-        output +=
 
-          (index + 1) +
-          ". " +
+    const table =
+      document
+        .getElementById(
+          "agentsTable"
+        );
 
-          agent.name +
 
-          "\nCode: " +
+    table.innerHTML =
+      "";
 
-          agent.code +
 
-          "\nPhone: " +
+    result.agents
+      .forEach(
+        function(agent) {
 
-          agent.phone +
+          table.innerHTML += `
 
-          "\nEmail: " +
+            <tr>
 
-          agent.email +
+              <td>
+                <strong>
+                  ${escapeHtml(
+                    agent.name
+                  )}
+                </strong>
+              </td>
 
-          "\nStatus: " +
+              <td>
+                ${escapeHtml(
+                  agent.code
+                )}
+              </td>
 
-          agent.status +
+              <td>
+                ${escapeHtml(
+                  agent.phone
+                )}
+              </td>
 
-          "\n\n";
+              <td>
+                ${escapeHtml(
+                  agent.email || "-"
+                )}
+              </td>
 
-      }
-    );
+              <td>
+                <span class="stage">
+                  ${escapeHtml(
+                    agent.status
+                  )}
+                </span>
+              </td>
 
-    alert(
-      output
-    );
+              <td>
+                ${escapeHtml(
+                  agent.createdAt || "-"
+                )}
+              </td>
+
+            </tr>
+
+          `;
+
+        }
+      );
+
+
+    container
+      .classList
+      .remove("hidden");
+
 
   } catch (error) {
 
-    showToast(
-      error.message,
-      "error"
-    );
-
-  } finally {
-
     hideLoading();
+
+    alert(
+      error.message
+    );
 
   }
 
 }
 
 
-/* =====================================================
+/* =========================================================
    LOGOUT
-===================================================== */
+========================================================= */
 
 function logout() {
 
@@ -3079,36 +3607,39 @@ function logout() {
     "sj_agent_session"
   );
 
+
   localStorage.removeItem(
     "sj_agent_user"
   );
 
+
   session =
     null;
+
 
   currentUser =
     null;
 
+
   clients =
     [];
+
 
   document
     .getElementById(
       "dashboardPage"
     )
     .classList
-    .add(
-      "hidden"
-    );
+    .add("hidden");
+
 
   document
     .getElementById(
       "loginPage"
     )
     .classList
-    .remove(
-      "hidden"
-    );
+    .remove("hidden");
+
 
   document
     .getElementById(
@@ -3117,14 +3648,15 @@ function logout() {
     .value =
     "";
 
+
   showLogin();
 
 }
 
 
-/* =====================================================
-   HTML ESCAPE
-===================================================== */
+/* =========================================================
+   ESCAPE HTML
+========================================================= */
 
 function escapeHtml(
   value
@@ -3134,87 +3666,48 @@ function escapeHtml(
     value ?? ""
   )
 
-  .replace(
-    /&/g,
-    "&amp;"
-  )
+    .replace(
+      /&/g,
+      "&amp;"
+    )
 
-  .replace(
-    /</g,
-    "&lt;"
-  )
+    .replace(
+      /</g,
+      "&lt;"
+    )
 
-  .replace(
-    />/g,
-    "&gt;"
-  )
+    .replace(
+      />/g,
+      "&gt;"
+    )
 
-  .replace(
-    /"/g,
-    "&quot;"
-  )
+    .replace(
+      /"/g,
+      "&quot;"
+    )
 
-  .replace(
-    /'/g,
-    "&#039;"
+    .replace(
+      /'/g,
+      "&#039;"
+    );
+
+}
+
+
+function escapeAttribute(
+  value
+) {
+
+  return escapeHtml(
+    value
   );
 
 }
 
 
-/* =====================================================
-   ENTER KEY LOGIN
-===================================================== */
-
-document
-  .getElementById(
-    "loginIdentifier"
-  )
-  .addEventListener(
-    "keydown",
-    function(event) {
-
-      if (
-        event.key ===
-        "Enter"
-      ) {
-
-        login();
-
-      }
-
-    }
-  );
-
-
-/* =====================================================
-   CLOSE MODAL WHEN CLICKING OUTSIDE
-===================================================== */
-
-document
-  .getElementById(
-    "clientModal"
-  )
-  .addEventListener(
-    "click",
-    function(event) {
-
-      if (
-        event.target ===
-        this
-      ) {
-
-        closeClientModal();
-
-      }
-
-    }
-  );
-
-
-/* =====================================================
+/* =========================================================
    AUTO LOGIN
-===================================================== */
+========================================================= */
 
 window.addEventListener(
   "load",
@@ -3232,7 +3725,58 @@ window.addEventListener(
   }
 );
 
+
+/* =========================================================
+   CLOSE MODAL WHEN CLICKING OUTSIDE
+========================================================= */
+
+document.addEventListener(
+  "click",
+  function(event) {
+
+    const modal =
+      document.getElementById(
+        "clientModal"
+      );
+
+
+    if (
+      event.target === modal
+    ) {
+
+      closeClientModal();
+
+    }
+
+  }
+);
+
+
+/* =========================================================
+   ENTER KEY LOGIN
+========================================================= */
+
+document
+  .getElementById(
+    "loginIdentifier"
+  )
+  .addEventListener(
+    "keypress",
+    function(event) {
+
+      if (
+        event.key === "Enter"
+      ) {
+
+        login();
+
+      }
+
+    }
+  );
+
 </script>
 
 </body>
+
 </html>
