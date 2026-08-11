@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="en">
 
 <head>
@@ -6,8 +7,9 @@
 <meta charset="UTF-8">
 
 <meta
-  name="viewport"
-  content="width=device-width, initial-scale=1.0"
+name="viewport"
+content="width=device-width, initial-scale=1.0"
+
 >
 
 <title>SJ Luxury Travel | Agent Portal</title>
@@ -27,18 +29,11 @@ html {
 }
 
 body {
-
   margin: 0;
-
-  font-family:
-    Arial,
-    Helvetica,
-    sans-serif;
-
+  font-family: Arial, Helvetica, sans-serif;
   background: #f5f7fb;
-
   color: #172033;
-
+  overflow-x: hidden;
 }
 
 button,
@@ -58,19 +53,93 @@ button {
 
 
 /* =========================================================
+   SJ LUXURY TRAVELS LOGO
+========================================================= */
+
+.sj-brand {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  color: #0b3156;
+  width: 100%;
+  transition: .2s ease;
+}
+
+.sj-brand:hover {
+  transform: translateY(-1px);
+}
+
+.sj-text-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.sj-main-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+
+.sj-title {
+  font-size: 38px;
+  font-weight: 900;
+  letter-spacing: -2px;
+  color: #0b3156;
+}
+
+.sj-divider {
+  width: 1px;
+  height: 31px;
+  background: #168bc2;
+  margin: 0 9px;
+}
+
+.sj-luxury {
+  font-size: 23px;
+  font-weight: 300;
+  font-style: italic;
+  letter-spacing: -.5px;
+  color: #168bc2;
+}
+
+.sj-subtitle-row {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 7px;
+}
+
+.sj-subtitle {
+  font-size: 8px;
+  font-weight: 800;
+  letter-spacing: 3px;
+  color: #0b3156;
+  white-space: nowrap;
+}
+
+.sj-subtitle-row .line {
+  height: 1px;
+  width: 28px;
+  background: #168bc2;
+}
+
+
+/* =========================================================
    LOGIN
 ========================================================= */
 
 .login-page {
-
   min-height: 100vh;
-
+  min-height: 100svh;
   display: flex;
-
   align-items: center;
-
   justify-content: center;
-
   padding: 25px;
 
   background:
@@ -80,48 +149,54 @@ button {
       #0b3156 50%,
       #124d78 100%
     );
-
 }
 
 .login-card {
-
   width: 100%;
-
   max-width: 470px;
-
   background: #ffffff;
-
   border-radius: 24px;
-
   padding: 42px;
 
   box-shadow:
     0 30px 80px rgba(0,0,0,.28);
+}
 
+.login-card .sj-brand {
+  margin-bottom: 20px;
+}
+
+.login-card .sj-title {
+  font-size: 42px;
+}
+
+.login-card .sj-luxury {
+  font-size: 25px;
+}
+
+.login-card .sj-divider {
+  height: 34px;
+}
+
+.login-description {
+  text-align: center;
+  color: #777;
+  font-size: 14px;
+  margin: 8px 0 28px;
 }
 
 .logo {
-
   text-align: center;
-
   margin-bottom: 30px;
-
 }
 
 .logo-mark {
-
   width: 65px;
-
   height: 65px;
-
   margin: 0 auto 15px;
-
   border-radius: 50%;
-
   display: flex;
-
   align-items: center;
-
   justify-content: center;
 
   background:
@@ -132,36 +207,24 @@ button {
     );
 
   color: white;
-
   font-size: 28px;
-
   font-weight: 900;
 
   box-shadow:
     0 10px 25px rgba(11,49,86,.25);
-
 }
 
 .logo h1 {
-
   margin: 0;
-
   font-size: 25px;
-
   letter-spacing: .5px;
-
   color: #0b3156;
-
 }
 
 .logo p {
-
   margin: 7px 0 0;
-
   color: #777;
-
   font-size: 14px;
-
 }
 
 
@@ -170,64 +233,42 @@ button {
 ========================================================= */
 
 .form-group {
-
   margin-bottom: 18px;
-
 }
 
 .form-group label {
-
   display: block;
-
   margin-bottom: 7px;
-
   font-weight: 700;
-
   font-size: 13px;
-
   color: #283548;
-
 }
 
 .form-group input,
 .form-group select,
 .form-group textarea {
-
   width: 100%;
-
   padding: 13px 14px;
-
   border: 1px solid #d7dee8;
-
   border-radius: 10px;
-
   background: #fff;
-
   color: #172033;
-
   font-size: 14px;
-
   outline: none;
-
   transition: .2s;
-
 }
 
 .form-group input:focus,
 .form-group select:focus,
 .form-group textarea:focus {
-
   border-color: #0b5c91;
 
   box-shadow:
     0 0 0 3px rgba(11,92,145,.08);
-
 }
 
 .form-group textarea {
-
   resize: vertical;
-
 }
 
 
@@ -236,77 +277,49 @@ button {
 ========================================================= */
 
 .btn {
-
   border: none;
-
   border-radius: 10px;
-
   padding: 12px 18px;
-
   font-weight: 700;
-
   cursor: pointer;
-
   transition: .2s;
-
   font-size: 13px;
-
 }
 
 .btn:hover {
-
   transform: translateY(-1px);
-
 }
 
 .btn-primary {
-
   background: #0b3156;
-
   color: white;
-
 }
 
 .btn-primary:hover {
-
   background: #124c7c;
-
 }
 
 .btn-primary.full {
-
   width: 100%;
-
 }
 
 .btn-secondary {
-
   background: #edf2f7;
-
   color: #172033;
-
 }
 
 .btn-secondary:hover {
-
   background: #dfe7ef;
-
 }
 
 .btn-success {
-
   background: #16834d;
-
   color: white;
-
 }
 
 .btn-danger {
-
   background: #c0392b;
-
   color: white;
-
 }
 
 
@@ -315,25 +328,16 @@ button {
 ========================================================= */
 
 .switch-link {
-
   text-align: center;
-
   margin-top: 20px;
-
   color: #666;
-
   font-size: 14px;
-
 }
 
 .switch-link a {
-
   color: #0b5c91;
-
   font-weight: 700;
-
   cursor: pointer;
-
 }
 
 
@@ -342,11 +346,8 @@ button {
 ========================================================= */
 
 .dashboard {
-
   min-height: 100vh;
-
   background: #f5f7fb;
-
 }
 
 
@@ -355,77 +356,84 @@ button {
 ========================================================= */
 
 .topbar {
-
   background: #071a33;
-
   color: white;
 
   padding: 14px 25px;
 
   display: flex;
-
   justify-content: space-between;
-
   align-items: center;
 
   gap: 20px;
 
   position: sticky;
-
   top: 0;
-
   z-index: 100;
-
 }
 
-.topbar-brand {
-
+.topbar-brand-link {
   display: flex;
-
   align-items: center;
-
-  gap: 10px;
-
-  font-size: 18px;
-
-  font-weight: 800;
-
+  text-decoration: none;
+  color: white;
+  min-width: 0;
 }
 
-.brand-mini {
-
-  width: 34px;
-
-  height: 34px;
-
-  border-radius: 50%;
-
+.topbar-logo {
   display: flex;
-
   align-items: center;
-
   justify-content: center;
+}
 
-  background: #168bc2;
+.topbar-logo .sj-text-container {
+  align-items: flex-start;
+}
 
-  font-weight: 900;
+.topbar-logo .sj-main-row {
+  justify-content: flex-start;
+}
 
+.topbar-logo .sj-title {
+  color: white;
+  font-size: 25px;
+}
+
+.topbar-logo .sj-luxury {
+  color: #58bde9;
+  font-size: 17px;
+}
+
+.topbar-logo .sj-divider {
+  height: 21px;
+  background: #58bde9;
+  margin: 0 6px;
+}
+
+.topbar-logo .sj-subtitle-row {
+  justify-content: flex-start;
+  margin-top: 3px;
+}
+
+.topbar-logo .sj-subtitle {
+  color: rgba(255,255,255,.85);
+  font-size: 6px;
+  letter-spacing: 2px;
+}
+
+.topbar-logo .sj-subtitle-row .line {
+  background: #58bde9;
+  width: 18px;
 }
 
 .user-area {
-
   display: flex;
-
   align-items: center;
-
-  gap: 12px;
-
+  gap: 10px;
 }
 
 .user-badge {
-
   background: rgba(255,255,255,.1);
-
   border: 1px solid rgba(255,255,255,.12);
 
   padding: 8px 12px;
@@ -434,6 +442,51 @@ button {
 
   font-size: 13px;
 
+  max-width: 250px;
+
+  overflow: hidden;
+
+  text-overflow: ellipsis;
+
+  white-space: nowrap;
+}
+
+
+/* =========================================================
+   BACK TO WEBSITE
+========================================================= */
+
+.back-website-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 7px;
+
+  padding: 9px 13px;
+
+  border-radius: 9px;
+
+  background: rgba(255,255,255,.10);
+
+  border: 1px solid rgba(255,255,255,.18);
+
+  color: white;
+
+  text-decoration: none;
+
+  font-size: 12px;
+
+  font-weight: 700;
+
+  transition: .2s ease;
+
+  white-space: nowrap;
+}
+
+.back-website-btn:hover {
+  background: rgba(255,255,255,.18);
+  transform: translateY(-1px);
 }
 
 
@@ -442,15 +495,10 @@ button {
 ========================================================= */
 
 .dashboard-container {
-
   width: 100%;
-
   max-width: 1450px;
-
   margin: auto;
-
   padding: 30px;
-
 }
 
 
@@ -459,7 +507,6 @@ button {
 ========================================================= */
 
 .stats {
-
   display: grid;
 
   grid-template-columns:
@@ -471,11 +518,9 @@ button {
   gap: 18px;
 
   margin-bottom: 25px;
-
 }
 
 .stat-card {
-
   background: white;
 
   border-radius: 15px;
@@ -486,27 +531,18 @@ button {
     0 5px 20px rgba(0,0,0,.06);
 
   border: 1px solid #edf0f4;
-
 }
 
 .stat-card h3 {
-
   margin: 0;
-
   font-size: 30px;
-
   color: #0b3156;
-
 }
 
 .stat-card p {
-
   margin: 7px 0 0;
-
   color: #777;
-
   font-size: 13px;
-
 }
 
 
@@ -515,7 +551,6 @@ button {
 ========================================================= */
 
 .panel {
-
   background: white;
 
   border-radius: 16px;
@@ -528,11 +563,9 @@ button {
     0 5px 20px rgba(0,0,0,.05);
 
   border: 1px solid #edf0f4;
-
 }
 
 .panel-header {
-
   display: flex;
 
   justify-content: space-between;
@@ -542,27 +575,18 @@ button {
   gap: 15px;
 
   margin-bottom: 20px;
-
 }
 
 .panel-header h2 {
-
   margin: 0;
-
   font-size: 20px;
-
   color: #172033;
-
 }
 
 .panel-actions {
-
   display: flex;
-
   gap: 8px;
-
   flex-wrap: wrap;
-
 }
 
 
@@ -571,15 +595,11 @@ button {
 ========================================================= */
 
 .search-box {
-
   margin-bottom: 20px;
-
   position: relative;
-
 }
 
 .search-box input {
-
   width: 100%;
 
   padding: 14px 15px 14px 42px;
@@ -591,11 +611,9 @@ button {
   outline: none;
 
   font-size: 14px;
-
 }
 
 .search-icon {
-
   position: absolute;
 
   left: 15px;
@@ -605,7 +623,6 @@ button {
   transform: translateY(-50%);
 
   color: #777;
-
 }
 
 
@@ -614,7 +631,6 @@ button {
 ========================================================= */
 
 .table-wrapper {
-
   width: 100%;
 
   overflow-x: auto;
@@ -623,20 +639,29 @@ button {
 
   border-radius: 10px;
 
+  -webkit-overflow-scrolling: touch;
+
+  scrollbar-width: thin;
+}
+
+.table-wrapper::-webkit-scrollbar {
+  height: 7px;
+}
+
+.table-wrapper::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 20px;
 }
 
 table {
-
   width: 100%;
 
   border-collapse: collapse;
 
   min-width: 1050px;
-
 }
 
 th {
-
   background: #f1f5f9;
 
   text-align: left;
@@ -651,10 +676,10 @@ th {
 
   color: #596579;
 
+  white-space: nowrap;
 }
 
 td {
-
   padding: 13px;
 
   border-bottom: 1px solid #edf0f4;
@@ -662,19 +687,14 @@ td {
   font-size: 13px;
 
   vertical-align: middle;
-
 }
 
 tr:last-child td {
-
   border-bottom: none;
-
 }
 
 tr:hover td {
-
   background: #fafbfd;
-
 }
 
 
@@ -683,7 +703,6 @@ tr:hover td {
 ========================================================= */
 
 .stage {
-
   display: inline-block;
 
   padding: 6px 9px;
@@ -699,7 +718,6 @@ tr:hover td {
   color: #174d75;
 
   white-space: nowrap;
-
 }
 
 
@@ -708,7 +726,6 @@ tr:hover td {
 ========================================================= */
 
 .funnel {
-
   display: grid;
 
   grid-template-columns:
@@ -717,11 +734,9 @@ tr:hover td {
   gap: 8px;
 
   overflow-x: auto;
-
 }
 
 .funnel-step {
-
   min-width: 120px;
 
   padding: 16px 10px;
@@ -733,11 +748,9 @@ tr:hover td {
   border-radius: 10px;
 
   color: #344054;
-
 }
 
 .funnel-step span {
-
   display: block;
 
   font-size: 27px;
@@ -747,21 +760,15 @@ tr:hover td {
   color: #0b3156;
 
   margin-bottom: 5px;
-
 }
 
 .funnel-step.active {
-
   background: #0b3156;
-
   color: white;
-
 }
 
 .funnel-step.active span {
-
   color: white;
-
 }
 
 
@@ -770,7 +777,6 @@ tr:hover td {
 ========================================================= */
 
 .modal {
-
   position: fixed;
 
   inset: 0;
@@ -786,11 +792,9 @@ tr:hover td {
   padding: 20px;
 
   z-index: 999;
-
 }
 
 .modal-content {
-
   background: white;
 
   width: 100%;
@@ -807,11 +811,9 @@ tr:hover td {
 
   box-shadow:
     0 30px 80px rgba(0,0,0,.25);
-
 }
 
 .modal-header {
-
   display: flex;
 
   justify-content: space-between;
@@ -819,17 +821,13 @@ tr:hover td {
   align-items: center;
 
   margin-bottom: 20px;
-
 }
 
 .modal-header h2 {
-
   margin: 0;
-
 }
 
 .close {
-
   border: none;
 
   background: transparent;
@@ -839,7 +837,6 @@ tr:hover td {
   cursor: pointer;
 
   color: #777;
-
 }
 
 
@@ -848,7 +845,6 @@ tr:hover td {
 ========================================================= */
 
 .message {
-
   text-align: center;
 
   margin-top: 15px;
@@ -856,7 +852,6 @@ tr:hover td {
   font-size: 13px;
 
   min-height: 20px;
-
 }
 
 
@@ -865,7 +860,6 @@ tr:hover td {
 ========================================================= */
 
 .loading {
-
   position: fixed;
 
   inset: 0;
@@ -879,11 +873,9 @@ tr:hover td {
   align-items: center;
 
   justify-content: center;
-
 }
 
 .loading-box {
-
   background: white;
 
   padding: 25px 35px;
@@ -894,11 +886,9 @@ tr:hover td {
     0 20px 50px rgba(0,0,0,.15);
 
   text-align: center;
-
 }
 
 .spinner {
-
   width: 35px;
 
   height: 35px;
@@ -912,7 +902,6 @@ tr:hover td {
   animation: spin .8s linear infinite;
 
   margin: 0 auto 12px;
-
 }
 
 @keyframes spin {
@@ -929,12 +918,32 @@ tr:hover td {
 ========================================================= */
 
 .empty-state {
-
   text-align: center;
 
   padding: 45px;
 
   color: #777;
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 1000px) {
+
+  .dashboard-container {
+    padding: 22px;
+  }
+
+  .stats {
+    grid-template-columns:
+      repeat(3, minmax(150px, 1fr));
+  }
+
+  .topbar {
+    padding: 12px 18px;
+  }
 
 }
 
@@ -945,67 +954,379 @@ tr:hover td {
 
 @media (max-width: 700px) {
 
-  .login-card {
-
-    padding: 25px;
-
+  body {
+    overflow-x: hidden;
   }
 
-  .dashboard-container {
+
+  /* LOGIN */
+
+  .login-page {
+    min-height: 100svh;
 
     padding: 15px;
 
+    align-items: flex-start;
+
+    padding-top: 35px;
+
+    padding-bottom: 35px;
   }
 
-  .topbar {
+  .login-card {
+    max-width: 100%;
 
-    padding: 12px 15px;
+    padding: 25px 20px;
+
+    border-radius: 18px;
+  }
+
+  .login-card .sj-title {
+    font-size: 34px;
+  }
+
+  .login-card .sj-luxury {
+    font-size: 21px;
+  }
+
+  .login-card .sj-divider {
+    height: 28px;
+
+    margin: 0 7px;
+  }
+
+  .login-card .sj-subtitle {
+    font-size: 7px;
+
+    letter-spacing: 2px;
+  }
+
+  .login-card .sj-subtitle-row .line {
+    width: 20px;
+  }
+
+  .login-description {
+    font-size: 13px;
+
+    margin-bottom: 22px;
+  }
+
+
+  /* MOBILE FORM */
+
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    font-size: 16px;
+
+    padding: 13px;
+  }
+
+  .btn {
+    min-height: 44px;
+  }
+
+
+  /* TOP BAR */
+
+  .topbar {
+    position: relative;
+
+    padding: 12px;
+
+    gap: 12px;
 
     flex-direction: column;
 
-    align-items: flex-start;
+    align-items: stretch;
+  }
 
+  .topbar-brand-link {
+    justify-content: center;
+  }
+
+  .topbar-logo .sj-title {
+    font-size: 24px;
+  }
+
+  .topbar-logo .sj-luxury {
+    font-size: 16px;
+  }
+
+  .topbar-logo .sj-subtitle {
+    font-size: 6px;
   }
 
   .user-area {
-
     width: 100%;
 
-    justify-content: space-between;
+    display: grid;
 
+    grid-template-columns:
+      minmax(0, 1fr)
+      auto
+      auto;
+
+    gap: 8px;
   }
 
+  .user-badge {
+    min-width: 0;
+
+    max-width: none;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+
+    white-space: nowrap;
+  }
+
+  .back-website-btn {
+    width: 100%;
+  }
+
+
+  /* DASHBOARD */
+
+  .dashboard-container {
+    padding: 12px;
+  }
+
+
+  /* STATS */
+
+  .stats {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+
+    gap: 10px;
+
+    margin-bottom: 15px;
+  }
+
+  .stat-card {
+    padding: 16px 13px;
+
+    border-radius: 12px;
+  }
+
+  .stat-card h3 {
+    font-size: 24px;
+  }
+
+  .stat-card p {
+    font-size: 11px;
+
+    line-height: 1.3;
+  }
+
+
+  /* PANELS */
+
   .panel {
+    padding: 15px;
 
-    padding: 18px;
+    border-radius: 13px;
 
+    margin-bottom: 15px;
   }
 
   .panel-header {
-
     align-items: flex-start;
 
     flex-direction: column;
+  }
 
+  .panel-header h2 {
+    font-size: 17px;
   }
 
   .panel-actions {
-
     width: 100%;
 
+    display: grid;
+
+    grid-template-columns:
+      1fr 1fr;
   }
 
   .panel-actions .btn {
-
-    flex: 1;
-
+    width: 100%;
   }
 
+
+  /* SEARCH */
+
+  .search-box input {
+    font-size: 16px;
+
+    padding:
+      13px
+      13px
+      13px
+      40px;
+  }
+
+
+  /* FUNNEL */
+
   .funnel {
+    display: flex;
 
+    overflow-x: auto;
+
+    gap: 8px;
+
+    padding-bottom: 5px;
+
+    scroll-snap-type: x mandatory;
+  }
+
+  .funnel-step {
+    flex: 0 0 125px;
+
+    min-width: 125px;
+
+    scroll-snap-align: start;
+  }
+
+
+  /* MODAL */
+
+  .modal {
+    padding: 10px;
+
+    align-items: flex-end;
+  }
+
+  .modal-content {
+    max-height: 94svh;
+
+    border-radius:
+      18px
+      18px
+      0
+      0;
+
+    padding:
+      20px
+      16px;
+  }
+
+  .modal-header h2 {
+    font-size: 19px;
+  }
+
+
+  /* TABLE */
+
+  .table-wrapper {
+    margin-left: -2px;
+
+    margin-right: -2px;
+
+    border-radius: 8px;
+  }
+
+  table {
+    min-width: 950px;
+  }
+
+  th {
+    padding: 11px;
+
+    font-size: 10px;
+  }
+
+  td {
+    padding: 11px;
+
+    font-size: 12px;
+  }
+
+}
+
+
+/* =========================================================
+   SMALL PHONES
+========================================================= */
+
+@media (max-width: 480px) {
+
+  .user-area {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .user-badge {
+    grid-column: 1 / -1;
+  }
+
+  .back-website-btn,
+  .user-area .btn {
+    width: 100%;
+  }
+
+}
+
+
+/* =========================================================
+   VERY SMALL PHONES
+========================================================= */
+
+@media (max-width: 400px) {
+
+  .login-card {
+    padding:
+      22px
+      16px;
+  }
+
+  .login-card .sj-title {
+    font-size: 29px;
+  }
+
+  .login-card .sj-luxury {
+    font-size: 18px;
+  }
+
+  .login-card .sj-divider {
+    height: 24px;
+
+    margin: 0 5px;
+  }
+
+  .stats {
     grid-template-columns:
-      repeat(7, 125px);
+      1fr 1fr;
+  }
 
+  .stat-card h3 {
+    font-size: 21px;
+  }
+
+  .stat-card p {
+    font-size: 10px;
+  }
+
+  .panel-actions {
+    grid-template-columns:
+      1fr;
+  }
+
+}
+
+
+/* =========================================================
+   TOUCH DEVICES
+========================================================= */
+
+@media (hover: none) {
+
+  .btn:hover,
+  .sj-brand:hover,
+  .back-website-btn:hover {
+    transform: none;
   }
 
 }
@@ -1014,9 +1335,7 @@ tr:hover td {
 
 </head>
 
-
 <body>
-
 
 <!-- =======================================================
      LOADING
@@ -1029,16 +1348,17 @@ tr:hover td {
 
   <div class="loading-box">
 
-    <div class="spinner"></div>
+```
+<div class="spinner"></div>
 
-    <strong id="loadingText">
-      Loading...
-    </strong>
+<strong id="loadingText">
+  Loading...
+</strong>
+```
 
   </div>
 
 </div>
-
 
 <!-- =======================================================
      LOGIN PAGE
@@ -1051,165 +1371,196 @@ tr:hover td {
 
   <div class="login-card">
 
-    <div class="logo">
+```
+<!-- SJ LUXURY TRAVELS LOGO -->
 
-      <div class="logo-mark">
+<a
+  href="https://www.sjluxurytravels.com/"
+  class="sj-brand"
+  aria-label="SJ Luxury Travels"
+>
+
+  <div class="sj-text-container">
+
+    <div class="sj-main-row">
+
+      <span class="sj-title">
         SJ
-      </div>
+      </span>
 
-      <h1>
-        SJ LUXURY TRAVEL
-      </h1>
+      <span class="sj-divider"></span>
 
-      <p>
-        Agent & Partner Portal
-      </p>
+      <span class="sj-luxury">
+        luxury
+      </span>
 
     </div>
 
 
-    <!-- LOGIN -->
+    <div class="sj-subtitle-row">
 
-    <div id="loginForm">
+      <span class="line"></span>
 
-      <div class="form-group">
+      <span class="sj-subtitle">
+        TRAVELS LTD
+      </span>
 
-        <label>
-          Referral Code or Phone Number
-        </label>
-
-        <input
-          id="loginIdentifier"
-          type="text"
-          placeholder="SJ-AG-1234 or 0712345678"
-          autocomplete="username"
-        >
-
-      </div>
-
-
-      <button
-        class="btn btn-primary full"
-        onclick="login()"
-      >
-        LOGIN
-      </button>
-
-
-      <div class="switch-link">
-
-        Don't have an agent account?
-
-        <br>
-
-        <a onclick="showRegister()">
-          Become an SJ Luxury Travel Agent
-        </a>
-
-      </div>
-
-
-      <p
-        id="loginMessage"
-        class="message"
-      ></p>
-
-    </div>
-
-
-    <!-- REGISTER -->
-
-    <div
-      id="registerForm"
-      class="hidden"
-    >
-
-      <h2>
-        Become an Agent
-      </h2>
-
-      <p style="color:#777;">
-        Join the SJ Luxury Travel agent network.
-      </p>
-
-
-      <div class="form-group">
-
-        <label>
-          Full Name *
-        </label>
-
-        <input
-          id="registerName"
-          type="text"
-          placeholder="Full name"
-        >
-
-      </div>
-
-
-      <div class="form-group">
-
-        <label>
-          Phone Number *
-        </label>
-
-        <input
-          id="registerPhone"
-          type="text"
-          placeholder="0712345678"
-        >
-
-      </div>
-
-
-      <div class="form-group">
-
-        <label>
-          Email
-        </label>
-
-        <input
-          id="registerEmail"
-          type="email"
-          placeholder="email@example.com"
-        >
-
-      </div>
-
-
-      <button
-        class="btn btn-primary full"
-        onclick="registerAgent()"
-      >
-        CREATE AGENT ACCOUNT
-      </button>
-
-
-      <div class="switch-link">
-
-        Already registered?
-
-        <br>
-
-        <a onclick="showLogin()">
-          Return to Login
-        </a>
-
-      </div>
-
-
-      <p
-        id="registerMessage"
-        class="message"
-      ></p>
+      <span class="line"></span>
 
     </div>
 
   </div>
 
-</section>
+</a>
 
+
+<p class="login-description">
+  Agent & Partner Portal
+</p>
+
+
+<!-- LOGIN -->
+
+<div id="loginForm">
+
+  <div class="form-group">
+
+    <label>
+      Referral Code or Phone Number
+    </label>
+
+    <input
+      id="loginIdentifier"
+      type="text"
+      placeholder="SJ-AG-1234 or 0712345678"
+      autocomplete="username"
+    >
+
+  </div>
+
+
+  <button
+    class="btn btn-primary full"
+    onclick="login()"
+  >
+    LOGIN
+  </button>
+
+
+  <div class="switch-link">
+
+    Don't have an agent account?
+
+    <br>
+
+    <a onclick="showRegister()">
+      Become an SJ Luxury Travel Agent
+    </a>
+
+  </div>
+
+
+  <p
+    id="loginMessage"
+    class="message"
+  ></p>
+
+</div>
+
+
+<!-- REGISTER -->
+
+<div
+  id="registerForm"
+  class="hidden"
+>
+
+  <h2>
+    Become an Agent
+  </h2>
+
+  <p style="color:#777;">
+    Join the SJ Luxury Travel agent network.
+  </p>
+
+
+  <div class="form-group">
+
+    <label>
+      Full Name *
+    </label>
+
+    <input
+      id="registerName"
+      type="text"
+      placeholder="Full name"
+    >
+
+  </div>
+
+
+  <div class="form-group">
+
+    <label>
+      Phone Number *
+    </label>
+
+    <input
+      id="registerPhone"
+      type="text"
+      placeholder="0712345678"
+    >
+
+  </div>
+
+
+  <div class="form-group">
+
+    <label>
+      Email
+    </label>
+
+    <input
+      id="registerEmail"
+      type="email"
+      placeholder="email@example.com"
+    >
+
+  </div>
+
+
+  <button
+    class="btn btn-primary full"
+    onclick="registerAgent()"
+  >
+    CREATE AGENT ACCOUNT
+  </button>
+
+
+  <div class="switch-link">
+
+    Already registered?
+
+    <br>
+
+    <a onclick="showLogin()">
+      Return to Login
+    </a>
+
+  </div>
+
+
+  <p
+    id="registerMessage"
+    class="message"
+  ></p>
+
+</div>
+```
+
+  </div>
+
+</section>
 
 <!-- =======================================================
      DASHBOARD
@@ -1220,345 +1571,406 @@ tr:hover td {
   class="dashboard hidden"
 >
 
+  <!-- TOP BAR -->
+
   <header class="topbar">
 
-    <div class="topbar-brand">
+```
+<!-- SJ LOGO -->
 
-      <div class="brand-mini">
-        SJ
+<a
+  href="https://www.sjluxurytravels.com/"
+  class="topbar-brand-link"
+  aria-label="SJ Luxury Travels"
+>
+
+  <div class="topbar-logo">
+
+    <div class="sj-text-container">
+
+      <div class="sj-main-row">
+
+        <span class="sj-title">
+          SJ
+        </span>
+
+        <span class="sj-divider"></span>
+
+        <span class="sj-luxury">
+          luxury
+        </span>
+
       </div>
 
-      SJ LUXURY TRAVEL
+
+      <div class="sj-subtitle-row">
+
+        <span class="line"></span>
+
+        <span class="sj-subtitle">
+          TRAVELS LTD
+        </span>
+
+        <span class="line"></span>
+
+      </div>
 
     </div>
 
+  </div>
 
-    <div class="user-area">
+</a>
 
-      <div
-        id="userBadge"
-        class="user-badge"
-      ></div>
+
+<!-- USER AREA -->
+
+<div class="user-area">
+
+
+  <div
+    id="userBadge"
+    class="user-badge"
+  ></div>
+
+
+  <!-- BACK TO MAIN WEBSITE -->
+
+  <a
+    href="https://www.sjluxurytravels.com/"
+    class="back-website-btn"
+    target="_blank"
+    rel="noopener noreferrer"
+  >
+    ← Back to Website
+  </a>
+
+
+  <!-- LOGOUT -->
+
+  <button
+    class="btn btn-secondary"
+    onclick="logout()"
+  >
+    Logout
+  </button>
+
+
+</div>
+```
+
+  </header>
+
+  <main class="dashboard-container">
+
+```
+<!-- =================================================
+     STATISTICS
+================================================== -->
+
+<div
+  class="stats"
+  id="statsContainer"
+>
+
+
+  <div class="stat-card">
+
+    <h3 id="totalClients">
+      0
+    </h3>
+
+    <p>
+      Total Customers
+    </p>
+
+  </div>
+
+
+  <div class="stat-card">
+
+    <h3 id="leadCount">
+      0
+    </h3>
+
+    <p>
+      Lead Qualification
+    </p>
+
+  </div>
+
+
+  <div class="stat-card">
+
+    <h3 id="consultationCount">
+      0
+    </h3>
+
+    <p>
+      Consultation
+    </p>
+
+  </div>
+
+
+  <div class="stat-card">
+
+    <h3 id="quotationCount">
+      0
+    </h3>
+
+    <p>
+      Quotations
+    </p>
+
+  </div>
+
+
+  <div class="stat-card">
+
+    <h3 id="bookingCount">
+      0
+    </h3>
+
+    <p>
+      Confirmed Bookings
+    </p>
+
+  </div>
+
+
+</div>
+
+
+<!-- =================================================
+     CUSTOMER PANEL
+================================================== -->
+
+<div class="panel">
+
+
+  <div class="panel-header">
+
+
+    <h2 id="dashboardTitle">
+      My Customers
+    </h2>
+
+
+    <div class="panel-actions">
+
+
+      <button
+        id="addClientButton"
+        class="btn btn-primary"
+        onclick="openClientModal()"
+      >
+        + Add Customer
+      </button>
+
 
       <button
         class="btn btn-secondary"
-        onclick="logout()"
+        onclick="loadDashboard()"
       >
-        Logout
+        Refresh
+      </button>
+
+
+    </div>
+
+  </div>
+
+
+  <!-- SEARCH -->
+
+  <div class="search-box">
+
+    <span class="search-icon">
+      🔎
+    </span>
+
+    <input
+      id="searchInput"
+      type="text"
+      placeholder="Search customers by name, phone, ID, destination or service..."
+      onkeyup="searchCustomers()"
+    >
+
+  </div>
+
+
+  <!-- CUSTOMER TABLE -->
+
+  <div class="table-wrapper">
+
+    <table>
+
+      <thead>
+
+        <tr>
+
+          <th>
+            Client ID
+          </th>
+
+          <th>
+            Customer
+          </th>
+
+          <th>
+            Phone
+          </th>
+
+          <th>
+            Service
+          </th>
+
+          <th>
+            Destination
+          </th>
+
+          <th>
+            Agent
+          </th>
+
+          <th>
+            Funnel Stage
+          </th>
+
+          <th>
+            Action
+          </th>
+
+        </tr>
+
+      </thead>
+
+
+      <tbody id="clientTable"></tbody>
+
+    </table>
+
+  </div>
+
+</div>
+
+
+<!-- =================================================
+     CUSTOMER JOURNEY
+================================================== -->
+
+<div class="panel">
+
+  <div class="panel-header">
+
+    <h2>
+      Customer Journey
+    </h2>
+
+  </div>
+
+
+  <div
+    class="funnel"
+    id="funnelContainer"
+  ></div>
+
+</div>
+
+
+<!-- =================================================
+     ADMIN
+================================================== -->
+
+<div
+  id="adminPanel"
+  class="panel hidden"
+>
+
+  <div class="panel-header">
+
+    <h2>
+      Administration
+    </h2>
+
+    <div class="panel-actions">
+
+      <button
+        class="btn btn-secondary"
+        onclick="loadAgents()"
+      >
+        Manage Agents
       </button>
 
     </div>
 
-  </header>
+  </div>
 
 
-  <main class="dashboard-container">
+  <p style="color:#777;">
+
+    Administrator access allows you to
+    manage all agents and customer journeys.
+
+  </p>
 
 
-    <!-- =================================================
-         STATISTICS
-    ================================================== -->
+  <div
+    id="agentsContainer"
+    class="hidden"
+  >
 
-    <div
-      class="stats"
-      id="statsContainer"
-    >
+    <div class="table-wrapper">
 
-      <div class="stat-card">
+      <table>
 
-        <h3 id="totalClients">
-          0
-        </h3>
+        <thead>
 
-        <p>
-          Total Customers
-        </p>
+          <tr>
 
-      </div>
+            <th>
+              Name
+            </th>
 
+            <th>
+              Referral Code
+            </th>
 
-      <div class="stat-card">
+            <th>
+              Phone
+            </th>
 
-        <h3 id="leadCount">
-          0
-        </h3>
+            <th>
+              Email
+            </th>
 
-        <p>
-          Lead Qualification
-        </p>
+            <th>
+              Status
+            </th>
 
-      </div>
+            <th>
+              Created
+            </th>
 
+          </tr>
 
-      <div class="stat-card">
-
-        <h3 id="consultationCount">
-          0
-        </h3>
-
-        <p>
-          Consultation
-        </p>
-
-      </div>
+        </thead>
 
 
-      <div class="stat-card">
+        <tbody id="agentsTable"></tbody>
 
-        <h3 id="quotationCount">
-          0
-        </h3>
-
-        <p>
-          Quotations
-        </p>
-
-      </div>
-
-
-      <div class="stat-card">
-
-        <h3 id="bookingCount">
-          0
-        </h3>
-
-        <p>
-          Confirmed Bookings
-        </p>
-
-      </div>
+      </table>
 
     </div>
 
+  </div>
 
-    <!-- =================================================
-         CUSTOMER PANEL
-    ================================================== -->
-
-    <div class="panel">
-
-      <div class="panel-header">
-
-        <h2 id="dashboardTitle">
-          My Customers
-        </h2>
-
-        <div class="panel-actions">
-
-          <button
-            id="addClientButton"
-            class="btn btn-primary"
-            onclick="openClientModal()"
-          >
-            + Add Customer
-          </button>
-
-          <button
-            class="btn btn-secondary"
-            onclick="loadDashboard()"
-          >
-            Refresh
-          </button>
-
-        </div>
-
-      </div>
-
-
-      <!-- SEARCH -->
-
-      <div class="search-box">
-
-        <span class="search-icon">
-          🔎
-        </span>
-
-        <input
-          id="searchInput"
-          type="text"
-          placeholder="Search customers by name, phone, ID, destination or service..."
-          onkeyup="searchCustomers()"
-        >
-
-      </div>
-
-
-      <!-- CUSTOMER TABLE -->
-
-      <div class="table-wrapper">
-
-        <table>
-
-          <thead>
-
-            <tr>
-
-              <th>
-                Client ID
-              </th>
-
-              <th>
-                Customer
-              </th>
-
-              <th>
-                Phone
-              </th>
-
-              <th>
-                Service
-              </th>
-
-              <th>
-                Destination
-              </th>
-
-              <th>
-                Agent
-              </th>
-
-              <th>
-                Funnel Stage
-              </th>
-
-              <th>
-                Action
-              </th>
-
-            </tr>
-
-          </thead>
-
-
-          <tbody id="clientTable">
-
-          </tbody>
-
-        </table>
-
-      </div>
-
-    </div>
-
-
-    <!-- =================================================
-         CUSTOMER JOURNEY
-    ================================================== -->
-
-    <div class="panel">
-
-      <div class="panel-header">
-
-        <h2>
-          Customer Journey
-        </h2>
-
-      </div>
-
-
-      <div
-        class="funnel"
-        id="funnelContainer"
-      ></div>
-
-    </div>
-
-
-    <!-- =================================================
-         ADMIN
-    ================================================== -->
-
-    <div
-      id="adminPanel"
-      class="panel hidden"
-    >
-
-      <div class="panel-header">
-
-        <h2>
-          Administration
-        </h2>
-
-        <div class="panel-actions">
-
-          <button
-            class="btn btn-secondary"
-            onclick="loadAgents()"
-          >
-            Manage Agents
-          </button>
-
-        </div>
-
-      </div>
-
-
-      <p style="color:#777;">
-
-        Administrator access allows you to
-        manage all agents and customer journeys.
-
-      </p>
-
-
-      <div
-        id="agentsContainer"
-        class="hidden"
-      >
-
-        <div class="table-wrapper">
-
-          <table>
-
-            <thead>
-
-              <tr>
-
-                <th>
-                  Name
-                </th>
-
-                <th>
-                  Referral Code
-                </th>
-
-                <th>
-                  Phone
-                </th>
-
-                <th>
-                  Email
-                </th>
-
-                <th>
-                  Status
-                </th>
-
-                <th>
-                  Created
-                </th>
-
-              </tr>
-
-            </thead>
-
-            <tbody id="agentsTable">
-
-            </tbody>
-
-          </table>
-
-        </div>
-
-      </div>
-
-    </div>
-
+</div>
+```
 
   </main>
 
 </section>
-
 
 <!-- =======================================================
      ADD CUSTOMER MODAL
@@ -1571,249 +1983,246 @@ tr:hover td {
 
   <div class="modal-content">
 
-    <div class="modal-header">
+```
+<div class="modal-header">
 
-      <h2>
-        Add New Customer
-      </h2>
+  <h2>
+    Add New Customer
+  </h2>
 
-      <button
-        class="close"
-        onclick="closeClientModal()"
-      >
-        &times;
-      </button>
+  <button
+    class="close"
+    onclick="closeClientModal()"
+  >
+    &times;
+  </button>
 
-    </div>
+</div>
 
 
-    <div class="form-group">
+<div class="form-group">
 
-      <label>
-        Customer Name *
-      </label>
+  <label>
+    Customer Name *
+  </label>
 
-      <input
-        id="clientName"
-        type="text"
-        placeholder="Customer full name"
-      >
+  <input
+    id="clientName"
+    type="text"
+    placeholder="Customer full name"
+  >
 
-    </div>
+</div>
 
 
-    <div class="form-group">
+<div class="form-group">
 
-      <label>
-        Phone Number *
-      </label>
+  <label>
+    Phone Number *
+  </label>
 
-      <input
-        id="clientPhone"
-        type="text"
-        placeholder="0712345678"
-      >
+  <input
+    id="clientPhone"
+    type="text"
+    placeholder="0712345678"
+  >
 
-    </div>
+</div>
 
 
-    <div class="form-group">
+<div class="form-group">
 
-      <label>
-        Email
-      </label>
+  <label>
+    Email
+  </label>
 
-      <input
-        id="clientEmail"
-        type="email"
-        placeholder="customer@email.com"
-      >
+  <input
+    id="clientEmail"
+    type="email"
+    placeholder="customer@email.com"
+  >
 
-    </div>
+</div>
 
 
-    <div class="form-group">
+<div class="form-group">
 
-      <label>
-        Service *
-      </label>
+  <label>
+    Service *
+  </label>
 
-      <select id="clientService">
+  <select id="clientService">
 
-        <option value="">
-          Select Service
-        </option>
+    <option value="">
+      Select Service
+    </option>
 
-        <option value="Luxury Safari">
-          Luxury Safari
-        </option>
+    <option value="Luxury Safari">
+      Luxury Safari
+    </option>
 
-        <option value="Beach Holiday">
-          Beach Holiday
-        </option>
+    <option value="Beach Holiday">
+      Beach Holiday
+    </option>
 
-        <option value="Private Villa">
-          Private Villa
-        </option>
+    <option value="Private Villa">
+      Private Villa
+    </option>
 
-        <option value="Honeymoon">
-          Honeymoon
-        </option>
+    <option value="Honeymoon">
+      Honeymoon
+    </option>
 
-        <option value="Family Holiday">
-          Family Holiday
-        </option>
+    <option value="Family Holiday">
+      Family Holiday
+    </option>
 
-        <option value="Luxury Travel">
-          Luxury Travel
-        </option>
+    <option value="Luxury Travel">
+      Luxury Travel
+    </option>
 
-        <option value="Corporate Travel">
-          Corporate Travel
-        </option>
+    <option value="Corporate Travel">
+      Corporate Travel
+    </option>
 
-        <option value="Private Jet">
-          Private Jet
-        </option>
+    <option value="Private Jet">
+      Private Jet
+    </option>
 
-        <option value="Luxury Yacht">
-          Luxury Yacht
-        </option>
+    <option value="Luxury Yacht">
+      Luxury Yacht
+    </option>
 
-        <option value="Airport Transfer">
-          Airport Transfer
-        </option>
+    <option value="Airport Transfer">
+      Airport Transfer
+    </option>
 
-        <option value="Custom Itinerary">
-          Custom Itinerary
-        </option>
+    <option value="Custom Itinerary">
+      Custom Itinerary
+    </option>
 
-        <option value="Other">
-          Other
-        </option>
+    <option value="Other">
+      Other
+    </option>
 
-      </select>
+  </select>
 
-    </div>
+</div>
 
 
-    <div class="form-group">
+<div class="form-group">
 
-      <label>
-        Destination
-      </label>
+  <label>
+    Destination
+  </label>
 
-      <input
-        id="clientDestination"
-        type="text"
-        placeholder="e.g. Maasai Mara, Zanzibar, Dubai"
-      >
+  <input
+    id="clientDestination"
+    type="text"
+    placeholder="e.g. Maasai Mara, Zanzibar, Dubai"
+  >
 
-    </div>
+</div>
 
 
-    <div class="form-group">
+<div class="form-group">
 
-      <label>
-        Travel Date
-      </label>
+  <label>
+    Travel Date
+  </label>
 
-      <input
-        id="clientTravelDate"
-        type="date"
-      >
+  <input
+    id="clientTravelDate"
+    type="date"
+  >
 
-    </div>
+</div>
 
 
-    <div class="form-group">
+<div class="form-group">
 
-      <label>
-        Number of Travellers
-      </label>
+  <label>
+    Number of Travellers
+  </label>
 
-      <input
-        id="clientTravellers"
-        type="number"
-        min="1"
-        placeholder="e.g. 2"
-      >
+  <input
+    id="clientTravellers"
+    type="number"
+    min="1"
+    placeholder="e.g. 2"
+  >
 
-    </div>
+</div>
 
 
-    <div class="form-group">
+<div class="form-group">
 
-      <label>
-        Budget
-      </label>
+  <label>
+    Budget
+  </label>
 
-      <input
-        id="clientBudget"
-        type="text"
-        placeholder="Approximate budget"
-      >
+  <input
+    id="clientBudget"
+    type="text"
+    placeholder="Approximate budget"
+  >
 
-    </div>
+</div>
 
 
-    <div class="form-group">
+<div class="form-group">
 
-      <label>
-        Special Requests
-      </label>
+  <label>
+    Special Requests
+  </label>
 
-      <textarea
-        id="clientSpecialRequests"
-        rows="4"
-        placeholder="Any special requirements..."
-      ></textarea>
+  <textarea
+    id="clientSpecialRequests"
+    rows="4"
+    placeholder="Any special requirements..."
+  ></textarea>
 
-    </div>
+</div>
 
 
-    <div class="form-group">
+<div class="form-group">
 
-      <label>
-        Notes
-      </label>
+  <label>
+    Notes
+  </label>
 
-      <textarea
-        id="clientNotes"
-        rows="3"
-        placeholder="Additional notes..."
-      ></textarea>
+  <textarea
+    id="clientNotes"
+    rows="3"
+    placeholder="Additional notes..."
+  ></textarea>
 
-    </div>
+</div>
 
 
-    <button
-      class="btn btn-primary full"
-      onclick="saveClient()"
-    >
-      SAVE CUSTOMER
-    </button>
+<button
+  class="btn btn-primary full"
+  onclick="saveClient()"
+>
+  SAVE CUSTOMER
+</button>
 
 
-    <p
-      id="clientMessage"
-      class="message"
-    ></p>
+<p
+  id="clientMessage"
+  class="message"
+></p>
+```
 
   </div>
 
 </div>
-
 
 <script>
 
 /* =========================================================
    CONFIGURATION
 ========================================================= */
-
-/*
-   YOUR EXISTING APPS SCRIPT WEB APP URL
-*/
 
 const API_URL =
   "https://script.google.com/macros/s/AKfycbyFmDVuaaRmAVKnieJPeUZy0Yo9uFnrjkr_8mY30rtOUH3qRv9T9mNhHWoUmMP43ZAi/exec";
@@ -1889,6 +2298,7 @@ function api(
         "action",
         action
       );
+
 
       Object.keys(params)
         .forEach(
@@ -2668,51 +3078,65 @@ function renderClients(
         <tr>
 
           <td>
+
             <strong>
+
               ${escapeHtml(
                 client.id
               )}
+
             </strong>
+
           </td>
 
 
           <td>
 
             <strong>
+
               ${escapeHtml(
                 client.name
               )}
+
             </strong>
 
           </td>
 
 
           <td>
+
             ${escapeHtml(
               client.phone
             )}
+
           </td>
 
 
           <td>
+
             ${escapeHtml(
               client.service
             )}
+
           </td>
 
 
           <td>
+
             ${escapeHtml(
               client.destination ||
               "-"
             )}
+
           </td>
 
 
           <td>
+
             ${escapeHtml(
               client.agentCode
             )}
+
           </td>
 
 
@@ -2821,7 +3245,8 @@ async function changeStage(
 
   if (
     !currentUser ||
-    currentUser.role !== "admin"
+    currentUser.role !==
+    "admin"
   ) {
 
     return;
@@ -3532,43 +3957,64 @@ async function loadAgents() {
             <tr>
 
               <td>
+
                 <strong>
+
                   ${escapeHtml(
                     agent.name
                   )}
+
                 </strong>
+
               </td>
 
+
               <td>
+
                 ${escapeHtml(
                   agent.code
                 )}
+
               </td>
 
+
               <td>
+
                 ${escapeHtml(
                   agent.phone
                 )}
+
               </td>
 
+
               <td>
+
                 ${escapeHtml(
                   agent.email || "-"
                 )}
+
               </td>
 
+
               <td>
+
                 <span class="stage">
+
                   ${escapeHtml(
                     agent.status
                   )}
+
                 </span>
+
               </td>
 
+
               <td>
+
                 ${escapeHtml(
                   agent.createdAt || "-"
                 )}
+
               </td>
 
             </tr>
