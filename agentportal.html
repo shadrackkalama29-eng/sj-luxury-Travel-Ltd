@@ -3472,7 +3472,7 @@
         ========================================================= */
 
         const API_URL =
-            "hhttps://script.google.com/macros/s/AKfycbz5sivscWnV7hoXwi9V_uQY42SZQi7qxKi481ciPmvtr0yPvW_VKwttaWXhe2OLAX8i/exec";
+            "https://script.google.com/macros/s/AKfycbz5sivscWnV7hoXwi9V_uQY42SZQi7qxKi481ciPmvtr0yPvW_VKwttaWXhe2OLAX8i/exec";
 
 
         /* =========================================================
@@ -3527,8 +3527,18 @@
 
 
         /* =========================================================
-           API REQUEST
-        ========================================================= */
+           API REQUEST — GOOGLE APPS SCRIPT JSONP
+           ---------------------------------------------------------
+           The portal is hosted on www.sjluxurytravels.com while the
+           API is hosted by Google Apps Script. JSONP is therefore
+           used intentionally for cross-origin communication.
+
+           IMPORTANT:
+           - Uses the exact deployed /exec URL above.
+           - Creates the callback BEFORE loading the script.
+           - Removes the callback/script after completion.
+           - There is NO 20-second timeout.
+           ========================================================= */
 
         function api(
             action,
@@ -3541,21 +3551,26 @@
                     const query =
                         new URLSearchParams();
 
-                    query.append(
+
+                    query.set(
                         "action",
-                        action
+                        String(action || "status")
                     );
 
 
-                    Object.keys(params)
+                    Object.keys(params || {})
                         .forEach(
                             function(key) {
 
-                                query.append(
-                                    key,
-                                    params[key] === undefined
+                                const value =
+                                    params[key] === undefined ||
+                                    params[key] === null
                                         ? ""
-                                        : params[key]
+                                        : String(params[key]);
+
+                                query.set(
+                                    key,
+                                    value
                                 );
 
                             }
@@ -3567,11 +3582,11 @@
                         Date.now() +
                         "_" +
                         Math.floor(
-                            Math.random() * 100000
+                            Math.random() * 1000000
                         );
 
 
-                    query.append(
+                    query.set(
                         "callback",
                         callbackName
                     );
@@ -3586,6 +3601,21 @@
                     let completed = false;
 
 
+                    function cleanup() {
+
+                        try {
+                            delete window[callbackName];
+                        } catch (error) {
+                            window[callbackName] = undefined;
+                        }
+
+                        if (script.parentNode) {
+                            script.parentNode.removeChild(script);
+                        }
+
+                    }
+
+
                     window[callbackName] =
                         function(data) {
 
@@ -3595,15 +3625,17 @@
 
                             completed = true;
 
-                            delete window[
-                                callbackName
-                            ];
-
-                            script.remove();
+                            cleanup();
 
                             resolve(data);
 
                         };
+
+
+                    script.async = true;
+                    script.type = "text/javascript";
+                    script.charset = "UTF-8";
+                    script.referrerPolicy = "no-referrer";
 
 
                     script.onerror =
@@ -3615,11 +3647,7 @@
 
                             completed = true;
 
-                            delete window[
-                                callbackName
-                            ];
-
-                            script.remove();
+                            cleanup();
 
                             reject(
                                 new Error(
@@ -3630,15 +3658,45 @@
                         };
 
 
+                    /*
+                     * Build the URL with URL so the query string is
+                     * encoded consistently, including passwords,
+                     * phone numbers and callback names.
+                     */
+                    const requestUrl =
+                        new URL(
+                            API_URL
+                        );
+
+
+                    requestUrl.searchParams.set(
+                        "t",
+                        String(Date.now())
+                    );
+
+
+                    query.forEach(
+                        function(value, key) {
+
+                            requestUrl.searchParams.set(
+                                key,
+                                value
+                            );
+
+                        }
+                    );
+
+
                     script.src =
-                        API_URL +
-                        "?t=" +
-                        Date.now() +
-                        "&" +
-                        query.toString();
+                        requestUrl.toString();
 
 
-                    document.body.appendChild(
+                    /*
+                     * The callback MUST exist before this line.
+                     * Apps Script may execute the JSONP response as
+                     * soon as the script is loaded.
+                     */
+                    document.head.appendChild(
                         script
                     );
 
