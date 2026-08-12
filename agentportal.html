@@ -4459,91 +4459,67 @@
             if (!session) {
 
                 logout();
-
                 return;
 
             }
 
-
-            showLoading(
-                "Loading dashboard..."
-            );
-
+            showLoading("Loading dashboard...");
 
             try {
 
+                /* ONE request now returns customers + statistics. */
                 const result =
                     await api(
-                        "clients",
+                        "dashboardData",
                         {
-                            token:
-                                session
+                            token: session
                         }
                     );
 
-
-                if (
-                    result.status ===
-                    "unauthorized"
-                ) {
-
+                if (result.status === "unauthorized") {
                     hideLoading();
-
                     logout();
-
                     return;
-
                 }
 
-
-                if (
-                    result.status !==
-                    "success"
-                ) {
-
+                if (result.status !== "success") {
                     hideLoading();
-
                     alert(
                         result.message ||
-                        "Unable to load customers."
+                        "Unable to load dashboard."
                     );
-
                     return;
-
                 }
 
+                clients = result.clients || [];
 
-                clients =
-                    result.clients || [];
+                renderClients(clients);
+                renderFunnel(clients);
 
+                const stats = result.stats || {};
 
-                renderClients(
-                    clients
-                );
+                document.getElementById("totalClients").textContent =
+                    stats.total || 0;
 
+                document.getElementById("leadCount").textContent =
+                    stats.leadQualification || 0;
 
-                renderFunnel(
-                    clients
-                );
+                document.getElementById("consultationCount").textContent =
+                    stats.consultation || 0;
 
+                document.getElementById("quotationCount").textContent =
+                    stats.quotation || 0;
 
-                await loadStats();
-
+                document.getElementById("bookingCount").textContent =
+                    stats.bookingConfirmation || 0;
 
                 hideLoading();
-
 
             } catch (error) {
 
                 hideLoading();
-
-                console.error(
-                    error
-                );
-
-                alert(
-                    error.message
-                );
+                console.error(error);
+                alert(error.message);
 
             }
 
