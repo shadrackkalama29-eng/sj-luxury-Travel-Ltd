@@ -4451,80 +4451,227 @@
 
 
         /* =========================================================
-           LOAD DASHBOARD
-        ========================================================= */
+   LOAD DASHBOARD
+========================================================= */
 
-        async function loadDashboard() {
+async function loadDashboard() {
 
-            if (!session) {
+    if (!session) {
 
-                logout();
-                return;
+        logout();
+        return;
 
-            }
+    }
 
-            showLoading("Loading dashboard...");
+    showLoading("Loading dashboard...");
 
-            try {
+    try {
 
-                /* ONE request now returns customers + statistics. */
-                const result =
-                    await api(
-                        "dashboardData",
-                        {
-                            token: session
-                        }
-                    );
+        /*
+         * IMPORTANT:
+         * Run BOTH requests at the same time.
+         *
+         * Previously:
+         *
+         * clients → wait → dashboard stats
+         *
+         * Now:
+         *
+         * clients ───────┐
+         *                 ├── wait for both
+         * dashboard ─────┘
+         *
+         * This significantly reduces the total loading time.
+         */
 
-                if (result.status === "unauthorized") {
-                    hideLoading();
-                    logout();
-                    return;
-                }
+        const results =
+            await Promise.all([
 
-                if (result.status !== "success") {
-                    hideLoading();
-                    alert(
-                        result.message ||
-                        "Unable to load dashboard."
-                    );
-                    return;
-                }
+                api(
+                    "clients",
+                    {
+                        token: session
+                    }
+                ),
 
-                clients = result.clients || [];
+                api(
+                    "dashboard",
+                    {
+                        token: session
+                    }
+                )
 
-                renderClients(clients);
-                renderFunnel(clients);
+            ]);
 
-                const stats = result.stats || {};
 
-                document.getElementById("totalClients").textContent =
-                    stats.total || 0;
+        const clientsResult =
+            results[0];
 
-                document.getElementById("leadCount").textContent =
-                    stats.leadQualification || 0;
+        const statsResult =
+            results[1];
 
-                document.getElementById("consultationCount").textContent =
-                    stats.consultation || 0;
 
-                document.getElementById("quotationCount").textContent =
-                    stats.quotation || 0;
+        /* =====================================================
+           CHECK SESSION
+        ===================================================== */
 
-                document.getElementById("bookingCount").textContent =
-                    stats.bookingConfirmation || 0;
+        if (
+            clientsResult &&
+            clientsResult.status ===
+            "unauthorized"
+        ) {
 
-                hideLoading();
+            hideLoading();
 
-            } catch (error) {
+            logout();
 
-                hideLoading();
-                console.error(error);
-                alert(error.message);
-
-            }
+            return;
 
         }
 
+
+        if (
+            statsResult &&
+            statsResult.status ===
+            "unauthorized"
+        ) {
+
+            hideLoading();
+
+            logout();
+
+            return;
+
+        }
+
+
+        /* =====================================================
+           CHECK CUSTOMER RESPONSE
+        ===================================================== */
+
+        if (
+            !clientsResult ||
+            clientsResult.status !==
+            "success"
+        ) {
+
+            hideLoading();
+
+            alert(
+                clientsResult?.message ||
+                "Unable to load customers."
+            );
+
+            return;
+
+        }
+
+
+        /* =====================================================
+           LOAD CUSTOMERS
+        ===================================================== */
+
+        clients =
+            clientsResult.clients ||
+            [];
+
+
+        renderClients(
+            clients
+        );
+
+
+        renderFunnel(
+            clients
+        );
+
+
+        /* =====================================================
+           LOAD STATISTICS
+        ===================================================== */
+
+        if (
+            statsResult &&
+            statsResult.status ===
+            "success"
+        ) {
+
+            const stats =
+                statsResult.stats ||
+                {};
+
+
+            document
+                .getElementById(
+                    "totalClients"
+                )
+                .textContent =
+                stats.total ||
+                0;
+
+
+            document
+                .getElementById(
+                    "leadCount"
+                )
+                .textContent =
+                stats.leadQualification ||
+                0;
+
+
+            document
+                .getElementById(
+                    "consultationCount"
+                )
+                .textContent =
+                stats.consultation ||
+                0;
+
+
+            document
+                .getElementById(
+                    "quotationCount"
+                )
+                .textContent =
+                stats.quotation ||
+                0;
+
+
+            document
+                .getElementById(
+                    "bookingCount"
+                )
+                .textContent =
+                stats.bookingConfirmation ||
+                0;
+
+        }
+
+
+        /* =====================================================
+           FINISHED
+        ===================================================== */
+
+        hideLoading();
+
+
+    } catch (error) {
+
+        hideLoading();
+
+        console.error(
+            "DASHBOARD LOAD ERROR:",
+            error
+        );
+
+        alert(
+            error.message ||
+            "Unable to load dashboard."
+        );
+
+    }
+
+}
 
         /* =========================================================
            RENDER CLIENTS
