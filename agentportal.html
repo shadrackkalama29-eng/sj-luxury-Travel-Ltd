@@ -3471,8 +3471,23 @@
            CONFIGURATION
         ========================================================= */
 
+        /*
+         * =========================================================
+         * BACKEND CONNECTION
+         * =========================================================
+         *
+         * Keep this URL exactly the same as CONFIG.WEB_APP_URL in
+         * the Google Apps Script backend.
+         *
+         * The portal intentionally uses JSONP because the public
+         * frontend and Apps Script backend are on different origins.
+         * =========================================================
+         */
         const API_URL =
             "https://script.google.com/macros/s/AKfycbzN-ZGEW8fD5-pdCzB3VCVTEP_yTYV7-IfvZovZWLtcYsqivn0_gfbDk_1jjCulyEYM/exec";
+
+        const API_TIMEOUT_MS = 20000;
+        const API_CALLBACK_PREFIX = "sjCallback_";
 
 
         /* =========================================================
@@ -3543,51 +3558,55 @@
 
                     query.append(
                         "action",
-                        action
+                        String(action || "").trim()
                     );
-
 
                     Object.keys(params)
                         .forEach(
                             function(key) {
 
+                                const value =
+                                    params[key] === undefined ||
+                                    params[key] === null
+                                        ? ""
+                                        : String(params[key]);
+
                                 query.append(
                                     key,
-                                    params[key] === undefined
-                                        ? ""
-                                        : params[key]
+                                    value
                                 );
 
                             }
                         );
 
-
+                    /*
+                     * Each request receives a unique callback.
+                     * The backend only accepts callbacks beginning
+                     * with sjCallback_, preventing arbitrary callback
+                     * names from being executed by the API.
+                     */
                     const callbackName =
-                        "sjCallback_" +
+                        API_CALLBACK_PREFIX +
                         Date.now() +
                         "_" +
                         Math.floor(
-                            Math.random() * 100000
+                            Math.random() * 1000000
                         );
-
 
                     query.append(
                         "callback",
                         callbackName
                     );
 
-
                     const script =
                         document.createElement(
                             "script"
                         );
 
-
                     let completed = false;
 
-
-                    window[callbackName] =
-                        function(data) {
+                    const finish =
+                        function(error, data) {
 
                             if (completed) {
                                 return;
@@ -3595,40 +3614,42 @@
 
                             completed = true;
 
-                            delete window[
-                                callbackName
-                            ];
+                            try {
+                                delete window[callbackName];
+                            } catch (cleanupError) {
+                                console.warn(
+                                    "API callback cleanup failed:",
+                                    cleanupError
+                                );
+                            }
 
-                            script.remove();
+                            if (script.parentNode) {
+                                script.parentNode.removeChild(script);
+                            }
 
-                            resolve(data);
+                            if (error) {
+                                reject(error);
+                            } else {
+                                resolve(data);
+                            }
 
                         };
 
+                    window[callbackName] =
+                        function(data) {
+                            finish(null, data);
+                        };
 
                     script.onerror =
                         function() {
 
-                            if (completed) {
-                                return;
-                            }
-
-                            completed = true;
-
-                            delete window[
-                                callbackName
-                            ];
-
-                            script.remove();
-
-                            reject(
+                            finish(
                                 new Error(
-                                    "Unable to connect to SJ Luxury Travel backend."
+                                    "Unable to connect to SJ Luxury Travel backend. Please check the Apps Script deployment URL and deployment access settings."
                                 )
                             );
 
                         };
-
 
                     script.src =
                         API_URL +
@@ -3637,42 +3658,30 @@
                         "&" +
                         query.toString();
 
+                    script.async = true;
+                    script.referrerPolicy = "no-referrer";
 
                     document.body.appendChild(
                         script
                     );
 
-
                     setTimeout(
                         function() {
 
-                            if (completed) {
-                                return;
-                            }
-
-                            completed = true;
-
-                            delete window[
-                                callbackName
-                            ];
-
-                            script.remove();
-
-                            reject(
+                            finish(
                                 new Error(
-                                    "The SJ Luxury Travel backend did not respond. Please check the Apps Script deployment."
+                                    "The SJ Luxury Travel backend did not respond within 20 seconds. Please check that the deployed Apps Script version is current and accessible to anyone with the link."
                                 )
                             );
 
                         },
-                        20000
+                        API_TIMEOUT_MS
                     );
 
                 }
             );
 
         }
-
 
         /* =========================================================
            LOGIN
